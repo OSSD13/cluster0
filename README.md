@@ -6,6 +6,7 @@
 ### 🧬 Technology
 - Laravel 11
 - Tailwind CSS
+- ApexCharts.JS
 
 ### 🔧 Tools
 - Visual Studio Code
