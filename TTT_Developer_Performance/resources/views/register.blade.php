@@ -129,7 +129,7 @@
   <div class="container">
     <div class="form-box">
       <h2>Create an account</h2>
-      <form>
+      <form action="/register" method="POST">
         <div class="form-group">
           <label for="username">Your Username</label>
           <input type="text" id="username" name="username" placeholder="Your Username" required>
@@ -146,13 +146,15 @@
           <input type="checkbox" id="terms" name="terms" required>
           <label for="terms">I agree to all the <a href="#">Terms, Privacy Policy and Fees</a></label>
         </div>
-        <button type="submit" class="submit-btn">Continue</button>
+        <button type="submit" class="submit-btn"> Continue </button>
+        
+        
         <div class="divider">OR</div>
         <button type="button" class="google-btn">
           <img src="google-icon-url" alt="Google Icon"> Sign up with Google
         </button>
         <div class="signin-link">
-          Have an account? <a href="#">Sign In</a>
+          Have an account? <a href="login.php">Sign In</a>
         </div>
       </form>
     </div>
