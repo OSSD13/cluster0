@@ -12,11 +12,21 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+<<<<<<< HEAD
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+=======
+    // กำหนดชื่อตาราง
+    protected $table = 'user';
+
+    // กำหนด Primary Key
+    protected $primaryKey = 'usr_id';
+
+    // อนุญาตให้ทำการเพิ่ม/แก้ไขข้อมูลในคอลัมน์เหล่านี้
+>>>>>>> develop
     protected $fillable = [
         'name',
         'email',
