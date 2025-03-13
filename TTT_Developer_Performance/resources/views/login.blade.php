@@ -8,7 +8,8 @@
     body{
         margin: 0;
         padding: 0;
-        background-image: url('image.png');
+        background: url('https://images.unsplash.com/photo-1524168948265-8f79ad8d4e33?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        backdrop-filter:blur(10px);
         background-size: cover;
         background-position: center;
         font-family: sans-serif;
@@ -129,7 +130,7 @@
             </button>
         </form>
         <div class="signup">
-            Don't have an account yet? <a href="{{route('register')}}"><button>Sign UP</button></a>
+            Don't have an account yet? <a href="{{route('register')}}">Sign UP</a>
         </div>
     </div>
 </body>
