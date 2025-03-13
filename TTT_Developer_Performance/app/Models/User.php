@@ -10,7 +10,7 @@ class User extends Model
     use HasFactory;
 
     // กำหนดชื่อตาราง
-    protected $table = 'users';
+    protected $table = 'user';
 
     // กำหนด Primary Key
     protected $primaryKey = 'usr_id';

@@ -129,7 +129,7 @@
   <div class="container">
     <div class="form-box">
       <h2>Create an account</h2>
-      <form action="/register" method="POST">
+      <form>
         <div class="form-group">
           <label for="username">Your Username</label>
           <input type="text" id="username" name="username" placeholder="Your Username" required>

@@ -20,7 +20,6 @@
  </head>
  <body class="flex items-center justify-center min-h-screen bg-blue-900">
   <div class="absolute top-4 left-4">
-   <img alt="Company logo with text 'TTI Developer Performance'" height="50" src="https://storage.googleapis.com/a1aa/image/kpok5w59P2JMD7m24qezc8yCZtOU7nrPrRYVTvN_-a4.jpg" width="150"/>
   </div>
   <div class="bg-white p-8 rounded-lg shadow-lg text-center">
    <div class="text-yellow-500 text-6xl mb-4">
