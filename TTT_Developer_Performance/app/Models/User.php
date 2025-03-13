@@ -2,53 +2,29 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
-<<<<<<< HEAD
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-=======
     // กำหนดชื่อตาราง
     protected $table = 'user';
 
-    // กำหนด Primary Keys
+    // กำหนด Primary Key
     protected $primaryKey = 'usr_id';
 
     // อนุญาตให้ทำการเพิ่ม/แก้ไขข้อมูลในคอลัมน์เหล่านี้
->>>>>>> develop
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'usr_username',
+        'usr_email',
+        'usr_password',
+        'usr_name',
+        'usr_trello_name',
+        'usr_role',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // กำหนดให้ไม่ต้องใช้ timestamps (หากไม่ได้ใช้ created_at, updated_at)
+    public $timestamps = true;
 }
