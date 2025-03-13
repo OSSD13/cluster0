@@ -129,7 +129,8 @@
   <div class="container">
     <div class="form-box">
       <h2>Create an account</h2>
-      <form>
+      <form action="{{ url('/register') }}" method="POST">
+        @csrf
         <div class="form-group">
           <label for="username">Your Username</label>
           <input type="text" id="username" name="username" placeholder="Your Username" required>
