@@ -12,7 +12,7 @@ class User extends Model
     // กำหนดชื่อตาราง
     protected $table = 'user';
 
-    // กำหนด Primary Key
+    // กำหนด Primary Keys
     protected $primaryKey = 'usr_id';
 
     // อนุญาตให้ทำการเพิ่ม/แก้ไขข้อมูลในคอลัมน์เหล่านี้
