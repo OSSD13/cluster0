@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>ยินดีต้อนรับ, {{ $user->username }}</h1>
-    <p>Email: {{ $user->email }}</p>
+    {{-- <p>Email: {{ $user->email }}</p> --}}
     <p>User ID: {{ $user->id }}</p>
 </body>
 </html>
