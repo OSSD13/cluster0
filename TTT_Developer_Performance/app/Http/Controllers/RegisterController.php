@@ -37,6 +37,6 @@ class RegisterController extends Controller
         ]);
 
         // ส่งกลับข้อมูลผู้ใช้
-        return redirect('/login');
+        return redirect('/register');
     }
 }
