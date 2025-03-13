@@ -124,7 +124,7 @@
             </button>
         </form>
         <div class="signup">
-            Don't have an account yet? <a href="signup.html">Sign UP</a>
+            Don't have an account yet? <a href="{{route('register')}}"><button>Sign UP</button></a>
         </div>
     </div>
 </body>
