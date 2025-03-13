@@ -38,3 +38,8 @@ Route::post(
     '/register',
     [RegisterController::class, 'validation']
 );
+
+Route::get(
+    '/register',
+    [RegisterController::class, 'register']
+);

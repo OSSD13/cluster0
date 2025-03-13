@@ -4,12 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
     public function register(){
+        return view('register');
+    }
+
+    public function updateName(Request $request)
+    {
+        // ตรวจสอบข้อมูลที่รับมา
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // ดึงข้อมูล User ปัจจุบัน
+        $user = Auth::user();
+        $user->name = $request->name; // อัปเดตชื่อใหม่
+        // $user->save(); // บันทึกลงฐานข้อมูล
+
+        return redirect();
+    }
+
+    public function addName(){
         return view('register');
     }
 
@@ -34,6 +54,6 @@ class RegisterController extends Controller
         ]);
 
         // ส่งกลับข้อมูลผู้ใช้
-        return redirect()->route('registerAlert');
+        return redirect()->route('inputName');
     }
 }
