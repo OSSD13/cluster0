@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  apache-php:
+    build: .
+    container_name: laravel-osssd-${CLUSTER_NAME}-TTTDP
+    ports:
+      - "1300:80"
+    env_file:
+      - .env
