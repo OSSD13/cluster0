@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create an Account</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1524168948265-8f79ad8d4e33?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-      backdrop-filter:blur(10px);
+      background: url('https://images.unsplash.com/photo-1524168948265-8f79ad8d4e33?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D');
+      backdrop-filter: blur(10px);
       background-size: cover;
     }
 
@@ -122,6 +124,12 @@
     .signin-link a:hover {
       text-decoration: underline;
     }
+
+    .error {
+      color: red;
+      font-size: 0.85rem;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -129,23 +137,26 @@
   <div class="container">
     <div class="form-box">
       <h2>Create an account</h2>
-      <form action="{{ url('/register') }}" method="POST">
-        @csrf
+      <form id="register-form">
         <div class="form-group">
           <label for="username">Your Username</label>
-          <input type="text" id="username" name="username" placeholder="Your Username" required>
+          <input type="text" id="username" name="username" placeholder="Your Username">
+          <small id="invalid-username" class="error">Please enter your username.</small>
         </div>
         <div class="form-group">
           <label for="email">Your Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" required>
+          <input type="email" id="email" name="email" placeholder="Your Email">
+          <small id="invalid-email" class="error">Please enter a valid email address.</small>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="At least 8 characters" required>
+          <input type="password" id="password" name="password" placeholder="At least 8 characters">
+          <small id="invalid-password" class="error">Password must contain at least 8 characters.</small>
         </div>
         <div class="checkbox-group">
-          <input type="checkbox" id="terms" name="terms" required>
+          <input type="checkbox" id="terms" name="terms">
           <label for="terms">I agree to all the <a href="#">Terms, Privacy Policy and Fees</a></label>
+          <small id="invalid-checkbox" class="error"></small>
         </div>
         <button type="submit" class="submit-btn">Continue</button>
         <div class="divider">OR</div>
@@ -158,6 +169,61 @@
       </form>
     </div>
   </div>
+
+  <script>
+    $(document).ready(function () {
+        $('#register-form').on('submit', function (event) {
+            let username = $('#username').val().trim();
+            let email = $('#email').val().trim();
+            let password = $('#password').val().trim();
+            let checkbox = $('#terms').prop('checked');
+            let isValid = true;
+
+            // เช็ก Username ต้องไม่เป็นค่าว่าง
+            if (username === "") {
+                $('#invalid-username').show();
+                $('#username').addClass('is-invalid');
+                isValid = false;
+            } else {
+                $('#invalid-username').hide();
+                $('#username').removeClass('is-invalid');
+            }
+
+            // เช็ก Email ต้องมี @ และ .
+            if (email === "" || !email.includes('@') || !email.includes('.')) {
+                $('#invalid-email').show();
+                isValid = false;
+            } else {
+                $('#invalid-email').hide();
+            }
+
+            // เช็ก Password ต้องมีอย่างน้อย 8 ตัวอักษร
+            if (password.length < 8) {
+                $('#invalid-password').show();
+                isValid = false;
+            } else {
+                $('#invalid-password').hide();
+            }
+
+            // เช็ก Checkbox ต้องถูกติ๊ก
+            if (!checkbox) {
+                $('#invalid-checkbox').show();
+                isValid = false;
+            } else {
+                $('#invalid-checkbox').hide();
+            }
+
+            // ถ้าไม่ผ่านเงื่อนไข หยุดการส่งฟอร์ม
+            if (!isValid) {
+                event.preventDefault();
+                return;
+            }
+
+            event.preventDefault();
+
+        });
+    });
+  </script>
 
 </body>
 </html>
