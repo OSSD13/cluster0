@@ -17,11 +17,11 @@ class LoginController extends Controller
     public function login(Request $req)
     {
         $req->validate([
-            'username' => 'required',
-            'password' => 'required|min:8',
+            'usr_username' => 'required',
+            'usr_password' => 'required|min:8',
         ]);
 
-        $user = User::where('username', $req->username)->first();
+        $user = User::where('usr_username', $req->username)->first();
         $remember = $req->has('remember');
 
         if ($user && Hash::check($req->password, $user->password)) {
