@@ -92,16 +92,15 @@
         color: #CCCCCC;
     }
 
-    .login-container .remember-me {
+    .remember-me {
         display: flex;
         align-items: center;
-        width: 100%;
-        margin: 10px 0;
-        justify-content: flex-start;
+        gap: 5px;
+        color: #CCCCCC;
     }
 
-    .login-container .remember-me input {
-        margin-right: 10px;
+    .remember-me input {
+        margin: 0;
     }
 
     </style>
@@ -111,8 +110,14 @@
         <img src="image 1.png" alt="Logo" style="width: 100px; margin-bottom: 20px;">
         <h2 class = "name-program">TTT Developer Performance</h2>
         <form action="login.php" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <div >
+                <label for="exampleFormControlInput1" class="form-label">Username</label>
+                <input type="username" class="form-control" id="exampleFormControlInput1" placeholder="Username">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password">
+              </div>
             <div>
                 <input type="checkbox" name="remember" id="remember">
                 <label for="remember">Remember me</label>
