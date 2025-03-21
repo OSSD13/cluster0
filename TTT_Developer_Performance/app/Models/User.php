@@ -12,28 +12,17 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-<<<<<<< HEAD
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-=======
-    // กำหนดชื่อตาราง
-    protected $table = 'user';
-
-    // กำหนด Primary Keys
-    protected $primaryKey = 'usr_id';
-
-    // อนุญาตให้ทำการเพิ่ม/แก้ไขข้อมูลในคอลัมน์เหล่านี้
->>>>>>> develop
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-<<<<<<< Updated upstream
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -52,8 +41,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-=======
+
     // กำหนดให้ไม่ต้องใช้ timestamps (หากไม่ได้ใช้ created_at, updated_at)
     public $timestamps = true;
->>>>>>> Stashed changes
 }

@@ -1,166 +1,54 @@
-<<<<<<< HEAD
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create an Account</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1524168948265-8f79ad8d4e33?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-      backdrop-filter:blur(10px);
-      background-size: cover;
-    }
+  <title>Register</title>
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/resources/Images/ttt_logo.jpg"/>
+  <link rel="stylesheet" href="resources/css/register.css">
+  <link rel="stylesheet" href="resources/css/global.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .form-box {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-
-    .checkbox-group {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .checkbox-group input {
-      margin-right: 0.5rem;
-    }
-
-    .submit-btn {
-      background-color: #0066cc;
-      color: white;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      width: 100%;
-      cursor: pointer;
-    }
-
-    .submit-btn:hover {
-      background-color: #005bb5;
-    }
-
-    .divider {
-      text-align: center;
-      margin: 1rem 0;
-      color: #777;
-    }
-
-    .google-btn {
-      background-color: white;
-      color: #555;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .google-btn img {
-      width: 20px;
-      margin-right: 0.5rem;
-    }
-
-    .google-btn:hover {
-      background-color: #f7f7f7;
-    }
-
-    .signin-link {
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .signin-link a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-
-    .signin-link a:hover {
-      text-decoration: underline;
-    }
-  </style>
 </head>
-<body>
-
-  <div class="container">
-    <div class="form-box">
-      <h2>Create an account</h2>
-      <form action="{{ url('/register') }}" method="POST">
-        @csrf
-        <div class="form-group">
-          <label for="username">Your Username</label>
-          <input type="text" id="username" name="username" placeholder="Your Username" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Your Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="At least 8 characters" required>
-        </div>
-        <div class="checkbox-group">
-          <input type="checkbox" id="terms" name="terms" required>
-          <label for="terms">I agree to all the <a href="#">Terms, Privacy Policy and Fees</a></label>
-        </div>
-        <button type="submit" class="submit-btn">Continue</button>
-        <div class="divider">OR</div>
-        <button type="button" class="google-btn">
-          <img src="google-icon-url" alt="Google Icon"> Sign up with Google
-        </button>
-        <div class="signin-link">
-          Have an account? <a href="#">Sign In</a>
-        </div>
-      </form>
+<body class="flex justify-center items-center h-screen bg-cover bg-center">
+  <form action="{{ url('/continue') }}" method="POST" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
+    <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-5 block text-left w-full">Create an account</h2>
+    @csrf
+    <div class="mb-[30px] w-full">
+      <label for="username" class="block font-bold">Your Username</label>
+      <input type="text" name="username" placeholder="Your Username" required class="w-full h-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
     </div>
-  </div>
 
+    <div class="mb-[30px] w-full">
+      <label for="email" class="block font-bold">Your Email</label>
+      <input type="email" name="email" placeholder="Your Email" required class="w-full h-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
+    </div>
+
+    <div class="mb-[30px] w-full">
+      <label for="password" class="block font-bold">Your Password</label>
+      <input type="password" name="password" placeholder="At least 8 characters" required class="w-full h-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
+    </div>
+
+    <div class="flex items-center w-full mb-[30px]">
+      <input type="checkbox" name="remember" id="remember" class="mr-2">
+      <label for="terms" class="text-sm">I agree to all the <a href="#"><b class="text-[var(--primary-color)]">Terms, Privacy</b> Policy and <b class="text-[var(--primary-color)]">Frees.</b></a></label>
+    </div>  
+
+    <button type="submit" class="w-full h-[50px] p-2 bg-[var(--primary-color)] text-white rounded-[10px] font-bold hover:bg-[#ffffff] hover:text-[var(--primary-color)] hover:border-3 hover:border-[var(--primary-color)]">Continue</button>
+    
+    <div class="flex items-center w-full my-4">
+      <div class="flex-1 border-t border-gray-300"></div>
+      <span class="px-3 text-gray-400 font-semibold">OR</span>
+      <div class="flex-1 border-t border-gray-300"></div>
+    </div> 
+
+    <button type="button" class="w-full h-[50px] p-2 border border-gray-300 text-gray-700 flex items-center justify-center rounded-[10px] hover:bg-gray-100 font-bold">
+      <img src="/resources/Images/Icons/google.png" alt="Google Logo" class="w-5 mr-2"> Sign up with Google
+    </button>
+
+    <div class="text-center mt-4">
+      Have an account? <a href="{{ url('/') }}" class="text-[var(--primary-color)] hover:underline"><b>Sign In</b></a>
+    </div>
+  </form>
 </body>
 </html>
->>>>>>> develop
