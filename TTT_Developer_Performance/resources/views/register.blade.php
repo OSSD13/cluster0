@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <link rel="icon" type="image/jpg" sizes="16x16" href="/resources/Images/ttt_logo.jpg"/>
-  <link rel="stylesheet" href="resources/css/register.css">
-  <link rel="stylesheet" href="resources/css/global.css">
+  <link rel="stylesheet" href="/resources/css/register.css">
+  <link rel="stylesheet" href="/resources/css/global.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
 <body class="flex justify-center items-center h-screen bg-cover bg-center">
-  <form action="{{ url('/continue') }}" method="POST" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
+  <form action="{{ route('step1') }}" method="POST" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
     <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-5 block text-left w-full">Create an account</h2>
     @csrf
     <div class="mb-[30px] w-full">
