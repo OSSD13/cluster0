@@ -1,0 +1,4 @@
+body {
+    background-image: var(--backgroung-image);
+    backdrop-filter: blur(10px);
+}
