@@ -1,0 +1,9 @@
+:root {
+    /* Images */
+    --backgroung-image: url('/resources/Images/background.avif');
+    --ttt-logo: url('/resources/Images/ttt_logo.jpg');
+
+    /* Colors */
+    --primary-color: #00408E;
+    --placeholder-text-color: #E2E2E2;
+}
