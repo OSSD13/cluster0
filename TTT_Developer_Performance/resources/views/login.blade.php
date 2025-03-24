@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
-<body class="flex justify-center items-center h-screen bg-cover bg-center">
+<body class="flex justify-center items-center h-screen bg-cover bg-center ">
     <form action="{{ url('/login') }}" method="post" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
         @csrf
         <img src="/resources/Images/ttt_logo.jpg" alt="Logo" class="w-24">
