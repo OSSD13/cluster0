@@ -42,9 +42,9 @@
       <div class="flex-1 border-t border-gray-300"></div>
     </div> 
 
-    <button type="button" class="w-full h-[50px] p-2 border border-gray-300 text-gray-700 flex items-center justify-center rounded-[10px] hover:bg-gray-100 font-bold">
+    <a href="{{ route('auth.google') }}" class="w-full h-[50px] p-2 border border-gray-300 text-gray-700 flex items-center justify-center rounded-[10px] hover:bg-gray-100 font-bold">
       <img src="/resources/Images/Icons/google.png" alt="Google Logo" class="w-5 mr-2"> Sign up with Google
-    </button>
+    </a>
 
     <div class="text-center mt-4">
       Have an account? <a href="{{ url('/') }}" class="text-[var(--primary-color)] hover:underline"><b>Sign In</b></a>
