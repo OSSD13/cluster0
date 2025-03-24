@@ -41,4 +41,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // กำหนดให้ไม่ต้องใช้ timestamps (หากไม่ได้ใช้ created_at, updated_at)
+    public $timestamps = true;
 }

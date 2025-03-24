@@ -1,137 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-    body{
-        margin: 0;
-        padding: 0;
-        background: url('https://images.unsplash.com/photo-1524168948265-8f79ad8d4e33?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-        backdrop-filter:blur(10px);
-        background-size: cover;
-        background-position: center;
-        font-family: sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+    <title>Login</title>
+    <link rel="icon" type="image/jpg" sizes="16x16" href="/resources/Images/ttt_logo.jpg"/>
+    <link rel="stylesheet" href="/resources/css/login.css">
+    <link rel="stylesheet" href="/resources/css/global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    .login-container{
-        width: 100%;
-        max-width: 400px;
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .login-container h2 {
-        margin-bottom: 20px;
-    }
-
-    .login-container input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    .login-container button {
-        width: 100%;
-        padding: 10px;
-        background: #00408E;
-        border: none;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .login-container button:hover {
-        background: #0056b3;
-    }
-
-    .login-container .google-btn {
-        background: white;
-        color: #444;
-        border: 1px solid #ccc;
-    }
-
-    .login-container .google-btn img {
-        vertical-align: middle;
-        margin-right: 10px;
-    }
-
-    .login-container .signup {
-        margin-top: 20px;
-    }
-
-    .login-container .signup a {
-        color: #00408E;
-        text-decoration: none;
-    }
-
-    .login-container .signup a:hover {
-        text-decoration: underline;
-    }
-
-    .login-container .name-program {
-        margin-bottom: 20px;
-        color: #00408E;
-    }
-
-    .login-container .or {
-        width: 100%;
-        text-align: center;
-        margin: 20px 0;
-        font-weight: bold;
-        color: #CCCCCC;
-    }
-
-    .remember-me {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: #CCCCCC;
-    }
-
-    .remember-me input {
-        margin: 0;
-    }
-
-    </style>
 </head>
-<body>
-    <div class = "login-container">
-        <img src="image 1.png" alt="Logo" style="width: 100px; margin-bottom: 20px;">
-        <h2 class = "name-program">TTT Developer Performance</h2>
-        <form action="login.php" method="post">
-            <div >
-                <label for="exampleFormControlInput1" class="form-label">Username</label>
-                <input type="username" class="form-control" id="exampleFormControlInput1" placeholder="Username">
-              </div>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password">
-              </div>
-            <div>
-                <input type="checkbox" name="remember" id="remember">
-                <label for="remember">Remember me</label>
-            </div>
-            <button type="submit">Sign In</button>
-            <div class="or" style="margin: 20px 0;"><h5>OR</h5></div>
-            <button type="button" class="google-btn">
-                <img src="image 8.png" alt="Google Logo" style="width: 20px;"> Sign in with Google
-            </button>
-        </form>
-        <div class="signup">
-            Don't have an account yet? <a href="{{route('register')}}">Sign UP</a>
+<body class="flex justify-center items-center h-screen bg-cover bg-center ">
+    <form action="{{ url('/login') }}" method="post" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
+        @csrf
+        <img src="/resources/Images/ttt_logo.jpg" alt="Logo" class="w-24">
+        <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-5">TTT Developer Performance</h2>
+        
+        <div class="mb-[30px] w-full">
+            <label for="username" class="block font-bold">Username</label>
+            <input type="text" name="username" placeholder="Username" required class="w-full h-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
         </div>
-    </div>
+        <div class="mb-[30px] w-full">
+            <label for="password" class="block font-bold">Password</label>
+            <input type="password" name="password" placeholder="Password" required class="w-full h-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
+        </div>
+        
+        <div class="flex items-center justify-between w-full mb-[30px]">
+            <div class="flex items-center">
+                <input type="checkbox" name="remember" id="remember" class="mr-2">
+                <label for="remember" class="text-sm font-bold">Remember me</label>
+            </div>
+            <a href="#" class="text-sm underline font-bold">Forgot password?</a>
+        </div>        
+        
+        <button type="submit" class="w-full h-[50px] p-2 bg-[var(--primary-color)] text-white rounded-[10px] font-bold hover:bg-[#ffffff] hover:text-[var(--primary-color)] hover:border-3 hover:border-[var(--primary-color)]">Sign In</button>
+        
+        <div class="flex items-center w-full my-4">
+            <div class="flex-1 border-t border-gray-300"></div>
+            <span class="px-3 text-gray-400 font-semibold">OR</span>
+            <div class="flex-1 border-t border-gray-300"></div>
+        </div>        
+        
+        <a href="{{ route('auth.google') }}" class="w-full h-[50px] p-2 border border-gray-300 text-gray-700 flex items-center justify-center rounded-[10px] hover:bg-gray-100 font-bold">
+            <img src="/resources/Images/Icons/google.png" alt="Google Logo" class="w-5 mr-2"> Sign in with Google
+        </a>
+        
+        <div class="mt-[30px] text-sm">
+            Don't have an account yet? <a href="{{ url('/register') }}" class="text-[var(--primary-color)] hover:underline"><b>Sign UP</b></a>
+        </div>
+    </form>
 </body>
 </html>
