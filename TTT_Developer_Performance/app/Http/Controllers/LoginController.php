@@ -65,7 +65,8 @@ class LoginController extends Controller
             //dd($googleUser);
 
             // ค้นหาผู้ใช้ในฐานข้อมูลโดยใช้ google id
-            $user = Users::where('usr_google_id', $googleUser->id)->first();
+            //$user = Users::where('usr_google_id', $googleUser->id)->first();
+            $user = Users::where('usr_email', $googleUser->email)->first();
 
             // แสดงข้อมูลผู้ใช้ที่ค้นพบ
             //dd($user);
