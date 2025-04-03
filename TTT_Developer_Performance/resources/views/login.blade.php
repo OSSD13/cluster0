@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="icon" type="image/jpg" sizes="16x16" href="/resources/Images/ttt_logo.jpg"/>
-    <link rel="stylesheet" href="/resources/css/login.css">
-    <link rel="stylesheet" href="/resources/css/global.css">
+    <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}"/>
+    <link rel="stylesheet" href="{{ asset('resources/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
-<body class="flex justify-center items-center h-screen bg-cover bg-center">
+<body class="flex justify-center items-center h-screen bg-cover bg-center ">
     <form action="{{ url('/login') }}" method="post" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
         @csrf
         <img src="/resources/Images/ttt_logo.jpg" alt="Logo" class="w-24">
