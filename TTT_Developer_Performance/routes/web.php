@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
 
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -41,3 +42,6 @@ Route::prefix('dev')->group(function () {
 Route::prefix('tester')->group(function () {
 
 });
+
+// Report
+Route::get('/report', [ReportController::class, 'index']);
