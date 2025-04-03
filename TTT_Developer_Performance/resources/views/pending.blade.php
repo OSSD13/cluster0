@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pending Approval</title>
-  <link rel="icon" type="image/jpg" sizes="16x16" href="/resources/Images/ttt_logo.jpg"/>
-  <link rel="stylesheet" href="/resources/css/register.css">
-  <link rel="stylesheet" href="/resources/css/global.css">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}"/>
+  <link rel="stylesheet" href="{{ asset('resources/css/register.css') }}">
+  <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
