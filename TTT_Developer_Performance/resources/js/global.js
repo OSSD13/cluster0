@@ -48,7 +48,7 @@ function toggleNavbar() {
     if (navbar.classList.contains('w-[300px]')) {
         navbar.classList.remove('w-[300px]');
         navbar.classList.add('w-[100px]');
-        
+
         // ซ่อนเมนูทั้งหมดเมื่อ navbar เป็นขนาด w-[100px]
         document.querySelectorAll(".submenu").forEach(sub => {
             sub.classList.add("hidden");
@@ -65,7 +65,7 @@ function toggleNavbar() {
     } else {
         navbar.classList.remove('w-[100px]');
         navbar.classList.add('w-[300px]');
-        
+
         // แสดงข้อความเมื่อ navbar กลับมาเป็นขนาด w-[300px]
         if (navbar.classList.contains('w-[300px]')) {
             dashboardText.classList.remove('hidden');
@@ -76,10 +76,10 @@ function toggleNavbar() {
             settingsText.classList.remove('hidden');
         }
     }
-    
+
     // ซ่อนหรือแสดงข้อความของ title
     title.classList.toggle('hidden');
-    
+
     // ซ่อนหรือแสดงไอคอน
     dashboardIcon.classList.toggle('hidden');
     performanceReviewIcon.classList.toggle('hidden');
@@ -87,4 +87,9 @@ function toggleNavbar() {
     memberManagementIcon.classList.toggle('hidden');
     reportsIcon.classList.toggle('hidden');
     settingsIcon.classList.toggle('hidden');
+}
+
+function toggleProfileDropdown() {
+    var dropdown = document.getElementById('profileDropdown');
+    dropdown.classList.toggle('hidden');
 }

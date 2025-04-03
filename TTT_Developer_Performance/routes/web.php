@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProfileController;
 
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -45,3 +46,6 @@ Route::prefix('tester')->group(function () {
 
 // Report
 Route::get('/report', [ReportController::class, 'index']);
+
+Route::get('/myprofile', [ProfileController::class,'myProfile']);
+Route::get('/changepassword', [ProfileController::class,'changePassword']);
