@@ -59,6 +59,7 @@ Route::get('/changepassword', [ProfileController::class,'changePassword']);
 Route::get('/minorcase', [MinorcaseController::class,'index']);
 Route::get('/addminorcase', [CreateMinorcaseController::class,'index']);
 
+// Team Managment
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
 Route::get('/addteam', [CreateNewTeamController::class,'index']);
 Route::get('/edit', [EditTeamController::class,'index']);
