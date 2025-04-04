@@ -54,4 +54,3 @@ Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
 Route::get('/minorcase', [MinorcaseController::class,'index']);
 Route::get('/addminorcase', [CreateMinorcaseController::class,'index']);
-
