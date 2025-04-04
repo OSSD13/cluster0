@@ -7,9 +7,9 @@
 @section('pagename')
     <div class="flex items-end gap-[10px] mb-4">
         {{-- Main Menu --}}
-        <h2 class="text-2xl font-bold">Reports</h2>
+        <h2 class="text-2xl font-bold">Team Management</h2>
         {{-- Sub Menu --}}
-        <p class="font-bold text-neutral-400">Generate Report</p>
+        <p class="font-bold text-neutral-400">Team List</p>
     </div>
 @endsection
 
