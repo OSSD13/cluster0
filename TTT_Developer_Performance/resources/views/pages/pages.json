@@ -1,0 +1,46 @@
+{
+    "pages": {
+        "All": [
+            {
+                "id": 1,
+                "title": "MyProfile",
+                "url": "MyProfile",
+                "description": ""
+            },
+            {
+                "id": 2,
+                "title": "ChangePassword",
+                "url": "ChangePassword",
+                "description": ""
+            }
+        ],
+        "Developer": [
+            {
+                "id": 1,
+                "title": "",
+                "url": "",
+                "description": ""
+            },
+            {
+                "id": 2,
+                "title": "",
+                "url": "",
+                "description": ""
+            }
+        ],
+        "Tester": [
+            {
+                "id": 1,
+                "title": "",
+                "url": "",
+                "description": ""
+            },
+            {
+                "id": 2,
+                "title": "",
+                "url": "",
+                "description": ""
+            }
+        ]
+    }
+}
