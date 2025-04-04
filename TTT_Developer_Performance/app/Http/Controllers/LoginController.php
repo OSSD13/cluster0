@@ -30,27 +30,17 @@ class LoginController extends Controller
 
         // ตรวจสอบรหัสผ่าน
         if ($user && Hash::check($validated['password'], $user->usr_password)) {
-            
-            // สร้าง session สำหรับเข้าสู่ระบบ
-            session(['user_id' => $user->id]);
-
-            // ถ้าติ๊ก Remember ให้เข้ารหัสและเก็บลง session
-            if ($req->has('remember') && $req->remember) {
-                session([
-                    'remember_token' => Crypt::encryptString($user->id), // เข้ารหัส ID ของ user
-                ]);
-            }
             return view('home', compact('user'));
         } else {
-            return view('login')->withErrors(['login' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง']);
+            return view('login');
         }
     }
 
     public function logout()
     {
         Auth::logout();
-        session()->forget(['remember_token']); // ลบ remember token
-        return redirect()->route('login'); // กลับไปหน้า Login
+        session()->forget(['remember_token']);
+        return redirect()->route('login');
     }
 
     public function googleLogin(){
@@ -61,27 +51,20 @@ class LoginController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
-            // แสดงข้อมูลที่ได้รับจาก Google
             //dd($googleUser);
 
-            // ค้นหาผู้ใช้ในฐานข้อมูลโดยใช้ google id
-            //$user = Users::where('usr_google_id', $googleUser->id)->first();
-            $user = Users::where('usr_email', $googleUser->email)->first();
-
-            // แสดงข้อมูลผู้ใช้ที่ค้นพบ
-            //dd($user);
+            $user = Users::where('usr_google_id', $googleUser->id)->first();
 
             if ($user) {
-                // สร้าง session สำหรับเข้าสู่ระบบ
-                session(['user_id' => $user->id]);
-
                 return view('home', compact('user'));
-                //return redirect()->route('home'); // ไปหน้า home
             } else {
-                return redirect()->route('login'); // ถ้าผู้ใช้ไม่พบให้กลับไปหน้า login
+                session([
+                    'usr_google_id' => $googleUser->id
+                ]);
+                return view('registerWithGoogle_step2', compact('googleUser'));
             }
         } catch (\Exception $e) {
-            dd($e); // แสดงข้อผิดพลาด
+            dd($e);
         }
     }
 }
