@@ -1,7 +1,7 @@
 @extends('layouts.tester')
 
 @section('title')
-    <title>Create Minorcase</title>
+    <title>Edit Minorcase</title>
 @endsection
 
 @section('pagename')
@@ -9,20 +9,20 @@
         {{-- Main Menu --}}
         <h2 class="text-2xl font-bold">Performance Review</h2>
         {{-- Sub Menu --}}
-        <p class="font-bold text-neutral-400">Minor Case / Add</p>
+        <p class="font-bold text-neutral-400">Minor Case / Edit</p>
     </div>
 @endsection
 
 @section('contents')
     <div class="text-xl font-bold mb-4 text-blue-900"> 
-        <p>Create Minor Case</p>
+        <p>Edit Minor Case</p>
     </div>
 
 <!-- Input All Inline -->
 <div class="flex gap-4 mb-[30px] w-full max-w-[1200px]">
     <!-- Input Member -->
     <div class="w-1/5">
-        <label for="member" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Member <span class="text-red-500">*</span> </label>
+        <label for="member" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Member </label>
         <select id="member" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-900 dark:focus:border-blue-900">
             <option selected>Member</option>
             <option value="Sun">Sun</option>
@@ -32,13 +32,13 @@
 
     <!-- Input Your Point (Wider) -->
     <div class="w-2/5">
-        <label for="your_point" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Your Point <span class="text-red-500">*</span> </label>
+        <label for="your_point" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Your Point </span> </label>
         <input type="text" id="your_point" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your point" required />
     </div>
 
     <!-- Input Current Team -->
     <div class="w-1/5">
-        <label for="team" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Current Team <span class="text-red-500">*</span> </label>
+        <label for="team" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Current Team </label>
         <select id="team" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 dark:bg-gray-700 dark:border-blue-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-900 dark:focus:border-blue-900">
             <option selected>Team</option>
             <option value="Team 1">Team 1</option>
@@ -48,7 +48,7 @@
 
     <!-- Input Year -->
     <div class="w-1/5">
-        <label for="year" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Year <span class="text-red-500">*</span> </label>
+        <label for="year" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Year</label>
         <select id="year" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 dark:bg-gray-700 dark:border-blue-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-900 dark:focus:border-blue-900">
             <option selected>Year</option>
             <option value="2568">2568</option>
@@ -58,7 +58,7 @@
 
     <!-- Input Sprint -->
     <div class="w-1/5">
-        <label for="sprint" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Sprint <span class="text-red-500">*</span> </label>
+        <label for="sprint" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Sprint</label>
         <select id="sprint" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 dark:bg-gray-700 dark:border-blue-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-900 dark:focus:border-blue-900">
             <option selected>Sprint</option>
             <option value="1">1</option>
