@@ -20,19 +20,20 @@
         </div>
         <div class="w-full h-[500px]">
             <form action="{{ route('step2') }}" method="POST" class="text-left">
-                <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-5 block text-left w-full">What your name?</h2>
+                <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-5 block text-left w-full">Generate Report</h2>
                 @csrf
                 <div class="mb-[30px] w-full">
                   <label for="author" class="block font-bold">Author</label>
                   <input type="text" name="author" placeholder="Author" required class="w-full h-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                 </div>
 
-                <div class="flex space-x-2 w-full">
-                    <button type="submit" class="h-[50px] p-2 bg-[var(--primary-color)] text-white rounded-[10px] font-bold hover:bg-[#ffffff] hover:text-[var(--primary-color)] hover:border-3 hover:border-[var(--primary-color)]">
-                        Sign Up
+                <div class="flex justify-between w-full mt-5">
+                    <button class="bg-gray-300 rounded-lg shadow-xl w-[210px] h-[50px] text-white">
+                        <strong>Cancel</strong>
                     </button>
-                    <button type="submit" class="h-[50px] p-2 bg-[var(--primary-color)] text-white rounded-[10px] font-bold hover:bg-[#ffffff] hover:text-[var(--primary-color)] hover:border-3 hover:border-[var(--primary-color)]">
-                        Sign Up
+
+                    <button class="bg-[var(--primary-color)] rounded-lg shadow-xl w-[210px] h-[50px] text-white">
+                        <strong>Confirm</strong>
                     </button>
                 </div>
 
