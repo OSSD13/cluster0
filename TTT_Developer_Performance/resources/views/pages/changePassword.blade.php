@@ -42,13 +42,14 @@
                         class="w-[500px] h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                 </div>
                 <div class="flex justify-between w-full mt-5">
-                    <button class="bg-gray-300 rounded-lg shadow-xl w-[225px] h-[50px] text-white">
+                    <button class="bg-gray-300 rounded-lg shadow-xl w-[225px] h-[50px] text-white border border-transparent hover:border-[3px] hover:border-gray-300 hover:bg-white hover:text-gray-300">
                         <strong>Cancel</strong>
                     </button>
-
-                    <button class="bg-[var(--primary-color)] rounded-lg shadow-xl w-[225px] h-[50px] text-white">
+                    
+                    <button class="bg-[var(--primary-color)] rounded-lg shadow-xl w-[225px] h-[50px] text-white border border-transparent hover:border-[3px] hover:border-[var(--primary-color)] hover:bg-white hover:text-[var(--primary-color)]">
                         <strong>Confirm</strong>
                     </button>
+                    
                 </div>
             </div>
         </form>

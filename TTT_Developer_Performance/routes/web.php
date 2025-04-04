@@ -8,6 +8,8 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\CreateMinorcaseController;
+use App\Http\Controllers\DashboardController;
+
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -47,6 +49,8 @@ Route::prefix('tester')->group(function () {
 
 // Report
 Route::get('/report', [ReportController::class, 'index']);
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
