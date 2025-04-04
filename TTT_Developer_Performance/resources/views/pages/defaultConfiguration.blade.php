@@ -14,8 +14,8 @@
 @endsection
 
 @section('contents')
-<div class="flex justify-center pt-10 min-h-screen">
-    <div class="bg-white p-6 rounded-lg w-full max-w-lg h-[500px]">
+<div class="flex justify-center pt-3 min-h-screen">
+    <div class="bg-white p-6 rounded-lg w-full max-w-lg h-[550px] shadow-lg">
         <h2 class="text-2xl font-bold text-[#00408e] mb-4">Default Configuration</h2>
         <form>
             <div class="mb-4">
