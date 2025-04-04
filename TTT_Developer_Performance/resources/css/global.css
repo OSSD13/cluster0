@@ -5,6 +5,13 @@
 
     /* Colors */
     --primary-color: #00408E;
+    --primary-color-yellow: #FFA533;
+    --primary-color-green: #60A563;
+    --primary-color-red: #DC5959;
+    --yellow-color-text: #FFCC00;
+    --green-color-text: #3AD800;
+    --red-color-text: #F00000;
+
     --bg-color: #FAFBFF;
     --placeholder-text-color: #E2E2E2;
 }

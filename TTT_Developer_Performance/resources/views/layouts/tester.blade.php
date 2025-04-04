@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     @yield('styles')
 </head>
 
@@ -167,7 +168,7 @@
                         </li>
                         <hr class="my-2">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
-                            <a href="" class="inline-flex gap-2">
+                            <a href="/logout" class="inline-flex gap-2">
                                 <img src="{{ asset('resources/Images/Icons/log-out.png') }}" alt="" class="ml-[4px] w-[20px] h-[20px]">
                                 <span id="signOut-text">Sign Out</span>
                             </a>
@@ -180,8 +181,10 @@
             <!-- Content Area -->
             <main class="p-6 flex-1">
                 @yield('pagename')
+                @yield('filter')
+                @yield('dashboard')
                 <div class="bg-white rounded-lg shadow-md p-6 shadow-lg h-[750px]">
-                    @yield('contents') 
+                    @yield('contents')
                 </div>
             </main>
         </div>
