@@ -18,9 +18,35 @@
     <p>Minor Case</p>
 </div>
 <!-- รอใส่ filter dropdown --> 
+<div class="flex gap-4 ml-4">
+        <select class="border border-blue-900 text-blue-900 font-bold rounded px-6 py-3 w-40 bg-white">
+            <option value="2568" class="text-black">2568</option>
+            <option value="2567" class="text-black">2567</option>
+        </select>
+        <select class="border border-blue-900 text-blue-900 font-bold rounded px-6 py-3 w-40 bg-white">
+            <option value="Sprint 01" class="text-black">Sprint 01</option>
+            <option value="Sprint 02" class="text-black">Sprint 02</option>
+        </select>
+        <select class="border border-blue-900 text-blue-900 font-bold rounded px-6 py-3 w-40 bg-white">
+            <option value="All team" class="text-black">All team</option>
+            <option value="Team 1" class="text-black">Team 1</option>
+            <option value="Team 2" class="text-black">Team 2</option>
+        </select>
+        <select class="border border-blue-900 text-blue-900 font-bold rounded px-6 py-3 w-40 bg-white">
+            <option value="Member" class="text-black">Member</option>
+            <option value="Steve" class="text-black">Steve</option>
+            <option value="Luna" class="text-black">Luna</option>
+        </select>
+        <button class="flex items-center bg-blue-900 text-white px-4 py-2 rounded">
+            <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+            Add New
+        </button>
+    </div>
+    <br>
+<!-- end -->
 <div class="relative overflow-x-auto sm:rounded-lg">
     <!-- Table -->
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
+    <table class="w-full text-[12px] text-left rtl:text-right text-gray-500 dark:text-gray-300">
         <!-- Table header -->
     <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b dark:border-gray-300"> 
     <tr>
@@ -88,7 +114,7 @@
                 </td>
                  <!-- Point -->
                 <td class="px-6 py-4 text-center">
-                    2
+                    3
                 </td>
                 <!-- Actions button-->               
                 <td class="px-6 py-4 flex items-center justify-start space-x-2">
@@ -124,7 +150,7 @@
                 </td>
                  <!-- Point -->
                 <td class="px-6 py-4 text-center">
-                    2
+                    4
                 </td>
                  <!-- Actions button-->               
                  <td class="px-6 py-4 flex items-center justify-start space-x-2">
