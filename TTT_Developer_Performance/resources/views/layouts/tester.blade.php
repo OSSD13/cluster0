@@ -181,7 +181,7 @@
             <main class="p-6 flex-1">
                 @yield('pagename')
                 <div class="bg-white rounded-lg shadow-md p-6 shadow-lg h-[750px]">
-                    {{-- @yield('contents') --}}
+                    @yield('contents') 
                 </div>
             </main>
         </div>
