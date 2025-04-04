@@ -309,7 +309,7 @@ dropdownMemberMenu.classList.add('hidden');
         </thead>
         <!-- Table body -->
         <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">1</th>
                 <td class="px-6 py-4 text-center text-black">67-52</td>
                 <td class="px-6 py-4 text-center text-black">Team2</td>
@@ -323,7 +323,7 @@ dropdownMemberMenu.classList.add('hidden');
                     <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete" class="w-[35px] h-[35px]"></a>
                 </td>
             </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">2</th>
                 <td class="px-6 py-4 text-center text-black">67-52</td>
                 <td class="px-6 py-4 text-center text-black">Team1</td>

@@ -151,7 +151,7 @@
                 </div>
 
                 <!-- DropdownProfile menu -->
-                <div id="profileDropdown" class="profileDropdown absolute top-[100px] right-[20px] bg-[var(--primary-color)] w-[200px] h-[170px] rounded-xl flex justify-center items-center  hidden">
+                <div id="profileDropdown" class="profileDropdown absolute top-[100px] right-[20px] bg-[var(--primary-color)] w-[200px] h-[170px] rounded-xl flex justify-center items-center hidden z-[9999]">
                     <ul id="profileDropdownList" class="flex flex-col">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/myprofile" class="inline-flex gap-2">
@@ -180,8 +180,8 @@
             <!-- Content Area -->
             <main class="p-6 flex-1">
                 @yield('pagename')
-                <div class="bg-white rounded-lg shadow-md p-6 shadow-lg h-[750px]">
-                    @yield('contents') 
+                <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
+                    @yield('contents')
                 </div>
             </main>
         </div>
