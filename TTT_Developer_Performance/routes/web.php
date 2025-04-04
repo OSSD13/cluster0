@@ -7,7 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
-use App\Http\Controllers\CreateMinorcaseController;
+
 
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -53,5 +53,6 @@ Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
 Route::get('/minorcase', [MinorcaseController::class,'index']);
-Route::get('/addminorcase', [CreateMinorcaseController::class,'index']);
+Route::get('/addminorcase', [MinorcaseController::class,'addMinorcase']);
+Route::get('/editminorcase', [MinorcaseController::class,'editMinorcase']);
 

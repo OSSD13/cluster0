@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class TeamPerformanceController extends Controller
 {
-    public function index(){
+    public function TeamPerformance(){
         return view('pages.teamPerformance');
     }
 }
