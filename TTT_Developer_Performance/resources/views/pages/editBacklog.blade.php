@@ -115,10 +115,14 @@
 
         <!-- Buttons -->
         <div class="flex flex-wrap gap-4 mb-[30px] w-full max-w-[900px] mx-auto">
-            <button type="button"
-                class="w-full sm:w-[350px] h-[60px] p-2 bg-zinc-500 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">Cancel</button>
+            <a href="{{ route('backlog') }}"
+                class="flex items-center justify-center w-full sm:w-[350px] h-[60px] p-2 bg-zinc-500 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
+                Cancel
+            </a>
             <button type="submit"
-                class="w-full sm:w-[350px] h-[60px] p-2 bg-blue-900 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">Create</button>
+                class="w-full sm:w-[350px] h-[60px] p-2 bg-blue-900 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
+                Apply
+            </button>
         </div>
     @endsection
 
@@ -139,6 +143,12 @@
 
             body {
                 font-family: "Inter", sans-serif;
+            }
+
+            .edit-btn:hover img {
+                opacity: 0.7;
+                transform: scale(1.1);
+                transition: all 0.3s ease;
             }
         </style>
     @endsection
