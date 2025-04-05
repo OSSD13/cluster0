@@ -15,7 +15,7 @@
 
 @section('filter')
     {{-- filter --}}
-    <div class="my-3 m-2 flex item-center justify-between">
+    <div class="flex item-center justify-between">
         <div class="bg-white w-full h-[70px] rounded-lg shadow-md shadow-lg flex items-center">
             <div class="gap-4 flex flex-row items-center w-full justify-between mx-10">
                 <div class="flex justify-start items-center gap-2 ">

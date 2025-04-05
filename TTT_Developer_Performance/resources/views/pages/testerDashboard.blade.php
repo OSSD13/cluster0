@@ -15,7 +15,7 @@
 
 @section('filter')
     {{-- filter --}}
-    <div class="my-3 m-2 flex item-center justify-between">
+    <div class="flex item-center justify-between">
         <div class="bg-white w-full h-[70px] rounded-lg shadow-md shadow-lg flex items-center">
             <div class="gap-4 flex flex-row items-center w-full justify-between mx-10">
                 <div class="flex justify-start items-center gap-2 ">
@@ -196,23 +196,390 @@
     </div>
 @endsection
 
-@section('content')
-    <div class="my-2 flex flex-row gap-2">
-        <div class="basis-1/2 bg-white rounded-xl shadow-md shadow-lg">
-            <div>
-                <p class="text-[var(--primary-color)] font-bold flex justify-start">Individual Point Details</p>
+@section('filter2')
+    <div class="flex item-center justify-between">
+        <div class="bg-white w-full h-[70px] rounded-lg shadow-md shadow-lg flex items-center">
+            <div class="gap-4 flex flex-row items-center w-full justify-between mx-10">
+                <div class="flex justify-start items-center gap-2 ">
+                    <img src="/resources/Images/Icons/filter (1).png" alt="" class="w-[40px] h-[40px]">
+                    <label class="text-[var(--primary-color)] text-2xl"><strong>Filter</strong></label>
+                </div>
+                <div class="flex justify-end gap-4 ml-4">
+                    <div class="relative">
+                        <button id="dropdownTeam"
+                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                            <span id="dropdownTeamSelected" class="truncate text-center w-full">Team:</span>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+                        <div id="dropdownTeamMenu"
+                            class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
+                            <div class="flex items-center px-4 py-2">
+                                <input type="checkbox" id="allTeams" value="All Teams" class="mr-2">
+                                <label for="allTeams" class="text-black">All Teams</label>
+                            </div>
+                            <div class="flex items-center px-4 py-2">
+                                <input type="checkbox" id="team1" value="Team 1" class="mr-2">
+                                <label for="team1" class="text-black">Team 1</label>
+                            </div>
+                            <div class="flex items-center px-4 py-2">
+                                <input type="checkbox" id="team2" value="Team 2" class="mr-2">
+                                <label for="team2" class="text-black">Team 2</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="basis-1/2 bg-white rounded-xl shadow-md shadow-lg">
-
         </div>
     </div>
 @endsection
 
+@section('contents')
+    <div class="my-2 flex flex-row gap-2 item-center w-full">
+        <div class="basis-1/2 bg-white rounded-lg shadow-md shadow-lg">
+            <div class="m-5">
+                <p class="text-[var(--primary-color)] font-bold flex justify-start text-2xl m-5">Individual Point Details
+                </p>
+                <div class="relative overflow-x-auto sm:rounded-lg">
+                    <!-- Table -->
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
+                        <!-- Table header -->
+                        <thead
+                            class="border-t border-gray-400 text-l text-gray-400 uppercase border-b dark:border-gray-300">
+                            <tr>
+                                <!-- Table header -->
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    #
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Member
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    <div class="flex items-center justify-center">
+                                        Amount
+                                        <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                            </svg></a>
+                                    </div>
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    <div class="flex items-center justify-center">
+                                        Test Pass
+                                        <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                            </svg></a>
+                                    </div>
+
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    <div class="flex items-center justify-center">
+                                        Test Fail
+                                        <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                            </svg></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    1
+                                </th>
+                                <!-- Member-->
+                                <td class="px-6 py-4 text-center">
+                                    Alex
+                                </td>
+                                <!-- Amount -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Pass -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Fail -->
+                                <td class="px-6 py-4 text-center">
+                                    0
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    2
+                                </th>
+                                <!-- Member-->
+                                <td class="px-6 py-4 text-center">
+                                    Alex
+                                </td>
+                                <!-- Amount -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Pass -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Fail -->
+                                <td class="px-6 py-4 text-center">
+                                    0
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    3
+                                </th>
+                                <!-- Member-->
+                                <td class="px-6 py-4 text-center">
+                                    Alex
+                                </td>
+                                <!-- Amount -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Pass -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Fail -->
+                                <td class="px-6 py-4 text-center">
+                                    0
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    4
+                                </th>
+                                <!-- Member-->
+                                <td class="px-6 py-4 text-center">
+                                    Alex
+                                </td>
+                                <!-- Amount -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Pass -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Fail -->
+                                <td class="px-6 py-4 text-center">
+                                    0
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    5
+                                </th>
+                                <!-- Member-->
+                                <td class="px-6 py-4 text-center">
+                                    Alex
+                                </td>
+                                <!-- Amount -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Pass -->
+                                <td class="px-6 py-4 text-center">
+                                    11
+                                </td>
+                                <!-- Test Fail -->
+                                <td class="px-6 py-4 text-center">
+                                    0
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="basis-1/2 bg-white rounded-lg shadow-md shadow-lg">
+            <div class="m-5">
+                <p class="text-[var(--primary-color)] font-bold flex justify-start text-2xl m-5">Total Points by Individual
+                    in Team
+                </p>
+                <div class="relative overflow-x-auto sm:rounded-lg">
+                    <!-- Table -->
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
+                        <!-- Table header -->
+                        <thead
+                            class="border-t border-gray-400 text-l text-gray-400 uppercase border-b dark:border-gray-300">
+                            <tr>
+                                <!-- Table header -->
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    #
+                                </th>
+                                <th scope="col" class="px-8 py-3 text-center">
+                                    Team
+                                </th>
+                                <th scope="col" class="px-3 py-3 text-center">
+                                    Member
+                                </th>
+                                <th scope="col" class="px-3 py-3 text-center">
+                                    <div class="flex items-center justify-center">
+                                        Point All
+                                        <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                            </svg></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white text-center">
+                                    1
+                                </th>
+                                <!-- Team-->
+                                <td class="px-6 py-4 text-center">
+                                    Team1
+                                </td>
+                                <!-- Member -->
+                                <td class="px-6 py-4 text-center">
+                                    Max
+                                </td>
+                                <!-- Point All -->
+                                <td class="px-6 py-4 text-center">
+                                    8
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white text-center">
+                                    2
+                                </th>
+                                <!-- Team-->
+                                <td class="px-6 py-4 text-center">
+                                    Team1
+                                </td>
+                                <!-- Member -->
+                                <td class="px-6 py-4 text-center">
+                                    Max
+                                </td>
+                                <!-- Point All -->
+                                <td class="px-6 py-4 text-center">
+                                    8
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 text-center">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    3
+                                </th>
+                                <!-- Team-->
+                                <td class="px-6 py-4 text-center">
+                                    Team1
+                                </td>
+                                <!-- Member -->
+                                <td class="px-6 py-4 text-center">
+                                    Max
+                                </td>
+                                <!-- Point All -->
+                                <td class="px-6 py-4 text-center">
+                                    8
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 text-center">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    4
+                                </th>
+                                <!-- Team-->
+                                <td class="px-6 py-4 text-center">
+                                    Team1
+                                </td>
+                                <!-- Member -->
+                                <td class="px-6 py-4 text-center">
+                                    Max
+                                </td>
+                                <!-- Point All -->
+                                <td class="px-6 py-4 text-center">
+                                    8
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 text-center">
+                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                                <!-- ลำดับ # -->
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                    5
+                                </th>
+                                <!-- Team-->
+                                <td class="px-6 py-4 text-center">
+                                    Team1
+                                </td>
+                                <!-- Member -->
+                                <td class="px-6 py-4 text-center">
+                                    Max
+                                </td>
+                                <!-- Point All -->
+                                <td class="px-6 py-4 text-center">
+                                    8
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
 @section('javascripts')
     <script>
+        // Sprint dropdown
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownSprint = document.getElementById('dropdownSprint');
             const dropdownSprintMenu = document.getElementById('dropdownSprintMenu');
@@ -236,6 +603,54 @@
             document.addEventListener('click', function(event) {
                 if (!dropdownSprint.contains(event.target) && !dropdownSprintMenu.contains(event.target)) {
                     dropdownSprintMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Team dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownTeam = document.getElementById('dropdownTeam');
+            const dropdownTeamMenu = document.getElementById('dropdownTeamMenu');
+            const dropdownTeamSelected = document.getElementById('dropdownTeamSelected');
+            const teamCheckboxes = dropdownTeamMenu.querySelectorAll('input[type="checkbox"]');
+            const allTeamsCheckbox = document.getElementById('allTeams');
+
+            dropdownTeam.addEventListener('click', function() {
+                dropdownTeamMenu.classList.toggle('hidden');
+            });
+
+            allTeamsCheckbox.addEventListener('change', function() {
+                const isChecked = allTeamsCheckbox.checked;
+                teamCheckboxes.forEach(checkbox => {
+                    if (checkbox !== allTeamsCheckbox) {
+                        checkbox.checked = isChecked;
+                    }
+                });
+                updateSelectedTeams();
+            });
+
+            teamCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (checkbox !== allTeamsCheckbox) {
+                        allTeamsCheckbox.checked = Array.from(teamCheckboxes)
+                            .filter(cb => cb !== allTeamsCheckbox)
+                            .every(cb => cb.checked);
+                    }
+                    updateSelectedTeams();
+                });
+            });
+
+            function updateSelectedTeams() {
+                const selectedTeams = Array.from(teamCheckboxes)
+                    .filter(cb => cb.checked && cb !== allTeamsCheckbox)
+                    .map(cb => cb.value)
+                    .join(', ');
+                dropdownTeamSelected.textContent = selectedTeams ? `Team: ${selectedTeams}` : 'Team:';
+            }
+
+            document.addEventListener('click', function(event) {
+                if (!dropdownTeam.contains(event.target) && !dropdownTeamMenu.contains(event.target)) {
+                    dropdownTeamMenu.classList.add('hidden');
                 }
             });
         });
