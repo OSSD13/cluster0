@@ -102,7 +102,7 @@
                 </td>
                 <!-- Actions button-->
                 <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="" class="w-[35px] h-[35px]" onclick="" ></a>
+                <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="" class="w-[35px] h-[35px]" onclick="openAlertDelete()" ></a>
                 </td>
             </tr>
         </tbody>
@@ -114,7 +114,21 @@
 @endsection
 
 @section('javascripts')
-    <script></script>
+    <script>
+        function openAlertDelete() {
+            document.getElementById("alertDeleteBox").classList.remove("hidden");
+        }
+
+        function closeAlertDelete() {
+            document.getElementById("alertDeleteBox").classList.add("hidden");
+        }
+
+        document.getElementById("alertDeleteBox").addEventListener('click', function(e) {
+            if (e.target === this) {
+            closeAlertDelete();
+        }
+        });
+    </script>
 @endsection
 
 @section('styles')
@@ -130,6 +144,11 @@
 
         body {
             font-family: "Inter", sans-serif;
+        }
+
+        #alertDeleteBox {
+            z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
         }
     </style>
 @endsection
