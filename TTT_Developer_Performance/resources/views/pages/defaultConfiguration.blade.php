@@ -14,22 +14,24 @@
 @endsection
 
 @section('contents')
-<div class="flex justify-center pt-3 min-h-screen">
-    <div class="bg-white p-6 rounded-lg w-full max-w-lg h-[550px] shadow-lg">
-        <h2 class="text-2xl font-bold text-[#00408e] mb-4">Default Configuration</h2>
-        <form>
-            <div class="mb-4">
-                <label for="password" class="block text-sm font-bold text-black">Set Default Password</label>
-                <input type="text" id="password" value="TTT@1234" class="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+    <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
+        <div class="flex justify-center pt-3 min-h-screen">
+            <div class="bg-white p-6 rounded-lg w-full max-w-lg h-[550px] shadow-lg">
+                <h2 class="text-2xl font-bold text-[#00408e] mb-4">Default Configuration</h2>
+                <form>
+                    <div class="mb-4">
+                        <label for="password" class="block text-sm font-bold text-black">Set Default Password</label>
+                        <input type="text" id="password" value="TTT@1234" class="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-gray-300 text-white font-semibold py-4 px-12 rounded-md shadow-md">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="flex justify-end">
-                <button type="submit" class="bg-gray-300 text-white font-semibold py-4 px-12 rounded-md shadow-md">
-                    Save changes
-                </button>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @section('javascripts')

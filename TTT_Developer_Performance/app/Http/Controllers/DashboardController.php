@@ -9,4 +9,8 @@ class DashboardController extends Controller
     function index(){
         return view('pages.dashboard');
     }
+
+    function tester(){
+        return view('pages.testerDashboard');
+    }
 }
