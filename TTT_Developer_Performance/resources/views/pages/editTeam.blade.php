@@ -62,10 +62,12 @@
         </div>
 
         <!-- Buttons -->
-        <div class="flex justify-end gap-2">
-            <button type="button" class="bg-gray-500 text-white px-6 py-2 rounded-lg">Cancel</button>
-            <button type="submit" class="bg-blue-900 text-white px-6 py-2 rounded-lg">Apply</button>
-        </div>
+<div class="flex justify-center gap-4 mt-4">
+    <button type="button"
+        class="w-1/2 h-[50px] bg-gray-500 text-white text-lg rounded-lg hover:bg-gray-600">Cancel</button>
+    <button type="submit"
+        class="w-1/2 h-[50px] bg-blue-900 text-white text-lg rounded-lg hover:bg-blue-800">Create</button>
+</div>
     </form>
 </div>
 @endsection
