@@ -26,7 +26,32 @@
 <div class="w-full h-15 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-4">
     <div class="flex items-center text-xl font-bold text-[var(--primary-color)] mb-4 justify-between">
         <p class="flex"> <img src="{{ asset('resources/Images/Icons/filter (1).png') }}" alt="Filter" class="w-5 h-5 mr-2"> Filter</p>
-        <button class="flex items-center bg-zinc-400 text-white px-5 py-1 rounded text-[12px] font-bold">
+        <div class="relative">
+                        <button id="dropdownSprint"
+                            class="border border-blue-900 text-blue-900 font-bold rounded px-6 py-1  bg-white text-center flex justify-between items-center">
+                            <span id="dropdownSprintSelected" class="truncate text-center w-full">Sprint:</span>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+                        <div id="dropdownSprintMenu"
+                            class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
+                            <div class="flex items-center px-4 py-2">
+                                <input type="checkbox" id="sprint01" value="Sprint 01" class="mr-2">
+                                <label for="sprint01" class="text-black">Sprint 01</label>
+                            </div>
+                            <div class="flex items-center px-4 py-2">
+                                <input type="checkbox" id="sprint02" value="Sprint 02" class="mr-2">
+                                <label for="sprint02" class="text-black">Sprint 02</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+        <button class="flex items-center bg-zinc-400 text-white px-7 py-1 rounded text-[12px] font-bold">
             Clear
     </button>
     </div>
