@@ -12,7 +12,53 @@
 @endsection
 
 @section('contents')
-
+    <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
+        <div class="flex justify-center w-full mb-5">
+            <form action="/myprofile" method="POST">
+                <div class="flex items-center gap-6 mt-5">
+                    <div class="flex flex-col items-center">
+                        <label for="profile-pic" class="text-lg font-bold mt-2">Profile picture</label>
+                        <img id="profile-pic" src="/resources/Images/ttt_logo.jpg" alt="Profile Picture"
+                            class="w-[120px] h-[120px] rounded-full shadow-xl">
+                    </div>
+                    <button onclick="" class="bg-[var(--primary-color)] rounded-lg shadow-xl w-[160px] h-[40px] text-white border border-transparent hover:border-[3px] hover:border-[var(--primary-color)] hover:bg-white hover:text-[var(--primary-color)]">
+                        <strong>Change profile</strong>
+                    </button>
+    
+                    <button onclick="" class="bg-gray-300 rounded-lg shadow-xl w-[160px] h-[40px] text-red-500 border border-transparent hover:border-[3px] hover:border-red-500 hover:bg-white hover:text-red-500">
+                        <strong>Delete profile</strong>
+                    </button>
+                </div>
+    
+                <div class="mt-5">
+                    <div class="mb-[30px] w-full">
+                        <label for="username" class="block font-bold">Username</label>
+                        <input type="text" name="username" value="Username"
+                            class="w-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px] pointer-events-none">
+                    </div>
+    
+                    <div class="mb-[30px] w-full">
+                        <label for="name" class="block font-bold">Name</label>
+                        <input type="text" name="name" placeholder="Name" required=""
+                            class="w-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
+                    </div>
+    
+    
+                    
+                    <div class="mb-[30px] w-full">
+                        <label for="email" class="block font-bold">Email</label>
+                        <input type="email" name="email" placeholder="Email" required=""
+                            class="w-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
+                    </div>
+                </div>
+                <div class="flex justify-end w-full">
+                    <button class="bg-gray-300 rounded-lg shadow-xl w-[160px] h-[40px] text-white border border-transparent hover:border-[3px] hover:border-gray-300 hover:bg-white hover:text-gray-300">
+                        <strong>Save changes</strong>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 @section('javascripts')

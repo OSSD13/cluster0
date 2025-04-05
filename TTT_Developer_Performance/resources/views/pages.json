@@ -1,0 +1,130 @@
+{
+    "pages": {
+        "All": [
+            {
+                "id": 1,
+                "title": "MyProfile",
+                "url": "pages.myProfile",
+                "description": ""
+            },
+            {
+                "id": 2,
+                "title": "ChangePassword",
+                "url": "pages.changePassword",
+                "description": ""
+            }
+        ],
+        "Developer": [
+            {
+                "id": 1,
+                "title": "Overview",
+                "url": "pages.overview",
+                "description": ""
+            },
+            {
+                "id": 2,
+                "title": "Team Performance",
+                "url": "pages.teamPerformance",
+                "description": ""
+            },
+            {
+                "id": 3,
+                "title": "Performance History",
+                "url": "pages.performanceHistory",
+                "description": ""
+            }
+        ],
+        "Tester": [
+            {
+                "id": 1,
+                "title": "Overview",
+                "url": "pages.overview",
+                "description": ""
+            },
+            {
+                "id": 2,
+                "title": "Team Performance",
+                "url": "pages.teamPerformance",
+                "description": ""
+            },
+            {
+                "id": 3,
+                "title": "Performance History",
+                "url": "pages.performanceHistory",
+                "description": ""
+            },
+            {
+                "id": 4,
+                "title": "Extra Point",
+                "url": "pages.extraPoint",
+                "description": ""
+            },
+            {
+                "id": 5,
+                "title": "Backlog",
+                "url": "pages.backlog",
+                "description": ""
+            },
+            {
+                "id": 6,
+                "title": "Minor case",
+                "url": "pages.minorCase",
+                "description": ""
+            },
+            {
+                "id": 7,
+                "title": "Team List",
+                "url": "pages.teamList",
+                "description": ""
+            },
+            {
+                "id": 8,
+                "title": "Add Team",
+                "url": "pages.addTeam",
+                "description": ""
+            },
+            {
+                "id": 9,
+                "title": "Member List",
+                "url": "pages.memberList",
+                "description": ""
+            },
+            {
+                "id": 10,
+                "title": "Add Member",
+                "url": "pages.addMember",
+                "description": ""
+            },
+            {
+                "id": 11,
+                "title": "Generate Report",
+                "url": "pages.report",
+                "description": ""
+            },
+            {
+                "id": 12,
+                "title": "Revision History",
+                "url": "pages.revisionHistory",
+                "description": ""
+            },
+            {
+                "id": 13,
+                "title": "Access Control",
+                "url": "pages.accessControl",
+                "description": ""
+            },
+            {
+                "id": 14,
+                "title": "Trello Configuration",
+                "url": "pages.trelloConfiguration",
+                "description": ""
+            },
+            {
+                "id": 15,
+                "title": "Default Configuration",
+                "url": "pages.defalutConfiguration",
+                "description": ""
+            }
+        ]
+    }
+}
