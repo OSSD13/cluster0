@@ -11,6 +11,7 @@ use App\Http\Controllers\CreateMinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\CreateNewTeamController;
 use App\Http\Controllers\EditTeamController;
+use App\Http\Controllers\BacklogController;
 
 
 // Login
@@ -63,3 +64,11 @@ Route::get('/addminorcase', [CreateMinorcaseController::class,'index']);
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
 Route::get('/addteam', [CreateNewTeamController::class,'index']);
 Route::get('/edit', [EditTeamController::class,'index']);
+
+
+Route::get('/backlog', [BacklogController::class,'index']);
+Route::get('/addBacklog', [BacklogController::class,'add']);
+Route::get('/editBacklog', [BacklogController::class, 'edit']);
+
+
+
