@@ -142,11 +142,12 @@
                     </div>
                 </div>
                 <!-- Add New Button -->
-                <button class="flex items-center bg-blue-900 text-white px-4 py-2 rounded font-bold">
+                <a href="{{ route('addbacklog') }}"
+                    class="flex items-center bg-blue-900 text-white px-4 py-2 rounded font-bold">
                     <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
                         class="w-7 h-7 mr-2">
                     Add New
-                </button>
+                </a>
             </div>
         </div>
 
@@ -225,8 +226,9 @@
                         <td class="px-6 py-4 text-center text-black">1</td>
                         <td class="px-6 py-4 text-center text-black">0</td>
                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                            <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                    alt="Edit" class="w-[35px] h-[35px]"></a>
+                            <a href="{{ route('editbacklog') }}"><img
+                                    src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                    class="w-[35px] h-[35px]"></a>
                             <a href="#" onclick="showAlert()"><img
                                     src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
                                     class="w-[35px] h-[35px]"></a>
@@ -270,9 +272,11 @@
                         <td class="px-6 py-4 text-center text-black">1</td>
                         <td class="px-6 py-4 text-center text-black">0</td>
                         <td class="px-6 py-4 text-center text-black">0</td>
+                        <!-- In the table rows (for both entries) -->
                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                            <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                    alt="Edit" class="w-[35px] h-[35px]"></a>
+                            <a href="{{ route('editbacklog') }}"><img
+                                    src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                    class="w-[35px] h-[35px]"></a>
                             <a href="#" onclick="showAlert()"><img
                                     src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
                                     class="w-[35px] h-[35px]"></a>
@@ -473,9 +477,9 @@
         }
 
         #alertBox {
-            z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
+            z-index: 9999;
+            /* ให้สูงกว่าทุกอย่างในหน้า */
             background-color: rgba(0, 0, 0, 0.5);
         }
-
     </style>
 @endsection
