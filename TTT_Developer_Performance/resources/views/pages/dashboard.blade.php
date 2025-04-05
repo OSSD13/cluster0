@@ -1,4 +1,4 @@
-@extends('layouts.tester') {{-- everyone can use ต้องใช้ layout อื่นที่ไม่ใช่ของ tester--}}
+@extends('layouts.tester') {{-- allUser ใช้ layout อื่น --}}
 
 @section('title')
     <title>Dashboard</title>
@@ -148,11 +148,13 @@
 @endsection
 
 @section('dashboard')
+    {{-- column chart --}}
     <div class="my-3 flex flex-row gap-4 grid grid-cols-3">
         <div class="col-span-2 bg-white h-full w-full rounded-lg shadow-md shadow-lg">
             <div id="columnChart"></div>
         </div>
 
+        {{-- pie chart, show pass & fail point --}}
         <div class="bg-white h-full rounded-lg shadow-md shadow-lg flex flex-col items-center">
             <div id="pieChart"></div>
             <div class="flex flex-col h-full justify-center items-center gap-2">
@@ -186,6 +188,8 @@
 
 @section('javascripts')
     <script>
+
+        // sprint dropdown
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownSprint = document.getElementById('dropdownSprint');
             const dropdownSprintMenu = document.getElementById('dropdownSprintMenu');
@@ -213,7 +217,7 @@
             });
         });
 
-        // Year dashboard
+        // column dashboard
         var options = {
             series: [{
                 name: 'Net Profit',

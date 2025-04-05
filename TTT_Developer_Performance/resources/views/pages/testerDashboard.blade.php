@@ -161,11 +161,13 @@
 @endsection
 
 @section('dashboard')
+    {{-- column chart --}}
     <div class="my-3 flex flex-row gap-4 grid grid-cols-3">
         <div class="col-span-2 bg-white h-full w-full rounded-lg shadow-md shadow-lg">
             <div id="columnChart"></div>
         </div>
 
+        {{-- pie chart, show pass & fail point --}}
         <div class="bg-white h-full rounded-lg shadow-md shadow-lg flex flex-col items-center">
             <div id="pieChart"></div>
             <div class="flex flex-col h-full justify-center items-center gap-2">
@@ -197,6 +199,7 @@
 @endsection
 
 @section('filter2')
+    {{-- filter --}}
     <div class="flex item-center justify-between">
         <div class="bg-white w-full h-[70px] rounded-lg shadow-md shadow-lg flex items-center">
             <div class="gap-4 flex flex-row items-center w-full justify-between mx-10">
@@ -204,6 +207,8 @@
                     <img src="/resources/Images/Icons/filter (1).png" alt="" class="w-[40px] h-[40px]">
                     <label class="text-[var(--primary-color)] text-2xl"><strong>Filter</strong></label>
                 </div>
+
+                {{-- dropdown team --}}
                 <div class="flex justify-end gap-4 ml-4">
                     <div class="relative">
                         <button id="dropdownTeam"
@@ -238,13 +243,14 @@
 @endsection
 
 @section('contents')
+    {{-- 2 tables --}}
     <div class="my-2 flex flex-row gap-2 item-center w-full">
         <div class="basis-1/2 bg-white rounded-lg shadow-md shadow-lg">
             <div class="m-5">
                 <p class="text-[var(--primary-color)] font-bold flex justify-start text-2xl m-5">Individual Point Details
                 </p>
                 <div class="relative overflow-x-auto sm:rounded-lg">
-                    <!-- Table -->
+                    <!-- Table Individual Point Details -->
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
                         <!-- Table header -->
                         <thead
@@ -433,7 +439,7 @@
                     in Team
                 </p>
                 <div class="relative overflow-x-auto sm:rounded-lg">
-                    <!-- Table -->
+                    <!-- Table Total Points by Individual in Team-->
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
                         <!-- Table header -->
                         <thead
