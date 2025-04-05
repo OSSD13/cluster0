@@ -14,7 +14,7 @@
 @endsection
 
 @section('contents')
-    <div class="max-w-md mx-auto">
+    <div class=" bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
         <div class="text-2xl font-bold mb-4 text-blue-900 ">
             <p>Trello API</p>
         </div>
