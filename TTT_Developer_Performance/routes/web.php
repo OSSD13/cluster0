@@ -63,6 +63,9 @@ Route::get('/addteam', [TeamManagementController::class,'add']);
 Route::get('/edit', [TeamManagementController::class,'edit']);
 
 Route::get('/backlog', [BacklogController::class,'index']);
+
+
+
 Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
 
 //mypage
@@ -71,5 +74,4 @@ Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
 
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
-
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
