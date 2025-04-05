@@ -52,23 +52,30 @@ Route::prefix('tester')->group(function () {
 Route::get('/report', [ReportController::class, 'index']);
 Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
 
+// Profile 
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
+// Dashboard
+Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
+
+// Baglog
+Route::get('/backlog', [BacklogController::class,'index']);
+
+// Extrapoint
+Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
+Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('createextrapoint');
+Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
+
+// Minor case
 Route::get('/minorcase', [MinorcaseController::class,'index']);
 Route::get('/addminorcase', [MinorcaseController::class,'add']);
+Route::get('/editminorcase', [MinorcaseController::class,'edit']);
 
 // Team Managment
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
 Route::get('/addteam', [TeamManagementController::class,'add']);
 Route::get('/edit', [TeamManagementController::class,'edit']);
 
-Route::get('/backlog', [BacklogController::class,'index']);
-Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
-
-//mypage
-Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('createextrapoint');
-Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
-
+// Performance History
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
