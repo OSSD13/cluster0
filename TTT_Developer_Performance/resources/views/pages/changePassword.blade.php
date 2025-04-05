@@ -1,4 +1,4 @@
-@extends('layouts.tester')
+@extends('layouts.tester') {{-- allUser ใช้ layout อื่น --}}
 
 @section('title')
     <title>ChangePassword</title>
@@ -22,35 +22,38 @@
                             class="w-[120px] h-[120px] rounded-full shadow-xl">
                     </div>
                 </div>
-    
+
+                {{-- Name, Username, Email input --}}
                 <div class="mt-5 w-full flex flex-col items-center">
                     <div class="mb-[30px]">
                         <label for="name" class="block font-bold">Current Password</label>
                         <input type="text" name="currentPassword" placeholder="Current Password" required=""
                             class="w-[500px] h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                     </div>
-    
-    
+
+
                     <div class="mb-[30px]">
                         <label for="username" class="block font-bold">New Password</label>
                         <input type="text" name="newPassword" placeholder="New Password" required=""
                             class="w-[500px] h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                     </div>
-    
+
                     <div class="mb-[30px]">
                         <label for="email" class="block font-bold">Confirm New Password</label>
                         <input type="email" name="confirmNewPassword" placeholder="Confirm New Password" required=""
                             class="w-[500px] h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                     </div>
+
+                    {{-- button cancel, confirm --}}
                     <div class="flex justify-between w-full mt-5">
                         <button class="bg-gray-300 rounded-lg shadow-xl w-[225px] h-[50px] text-white border border-transparent hover:border-[3px] hover:border-gray-300 hover:bg-white hover:text-gray-300">
                             <strong>Cancel</strong>
                         </button>
-                        
+
                         <button class="bg-[var(--primary-color)] rounded-lg shadow-xl w-[225px] h-[50px] text-white border border-transparent hover:border-[3px] hover:border-[var(--primary-color)] hover:bg-white hover:text-[var(--primary-color)]">
                             <strong>Confirm</strong>
                         </button>
-                        
+
                     </div>
                 </div>
             </form>

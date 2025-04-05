@@ -9,10 +9,10 @@ class MinorcaseController extends Controller
     public function index(){
         return view('pages.minorcase');
     }
-    public function addMinorcase(){
+    public function add(){
         return view('pages.addMinorcase');
     }
-    public function editMinorcase(){
+    public function edit(){
         return view('pages.editMinorcase');
     }
 }

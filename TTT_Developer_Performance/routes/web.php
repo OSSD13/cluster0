@@ -50,6 +50,7 @@ Route::prefix('tester')->group(function () {
 
 // Report
 Route::get('/report', [ReportController::class, 'index']);
+Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
 
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
@@ -71,5 +72,3 @@ Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
 
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
-
-Route::get('/testerdashboard', [DashboardController::class,'tester']);

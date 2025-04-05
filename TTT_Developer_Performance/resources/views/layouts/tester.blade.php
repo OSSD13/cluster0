@@ -10,6 +10,7 @@
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     @yield('styles')
 </head>
 
@@ -148,28 +149,32 @@
                     <button onclick="toggleProfileDropdown()" class="focus:outline-none">
                         <img src="{{ asset('resources/Images/ttt_logo.jpg') }}" alt=""
                             class="w-[50px] h-[50px] rounded-[50px]">
-                        </button>
+                    </button>
                 </div>
 
                 <!-- DropdownProfile menu -->
-                <div id="profileDropdown" class="profileDropdown absolute top-[100px] right-[20px] bg-[var(--primary-color)] w-[200px] h-[170px] rounded-xl flex justify-center items-center  hidden">
+                <div id="profileDropdown"
+                    class="profileDropdown absolute top-[100px] right-[20px] bg-[var(--primary-color)] w-[200px] h-[170px] rounded-xl flex justify-center items-center  hidden">
                     <ul id="profileDropdownList" class="flex flex-col">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/myprofile" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/user.png') }}" alt="" class="w-[20px] h-[20px]">
+                                <img src="{{ asset('resources/Images/Icons/user.png') }}" alt=""
+                                    class="w-[20px] h-[20px]">
                                 <span id="myProfile-text">My profile</span>
                             </a>
                         </li>
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/changepassword" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/lock.png') }}" alt="" class="w-[20px] h-[20px]">
+                                <img src="{{ asset('resources/Images/Icons/lock.png') }}" alt=""
+                                    class="w-[20px] h-[20px]">
                                 <span id="changePassword-text">Change Password</span>
                             </a>
                         </li>
                         <hr class="my-2">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/logout" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/log-out.png') }}" alt="" class="ml-[4px] w-[20px] h-[20px]">
+                                <img src="{{ asset('resources/Images/Icons/log-out.png') }}" alt=""
+                                    class="ml-[4px] w-[20px] h-[20px]">
                                 <span id="signOut-text">Sign Out</span>
                             </a>
                         </li>
@@ -183,8 +188,9 @@
                 @yield('pagename')
                 @yield('filter')
                 @yield('dashboard')
-                @yield('contents')
                 @yield('filter2')
+                @yield('contents')
+
             </main>
         </div>
     </div>
