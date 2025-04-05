@@ -354,43 +354,46 @@
             </thead>
             <!-- Table body -->
             <tbody>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <!-- ลำดับ # -->
-                    <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                        1
-                    </th>
-                    <!-- Sprint -->
-                    <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
-                        67-52
-                    </td>
-                    <!-- Team -->
-                    <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
-                        Team 2
-                    </td>
-                    <!-- Member -->
-                    <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
-                        Steve
-                    </td>
-                    <!-- Point -->
-                    <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
-                        <div class="flex items-center justify-center">
-                            2
-                        </div>
-                    </td>
-                    <!-- Actions button -->
-                    <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                        <a href="{{ route('editExtrapoint') }}">
+                @foreach ($points as $key => $item)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <!-- ลำดับ # -->
+                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                            {{ $key + 1 }}
+                        </th>
+                        <!-- Sprint -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            {{ $item->sprint_year . '-' . $item->sprint_num }}
+                        </td>
+                        <!-- Team -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            {{ $item->team }}
+                        </td>
+                        <!-- Member -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            {{ $item->member }}
+                        </td>
+                        <!-- Point -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            <div class="flex items-center justify-center">
+                                {{ $item->value }}
+                            </div>
+                        </td>
+                        <!-- Actions button -->
+                        <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                            <a href="{{ route('editExtrapoint') }}">
 
-                            <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt=""
-                                class="w-[35px] h-[35px]" onclick="">
-                        </a>
-                        <a href="" id="deleteBtn">
-                            <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
-                                class="w-[35px] h-[35px]" onclick="">
-                        </a>
-                    </td>
-                </tr>
+                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt=""
+                                    class="w-[35px] h-[35px]" onclick="">
+                            </a>
+                            <a href="" id="deleteBtn">
+                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
+                                    class="w-[35px] h-[35px]" onclick="">
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>

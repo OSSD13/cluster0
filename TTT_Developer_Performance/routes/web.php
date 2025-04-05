@@ -7,9 +7,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
-use App\Http\Controllers\TeamManagementController;
-use App\Http\Controllers\DashboardController;
 
+
+//mypage
+use App\Http\Controllers\ExtrapointController;
+use App\Http\Controllers\PerformanceHistoryController;
 
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -50,25 +52,17 @@ Route::prefix('tester')->group(function () {
 
 // Report
 Route::get('/report', [ReportController::class, 'index']);
-Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
 
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
 Route::get('/minorcase', [MinorcaseController::class,'index']);
-Route::get('/addminorcase', [MinorcaseController::class,'add']);
-
-// Team Managment
-Route::get('/teammanagment', [TeamManagementController::class,'index']);
-Route::get('/addteam', [TeamManagementController::class,'add']);
-Route::get('/edit', [TeamManagementController::class,'edit']);
-
-Route::get('/backlog', [BacklogController::class,'index']);
-Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
+Route::get('/addminorcase', [MinorcaseController::class, 'add']); // Ensure the controller and method exist
 
 //mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('createextrapoint');
-Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
+Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
+Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
 
-Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
