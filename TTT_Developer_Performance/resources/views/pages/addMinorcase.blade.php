@@ -22,12 +22,12 @@
 <div class="flex gap-4 mb-[30px] w-full ">
     <!-- Input Member -->
     <div class="w-1/5">
-        <label for="member" class="block mb-2 text-sm font-bold text-gray-900 ">Member <span class="text-red-500">*</span> </label>
-        <select id="member" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
-            <option selected>Member</option>
-            <option value="Sun">Sun</option>
-            <option value="Ohm">Ohm</option>
-        </select>
+    <label for="member" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Member <span class="text-red-500">*</span></label>
+            <select id="member" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
+            <option value="" disabled selected hidden class="text-center">Member</option>
+            <option value="Member A">Sun</option>
+            <option value="Member B">ohm</option>
+            </select>
     </div>
 
     <!-- Input Your Point (Wider) -->
@@ -38,32 +38,32 @@
 
     <!-- Input Current Team -->
     <div class="w-1/5">
-        <label for="team" class="block mb-2 text-sm font-bold text-gray-900 ">Current Team <span class="text-red-500">*</span> </label>
-        <select id="team" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
-            <option selected>Team</option>
-            <option value="Team 1">Team 1</option>
-            <option value="Team 2">Team 2</option>
-        </select>
+    <label for="current_team" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Current Team <span class="text-red-500">*</span></label>
+            <select id="member" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
+                <option value="" disabled selected hidden class="text-center">Team</option>
+                <option value="Team A">Team A</option>
+                <option value="Team B">Team B</option>
+            </select>
     </div>
 
     <!-- Input Year -->
     <div class="w-1/5">
-        <label for="year" class="block mb-2 text-sm font-bold text-gray-900 ">Year <span class="text-red-500">*</span> </label>
-        <select id="year" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
-            <option selected>Year</option>
-            <option value="2568">2568</option>
-            <option value="2567">2567</option>
-        </select>
+    <label for="year" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Sprint <span class="text-red-500">*</span></label>
+            <select id="year" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
+            <option value="" disabled selected hidden class="text-center">Year</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            </select>
     </div>
 
     <!-- Input Sprint -->
     <div class="w-1/5">
-        <label for="sprint" class="block mb-2 text-sm font-bold text-gray-900 ">Sprint <span class="text-red-500">*</span> </label>
-        <select id="sprint" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
-            <option selected>Sprint</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-        </select>
+    <label for="sprint" class="invisible block mb-2 text-sm font-bold text-gray-900 dark:text-white"><span class="text-red-500">*</span></label>
+            <select id="sprint" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
+            <option value="" disabled selected hidden class="text-center">Sprint</option>
+            <option value="Sprint 1">Sprint 1</option>
+            <option value="Sprint 2">Sprint 2</option>
+            </select>
     </div>
 </div>
 

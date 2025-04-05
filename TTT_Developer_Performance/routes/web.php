@@ -12,6 +12,8 @@ use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\CreateNewTeamController;
 use App\Http\Controllers\EditTeamController;
 use App\Http\Controllers\TeamPerformanceController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BacklogController;
 
 
 // Login
@@ -58,7 +60,7 @@ Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
 Route::get('/minorcase', [MinorcaseController::class,'index']);
-Route::get('/addminorcase', [CreateMinorcaseController::class,'index']);
+Route::get('/addminorcase', [MinorcaseController::class,'addMinorcase']);
 
 // Team Managment
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
@@ -67,3 +69,6 @@ Route::get('/edit', [EditTeamController::class,'index']);
 
 // Team Performance 
 Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
+
+
+Route::get('/backlog', [BacklogController::class, 'index']);
