@@ -16,7 +16,7 @@
 <!-- Header -->
 <div class="bg-white shadow-md rounded-xl p-6 max-w-[900px] mx-auto">
     <div class="flex flex-col md:flex-row items-center justify-between mb-4 gap-4 md:gap-0">
-        <p class="text-xl font-bold text-blue-900">Team List</p>
+        <p class="text-2xl font-bold text-blue-900">Team List</p>
 
         <!-- Search -->
         <div class="flex-1 flex justify-center order-3 md:order-none">
