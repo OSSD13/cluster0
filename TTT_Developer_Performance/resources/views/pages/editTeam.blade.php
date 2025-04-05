@@ -1,88 +1,71 @@
 @extends('layouts.tester')
 
 @section('title')
-    <title>Team Management</title>
+    <title>Edit Team</title>
 @endsection
 
 @section('pagename')
-    <div class="flex items-end gap-2 mb-4">
+    <div class="flex items-end gap-[10px] mb-4">
         <h2 class="text-2xl font-bold">Team Management</h2>
-        <p class="font-bold text-neutral-400">Team List / Edit Team</p>
+        <p class="font-bold text-neutral-400 ml-4">Team List / Edit</p>
     </div>
 @endsection
 
-@section('contents') 
-<div class="text-xl font-bold mb-4 text-blue-900">
-    <p>Edit Team</p>
+@section('contents')
+<div class="bg-white shadow-md rounded-xl p-6 max-w-[600px] mx-auto">
+    <h2 class="text-xl font-bold text-blue-900 mb-4">Edit Team</h2>
+
+    <form action="#" method="POST">
+        @csrf
+        @method('PUT')
+
+        <!-- Team Name -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Team Name</label>
+            <input type="text" name="team_name" value="Team1" 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+        </div>
+
+        <!-- Trello Team Name -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Trello Team Name</label>
+            <input type="text" name="trello_board" value="Board Team 1" 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+        </div>
+
+        <!-- Team Members -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Team Member</label>
+            <div class="flex flex-wrap gap-2">
+                @foreach (['Name 1', 'Name 2', 'Name 3', 'Name 4', 'Name 5'] as $member)
+                    <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg flex items-center">
+                        {{ $member }} <button class="ml-2 text-gray-500">✕</button>
+                    </span>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Choose API & Setting -->
+        <div class="mb-4 flex gap-4">
+            <div class="w-1/2">
+                <label class="block text-gray-700 font-bold mb-2">Choose API</label>
+                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                    <option>API set 1</option>
+                </select>
+            </div>
+            <div class="w-1/2">
+                <label class="block text-gray-700 font-bold mb-2">Choose Setting</label>
+                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                    <option>Setting 1</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-end gap-2">
+            <button type="button" class="bg-gray-500 text-white px-6 py-2 rounded-lg">Cancel</button>
+            <button type="submit" class="bg-blue-900 text-white px-6 py-2 rounded-lg">Apply</button>
+        </div>
+    </form>
 </div>
-
-<div class="relative overflow-x-auto rounded-lg shadow-md">
-    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300">
-        <thead class="bg-gray-200 text-xs text-gray-600 uppercase">
-            <tr>
-                <th class="px-6 py-3 text-center">#</th>
-                <th class="px-6 py-3 text-center">Sprint</th>
-                <th class="px-6 py-3 text-center">Team</th>
-                <th class="px-6 py-3 text-center">Member</th>
-                <th class="px-6 py-3 text-center">Card Detail</th>
-                <th class="px-6 py-3 text-center">Defect Detail</th>
-                <th class="px-6 py-3 text-center">
-                    <div class="flex items-center justify-center">
-                        Point
-                        <a href="#" class="ml-2">
-                            <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </th>
-                <th class="px-6 py-3 text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ([1, 2] as $i)
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="px-6 py-4 text-center font-medium text-gray-700 dark:text-white">{{ $i }}</td>
-                <td class="px-6 py-4 text-center">67-52</td>
-                <td class="px-6 py-4 text-center">Team 2</td>
-                <td class="px-6 py-4 text-center">Steve</td>
-                <td class="px-6 py-4 text-center">Lorem</td>
-                <td class="px-6 py-4 text-center">Lorem</td>
-                <td class="px-6 py-4 text-center">2</td>
-                <td class="px-6 py-4 flex items-center justify-center gap-2">
-                    <a href="#">
-                        <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit" class="w-8 h-8">
-                    </a>
-                    <a href="#">
-                        <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete" class="w-8 h-8">
-                    </a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-@endsection
-
-@section('javascripts')
-    <script>
-        // JS functions (ถ้ามี)
-    </script>
-@endsection
-
-@section('styles')
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-        #navbar-title {
-            font-family: "Jaro", sans-serif;
-            line-height: 25px;
-            letter-spacing: 0.5px;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-        }
-    </style>
 @endsection
