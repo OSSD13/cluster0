@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BacklogController;
 
 
 // Login
@@ -50,21 +51,23 @@ Route::prefix('tester')->group(function () {
 
 // Report
 Route::get('/report', [ReportController::class, 'index']);
-Route::get('/pdf', [ReportController::class, 'reportGenerate']);
 
-Route::get('/myprofile', [ProfileController::class,'myProfile']);
-Route::get('/changepassword', [ProfileController::class,'changePassword']);
+Route::get('/myprofile', [ProfileController::class, 'myProfile']);
+Route::get('/changepassword', [ProfileController::class, 'changePassword']);
 
-Route::get('/minorcase', [MinorcaseController::class,'index']);
-Route::get('/addminorcase', [MinorcaseController::class,'add']);
+Route::get('/minorcase', [MinorcaseController::class, 'index']);
+Route::get('/addminorcase', [MinorcaseController::class, 'add']);
 
 // Team Managment
-Route::get('/teammanagment', [TeamManagementController::class,'index']);
-Route::get('/addteam', [TeamManagementController::class,'add']);
-Route::get('/edit', [TeamManagementController::class,'edit']);
+Route::get('/teammanagment', [TeamManagementController::class, 'index']);
+Route::get('/addteam', [TeamManagementController::class, 'add']);
+Route::get('/edit', [TeamManagementController::class, 'edit']);
 
-Route::get('/backlog', [BacklogController::class,'index']);
-Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
+Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
+Route::get('/addbacklog', [BacklogController::class,'add'])->name('addbacklog');
+Route::get('/editbacklog', [BacklogController::class,'edit'])->name('editbacklog');
+
+Route::get('/teamPerformance', [TeamPerformanceController::class, 'TeamPerformance']);
 
 //mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
@@ -72,3 +75,8 @@ Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
 
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+Route::get('/testerdashboard', [DashboardController::class, 'tester']);
+
+
+
+
