@@ -35,7 +35,9 @@
 @endsection
 
 @section('javascripts')
-    <script></script>
+<script>
+</script>
+
 @endsection
 
 @section('styles')
