@@ -25,7 +25,6 @@ class LoginController extends Controller
 
         // ค้นหาผู้ใช้จาก username หรือ email
         $user = Users::where('usr_username', $validated['username'])
-                    ->orWhere('usr_email', $validated['username'])
                     ->first();
 
         // ตรวจสอบรหัสผ่าน
