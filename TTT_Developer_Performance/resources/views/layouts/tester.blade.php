@@ -190,7 +190,6 @@
                 @yield('dashboard')
                 @yield('filter2')
                 @yield('contents')
-
             </main>
         </div>
     </div>
