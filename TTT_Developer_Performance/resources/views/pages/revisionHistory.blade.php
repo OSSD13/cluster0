@@ -14,10 +14,9 @@
 @section('contents')
     <div class="bg-white p-6 rounded-lg shadow-md">
         <div class="flex justify-between items-center mb-4">
-            <!-- Left: Title -->
             <p class="text-2xl font-bold text-blue-900">Revision History</p>
 
-            <!-- Right: Dropdown Filters -->
+            <!-- Dropdown Filters -->
             <div class="flex gap-4">
                 <!-- Year Dropdown -->
                 <div class="w-32 relative">
@@ -163,11 +162,13 @@
 
 @section('javascripts')
     <script>
+        // ฟังก์ชันสำหรับเปิด/ปิด Dropdown
         function toggleDropdown(id) {
             const dropdown = document.getElementById(id);
             dropdown.classList.toggle('hidden');
         }
 
+        // ปิด dropdown เมื่อคลิกที่พื้นที่อื่น
         document.addEventListener('click', function(event) {
             const dropdowns = ['yearDropdown', 'sprintDropdown', 'versionDropdown'];
             dropdowns.forEach(id => {
