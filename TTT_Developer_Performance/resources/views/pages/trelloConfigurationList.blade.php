@@ -64,7 +64,8 @@
             </div>
             <div class="mb-4 w-[480px]">
                 <label for="Choose List" class="block mb-2 text-sm font-bold text-gray-900 ">Choose List </label>
-                <select id="Choose List" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-md focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
+                <select id="Choose List"
+                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-md focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
                     <option value="" disabled selected hidden>Choose List</option>
                     <option value="">To-do</option>
                     <option value="">In-progress</option>
@@ -87,7 +88,8 @@
 
                     <button
                         class="absolute top-1/2 left-122 transform -translate-y-1/2 w-[40px] h-[40px] bg-[#00BA00] p-2 rounded-md shadow-md flex items-center justify-center">
-                        <img src="{{ asset('resources\Images\Icons\check-green.png') }}" alt="" class="w-[25px] h-[25px]">
+                        <img src="{{ asset('resources\Images\Icons\check-green.png') }}" alt=""
+                            class="w-[25px] h-[25px]">
                     </button>
                 </div>
             </div>
