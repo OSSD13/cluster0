@@ -16,7 +16,7 @@
 @section('contents')
 <!-- ฺBox Team performance -->
 <div
-    class=" w-full h-20 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-6 flex justify-between items-center mb-[30px]">
+    class=" w-full h-20 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-6 flex justify-between items-center mb-[20px]">
     <div class="grid grid-cols-2 gap-2 w-full">
         <div class="items-center flex">
             <!-- ซ้าย -->
@@ -61,7 +61,7 @@
 
 
 <!-- Filter -->
-<div class="w-full h-15 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-4">
+<div class="w-full h-15 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-4 mb-[20px]">
     <div class="flex items-center text-xl font-bold text-[var(--primary-color)] mb-4 justify-between">
 
         <div>
@@ -286,9 +286,6 @@
                     });
                 });
                 </script>
-
-
-
             </div>
         </div>
 
@@ -296,11 +293,12 @@
             Clear
         </button>
     </div>
-</div><br>
+</div>
 
 
 <!-- Team -->
-<div class="w-full h-15 bg-[var(--primary-color)] border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-4">
+<div
+    class="w-full h-15 bg-[var(--primary-color)] border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-4 mb-[10px]">
     <div class="flex justify-between items-center">
         <p class="text-xl font-bold text-white">Team A</p>
         <span class="text-sm  text-white">Last update: 03/01/2025, 15.45</span>
@@ -309,7 +307,7 @@
 <br>
 
 <!-- Box All point -->
-<div class="grid grid-cols-3 gap-2">
+<div class="grid grid-cols-3 gap-2 ">
     <div
         class="w-full h-60 flex justify-center col-span-2 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-4">
         <div class="grid grid-cols-2 gap-2">
@@ -389,7 +387,7 @@
 
 
 <!-- Team Member Table -->
-<div class="w-full h-50 bg-white border-gray-300 rounded-lg shadow-xl p-6">
+<div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-6">
     <div class="text-xl font-bold mb-4 text-blue-900 flex justify-between items-center">
         <p>Team Members</p>
         <button class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
@@ -404,12 +402,78 @@
                 <tr>
                     <th class="px-3 py-3">#</th>
                     <th class="px-3 py-3">Member</th>
-                    <th class="px-3 py-3">Point Personal</th>
-                    <th class="px-3 py-3">Test Pass</th>
-                    <th class="px-3 py-3">Bug</th>
-                    <th class="px-3 py-3">Final Pass Point</th>
-                    <th class="px-3 py-3">Cancel</th>
-                    <th class="px-3 py-3">Sum Final</th>
+                    <th class="px-3 py-3">
+                        <div class="flex items-center justify-center">
+                            Point Personal
+                            <a href="#">
+                                <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </th>
+                    <th class="px-3 py-3">
+                        <div class="flex items-center justify-center">
+                            Test Pass
+                            <a href="#">
+                                <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </th>
+                    <th class="px-3 py-3">
+                        <div class="flex items-center justify-center">
+                            Bug
+                            <a href="#">
+                                <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </th>
+                    <th class="px-3 py-3">
+                        <div class="flex items-center justify-center">
+                            Final Pass Point
+                            <a href="#">
+                                <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </th>
+                    <th class="px-3 py-3">
+                        <div class="flex items-center justify-center">
+                            Cancel
+                            <a href="#">
+                                <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </th>
+                    <th class="px-3 py-3">
+                        <div class="flex items-center justify-center">
+                            Sum Final
+                            <a href="#">
+                                <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </th>
                     <th class="px-3 py-3">Day Off</th>
                     <th class="px-3 py-3">Assign</th>
                     <th class="px-3 py-3">Actions</th>
@@ -444,13 +508,63 @@
                     <!-- Action button-->
                     <td class="px-5 py-5 flex items-center justify-center space-x-2">
                         <a href=""> <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                class="w-8 h-8 min-w-8 min-h-8 cursor-pointer" onclick=""> </a>
+                                class="w-7 h-7 min-w-7 min-h-7 cursor-pointer" onclick=""> </a>
                         <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
-                                class="w-8 h-8 min-w-8 min-h-8 cursor-pointer" onclick=""></a>
+                                class="w-7 h-7 min-w-7 min-h-7 cursor-pointer" onclick=""></a>
                     </td>
                     </td>
                 </tr>
             </tbody>
+            <tbody>
+                <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
+                    <td class="px-6 py-4">1</td>
+                    <td class="px-6 py-4">Max</td>
+                    <td class="px-6 py-4">10</td>
+                    <td class="px-6 py-4">10</td>
+                    <td class="px-6 py-4">0</td>
+                    <td class="px-6 py-4">100.00%</td>
+                    <td class="px-6 py-4">0</td>
+                    <td class="px-6 py-4">10</td>
+                    <!-- Dropdown Test and Not-test  -->
+                    <td class="px-6 py-4 text-center items-center">
+                        <select onchange="changeColor(this)"
+                            class="px-2 py-1 rounded-md text-white text-[10px] bg-red-600 font-semibold transition-colors duration-300">
+                            <option value="not-test">Not Test</option>
+                            <option value="test" class="text-center">Test</option>
+                        </select>
+                    </td>
+                    <td class="px-4 py-2">
+                        <button
+                            class="inline-block border border-gray-400 rounded-full px-4 py-1 text-gray-800 font-medium">
+                            Tester1
+                        </button>
+                    </td>
+                    </td>
+                    <!-- Action button-->
+                    <td class="px-5 py-5 flex items-center justify-center space-x-2">
+                        <a href=""> <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                class="w-7 h-7 min-w-7 min-h-7 cursor-pointer" onclick=""> </a>
+                        <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
+                                class="w-7 h-7 min-w-7 min-h-7 cursor-pointer" onclick=""></a>
+                    </td>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- Calulate -->
+            <tbody>
+                <tr class="bg-white hover:bg-gray-50 text-zinc-400 font-bold text-center">
+                    <td class="px-6 py-4">Sum</td>
+                    <td class="px-6 py-4">5</td>
+                    <td class="px-6 py-4">37</td>
+                    <td class="px-6 py-4">34</td>
+                    <td class="px-6 py-4">3</td>
+                    <td class="px-6 py-4">34</td>
+                    <td class="px-6 py-4">0</td>
+                    <td class="px-6 py-4">34</td>
+                </tr>
+            </tbody>
+
+
         </table>
     </div>
 </div><br>
@@ -458,252 +572,315 @@
 <!-- column -->
 
 <div class="flex gap-4">
-    <!-- ฝั่งซ้าย: Backlog + Minor Case -->
+    <!-- ฝั่งซ้าย: Backlog + Minor Case  -->
     <div class="flex flex-col gap-4 w-2/3">
         <!-- Backlog -->
         <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
             <div class="flex justify-between items-center mb-2">
-                <h2 class="text-lg font-bold text-blue-900">Backlog</h2>
+                <h2 class="text-lg font-bold text-blue-900 text-[20px]">Backlog</h2>
                 <button class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
                     <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
                     Add New
                 </button>
             </div>
-        
             <!-- Backlog Table -->
-            </div>
-                     <!-- Minor Case -->
-                    <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="text-lg font-bold text-blue-900">Minor Case</h2>
-                            <button
-                                class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
-                                <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
-                                    class="w-5 h-5 mr-2">
-                                Add New
-                            </button>
-                        </div>
-                        <!-- Minor case table -->
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-[10px] text-center text-gray-500 border-collapse">
-                                <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b">
-                                    <tr>
-                                        <th class="px-3 py-3">#</th>
-                                        <th class="px-3 py-3">Sprint</th>
-                                        <th class="px-3 py-3">Member</th>
-                                        <th class="px-3 py-3">
-                                            <div class="flex items-center justify-center">
-                                                Point All
-                                                <a href="#">
-                                                    <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </th>
-
-                                        <th class="px-3 py-3">
-                                            <div class="flex items-center justify-center">
-                                                Test Pass
-                                                <a href="#">
-                                                    <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </th>
-
-                                        <th class="px-3 py-3">
-                                            <div class="flex items-center justify-center">
-                                                Bug
-                                                <a href="#">
-                                                    <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </th>
-
-                                        <th class="px-3 py-3">
-                                            <div class="flex items-center justify-center">
-                                                cancel
-                                                <a href="#">
-                                                    <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                        <td class="px-6 py-4">1</td>
-                                        <td class="px-6 py-4">Max</td>
-                                        <td class="px-6 py-4">8</td>
-                                        <td class="px-6 py-4">Yes</td>
-                                        <td class="px-6 py-4">0</td>
-                                    </tr>
-                                </tbody>
-
-                                <th class="px-3 py-3">Action</th>
-
-                            </table>
-                        </div>
-                    </div>
-            </div>
-
-            <!-- ฝั่งขวา: Extra Point -->
-            <div class="w-1/3">
-                <div
-                    class="w-full bg-white border-gray-300 rounded-lg shadow-xl px-6 pt-4 pb-6 flex flex-col gap-6 items-center">
-                    <p class="text-lg font-bold text-blue-900">Total Extra Point</p>
-
-                    <div class="flex justify-center items-center">
-                        <p class="text-[50px] text-center font-bold text-blue-900">10.5</p>
-                    </div>
-
-                    <div class="flex justify-between items-center w-full">
-                        <p class="text-[15px] font-bold text-zinc-400">Extra Point</p>
-                        <button
-                            class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
-                            <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
-                                class="w-5 h-5 mr-2">
-                            Add New
-                        </button>
-                    </div>
-
-                    <div class="overflow-x-auto w-full">
-                        <table class="w-full text-[11px] text-center text-gray-500 border-collapse">
-                            <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b">
-                                <tr>
-                                    <th class="px-3 py-3">#</th>
-                                    <th class="px-3 py-3">Member</th>
-                                    <th class="px-3 py-3">
-                                        <div class="flex items-center justify-center">
-                                            Point
-                                            <a href="#">
-                                                <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor" viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th class="px-3 py-3">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                    <td class="px-6 py-4">1</td>
-                                    <td class="px-6 py-4">Max</td>
-                                    <td class="px-6 py-4">10</td>
-                                    <td class="w-full px-5 py-5 flex items-center justify-center space-x-2">
-                                        <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                                alt="Edit" class="w-7 h-7 min-w-7 min-h-7 cursor-pointer"></a>
-                                        <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                                alt="Delete" class="w-7 h-7 min-w-7 min-h-7 cursor-pointer"></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-[10px] text-center text-gray-500 border-collapse">
+                    <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b">
+                        <tr>
+                            <th class="px-3 py-3">#</th>
+                            <th class="px-3 py-3">Sprint</th>
+                            <th class="px-3 py-3">Member</th>
+                            <th class="px-3 py-3">
+                                <div class="flex items-center justify-center">
+                                    Point All
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
+                            <th class="px-3 py-3">
+                                <div class="flex items-center justify-center">
+                                    Test Pass
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
+                            <th class="px-3 py-3">
+                                <div class="flex items-center justify-center">
+                                    Bug
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
+                            <th class="px-3 py-3">
+                                <div class="flex items-center justify-center">
+                                    Cancel
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
+                            <th class="px-3 py-3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
+                            <td class="px-3 py-3">-</td>
+                            <td class="px-3 py-3">-</td>
+                            <td class="px-3 py-3">-</td>
+                            <td class="px-3 py-3">-</td>
+                            <td class="px-3 py-3">-</td>
+                            <td class="px-3 py-3">-</td>
+                            <td class="px-3 py-3">-</td>
+                            <td class="px-3 py-3">
+                                <div class="flex justify-center gap-1">
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                            class="w-6 h-6"></a>
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
+                                            alt="Delete" class="w-6 h-6"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
+        <!-- Minor Case -->
+        <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-bold text-blue-900 text-[20px]">Minor Case</h2>
+                <button class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+                    Add New
+                </button>
+            </div>
+            <!-- Minor Case Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-[10px] text-center text-gray-500 border-collapse">
+                    <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b">
+                        <tr>
+                            <th class="px-3 py-3">#</th>
+                            <th class="px-3 py-3">Sprint</th>
+                            <th class="px-3 py-3">Member</th>
+                            <th class="px-3 py-3">Card Detail</th>
+                            <th class="px-3 py-3">Defect Detail</th>
+                            <th class="px-3 py-3">
+                                <div class="flex items-center justify-center">
+                                    Point
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
+                            <th class="px-3 py-3">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
+                            <td class="px-3 py-3">1</td>
+                            <td class="px-3 py-3">Sprint 4</td>
+                            <td class="px-3 py-3">Max</td>
+                            <td class="px-3 py-3">8</td>
+                            <td class="px-3 py-3">Yes</td>
+                            <td class="px-3 py-3">0</td>
+                            <td class="px-3 py-3">
+                                <div class="flex justify-center gap-1">
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                            class="w-6 h-6"></a>
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
+                                            alt="Delete" class="w-6 h-6"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
 
 
 
-        @endsection
+    <!-- ฝั่งขวา: Extra Point -->
+    <div class="w-1/3">
+        <div
+            class="w-full bg-white border-gray-300 rounded-lg shadow-xl px-6 pt-4 pb-3 flex flex-col gap-3 items-center">
+            <p class="text-lg font-bold text-blue-900 text-[20px]">Total Extra Point</p>
 
-        @section('javascripts')
-        <script>
-        var options = {
-            series: [{
-                name: 'Plan', // Updated name
-                data: [44]
-            }, {
-                name: 'Actual', // Updated name
-                data: [53]
-            }],
-            chart: {
-                type: 'bar',
-                height: 193
-            },
-            labels: ['Plan', 'Actual'],
-            colors: ['#FFA533', '#60A563'],
-            plotOptions: {
-                bar: {
-                    horizontal: true,
-                    dataLabels: {
-                        position: 'top',
-                    },
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                offsetX: -6,
-                style: {
-                    fontSize: '12px',
+            <div class="flex justify-center items-center">
+                <p class="text-[50px] text-center font-bold text-blue-900">10.5</p>
+            </div>
+
+            <div class="flex justify-between items-center w-full">
+                <p class="text-[15px] font-bold text-zinc-400">Extra Point</p>
+                <button class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+                    Add New
+                </button>
+            </div>
+            <!-- Extra Point Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-[10px] text-center text-gray-500 border-collapse">
+                    <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b">
+                        <tr>
+                            <th class="px-3 py-3">#</th>
+                            <th class="px-3 py-3">Member</th>
+                            <th class="px-3 py-3">
+                                <div class="flex items-center justify-center">
+                                    Point
+                                    <a href="#">
+                                        <svg class="w-3 h-3 ms-1.5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </th>
+                            <th class="px-3 py-3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
+                            <td class="px-3 py-3">1</td>
+                            <td class="px-3 py-3">Max</td>
+                            <td class="px-3 py-3">4</td>
+
+                            <td class="px-3 py-3">
+                                <div class="flex justify-center gap-1">
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                            class="w-6 h-6"></a>
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
+                                            alt="Delete" class="w-6 h-6"></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
+                            <td class="px-3 py-3">2</td>
+                            <td class="px-3 py-3">Luna</td>
+                            <td class="px-3 py-3">1</td>
+
+                            <td class="px-3 py-3">
+                                <div class="flex justify-center gap-1">
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                            class="w-6 h-6"></a>
+                                    <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
+                                            alt="Delete" class="w-6 h-6"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+
+            </div>
+
+
+
+
+
+            @endsection
+
+            @section('javascripts')
+            <script>
+            var options = {
+                series: [{
+                    name: 'Plan', // Updated name
+                    data: [44]
+                }, {
+                    name: 'Actual', // Updated name
+                    data: [53]
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 193
+                },
+                labels: ['Plan', 'Actual'],
+                colors: ['#FFA533', '#60A563'],
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        dataLabels: {
+                            position: 'top',
+                        },
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    offsetX: -6,
+                    style: {
+                        fontSize: '12px',
+                        colors: ['#fff']
+                    }
+                },
+                stroke: {
+                    show: true,
+                    width: 1,
                     colors: ['#fff']
+                },
+                tooltip: {
+                    shared: true,
+                    intersect: false
+                },
+                xaxis: {
+                    categories: ['Point'],
+                },
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+
+            function changeColor(dropdown) {
+                // Remove old color classes
+                dropdown.classList.remove('bg-red-600', 'bg-lime-600');
+
+                // Add new color class based on the selected value
+                if (dropdown.value === 'test') {
+                    dropdown.classList.add('bg-lime-600');
+                } else {
+                    dropdown.classList.add('bg-red-600');
                 }
-            },
-            stroke: {
-                show: true,
-                width: 1,
-                colors: ['#fff']
-            },
-            tooltip: {
-                shared: true,
-                intersect: false
-            },
-            xaxis: {
-                categories: ['Point'],
-            },
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-
-        function changeColor(dropdown) {
-            // Remove old color classes
-            dropdown.classList.remove('bg-red-600', 'bg-lime-600');
-
-            // Add new color class based on the selected value
-            if (dropdown.value === 'test') {
-                dropdown.classList.add('bg-lime-600');
-            } else {
-                dropdown.classList.add('bg-red-600');
             }
-        }
-        </script>
-        @endsection
+            </script>
+            @endsection
 
-        @section('styles')
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+            @section('styles')
+            <style>
+            @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-        #navbar-title {
-            font-family: "Jaro", sans-serif;
-            line-height: 25px;
-            letter-spacing: 0.5px;
-        }
+            #navbar-title {
+                font-family: "Jaro", sans-serif;
+                line-height: 25px;
+                letter-spacing: 0.5px;
+            }
 
-        body {
-            font-family: "Inter", sans-serif;
-        }
-        </style>
-        @endsection
+            body {
+                font-family: "Inter", sans-serif;
+            }
+            </style>
+            @endsection
