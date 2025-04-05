@@ -9,6 +9,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\CreateMinorcaseController;
 
+//mypage
+use App\Http\Controllers\ExtrapointController;
+use App\Http\Controllers\PerformanceHistoryController;
+
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -54,3 +58,11 @@ Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
 Route::get('/minorcase', [MinorcaseController::class,'index']);
 Route::get('/addminorcase', [CreateMinorcaseController::class,'index']);
+
+//mypage
+Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
+Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
+Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
+
+Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');

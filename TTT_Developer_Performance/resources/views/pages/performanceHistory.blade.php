@@ -272,10 +272,6 @@
                 });
             });
         </script>
-        <button class="flex items-center bg-blue-900 text-white px-4 py-2 rounded font-bold">
-            <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-7 h-7 mr-2">
-            Add New
-        </button>
     </div>
 </div>
 <!-- Table -->
