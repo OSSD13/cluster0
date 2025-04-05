@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
@@ -13,6 +13,8 @@ class ReportController extends Controller
 
     public function reportGenerate(){
         $pdf = Pdf::loadView('layouts.pdf');
-        return $pdf->download('itsolutionstuff.pdf');
-    }
+
+        return $pdf->download('report.pdf');
+    }   
+
 }
