@@ -13,4 +13,11 @@ class DashboardController extends Controller
     function tester(){
         return view('pages.testerDashboard');
     }
+
+    function index() {
+        $points = Points::all()->paginate(5);
+        return view('pages.testerDashboard', compact('points'));
+    }
+
+
 }
