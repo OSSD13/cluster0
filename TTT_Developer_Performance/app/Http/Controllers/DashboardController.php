@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    function index(){
+    function developer(){
         return view('pages.dashboard');
+    }
+
+    function tester(){
+        return view('pages.testerDashboard');
     }
 }

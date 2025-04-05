@@ -183,9 +183,8 @@
                 @yield('pagename')
                 @yield('filter')
                 @yield('dashboard')
-                <div class="bg-white rounded-lg shadow-md p-6 shadow-lg h-[750px]">
-                    @yield('contents')
-                </div>
+                @yield('contents')
+                @yield('filter2')
             </main>
         </div>
     </div>
