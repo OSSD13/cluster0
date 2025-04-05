@@ -11,6 +11,7 @@ use App\Http\Controllers\CreateMinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\CreateNewTeamController;
 use App\Http\Controllers\EditTeamController;
+use App\Http\Controllers\DashboardController;
 
 
 // Login
@@ -63,3 +64,6 @@ Route::get('/addminorcase', [CreateMinorcaseController::class,'index']);
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
 Route::get('/addteam', [CreateNewTeamController::class,'index']);
 Route::get('/edit', [EditTeamController::class,'index']);
+
+// tester dashboard
+Route::get('/testerdashboard', [DashboardController::class,'tester']);

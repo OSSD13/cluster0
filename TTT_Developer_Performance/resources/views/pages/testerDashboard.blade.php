@@ -1,4 +1,4 @@
-@extends('layouts.tester') {{-- everyone can use ต้องใช้ layout อื่นที่ไม่ใช่ของ tester--}}
+@extends('layouts.tester')
 
 @section('title')
     <title>Dashboard</title>
@@ -90,10 +90,10 @@
     </div>
 
     {{-- show point 3 type --}}
-    <div class="my-3 flex flex-row gap-4">
+    <div class="my-4 flex flex-row gap-4">
 
         {{-- Point All --}}
-        <div class="basis-1/3 bg-white h-[90px] w-full rounded-lg shadow-md shadow-lg">
+        <div class="basis-1/4 bg-white h-[90px] w-full rounded-lg shadow-md shadow-lg">
             <div class="bg-[var(--primary-color-yellow)] w-full h-[30px] rounded-t-lg flex flex-col">
                 <div class="mt-1 flex justify-center items-center gap-2">
                     <label class="text-white font-bold">Point All</label>
@@ -111,7 +111,7 @@
         </div>
 
         {{-- Point Pass --}}
-        <div class="basis-1/3 bg-white h-[90px] w-full rounded-lg shadow-md shadow-lg">
+        <div class="basis-1/4 bg-white h-[90px] w-full rounded-lg shadow-md shadow-lg">
             <div class="bg-[var(--primary-color-green)] w-full h-[30px] rounded-t-lg flex flex-col">
                 <div class="mt-1 flex justify-center items-center gap-2">
                     <label class="text-white font-bold">Point Pass</label>
@@ -128,7 +128,7 @@
             </div>
         </div>
         {{-- Point Fail --}}
-        <div class="basis-1/3 bg-white h-[90px] w-full rounded-lg shadow-md shadow-lg">
+        <div class="basis-1/4 bg-white h-[90px] w-full rounded-lg shadow-md shadow-lg">
             <div class="bg-[var(--primary-color-red)] w-full h-[30px] rounded-t-lg flex flex-col">
                 <div class="mt-1 flex justify-center items-center gap-2">
                     <label class="text-white font-bold">Point Fail</label>
@@ -141,6 +141,19 @@
                     <div class="flex-1 flex items-center justify-center">
                         <p id="pointPassPercent" class="font-bold text-[var(--red-color-text)]">8.10%</p>
                     </div>
+                </div>
+            </div>
+        </div>
+        {{-- Team Amoute --}}
+        <div class="basis-1/4 bg-white h-[90px] w-full rounded-lg shadow-md shadow-lg">
+            <div class="bg-[var(--primary-color)] w-full h-[30px] rounded-t-lg flex flex-col">
+                <div class="mt-1 flex justify-center items-center gap-2">
+                    <label class="text-white font-bold">Team Amount</label>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 w-full mt-3">
+                <div class="flex items-center justify-center w-full h-full">
+                    <p id="teamAmouteNum" class="font-bold">3</p>
                 </div>
             </div>
         </div>
@@ -168,8 +181,7 @@
                     </div>
                 </div>
 
-                <div
-                    class="bg-[var(--primary-color-red)] w-[180px] h-[35px] rounded-lg flex justify-between items-center">
+                <div class="bg-[var(--primary-color-red)] w-[180px] h-[35px] rounded-lg flex justify-between items-center">
                     <div
                         class="bg-[var(--primary-color-red)] w-[90px] h-[35px] rounded-lg flex justify-center items-center">
                         <p class="text-white font-bold">Fail</p>
@@ -183,6 +195,21 @@
         </div>
     </div>
 @endsection
+
+@section('content')
+    <div class="my-2 flex flex-row gap-2">
+        <div class="basis-1/2 bg-white rounded-xl shadow-md shadow-lg">
+            <div>
+                <p class="text-[var(--primary-color)] font-bold flex justify-start">Individual Point Details</p>
+            </div>
+        </div>
+
+        <div class="basis-1/2 bg-white rounded-xl shadow-md shadow-lg">
+
+        </div>
+    </div>
+@endsection
+
 
 @section('javascripts')
     <script>
