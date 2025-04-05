@@ -9,10 +9,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\BacklogController;
-use App\Http\Controllers\TeamPerformanceController;
-use App\Http\Controllers\ExtrapointController;
-use App\Http\Controllers\PerformanceHistoryController;
 
 
 // Login
@@ -54,6 +50,7 @@ Route::prefix('tester')->group(function () {
 
 // Report
 Route::get('/report', [ReportController::class, 'index']);
+Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
 
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
@@ -69,12 +66,9 @@ Route::get('/edit', [TeamManagementController::class,'edit']);
 Route::get('/backlog', [BacklogController::class,'index']);
 Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
 
-//Ohmpage
+//mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
-Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('createextrapoint');
+Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
 
-Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
-
-Route::get('/testerdashboard', [DashboardController::class,'tester']);
-Route::get('/dashboard', [DashboardController::class,'developer']);
+Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
