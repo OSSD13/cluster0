@@ -71,6 +71,3 @@ Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
 
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
-
-Route::get('/testerdashboard', [DashboardController::class,'tester']);
-Route::get('/dashboard', [DashboardController::class,'developer']);
