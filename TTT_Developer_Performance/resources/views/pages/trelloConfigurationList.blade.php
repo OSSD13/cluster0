@@ -63,25 +63,31 @@
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <div class="mb-4 w-[480px]">
-                <label for="choose-list" class="block text-sm font-bold text-black mb-2">Choose List</label>
-                <div class="relative">
-                    <select id="choose-list" class="w-full p-2 border rounded appearance-none">
-                        <option>In-progress</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
+                <label for="Choose List" class="block mb-2 text-sm font-bold text-gray-900 ">Choose List </label>
+                <select id="Choose List" class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-md focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
+                    <option value="" disabled selected hidden>Choose List</option>
+                    <option value="">To-do</option>
+                    <option value="">In-progress</option>
+                    <option value="">Done</option>
+                    <option value="">Bug / Backlog</option>
+                    <option value="">Minor case</option>
+                    <option value="">Extra</option>
+                    <option value="">Cancel</option>
+                </select>
             </div>
             <div class="mb-4 w-[480px]">
-                <label for="list-name" class="block text-sm font-bold text-black mb-2">List Name</label>
+                <label for="setting-name" class="block text-sm font-bold text-black mb-2">
+                    List Name
+                </label>
 
-                <div class="flex items-center">
+                <div class="relative">
                     <input type="text" id="list-name" placeholder="List Name"
-                        class="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow font-bold" value="">
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        value="">
 
-                    <button class="ml-2 w-[40px] h-[40px] bg-[#00BA00] p-2 rounded-md shadow-md flex items-center justify-center flex-shrink-0">
-                        <img src="{{ asset('resources/Images/Icons/check (1).png') }}" alt="" class="w-[25px] h-[25px]">
+                    <button
+                        class="absolute top-1/2 left-122 transform -translate-y-1/2 w-[40px] h-[40px] bg-[#00BA00] p-2 rounded-md shadow-md flex items-center justify-center">
+                        <img src="{{ asset('resources\Images\Icons\check-green.png') }}" alt="" class="w-[25px] h-[25px]">
                     </button>
                 </div>
             </div>
