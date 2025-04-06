@@ -23,7 +23,7 @@
             </div>
             <div class="w-full">
                 <form action="{{ route('step2') }}" method="POST" class="text-left">
-                    <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-[15px] block text-left w-full">Generate Report2</h2>
+                    <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-[15px] block text-left w-full">Generate Report</h2>
                     @csrf
                     <div class="mb-[15px] w-full">
                       <label for="author" class="block font-bold">Author</label>

@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TeamPerformanceController;
 
 
 // Login
@@ -72,3 +73,6 @@ Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
 
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+
+
+Route::get('/testCards', [TeamPerformanceController::class, 'testTrelloApi']);
