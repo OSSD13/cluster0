@@ -18,7 +18,7 @@ class TeamSeeder extends Seeder
         //
         DB::table('teams')->insert([
             'tm_is_use' => 1,
-            'tm_name' => 'OhmTeam',
+            'tm_name' => 'SunTeam',
             'tm_stl_id' => 1,
             'tm_trello_boardname' => 'OhmTrello Board Name'
         ]);

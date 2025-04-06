@@ -80,6 +80,8 @@ Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapo
 Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
+Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
+Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
 

@@ -199,11 +199,11 @@
                             <label for="allTeams" class="text-black">All Teams</label>
                         </div>
                         <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="team1" value="Team 1" class="mr-2">
+                            <input type="checkbox" id="team1" value="1" class="mr-2">
                             <label for="team1" class="text-black">Team 1</label>
                         </div>
                         <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="team2" value="Team 2" class="mr-2">
+                            <input type="checkbox" id="team2" value="2" class="mr-2">
                             <label for="team2" class="text-black">Team 2</label>
                         </div>
                     </div>
@@ -381,15 +381,71 @@
                         </td>
                         <!-- Actions button -->
                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                            <a href="{{ route('editExtrapoint') }}">
-
+                            <a href="{{ route('editExtrapoint','$item->id') }}">
                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt=""
                                     class="w-[35px] h-[35px]" onclick="">
                             </a>
-                            <a href="" id="deleteBtn">
-                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
-                                    class="w-[35px] h-[35px]" onclick="">
-                            </a>
+                            <form action="{{ route('deleteExtrapoint', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                @csrf
+                                @method('put')
+                                <button type="submit">
+                                    <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
+                                        class="w-[35px] h-[35px]">
+                                </button>
+                            </form>
+
+                            <script>
+                                function deleteExtrapoint(id) {
+                                    Swal.fire({
+                                        title: "Are you sure?",
+                                        text: "You won't be able to revert this!",
+                                        icon: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#3085d6",
+                                        cancelButtonColor: "#d33",
+                                        confirmButtonText: "Yes, delete it!",
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            fetch(`{{ url('deleteExtrapoint') }}/${id}`, {
+                                                method: 'DELETE',
+                                                headers: {
+                                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                                }
+                                            }).then(response => {
+                                                if (response.ok) {
+                                                    Swal.fire({
+                                                        title: "Deleted!",
+                                                        text: "Your file has been deleted.",
+                                                        icon: "success",
+                                                        allowOutsideClick: false,
+                                                        allowEscapeKey: false
+                                                    }).then(() => {
+                                                        location.reload(); // Reload the page
+                                                    });
+                                                } else {
+                                                    Swal.fire({
+                                                        title: "Error!",
+                                                        text: "Something went wrong.",
+                                                        icon: "error",
+                                                        allowOutsideClick: false,
+                                                        allowEscapeKey: false
+                                                    });
+                                                }
+                                            }).catch(error => {
+                                                Swal.fire({
+                                                    title: "Error!",
+                                                    text: "Something went wrong.",
+                                                    icon: "error",
+                                                    allowOutsideClick: false,
+                                                    allowEscapeKey: false
+                                                });
+                                            });
+                                        }
+                                    });
+                                }
+                            </script>
                         </td>
                     </tr>
                 @endforeach
