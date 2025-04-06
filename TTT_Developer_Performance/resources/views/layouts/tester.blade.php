@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('title')
-    <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}" />
-    <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
+    <link rel="icon" type="image/jpg" sizes="16x16" href="resources/Images/ttt_logo.jpg" />
+    <link rel="stylesheet" href="resources/css/global.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -32,7 +32,7 @@
                     <button onclick="toggleMenu('dashboardMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-3">
-                            <img src="{{ asset('resources/Images/Icons/visualization.png') }}" alt=""
+                            <img src="resources/Images/Icons/visualization.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="dashboard-text">Dashboard</span>
                         </div>
@@ -49,7 +49,7 @@
                     <button onclick="toggleMenu('performanceReviewMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/evaluation.png') }}" alt=""
+                            <img src="resources/Images/Icons/evaluation.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="performanceReview-text">Performance Review</span>
                         </div>
@@ -68,7 +68,7 @@
                     <button onclick="toggleMenu('teamManagementMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/group.png') }}" alt=""
+                            <img src="resources/Images/Icons/group.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="teamManagement-text">Team Management</span>
                         </div>
@@ -85,7 +85,7 @@
                     <button onclick="toggleMenu('memberManagementMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/user.png') }}" alt=""
+                            <img src="resources/Images/Icons/user.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="memberManagement-text">Member Management</span>
                         </div>
@@ -102,7 +102,7 @@
                     <button onclick="toggleMenu('reportsMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/report.png') }}" alt=""
+                            <img src="resources/Images/Icons/report.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="reports-text">Reports</span>
                         </div>
@@ -118,7 +118,7 @@
                     <button onclick="toggleMenu('settingsMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/setting.png') }}" alt=""
+                            <img src="resources/Images/Icons/setting.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="settings-text">Settings</span>
                         </div>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="relative">
                     <button onclick="toggleProfileDropdown()" class="focus:outline-none">
-                        <img src="{{ asset('resources/Images/ttt_logo.jpg') }}" alt=""
+                        <img src="resources/Images/ttt_logo.jpg" alt=""
                             class="w-[50px] h-[50px] rounded-[50px]">
                     </button>
                 </div>
@@ -158,14 +158,14 @@
                     <ul id="profileDropdownList" class="flex flex-col">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/myprofile" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/user.png') }}" alt=""
+                                <img src="resources/Images/Icons/user.png" alt=""
                                     class="w-[20px] h-[20px]">
                                 <span id="myProfile-text">My profile</span>
                             </a>
                         </li>
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/changepassword" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/lock.png') }}" alt=""
+                                <img src="'resources/Images/Icons/lock.png" alt=""
                                     class="w-[20px] h-[20px]">
                                 <span id="changePassword-text">Change Password</span>
                             </a>
@@ -173,7 +173,7 @@
                         <hr class="my-2">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/logout" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/log-out.png') }}" alt=""
+                                <img src="resources/Images/Icons/log-out.png" alt=""
                                     class="ml-[4px] w-[20px] h-[20px]">
                                 <span id="signOut-text">Sign Out</span>
                             </a>
@@ -195,7 +195,7 @@
     </div>
 
     @yield('javascripts')
-    <script src="{{ asset('resources/js/global.js') }}"></script>
+    <script src="resources/js/global.js"></script>
 </body>
 
 </html>
