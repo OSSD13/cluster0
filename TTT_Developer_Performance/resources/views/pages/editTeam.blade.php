@@ -72,7 +72,7 @@
 
         <!-- Buttons -->
         <div class="flex justify-center gap-4 mt-4">
-            <button type="button" class="w-1/2 h-[50px] bg-gray-500 text-white text-lg rounded-lg hover:bg-gray-600">Cancel</button>
+            <button type="button" class="w-1/2 h-[50px] bg-gray-500 text-white text-lg rounded-lg hover:bg-gray-600">Cancel</button> 
                 <button type="submit"class="w-1/2 h-[50px] bg-blue-900 text-white text-lg rounded-lg hover:bg-blue-800">Create</button>
 </div>
     </form>

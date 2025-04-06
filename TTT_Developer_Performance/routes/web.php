@@ -65,13 +65,14 @@ Route::get('/editminorcase', [MinorcaseController::class,'edit']);
 
 // Team Managment
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
-Route::get('/addteam', [TeamManagementController::class,'add']);
-Route::get('/edit', [TeamManagementController::class,'edit']);
+Route::get('/add', [TeamManagementController::class,'add'])->name('add');
+Route::get('/edit/{id?}', [TeamManagementController::class,'edit'])->name('edit');
+Route::get('/delete/{id?}',[TeamManagmentController::class, 'delete'])->name('delete');
 
 Route::get('/backlog', [BacklogController::class,'index']);
 Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
 
-//mypage
+//mypages
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
 Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
