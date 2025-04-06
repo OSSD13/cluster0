@@ -39,8 +39,8 @@
                         <i id="dashboard-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="dashboardMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Overview</a></li>
-                        <li><a href="#" class="block">Team Performance</a></li>
+                        <li><a href="{{ url('/testerDashboard') }}" class="block">Overview</a></li>
+                        <li><a href="{{ url('/teamPerformance') }}" class="block">Team Performance</a></li>
                     </ul>
                 </li>
 
@@ -56,10 +56,10 @@
                         <i id="performanceReview-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="performanceReviewMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Performance History</a></li>
-                        <li><a href="#" class="block">Extra Point</a></li>
-                        <li><a href="#" class="block">Backlog</a></li>
-                        <li><a href="#" class="block">Minor Case</a></li>
+                        <li><a href="{{ url('/performancehistory') }}" class="block">Performance History</a></li>
+                        <li><a href="{{ url('/extrapoint') }}" class="block">Extra Point</a></li>
+                        <li><a href="{{ url('/backlog') }}" class="block">Backlog</a></li>
+                        <li><a href="{{ url('/minorcase') }}" class="block">Minor Case</a></li>
                     </ul>
                 </li>
 
@@ -75,8 +75,8 @@
                         <i id="teamManagement-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="teamManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Team List</a></li>
-                        <li><a href="#" class="block">Add Team</a></li>
+                        <li><a href="{{ url('/teammanagment') }}" class="block">Team List</a></li>
+                        <li><a href="{{ url('/addteam') }}" class="block">Add Team</a></li>
                     </ul>
                 </li>
 
@@ -92,8 +92,8 @@
                         <i id="memberManagement-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="memberManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Member List</a></li>
-                        <li><a href="#" class="block">Add Member</a></li>
+                        <li><a href="{{ url('/') }}" class="block">Member List</a></li>
+                        <li><a href="{{ url('/') }}" class="block">Add Member</a></li>
                     </ul>
                 </li>
 
@@ -109,7 +109,7 @@
                         <i id="reports-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="reportsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Generate Report</a></li>
+                        <li><a href="{{ url('/report') }}" class="block">Generate Report</a></li>
                     </ul>
                 </li>
 
@@ -125,10 +125,10 @@
                         <i id="settings-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="settingsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Revision History</a></li>
-                        <li><a href="#" class="block">Access Control</a></li>
-                        <li><a href="#" class="block">Trello Configuration</a></li>
-                        <li><a href="#" class="block">Default Configuration</a></li>
+                        <li><a href="{{ url('/') }}" class="block">Revision History</a></li>
+                        <li><a href="{{ url('/') }}" class="block">Access Control</a></li>
+                        <li><a href="{{ url('/trelloconfig') }}" class="block">Trello Configuration</a></li>
+                        <li><a href="{{ url('/defaultConfiguration') }}" class="block">Default Configuration</a></li>
                     </ul>
                 </li>
 

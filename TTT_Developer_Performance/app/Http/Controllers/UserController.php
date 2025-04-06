@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    //
     public function defaultConfiguration()
     {
-        $json = Storage::disk('local')->get('config/defaultPassword.json');
-        $config = json_decode($json, true);
+        // Get the content of the JSON file
+        $json = Storage::disk('local')->get('config\defaultPassword.json');
 
-        return view('pages.defaultConfiguration', ['configData' => $config]);
+        // Decode the JSON data, if it's null, fallback to default
+        $configData = json_decode($json, true) ?? ['defaultPassword' => ''];
+
+        return view('pages.defaultConfiguration', compact('configData'));
     }
 
     // ✅ ฟังก์ชันสำหรับบันทึก JSON
@@ -21,7 +23,7 @@ class UserController extends Controller
     {
         $data = ['defaultPassword' => $request->input('defaultPassword')];
 
-        Storage::disk('local')->put('config/defaultPassword.json', json_encode($data, JSON_PRETTY_PRINT));
+        Storage::disk('local')->put('config\defaultPassword.json', json_encode($data, JSON_PRETTY_PRINT));
 
         return response()->json();
     }

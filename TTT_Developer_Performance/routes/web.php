@@ -10,6 +10,12 @@ use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TeamPerformanceController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BacklogController;
+use App\Http\Controllers\ExtrapointController;
+use App\Http\Controllers\PerformanceHistoryController;
+use App\Http\Controllers\RevisionHistoryController;
+use App\Http\Controllers\TrelloConfigurationController;
 
 
 // Login
@@ -76,3 +82,33 @@ Route::get('/performancehistory', [PerformanceHistoryController::class, 'index']
 
 
 Route::get('/testCards', [TeamPerformanceController::class, 'testTrelloApi']);
+
+Route::get('/defaultConfiguration', [UserController::class,'defaultConfiguration']);
+Route::post('/save-configuration', [UserController::class, 'saveConfiguration']);
+
+Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
+Route::get('/addbacklog', [BacklogController::class,'add'])->name('addbacklog');
+Route::get('/editbacklog', [BacklogController::class,'edit'])->name('editbacklog');
+
+Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
+Route::get('/addminorcase', [MinorcaseController::class,'add'])->name('addminorcase');
+Route::get('/editminorcase', [MinorcaseController::class,'edit'])->name('editminorcase');
+
+//mypage
+Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
+Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
+Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
+Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
+Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+
+
+Route::get('/testerDashboard', [DashboardController::class, 'tester']);
+
+//Revison History
+Route::get('/revisionhistory', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
+
+//Trello Configuration
+Route::get('/trelloconfig', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
+Route::get('/trelloconfigAPI', [TrelloConfigurationAPIController::class, 'index'])->name('trelloConfigurationAPI');
+Route::get('/trelloconfigList', [TrelloConfigurationListController::class, 'index'])->name('trelloConfigurationList');
