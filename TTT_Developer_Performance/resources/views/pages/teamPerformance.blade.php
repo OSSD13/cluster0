@@ -745,7 +745,7 @@
 
             <div class="flex justify-between items-center w-full">
                 <p class="text-[15px] font-bold text-zinc-400">Extra Point</p>
-                <a href=""
+                <a href="{{route('createExtrapoint')}}"
                     class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                     <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
                         class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
