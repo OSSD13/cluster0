@@ -110,10 +110,12 @@
             </div>
             {{-- Cancel And Create --}}
             <div class="flex justify-center gap-4">
-                <button type="button" class="w-58 px-6 py-2 bg-[#636363] text-white rounded-md hover:bg-[#636363]">
+                <button type="button" onclick="window.location.href='{{ route('trelloConfiguration') }}'"
+                    class="w-58 px-6 py-2 bg-zinc-500 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
                     Cancel
                 </button>
-                <button type="submit" class="w-58 px-6 py-2 bg-[#00408E] text-white rounded-md hover:bg-[#00408E]">
+                <button type="submit"
+                    class="w-58 px-6 py-2 bg-blue-900 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
                     Create
                 </button>
             </div>

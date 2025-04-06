@@ -18,6 +18,7 @@
 
             <!-- Dropdown Filters -->
             <div class="flex gap-4">
+                
                 <!-- Year Dropdown -->
                 <div class="w-32 relative">
                     <div class="bg-white border-2 border-blue-900 text-sm font-bold text-blue-900 rounded-md px-3 py-1 cursor-pointer flex justify-between items-center"
@@ -48,7 +49,7 @@
                     </div>
                     <div id="sprintDropdown"
                         class="absolute z-10 mt-1 bg-white border border-gray-300 rounded-md shadow-md w-full hidden">
-                        @foreach ([1, 2, 3, 4] as $sprint)
+                        @foreach ([1, 2, 3] as $sprint)
                             <label class="block px-4 py-2 cursor-pointer">
                                 <input type="checkbox" class="mr-2 text-blue-600 sprint-option"> {{ $sprint }}
                             </label>
@@ -77,9 +78,7 @@
             </div>
         </div>
 
-        <!-- รอใส่ filter dropdown -->
         <div class="relative overflow-x-auto sm:rounded-lg">
-
             <!-- Table -->
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
                 <!-- Table header -->
