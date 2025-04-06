@@ -11,7 +11,26 @@
     --yellow-color-text: #FFCC00;
     --green-color-text: #3AD800;
     --red-color-text: #F00000;
-
+    
     --bg-color: #FAFBFF;
     --placeholder-text-color: #E2E2E2;
+
+    /* Form Color */
+    --form-team: #6AA84F;
+    --form-gray: #95B3D7;
+    --form-orange: #FF6D01;
+
+    --form-backlog: #E69138;
+    --form-minorcase: #999999;
+    --form-minor-col: #B7B7B7;
+    --form-extrapoint: #741B47;
+
+    --form-remain: #CC0000;
+    --form-sum: #FF0000;
+    --form-percent: #46BDC6;
+    --form-actual: #1155CC;
+    
+    --form-test: #11734B;
+    --form-nottest: #B10202;
+
 }

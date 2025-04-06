@@ -14,26 +14,32 @@
 @endsection
 
 @section('contents')
-    <div class="max-w-md mx-auto">
+    <div class=" bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
         <div class="text-2xl font-bold mb-4 text-blue-900 ">
             <p>Trello API</p>
         </div>
+
+        {{-- Form Trello API --}}
         <form>
+            {{-- Setting Name --}}
             <div class="mb-4">
                 <label for="setting-name" class="block text-sm font-bold text-black mb-2">Setting Name</label>
                 <input type="text" id="setting-name" placeholder="Setting Name"
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
+            {{-- APT Key --}}
             <div class="mb-4">
                 <label for="api-key" class="block text-sm font-bold text-black mb-2">API Key</label>
                 <input type="text" id="api-key" placeholder="Your API Key"
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
+            {{-- API Token --}}
             <div class="mb-6">
                 <label for="api-token" class="block text-sm font-bold text-black mb-2">API Token</label>
                 <input type="text" id="api-token" placeholder="Your API Token"
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
+            {{-- Cancel And Create --}}
             <div class="flex justify-center gap-4">
                 <button type="button"
                     class="w-60 px-6 py-2 bg-[#636363] text-white rounded-md hover:bg-[#636363]">Cancel</button>

@@ -20,13 +20,17 @@
             <div class="bg-white rounded-lg shadow-lg p-4 w-full lg:w-1/2">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello API</h2>
-                    <button class="bg-[#00408E] text-white px-4 py-2 rounded-lg flex items-center">
-                        <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
-                            class="w-[20px] h-[20px] mr-2">
-                        Add New
-                    </button>
+                    <a href="">
+                        <!-- Add New API -->
+                        <button class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
+                            <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
+                                class="w-[20px] h-[20px] mr-2">
+                            Add New
+                        </button>
+                    </a>
                 </div>
                 <div class="relative overflow-x-auto sm:rounded-lg">
+                    <!-- Table API -->
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
                         <thead class="border-t border-gray-400 text-l text-gray-400 border-b dark:border-gray-300">
                             <tr>
@@ -40,6 +44,7 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">1</th>
                                 <td class="px-6 py-4 text-center">API Set 1</td>
                                 <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                                    <!-- Edit And Delete -->
                                     <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                             alt="Edit Icon" class="w-[35px] h-[35px]"></a>
                                     <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
@@ -84,13 +89,17 @@
             <div class="bg-white rounded-lg shadow-lg p-4 w-full lg:w-1/2">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello Lists</h2>
-                    <button class="bg-[#00408E] text-white px-4 py-2 rounded-lg flex items-center">
-                        <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
-                            class="w-[20px] h-[20px] mr-2">
-                        Add New
-                    </button>
+                    <a href="">
+                        <!-- Add New List -->
+                        <button class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
+                            <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
+                                class="w-[20px] h-[20px] mr-2">
+                            Add New
+                        </button>
+                    </a>
                 </div>
                 <div class="relative overflow-x-auto sm:rounded-lg">
+                    <!-- Table Lists -->
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
                         <thead class="border-t border-gray-400 text-l text-gray-400 border-b dark:border-gray-300">
                             <tr>
@@ -104,6 +113,7 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">1</th>
                                 <td class="px-6 py-4 text-center">List Set 1</td>
                                 <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                                    <!-- Edit And Delete -->
                                     <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                             alt="Edit Icon" class="w-[35px] h-[35px]"></a>
                                     <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"

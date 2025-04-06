@@ -9,7 +9,7 @@ class Point extends Model
 {
     use HasFactory;
 
-    protected $table = 'points'; 
+    protected $table = 'points';
 
     protected $primaryKey = 'pts_id';
 
@@ -25,5 +25,14 @@ class Point extends Model
         'pts_dayoff',
         'pts_remark',
     ];
-}
 
+    public function sprint()
+    {
+        return $this->belongsTo(Sprint::class, 'pts_spr_id');
+    }
+
+    public function userTeamHistory()
+    {
+        return $this->belongsTo(UserTeamHistory::class, 'pts_uth_id');
+    }
+}
