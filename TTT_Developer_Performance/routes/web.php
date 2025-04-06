@@ -59,9 +59,9 @@ Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
-Route::get('/minorcase', [MinorcaseController::class,'index']);
-Route::get('/addminorcase', [MinorcaseController::class,'add']);
-Route::get('/editminorcase', [MinorcaseController::class,'edit']);
+Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
+Route::get('/addminorcase', [MinorcaseController::class,'add'])->name('addminorcase');
+Route::get('/editminorcase', [MinorcaseController::class,'edit'])->name('editminorcase');
 
 // Team Managment
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
@@ -77,7 +77,7 @@ Route::get('/teamPerformanceDeveloper', [TeamPerformanceController::class,'TeamP
 
 //mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
+Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('createExtrapoint');
 Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
 Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');

@@ -17,7 +17,7 @@
     <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
 
         <!-- Input All Inline -->
-        <div class="text-xl font-bold mb-4 text-blue-900 w-full max-w-[900px] mx-auto">
+        <div class="text-xl font-bold mb-4 text-blue-900 w-full ">
             <p>Create Backlog</p>
         </div>
 
@@ -26,7 +26,7 @@
 
             <!-- Input Member -->
             <div class="w-full sm:w-1/4">
-                <label for="member" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Member <span
+                <label for="member" class="block mb-2 text-sm font-bold text-gray-900 text-white">Member <span
                         class="text-red-500">*</span></label>
                 <select id="member"
                     class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
@@ -38,7 +38,7 @@
 
             <!-- Input Current Team -->
             <div class="w-full sm:w-1/4">
-                <label for="current_team" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Current Team
+                <label for="current_team" class="block mb-2 text-sm font-bold text-gray-900 text-white">Current Team
                     <span class="text-red-500">*</span></label>
                 <select id="member"
                     class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
