@@ -13,6 +13,7 @@ use App\Http\Controllers\BacklogController;
 use App\Http\Controllers\ExtrapointController;
 use App\Http\Controllers\TeamPerformanceController;
 use App\Http\Controllers\PerformanceHistoryController;
+use App\Http\Controllers\UserController;
 
 
 // Login
@@ -80,6 +81,3 @@ Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
 
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
-
-
-
