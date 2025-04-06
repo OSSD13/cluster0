@@ -9,10 +9,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TeamPerformanceController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BacklogController;
 use App\Http\Controllers\ExtrapointController;
-use App\Http\Controllers\TeamPerformanceController;
 use App\Http\Controllers\PerformanceHistoryController;
+use App\Http\Controllers\RevisionHistoryController;
+use App\Http\Controllers\TrelloConfigurationController;
 
 
 // Login
@@ -59,21 +62,37 @@ Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
 Route::get('/changepassword', [ProfileController::class,'changePassword']);
 
-Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
-Route::get('/addminorcase', [MinorcaseController::class,'add'])->name('addminorcase');
-Route::get('/editminorcase', [MinorcaseController::class,'edit'])->name('editminorcase');
+Route::get('/minorcase', [MinorcaseController::class,'index']);
+Route::get('/addminorcase', [MinorcaseController::class,'add']);
 
 // Team Managment
 Route::get('/teammanagment', [TeamManagementController::class,'index']);
 Route::get('/addteam', [TeamManagementController::class,'add']);
 Route::get('/edit', [TeamManagementController::class,'edit']);
 
+Route::get('/backlog', [BacklogController::class,'index']);
+Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
+
+//mypage
+Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
+Route::get('/createextrapoint', [ExtrapointController::class, 'create'])->name('createextrapoint');
+Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editextrapoint');
+
+Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+
+
+Route::get('/testCards', [TeamPerformanceController::class, 'testTrelloApi']);
+
+Route::get('/defaultConfiguration', [UserController::class,'defaultConfiguration']);
+Route::post('/save-configuration', [UserController::class, 'saveConfiguration']);
+
 Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
 Route::get('/addbacklog', [BacklogController::class,'add'])->name('addbacklog');
 Route::get('/editbacklog', [BacklogController::class,'edit'])->name('editbacklog');
 
-Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
-Route::get('/teamPerformanceDeveloper', [TeamPerformanceController::class,'TeamPerformanDeveloper']);
+Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
+Route::get('/addminorcase', [MinorcaseController::class,'add'])->name('addminorcase');
+Route::get('/editminorcase', [MinorcaseController::class,'edit'])->name('editminorcase');
 
 //mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
@@ -83,9 +102,13 @@ Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('
 Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
 Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 
-Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
 
-Route::get('/testerdashboard', [DashboardController::class,'tester']);
+Route::get('/testerDashboard', [DashboardController::class, 'tester']);
 
+//Revison History
+Route::get('/revisionhistory', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
 
-
+//Trello Configuration
+Route::get('/trelloconfig', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
+Route::get('/trelloconfigAPI', [TrelloConfigurationAPIController::class, 'index'])->name('trelloConfigurationAPI');
+Route::get('/trelloconfigList', [TrelloConfigurationListController::class, 'index'])->name('trelloConfigurationList');
