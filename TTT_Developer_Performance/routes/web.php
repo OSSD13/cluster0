@@ -17,7 +17,6 @@ use App\Http\Controllers\PerformanceHistoryController;
 use App\Http\Controllers\RevisionHistoryController;
 use App\Http\Controllers\TrelloConfigurationController;
 
-
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
