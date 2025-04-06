@@ -15,7 +15,7 @@ class UserController extends Controller
         // Decode the JSON data, if it's null, fallback to default
         $configData = json_decode($json, true) ?? ['defaultPassword' => ''];
 
-        return view('pages.defaultConfiguration', compact('configData'));
+        return view('pages.setting.defaultConfiguration', compact('configData'));
     }
 
     // ✅ ฟังก์ชันสำหรับบันทึก JSON

@@ -12,6 +12,14 @@ class TrelloConfigurationController extends Controller
         //$apiSets = TrelloApi::all();
         //$listSets = TrelloList::all();
 
-        return view('pages.trelloConfiguration');
+        return view('pages.trello.trelloConfiguration');
+    }
+
+    public function api(){
+        return view('pages.trello.trelloConfigurationAPI');
+    }
+
+    public function list(){
+        return view('pages.trello.trelloConfigurationList');
     }
 }

@@ -40,6 +40,6 @@ class RevisionHistoryController extends Controller
         */
 
         // ส่งข้อมูลไปยัง View
-        return view('pages.revisionHistory');
+        return view('pages.setting.revisionHistory');
     }
 }

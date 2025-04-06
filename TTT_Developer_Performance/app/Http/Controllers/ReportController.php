@@ -8,7 +8,7 @@ use Barryvdh\DomPDF\Facade as Pdf;
 class ReportController extends Controller
 {
     public function index(){
-        return view('pages.report');
+        return view('pages.report.report');
     }
 
     public function reportGenerate(){

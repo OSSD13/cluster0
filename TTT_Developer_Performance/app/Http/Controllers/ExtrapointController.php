@@ -9,7 +9,7 @@ use App\Models\Point;
 
 class ExtrapointController extends Controller
 {
-    function index()
+    public function index()
     {
         $points = DB::table('points')
             ->join('user_team_history', 'points.pts_uth_id', '=', 'user_team_history.uth_id')
@@ -29,9 +29,10 @@ class ExtrapointController extends Controller
                 ['points.pts_is_use', '=', 1]
             ])
             ->get();
-        return view('pages.extrapoint.list', compact('points'));
+        return view('pages.extraPoint.list', compact('points'));
     }
-    function add()
+
+    public function add()
     {
         $users = DB::table('users')
             ->where('usr_is_use', '=', 1)
@@ -43,9 +44,10 @@ class ExtrapointController extends Controller
             ->select('tm_id as id', 'tm_name as name')
             ->get();
 
-        return view('pages.extrapoint.add', compact('users', 'teams'));
+        return view('pages.extraPoint.list', compact('users', 'teams'));
     }
-    function edit(Request $request, $id)
+
+    public function edit(Request $request, $id)
     {
         $users = DB::table('users')
             ->where('usr_is_use', '=', 1)
@@ -57,7 +59,7 @@ class ExtrapointController extends Controller
             ->select('tm_id as id', 'tm_name as name')
             ->get();
 
-        return view('pages.extrapoint.edit', compact('users', 'teams', 'id'));
+        return view('pages.extraPoint.edit', compact('users', 'teams', 'id'));
     }
     function update(Request $request)
         {

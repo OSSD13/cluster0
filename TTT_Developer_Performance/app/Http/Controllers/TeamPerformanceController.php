@@ -12,7 +12,7 @@ use App\Models\Card;
 class TeamPerformanceController extends Controller
 {
     public function TeamPerformance(){
-        return view('pages.teamPerformance');
+        return view('pages.dashboard.teamPerformance');
     }
 
     public function testTrelloApi(){

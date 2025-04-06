@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 class BacklogController extends Controller
 {
     public function index(){
-        return view('pages.backlog');
+        return view('pages.backlog.backlog');
     }
 
     public function add(){
-        return view('pages.addBacklog');
+        return view('pages.backlog.addBacklog');
     }
 
     public function edit(){
-        return view('pages.editBacklog');
+        return view('pages.backlog.editBacklog');
     }
 
 }
