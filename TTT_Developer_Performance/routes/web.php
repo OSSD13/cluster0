@@ -68,8 +68,12 @@ Route::get('/teammanagment', [TeamManagementController::class,'index']);
 Route::get('/addteam', [TeamManagementController::class,'add']);
 Route::get('/edit', [TeamManagementController::class,'edit']);
 
-Route::get('/backlog', [BacklogController::class,'index']);
+Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
+Route::get('/addbacklog', [BacklogController::class,'add'])->name('addbacklog');
+Route::get('/editbacklog', [BacklogController::class,'edit'])->name('editbacklog');
+
 Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
+Route::get('/teamPerformanceDeveloper', [TeamPerformanceController::class,'TeamPerformanDeveloper']);
 
 //mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
