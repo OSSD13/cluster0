@@ -18,5 +18,4 @@ class BacklogController extends Controller
         return view('pages.editBacklog');
     }
 
-
 }
