@@ -19,100 +19,98 @@
             <div class="text-2xl font-bold text-blue-900">
                 <p>Backlog</p>
             </div>
-            <!-- Dropdown Filters -->
-            <div class="flex gap-4 ml-4">
+            <!-- Compact Dropdown Filters -->
+            <div class="flex gap-2 ml-4 items-center">
 
                 <!-- Year Dropdown -->
                 <div class="relative">
                     <button id="dropdownYear"
-                        class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                        class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
                         <span id="dropdownYearSelected" class="truncate text-center w-full">Year:</span>
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div id="dropdownYearMenu"
-                        class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="year2568" value="2568" class="mr-2">
+                        class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="year2568" value="2568" class="mr-2 h-3 w-3">
                             <label for="year2568" class="text-black">2568</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="year2567" value="2567" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="year2567" value="2567" class="mr-2 h-3 w-3">
                             <label for="year2567" class="text-black">2567</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="year2566" value="2566" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="year2566" value="2566" class="mr-2 h-3 w-3">
                             <label for="year2566" class="text-black">2566</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="year2565" value="2565" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="year2565" value="2565" class="mr-2 h-3 w-3">
                             <label for="year2565" class="text-black">2565</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="year2564" value="2564" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="year2564" value="2564" class="mr-2 h-3 w-3">
                             <label for="year2564" class="text-black">2564</label>
                         </div>
                     </div>
                 </div>
 
-
                 <!-- Sprint Dropdown -->
                 <div class="relative">
                     <button id="dropdownSprint"
-                        class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                        class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
                         <span id="dropdownSprintSelected" class="truncate text-center w-full">Sprint:</span>
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div id="dropdownSprintMenu"
-                        class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="sprint1" value="Sprint 1" class="mr-2">
+                        class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="sprint1" value="Sprint 1" class="mr-2 h-3 w-3">
                             <label for="sprint1" class="text-black">Sprint 1</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="sprint2" value="Sprint 2" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="sprint2" value="Sprint 2" class="mr-2 h-3 w-3">
                             <label for="sprint2" class="text-black">Sprint 2</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="sprint3" value="Sprint 3" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="sprint3" value="Sprint 3" class="mr-2 h-3 w-3">
                             <label for="sprint3" class="text-black">Sprint 3</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="sprint4" value="Sprint 4" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="sprint4" value="Sprint 4" class="mr-2 h-3 w-3">
                             <label for="sprint4" class="text-black">Sprint 4</label>
                         </div>
                     </div>
                 </div>
 
-
                 <!-- Team Dropdown -->
                 <div class="relative">
                     <button id="dropdownTeam"
-                        class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                        class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
                         <span id="dropdownTeamSelected" class="truncate text-center w-full">Team:</span>
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
                     <div id="dropdownTeamMenu"
-                        class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="allTeams" value="All Teams" class="mr-2">
+                        class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="allTeams" value="All Teams" class="mr-2 h-3 w-3">
                             <label for="allTeams" class="text-black">All Teams</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="team1" value="Team 1" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="team1" value="Team 1" class="mr-2 h-3 w-3">
                             <label for="team1" class="text-black">Team 1</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="team2" value="Team 2" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="team2" value="Team 2" class="mr-2 h-3 w-3">
                             <label for="team2" class="text-black">Team 2</label>
                         </div>
                     </div>
@@ -121,33 +119,34 @@
                 <!-- Member Dropdown -->
                 <div class="relative">
                     <button id="dropdownMember"
-                        class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                        class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
                         <span id="dropdownMemberSelected" class="truncate text-center w-full">Member:</span>
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
                     <div id="dropdownMemberMenu"
-                        class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="member01" value="Member 01" class="mr-2">
+                        class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="member01" value="Member 01" class="mr-2 h-3 w-3">
                             <label for="member01" class="text-black">Member 01</label>
                         </div>
-                        <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="member02" value="Member 02" class="mr-2">
+                        <div class="flex items-center px-3 py-1">
+                            <input type="checkbox" id="member02" value="Member 02" class="mr-2 h-3 w-3">
                             <label for="member02" class="text-black">Member 02</label>
                         </div>
                     </div>
                 </div>
+
                 <!-- Add New Button -->
                 <a href="{{ route('addbacklog') }}"
-                    class="flex items-center bg-blue-900 text-white px-4 py-2 rounded font-bold">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
-                        class="w-7 h-7 mr-2">
-                    Add New
-                </a>
+                class="flex items-center bg-blue-900 text-white px-4 py-1 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                     class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
+                Add New
+            </a>
             </div>
         </div>
 

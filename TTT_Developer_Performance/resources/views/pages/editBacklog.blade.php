@@ -6,149 +6,126 @@
 
 @section('pagename')
     <div class="flex items-end gap-[10px] mb-4">
-        {{-- Main Menu --}}
         <h2 class="text-2xl font-bold">Performance Review</h2>
-        {{-- Sub Menu --}}
         <p class="font-bold text-neutral-400">Backlog / Edit</p>
     </div>
 @endsection
 
 @section('contents')
-    <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
+    <div class="bg-white rounded-lg shadow-md p-8 max-w-4xl mx-auto">
 
-        <!-- Input All Inline -->
-        <div class="text-xl font-bold mb-4 text-blue-900 w-full max-w-[900px] mx-auto">
-            <p>Edit Backlog</p>
+        <!-- Header -->
+        <div class="text-left mb-8">
+            <h1 class="text-2xl font-bold text-blue-900">Edit Backlog</h1>
         </div>
 
-        <!-- Input All Inline -->
-        <div class="flex flex-wrap gap-4 mb-[30px] w-full max-w-[900px] mx-auto">
+        <!-- Form Container -->
+        <div class="space-y-6">
 
-            <!-- Input Member -->
-            <div class="w-full sm:w-1/4">
-                <label for="member" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Member <span
-                        class="text-red-500">*</span></label>
-                <select id="member"
-                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
-                    <option value="" disabled selected hidden class="text-center">Member</option>
-                    <option value="Member A">Sun</option>
-                    <option value="Member B">ohm</option>
-                </select>
+            <!-- First Row - Dropdowns -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Member -->
+                <div>
+                    <label for="member" class="block mb-2 text-sm font-bold text-gray-900">Member </label>
+                    <select id="member" class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
+                        <option value="" disabled selected hidden>Member</option>
+                        <option value="Member A">Sun</option>
+                        <option value="Member B">ohm</option>
+                    </select>
+                </div>
+
+                <!-- Current Team -->
+                <div>
+                    <label for="current_team" class="block mb-2 text-sm font-bold text-gray-900">Current Team </label>
+                    <select id="current_team" class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
+                        <option value="" disabled selected hidden>Team</option>
+                        <option value="Team A">Team A</option>
+                        <option value="Team B">Team B</option>
+                    </select>
+                </div>
+
+                <!-- Year -->
+                <div>
+                    <label for="year" class="block mb-2 text-sm font-bold text-gray-900">Year </label>
+                    <select id="year" class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
+                        <option value="" disabled selected hidden>Year</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+
+                <!-- Sprint -->
+                <div>
+                    <label for="sprint" class="block mb-2 text-sm font-bold text-gray-900">Sprint </label>
+                    <select id="sprint" class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
+                        <option value="" disabled selected hidden>Sprint</option>
+                        <option value="Sprint 1">Sprint 1</option>
+                        <option value="Sprint 2">Sprint 2</option>
+                        <option value="Sprint 3">Sprint 3</option>
+                        <option value="Sprint 4">Sprint 4</option>
+                    </select>
+                </div>
             </div>
 
-            <!-- Input Current Team -->
-            <div class="w-full sm:w-1/4">
-                <label for="current_team" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Current Team
-                    <span class="text-red-500">*</span></label>
-                <select id="member"
-                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
-                    <option value="" disabled selected hidden class="text-center">Team</option>
-                    <option value="Team A">Team A</option>
-                    <option value="Team B">Team B</option>
-                </select>
+            <!-- Point All -->
+            <div class="w-full md:w-1/3">
+                <label for="point_all" class="block mb-2 text-sm font-bold text-gray-900">Point All </label>
+                <input type="text" id="point_all" class="w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Point" required />
             </div>
 
-            <!-- Input Year / sprint -->
-            <div class="w-full sm:w-1/9">
-                <label for="year" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Year <span
-                        class="text-red-500">*</span></label>
-                <select id="year"
-                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
-                    <option value="" disabled selected hidden class="text-center">Year</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                </select>
+            <!-- Test Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Test Pass -->
+                <div>
+                    <label for="test_pass" class="block mb-2 text-sm font-bold text-gray-900">Test Pass </label>
+                    <input type="text" id="test_pass" class="w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Test Pass" required />
+                </div>
+
+                <!-- Bug -->
+                <div>
+                    <label for="bug" class="block mb-2 text-sm font-bold text-gray-900">Bug </label>
+                    <input type="text" id="bug" class="w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Bug" required />
+                </div>
+
+                <!-- Cancel -->
+                <div>
+                    <label for="cancel" class="block mb-2 text-sm font-bold text-gray-900">Cancel </label>
+                    <input type="text" id="cancel" class="w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Cancel" required />
+                </div>
             </div>
 
-            <div class="w-full sm:w-1/9">
-                <label for="sprint" class="invisible block mb-2 text-sm font-bold text-gray-900 dark:text-white"><span
-                        class="text-red-500">*</span></label>
-                <select id="sprint"
-                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
-                    <option value="" disabled selected hidden class="text-center">Sprint</option>
-                    <option value="Sprint 1">Sprint 1</option>
-                    <option value="Sprint 2">Sprint 2</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Input Points -->
-        <div class="flex flex-wrap gap-4 mb-[30px] w-full max-w-[900px] mx-auto">
-            <!-- Input Point All -->
-            <div class="w-full sm:w-1/4">
-                <label for="point_all" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Point All <span
-                        class="text-red-500">*</span></label>
-                <input type="text" id="point_all"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Point" required />
-            </div>
-        </div>
-
-        <!-- Input Test Pass -->
-        <div class="flex flex-wrap gap-4 mb-[30px] w-full max-w-[900px] mx-auto">
-            <div class="w-full sm:w-1/4">
-                <label for="test_pass" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Test Pass <span
-                        class="text-red-500">*</span></label>
-                <input type="text" id="test_pass"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Test Pass" required />
-            </div>
-
-            <!-- Input Bug -->
-            <div class="w-full sm:w-1/4">
-                <label for="bug" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Bug <span
-                        class="text-red-500">*</span></label>
-                <input type="text" id="bug"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Bug" required />
-            </div>
-
-            <!-- Input Cancel -->
-            <div class="w-full sm:w-1/4">
-                <label for="cancel" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Cancel <span
-                        class="text-red-500">*</span></label>
-                <input type="text" id="cancel"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Cancel" required />
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+                <a href="{{ route('backlog') }}"
+                class="min-w-[400px] px-8 py-3 bg-zinc-500 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 text-center hover:border-2 hover:border-blue-900 transition-all duration-200">
+                    Cancel
+                </a>
+                <button type="submit"
+                class="min-w-[400px] px-8 py-3 bg-blue-900 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
+                    Apply
+                </button>
             </div>
         </div>
+    </div>
+@endsection
 
-        <!-- Buttons -->
-        <div class="flex flex-wrap gap-4 mb-[30px] w-full max-w-[900px] mx-auto">
-            <a href="{{ route('backlog') }}"
-                class="flex items-center justify-center w-full sm:w-[350px] h-[60px] p-2 bg-zinc-500 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
-                Cancel
-            </a>
-            <button type="submit"
-                class="w-full sm:w-[350px] h-[60px] p-2 bg-blue-900 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
-                Apply
-            </button>
-        </div>
-    @endsection
+@section('javascripts')
+    <script></script>
+@endsection
 
-    @section('javascripts')
-        <script></script>
-    @endsection
+@section('styles')
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-    @section('styles')
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
-            @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+        #navbar-title {
+            font-family: "Jaro", sans-serif;
+            line-height: 25px;
+            letter-spacing: 0.5px;
+        }
 
-            #navbar-title {
-                font-family: "Jaro", sans-serif;
-                line-height: 25px;
-                letter-spacing: 0.5px;
-            }
-
-            body {
-                font-family: "Inter", sans-serif;
-            }
-
-            .edit-btn:hover img {
-                opacity: 0.7;
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
-        </style>
-    @endsection
+        body {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
+@endsection
