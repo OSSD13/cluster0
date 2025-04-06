@@ -23,13 +23,13 @@
             </div>
             <div class="w-full">
                 <form action="{{ route('step2') }}" method="POST" class="text-left">
-                    <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-[15px] block text-left w-full">Generate Report</h2>
+                    <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-[15px] block text-left w-full">Generate Report2</h2>
                     @csrf
                     <div class="mb-[15px] w-full">
                       <label for="author" class="block font-bold">Author</label>
                       <input type="text" name="author" placeholder="Author" required class="w-full h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                     </div>
-    
+
                     <!-- Year & Sprint in the same row -->
                     <div class="mb-[15px] w-full flex gap-5">
                         <div class="w-1/2">
@@ -49,7 +49,7 @@
                             </select>
                         </div>
                     </div>
-    
+
                     <div class="mb-[15px] w-full">
                         <label for="team" class="block font-bold">Team <span class="text-red-500">*</span></label>
                         <select id="team" class="w-full h-[50px] p-2 border-[2px] border-[var(--primary-color)] rounded-[10px] bg-white font-bold text-[var(--primary-color)]">
@@ -107,7 +107,7 @@
                         <button class="bg-gray-300 rounded-lg shadow-md shadow-lg w-full h-[50px] text-white">
                             <strong>Cancel</strong>
                         </button>
-    
+
                         <button class="bg-[var(--primary-color)] rounded-lg shadow-md shadow-lg w-full h-[50px] text-white">
                             <strong>Confirm</strong>
                         </button>
