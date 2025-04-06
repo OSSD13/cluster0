@@ -390,8 +390,10 @@
 <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-6">
     <div class="text-xl font-bold mb-4 text-blue-900 flex justify-between items-center">
         <p>Team Members</p>
-        <a href="" class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
-            <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+        <a href=""
+            class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+            <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
             Add New
         </a>
     </div>
@@ -578,10 +580,12 @@
         <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
             <div class="flex justify-between items-center mb-2">
                 <h2 class="text-lg font-bold text-blue-900 text-[20px]">Backlog</h2>
-                <a href="{{ route ('addbacklog')}}" class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+                <a href="{{ route ('addbacklog')}}"
+                    class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                     Add New
-            </a>
+                </a>
             </div>
             <!-- Backlog Table -->
             <div class="overflow-x-auto">
@@ -669,10 +673,13 @@
         <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
             <div class="flex justify-between items-center mb-2">
                 <h2 class="text-lg font-bold text-blue-900 text-[20px]">Minor Case</h2>
-                <button class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+
+                <a href=" {{ route ('addminorcase')}}"
+                    class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                     Add New
-                </button>
+                </a>
             </div>
             <!-- Minor Case Table -->
             <div class="overflow-x-auto">
@@ -738,10 +745,12 @@
 
             <div class="flex justify-between items-center w-full">
                 <p class="text-[15px] font-bold text-zinc-400">Extra Point</p>
-                <button class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+                <a href=""
+                    class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                     Add New
-                </button>
+                </a>
             </div>
             <!-- Extra Point Table -->
             <div class="overflow-x-auto">
