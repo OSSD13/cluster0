@@ -20,12 +20,16 @@ class UserTeamHistory extends Model
 
     public function user()
     {
+
         return $this->belongsTo(Users::class, 'uth_usr_id');
+
+        return $this->belongsTo(Users::class, 'uth_usr_id', 'usr_id');
+
     }
 
     public function team()
     {
-        return $this->belongsTo(Team::class, 'uth_tm_id');
+        return $this->belongsTo(Team::class, 'uth_tm_id', 'tm_id');
     }
 
 

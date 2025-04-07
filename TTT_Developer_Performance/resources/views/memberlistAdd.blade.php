@@ -81,7 +81,8 @@
                 <!-- Buttons -->
                 <div class="flex justify-between mt-6">
                     <button
-                        class="w-[450px] h-[60px] p-2 bg-[#636363] text-white rounded-[10px] font-bold hover:bg-[#a6a6a6] hover:text-white hover:border-3 hover:border-[#636363]">
+                        class="w-[450px] h-[60px] p-2 bg-[#636363] text-white rounded-[10px] font-bold hover:bg-[#a6a6a6] hover:text-white hover:border-3 hover:border-[#636363]"
+                        onclick="window.location.href='{{ route('memberlist') }}'">
                         Cancel
                     </button>
                     <button onclick = "openErrorAlert()"

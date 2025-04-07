@@ -9,11 +9,12 @@ class Users extends Authenticatable
     protected $table = 'users';
     protected $primaryKey = 'usr_id';
     public $timestamps = false;
+   
 
     protected $fillable = [
         'usr_username',
-        'usr_password',
         'usr_email',
+        'usr_password',
         'usr_name',
         'usr_trello_fullname',
         'usr_role',
@@ -25,4 +26,9 @@ class Users extends Authenticatable
         'usr_password',
     ];
 
+    public function getAuthPassword()
+    {
+        return $this->usr_password; // ระบุฟิลด์รหัสผ่านให้ Laravel ใช้
+    }
 }
+
