@@ -20,14 +20,13 @@
             <div class="bg-white rounded-lg shadow-lg p-4 w-full lg:w-1/2">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello API</h2>
-                    <a href=" {{ route('trelloConfigurationAPI') }} ">
-                        <!-- Add New API -->
-                        <button class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
-                            <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
-                                class="w-[20px] h-[20px] mr-2">
-                            Add New
-                        </button>
-                    </a>
+                    <!-- Add New API -->
+                    <button type="button" onclick="window.location.href='{{ route('trelloConfigurationAPI') }}'"
+                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
+                        <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
+                            class="w-[20px] h-[20px] mr-2">
+                        Add New
+                    </button>
                 </div>
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <!-- Table API -->
@@ -40,47 +39,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">1</th>
-                                <td class="px-6 py-4 text-center">API Set 1</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <!-- Edit And Delete -->
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">2</th>
-                                <td class="px-6 py-4 text-center">API Set 2</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">3</th>
-                                <td class="px-6 py-4 text-center">API Set 3</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">4</th>
-                                <td class="px-6 py-4 text-center">API Set 4</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
+                            @if (isset($apis) && $apis->count() > 0)
+                                @foreach ($apis as $index => $api)
+                                    <tr class="bg-white text-black">
+                                        <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">
+                                            {{ $index + 1 }}
+                                        </th>
+                                        <td class="px-6 py-4 text-center">{{ $api->name }}</td>
+                                        <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                                            <a href="">
+                                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
+                                                    alt="Edit Icon" class="w-[35px] h-[35px]">
+                                            </a>
+                                            <a href="">
+                                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
+                                                    alt="Delete Icon" class="w-[35px] h-[35px]">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="3" class="text-center">No API found</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -89,14 +71,13 @@
             <div class="bg-white rounded-lg shadow-lg p-4 w-full lg:w-1/2">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello Lists</h2>
-                    <a href=" {{ route('trelloConfigurationList') }} ">
-                        <!-- Add New List -->
-                        <button class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center ">
-                            <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
-                                class="w-[20px] h-[20px] mr-2">
-                            Add New
-                        </button>
-                    </a>
+                    <!-- Add New List -->
+                    <button type="button" onclick="window.location.href='{{ route('trelloConfigurationList') }}'"
+                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center ">
+                        <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
+                            class="w-[20px] h-[20px] mr-2">
+                        Add New
+                    </button>
                 </div>
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <!-- Table Lists -->
@@ -109,47 +90,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">1</th>
-                                <td class="px-6 py-4 text-center">List Set 1</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <!-- Edit And Delete -->
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">2</th>
-                                <td class="px-6 py-4 text-center">List Set 2</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">3</th>
-                                <td class="px-6 py-4 text-center">List Set 3</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
-                            <tr class="bg-white text-black">
-                                <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">4</th>
-                                <td class="px-6 py-4 text-center">List Set 4</td>
-                                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                            alt="Edit Icon" class="w-[35px] h-[35px]"></a>
-                                    <a href=""><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                            alt="Delete Icon" class="w-[35px] h-[35px]"></a>
-                                </td>
-                            </tr>
+                            @if (isset($lists) && $lists->count() > 0)
+                                @foreach ($lists as $index => $list)
+                                    <tr class="bg-white text-black">
+                                        <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">
+                                            {{ $index + 1 }}
+                                        </th>
+                                        <td class="px-6 py-4 text-center">{{ $list->name }}</td>
+                                        <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                                            <a href="">
+                                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
+                                                    alt="Edit Icon" class="w-[35px] h-[35px]">
+                                            </a>
+                                            <a href="">
+                                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
+                                                    alt="Delete Icon" class="w-[35px] h-[35px]">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="3" class="text-center">No Lists found</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

@@ -18,7 +18,7 @@
 
             <!-- Dropdown Filters -->
             <div class="flex gap-4">
-                
+
                 <!-- Year Dropdown -->
                 <div class="w-32 relative">
                     <div class="bg-white border-2 border-blue-900 text-sm font-bold text-blue-900 rounded-md px-3 py-1 cursor-pointer flex justify-between items-center"
@@ -105,54 +105,28 @@
                 </thead>
                 <!-- Table body -->
                 <tbody>
-                    <tr class="bg-white text-black ">
-                        <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                        <!-- ลำดับ # -->
-                        <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">1</th>
-                        <td class="px-6 py-4 text-center">You edited</td>
-                        <td class="px-6 py-4 text-center">67-50</td>
-                        <td class="px-6 py-4 text-center">1</td>
-                        <td class="px-6 py-4 text-center">30/08/2024 17:55</td>
-                        <td class="px-6 py-4 text-center">
-                            <div class="flex items-center justify-center">
-                                <button class="bg-[#FFA533] text-white py-1 px-1 rounded flex items-center">
-                                    <img src="{{ asset('resources/Images/Icons/eye.png') }}" alt=""
-                                        class="w-[20px] h-[20px] mr-2">
-                                    <span>View</span>
-                                </button>
-                            </div>
-                        </td>
-                    <tr class="bg-white text-black ">
-                        <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">1</th>
-                        <td class="px-6 py-4 text-center">Sumo</td>
-                        <td class="px-6 py-4 text-center">67-50</td>
-                        <td class="px-6 py-4 text-center">2</td>
-                        <td class="px-6 py-4 text-center">15/10/2024 12:55</td>
-                        <td class="px-6 py-4 text-center">
-                            <div class="flex items-center justify-center">
-                                <button class="bg-[#FFA533] text-white py-1 px-1 rounded flex items-center">
-                                    <img src="{{ asset('resources/Images/Icons/eye.png') }}" alt=""
-                                        class="w-[20px] h-[20px] mr-2">
-                                    <span>View</span>
-                                </button>
-                            </div>
-                        </td>
-                    <tr class="bg-white text-black ">
-                        <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">1</th>
-                        <td class="px-6 py-4 text-center">Hade</td>
-                        <td class="px-6 py-4 text-center">67-50</td>
-                        <td class="px-6 py-4 text-center">3</td>
-                        <td class="px-6 py-4 text-center">03/12/2024 09:55</td>
-                        <td class="px-6 py-4 text-center">
-                            <div class="flex items-center justify-center">
-                                <button class="bg-[#FFA533] text-white py-1 px-1 rounded flex items-center">
-                                    <img src="{{ asset('resources/Images/Icons/eye.png') }}" alt=""
-                                        class="w-[20px] h-[20px] mr-2">
-                                    <span>View</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    @foreach ($revisionHistories as $index => $history)
+                        <tr class="bg-white text-black">
+                            <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">
+                                {{ $index + 1 }}</th>
+                            <td class="px-6 py-4 text-center">{{ $history['editor'] }}</td>
+                            <td class="px-6 py-4 text-center">{{ $history['sprint'] }}</td>
+                            <td class="px-6 py-4 text-center">{{ $history['version'] }}</td>
+                            <td class="px-6 py-4 text-center">{{ $history['updated_at'] }}</td>
+                            <td class="px-6 py-4 text-center">
+                                <!-- กดปุ่ม View ไปยัง TeamPerformance -->
+                                <div class="flex items-center justify-center">
+                                    <a href=" {{ route('TeamPerformance') }}">
+                                        <button class="bg-[#FFA533] text-white py-1 px-1 rounded flex items-center">
+                                            <img src="{{ asset('resources/Images/Icons/eye.png') }}" alt=""
+                                                class="w-[20px] h-[20px] mr-2">
+                                            <span>View</span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
