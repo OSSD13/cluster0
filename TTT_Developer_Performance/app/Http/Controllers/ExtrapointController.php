@@ -14,29 +14,7 @@ class ExtrapointController extends Controller
     //
     function index()
     {
-        $lastVersion = Version::select('ver_id')
-            ->orderBy('ver_version')
-            ->first();
-        $points = DB::table('points')
-            ->join('user_team_history', 'points.pts_uth_id', '=', 'user_team_history.uth_id')
-            ->join('teams', 'user_team_history.uth_tm_id', '=', 'tm_id')
-            ->join('users', 'user_team_history.uth_usr_id', '=', 'usr_id')
-            ->join('sprints', 'points.pts_spr_id', '=', 'spr_id')
-            ->select(
-                'points.pts_value as value',
-                'points.pts_id as id',
-                'users.usr_name as member',
-                'teams.tm_name as team',
-                'sprints.spr_year as sprint_year',
-                'sprints.spr_number as sprint_num',
-            )
-            ->where([
-                ['points.pts_type', '=', 'extra'],
-                ['points.pts_is_use', '=', 1],
-                ['points.pts_ver_id', '=', $lastVersion->ver_id]
-            ])
-            ->get();
-        return view('pages.extrapoint.list', compact('points'));
+        
     }
     //
     function add()
@@ -267,5 +245,5 @@ class ExtrapointController extends Controller
             //dd($sprint->spr_id);
             return $sprint->spr_id;
         }
-    
+
 }

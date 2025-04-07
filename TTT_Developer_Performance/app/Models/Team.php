@@ -11,10 +11,11 @@ class Team extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'tm_is_use',
         'tm_name',
-        'tm_stl_id',
         'tm_trello_boardname',
+        'tm_is_use',
+        'tm_stl_id',
+        'tm_trc_id',
     ];
 
     public function teamSettingTrello()
