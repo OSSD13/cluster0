@@ -20,54 +20,55 @@
     <input type="text" placeholder="Search" class="px-3 py-2 border border-black rounded-lg shadow-sm w-64 placeholder:font-bold">
 </div>
 <!-- รอใส่ filter dropdown -->
-<div class="relative overflow-x-auto sm:rounded-lg">
+<div class="relative sm:rounded-lg">
     <!-- Table -->
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 gray-300">
         <!-- Table header -->
-    <thead class="border-t border-gray-400 text-l text-gray-400 border-b dark:border-gray-300">
+    <thead class="border-t border-gray-400 text-l text-gray-400 border-b gray-300">
     <tr>
                 <!-- Table header -->
-                <th class="px-4 py-2 text-center">#</th>
-                <th class="px-4 py-2 text-center">Name</th>
-                <th class="px-4 py-2 text-center">Username</th>
-                <th class="px-4 py-2 text-center">Email</th>
-                <th class="px-4 py-2 text-center w-45">Trello Full Name</th>
-                <th class="px-4 py-2 text-center">Password</th>
-                <th class="px-4 py-2 text-center">Team</th>
-                <th class="px-4 py-2 text-center">Access</th>
-                <th class="px-4 py-2 text-center">Action</th>
+                <th class="px-2 py-2 text-center">#</th>
+                <th class="px-2 py-2 text-center">Name</th>
+                <th class="px-2 py-2 text-center">Username</th>
+                <th class="px-2 py-2 text-center">Email</th>
+                <th class="px-2 py-2 text-center">Trello Full Name</th>
+                <th class="px-2 py-2 text-center">Password</th>
+                <th class="px-2 py-2 text-center">Team</th>
+                <th class="px-2 py-2 text-center">Access</th>
+                <th class="px-2 py-2 text-center">Action</th>
             </tr>
         </thead>
         <!-- Table body -->
         <tbody>
+            @foreach($users as $user)
             <tr class="bg-white text-black">
-               <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                 <!-- ลำดับ # -->
+                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
+                <!-- ลำดับ # -->
                 <th scope="row" class="text-center px-6 py-4 font-medium text-black whitespace-nowrap ">
-                    1
+                    {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
                 </th>
                  <!-- Name -->
-                <td class="px-6 py-4 text-center">
-                    Max
+                <td class="px-2 py-4 text-center">
+                    {{ $user->usr_name }}
                 </td>
                  <!-- Username -->
-                <td class="px-6 py-4 text-center">
-                    Maxttt1234
+                <td class="px-2 py-4 text-center">
+                    {{ $user->usr_username }}
                 </td>
                 <!-- Email -->
-                <td class="px-6 py-4 text-center">
-                    max@gmail.com
+                <td class="px-2 py-4 text-center">
+                    {{ $user->usr_email }}
                 </td>
                  <!-- Trello full name -->
-                <td class="px-6 py-4 text-center">
-                    Max123
+                <td class="px-2 py-4 text-center">
+                    {{ $user->usr_trello_fullname }}
                 </td>
                  <!-- Password -->
-                <td class="px-6 py-4 text-center">
+                <td class="px-2 py-4 text-center">
                     <button class="w-25 bg-[#00408e] hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" style="border-radius: 7px;">Reset</button>
                 </td>
                  <!-- Team -->
-                 <td class="py-4 text-center">
+                <td class="py-4 text-center">
                     <div class="relative">
                         <select class="w-32 border-2 p-2 rounded-lg appearance-none pr-12 text-blue-900 text-center
                                       focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
@@ -77,10 +78,10 @@
                                    background-repeat: no-repeat;
                                    background-position: right 1rem center;
                                    background-size: 1.2rem;">
-                            <option class="text-center text-blue-900 bg-white">-</option>
-                            <option class="text-center text-blue-900 bg-white">Team 1</option>
-                            <option class="text-center text-blue-900 bg-white">Team 2</option>
-                            <option class="text-center text-blue-900 bg-white">Team 3</option>
+                            <option value="">{{ $user->current_team_name ?? '-' }}</option>
+                            @foreach($teams as $team)
+                                <option value="{{ $team->tm_id }}">{{ $team->tm_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </td>
@@ -94,19 +95,63 @@
                                    background-repeat: no-repeat;
                                    background-position: right 1rem center;
                                    background-size: 1.2rem;">
-                            <option class="text-center text-blue-900 bg-white">-</option>
-                            <option class="text-center text-blue-900 bg-white">Developer</option>
-                            <option class="text-center text-blue-900 bg-white">Tester</option>
+                            <option class="text-center text-blue-900 bg-white" value="">
+                                {{ $user->usr_role ? $user->usr_role : '-' }}
+                            </option>
+                            @if(!$user->usr_role)
+                                <!-- ถ้าไม่มี role ให้โชว์ตัวเลือก Tester กับ Developer -->
+                                <option class="text-center text-blue-900 bg-white">Tester</option>
+                                <option class="text-center text-blue-900 bg-white">Developer</option>
+                            @else
+                                <!-- ถ้ามี role แล้ว แสดงอีกอันที่ไม่ได้เลือกไว้ -->
+                                @if($user->usr_role === 'Tester')
+                                    <option class="text-center text-blue-900 bg-white">Developer</option>
+                                @elseif($user->usr_role === 'Developer')
+                                    <option class="text-center text-blue-900 bg-white">Tester</option>
+                                @endif
+                            @endif
                         </select>
                     </div>
                 </td>
+
                 <!-- Actions button-->
-                <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="" class="w-[35px] h-[35px]" onclick="" ></a>
+                <td class="px-2 py-4 flex items-center justify-center space-x-2">
+                    <button onclick="openAlertDelete()" class="p-0 border-0 bg-transparent">
+                        <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="" class="w-[35px] h-[35px]">
+                    </button>
                 </td>
             </tr>
+            @endforeach
+            <div id="alertDeleteBox"
+                class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+                <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                    <button onclick="closeAlertDelete()"
+                        class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="flex justify-center mb-4">
+                        <img alt="Cross icon" class="rounded-full" height="64"
+                        src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
+                    <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
+                    <div class="flex justify-center space-x-4">
+                        <button
+                            class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                            Delete
+                        </button>
+                        <button onclick="closeAlertDelete()"
+                            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
         </tbody>
     </table>
+    <div class="mt-4 flex justify-center">
+        {{ $users->links() }}
+    </div>
 </div>
 
 
