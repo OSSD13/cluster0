@@ -9,6 +9,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\TeamManagementController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BacklogController;
+use App\Http\Controllers\TeamPerformanceController;
+use App\Http\Controllers\ExtrapointController;
+use App\Http\Controllers\MemberListController;
 
 
 // Login
@@ -74,6 +78,18 @@ Route::get('/performancehistory', [PerformanceHistoryController::class, 'index']
 
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
 
-Route::get('memberlistAdd', function () {
+
+
+// MemberList
+Route::get('memberlist', [MemberListController::class, 'index'])->name('index');
+
+Route::get('/memberlistAdd', function () {
     return view('memberlistAdd');
+})->name('memberlist.add');
+
+Route::get('/memberlist/edit/{usr_name}/{usr_trello_name}', [MemberListController::class, 'edit'])->name('memberlist.edit');
+
+
+Route::get('memberlist', function () {
+    return view('memberlist');
 });
