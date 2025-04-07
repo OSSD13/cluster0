@@ -12,10 +12,12 @@ use App\Models\Version; // Add this line to import the Version model
 class ExtrapointController extends Controller
 {
     //
-    function index()
-    {
-        
-    }
+    public function index()
+{
+    $points = $this->findPoint();
+    return view('pages.extrapoint.list', compact('points'));
+}
+
     //
     function add()
     {
@@ -151,7 +153,12 @@ class ExtrapointController extends Controller
             return redirect()->route('extrapoint')->with('success', 'Extrapoint deleted successfully.');
         }
         //
-        function getSprint($id)
+        function findPoint(){
+            $points = Point::where('pts_type', '=', 'extra')
+                ->where('pts_is_use', '1');
+            return $points;
+        }
+        function findSprint($id)
         {
             $sprints = DB::table('sprints')
                 ->where('spr_year', '=', $id)
