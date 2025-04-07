@@ -98,7 +98,7 @@ Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name
 // Teams Managment
 Route::get('/team', [TeamManagementController::class,'index'])->name('team');
 Route::get('/team-add', [TeamManagementController::class,'add'])->name('team.add');
-Route::get('/team-edit', [TeamManagementController::class,'edit']);
+Route::get('/team-edit', [TeamManagementController::class,'edit'])->name('team.edit');
 // ****************************************************************************************************** //
 // Members Managment
 //Route::get('/member', [UserController::class,'']);
