@@ -46,7 +46,8 @@
                         <div class="flex justify-end">
                             <button onclick="togglechooseCardPopup()"
                                 class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center">
-                                <img src="../resources/Images/Icons/refresh.png" alt="Add" class="w-4 h-4 mr-2">
+                                <img src="../resources/Images/Icons/refresh.png" alt="Reload"
+                                    class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
                                 Reload
                             </button>
                         </div>
@@ -493,43 +494,7 @@
                                 <select onchange="changeColor(this)"
                                     class="px-2 py-1 rounded-md text-white text-[10px] bg-red-600 font-semibold transition-colors duration-300">
                                     <option value="not-test">Not Test</option>
-                                    <option value="test" class="text-center">Test</option>
-                                </select>
-                            </td>
-                            <td class="px-4 py-2">
-                                <button
-                                    class="inline-block border border-gray-400 rounded-full px-4 py-1 text-gray-800 font-medium">
-                                    Tester1
-                                </button>
-                            </td>
-                            </td>
-                            <!-- Action button-->
-                            <td class="px-5 py-5 flex items-center justify-center space-x-2">
-                                <a href=""> <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                        alt="Edit" class="w-7 h-7 min-w-7 min-h-7 cursor-pointer" onclick="">
-                                </a>
-                                <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
-                                        alt="Delete" class="w-7 h-7 min-w-7 min-h-7 cursor-pointer" onclick=""></a>
-                            </td>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                            <td class="px-6 py-4">1</td>
-                            <td class="px-6 py-4">Max</td>
-                            <td class="px-6 py-4">10</td>
-                            <td class="px-6 py-4">10</td>
-                            <td class="px-6 py-4">0</td>
-                            <td class="px-6 py-4">100.00%</td>
-                            <td class="px-6 py-4">0</td>
-                            <td class="px-6 py-4">10</td>
-                            <!-- Dropdown Test and Not-test  -->
-                            <td class="px-6 py-4 text-center items-center">
-                                <select onchange="changeColor(this)"
-                                    class="px-2 py-1 rounded-md text-white text-[10px] bg-red-600 font-semibold transition-colors duration-300">
-                                    <option value="not-test">Not Test</option>
-                                    <option value="test" class="text-center">Test</option>
+                                    <option value="test" class="text-left">Test</option>
                                 </select>
                             </td>
                             <td class="px-4 py-2">
@@ -879,7 +844,7 @@
                             <div class="flex flex-row gap-4 mx-5 basis-1/2">
                                 {{-- image + filter --}}
                                 <div class="flex items-center gap-3">
-                                    <img src="../resources/Images/Icons/filter (1).png') }}" alt=""
+                                    <img src="../resources/Images/Icons/filter (1).png" alt=""
                                         class="w-[30px] h-[30px]">
                                     <p class="text-[var(--primary-color)] font-bold text-xl">Filter</p>
                                 </div>
@@ -1014,7 +979,7 @@
                         <!-- Table -->
                         <table class="w-full text-[12px] text-left rtl:text-right text-gray-500">
                             <!-- Table header -->
-                            <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b  text-center">
+                            <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b text-center">
                                 <tr>
                                     <!-- Table header -->
                                     <th scope="col" class="px-6 py-3"><input type="checkbox" id="selectAll"
@@ -1046,7 +1011,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     </div>
 @endsection
@@ -1233,6 +1197,25 @@
 
         body {
             font-family: "Inter", sans-serif;
+        }
+
+        select option {
+            background-color: white;
+            color: black;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin {
+            animation: spin 0.5s linear infinite;
         }
     </style>
 @endsection
