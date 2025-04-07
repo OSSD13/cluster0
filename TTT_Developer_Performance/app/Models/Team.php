@@ -16,4 +16,9 @@ class Team extends Model
         'tm_stl_id',
         'tm_trello_boardname',
     ];
+
+    public function teamSettingTrello()
+    {
+        return $this->belongsTo(SettingTrello::class, 'tm_stl_id');
+    }
 }

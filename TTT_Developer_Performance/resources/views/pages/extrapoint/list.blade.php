@@ -381,11 +381,12 @@
                         </td>
                         <!-- Actions button -->
                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                            <a href="{{ route('editExtrapoint','$item->id') }}">
+
+                            <a href="{{ route('editExtrapoint', $item->id) }}">
                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt=""
-                                    class="w-[35px] h-[35px]" onclick="">
+                                    class="w-[35px] h-[35px]">
                             </a>
-                            <form action="{{ route('deleteExtrapoint', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <form action="{{ route('deleteExtrapoint', $item->id) }}" method="POST" class="deleteBtn">
                                 @csrf
                                 @method('put')
                                 <button type="submit">
@@ -393,59 +394,6 @@
                                         class="w-[35px] h-[35px]">
                                 </button>
                             </form>
-
-                            <script>
-                                function deleteExtrapoint(id) {
-                                    Swal.fire({
-                                        title: "Are you sure?",
-                                        text: "You won't be able to revert this!",
-                                        icon: "warning",
-                                        showCancelButton: true,
-                                        confirmButtonColor: "#3085d6",
-                                        cancelButtonColor: "#d33",
-                                        confirmButtonText: "Yes, delete it!",
-                                        allowOutsideClick: false,
-                                        allowEscapeKey: false
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            fetch(`{{ url('deleteExtrapoint') }}/${id}`, {
-                                                method: 'DELETE',
-                                                headers: {
-                                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                                }
-                                            }).then(response => {
-                                                if (response.ok) {
-                                                    Swal.fire({
-                                                        title: "Deleted!",
-                                                        text: "Your file has been deleted.",
-                                                        icon: "success",
-                                                        allowOutsideClick: false,
-                                                        allowEscapeKey: false
-                                                    }).then(() => {
-                                                        location.reload(); // Reload the page
-                                                    });
-                                                } else {
-                                                    Swal.fire({
-                                                        title: "Error!",
-                                                        text: "Something went wrong.",
-                                                        icon: "error",
-                                                        allowOutsideClick: false,
-                                                        allowEscapeKey: false
-                                                    });
-                                                }
-                                            }).catch(error => {
-                                                Swal.fire({
-                                                    title: "Error!",
-                                                    text: "Something went wrong.",
-                                                    icon: "error",
-                                                    allowOutsideClick: false,
-                                                    allowEscapeKey: false
-                                                });
-                                            });
-                                        }
-                                    });
-                                }
-                            </script>
                         </td>
                     </tr>
                 @endforeach

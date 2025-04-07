@@ -17,11 +17,20 @@ class SprintSeeder extends Seeder
     {
         //
         DB::table('sprints')->insert([
-            'spr_created_time' => now(),
-            'spr_date_finish'=> now()->addDays(),
-            'spr_date_start' => now(),
-            'spr_number' => 1,
-            'spr_year' => now()->year,
+            [
+                'spr_created_time' => now(),
+                'spr_date_finish'=> now()->addDays(),
+                'spr_date_start' => now(),
+                'spr_number' => 1,
+                'spr_year' => now()->year,
+            ],
+            [
+                'spr_created_time' => now(),
+                'spr_date_finish'=> now()->addDays(),
+                'spr_date_start' => now(),
+                'spr_number' => 2,
+                'spr_year' => now()->year,
+            ]
         ]);
     }
 }

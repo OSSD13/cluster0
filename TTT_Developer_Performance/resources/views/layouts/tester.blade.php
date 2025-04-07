@@ -21,7 +21,6 @@
             class="bg-[var(--primary-color)] rounded-r-[10px] p-4 pt-[30px] text-white transition-all duration-300 w-[300px] shadow-lg">
             <!-- Logo -->
             <div id="logo-container" class="flex mb-6 gap-[10px] items-center">
-                <img src="../resources/Images/ttt_logo.jpg" alt="" class="w-[50px] h-[50px] rounded-[5px]">
                 <h1 id="navbar-title" class="text-lg">TTT Developer <br>Performance</h1>
             </div>
 
@@ -39,8 +38,8 @@
                         <i id="dashboard-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="dashboardMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('/dash/overview') }}" class="block">Overview</a></li>
-                        <li><a href="{{ url('/dash/team-performance') }}" class="block">Team Performance</a></li>
+                        <li><a href="{{ url('cluster0/dash-overview') }}" class="block">Overview</a></li>
+                        <li><a href="{{ url('cluster0/dash-team-performance') }}" class="block">Team Performance</a></li>
                     </ul>
                 </li>
 
@@ -56,10 +55,10 @@
                         <i id="performanceReview-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="performanceReviewMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('/review/performance-history') }}" class="block">Performance History</a></li>
-                        <li><a href="{{ url('/extrapoint') }}" class="block">Extra Point</a></li>
-                        <li><a href="{{ url('/backlog') }}" class="block">Backlog</a></li>
-                        <li><a href="{{ url('/minorcase') }}" class="block">Minor Case</a></li>
+                        <li><a href="{{ url('cluster0/review-performance-history') }}" class="block">Performance History</a></li>
+                        <li><a href="{{ url('cluster0/extrapoint') }}" class="block">Extra Point</a></li>
+                        <li><a href="{{ url('cluster0/backlog') }}" class="block">Backlog</a></li>
+                        <li><a href="{{ url('cluster0/minorcase') }}" class="block">Minor Case</a></li>
                     </ul>
                 </li>
 
@@ -75,8 +74,8 @@
                         <i id="teamManagement-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="teamManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('/team') }}" class="block">Team List</a></li>
-                        <li><a href="{{ url('/team/add') }}" class="block">Add Team</a></li>
+                        <li><a href="{{ url('cluster0/team') }}" class="block">Team List</a></li>
+                        <li><a href="{{ url('cluster0/team-add') }}" class="block">Add Team</a></li>
                     </ul>
                 </li>
 
@@ -109,7 +108,7 @@
                         <i id="reports-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="reportsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('/report') }}" class="block">Generate Report</a></li>
+                        <li><a href="{{ url('cluster0/report') }}" class="block">Generate Report</a></li>
                     </ul>
                 </li>
 
@@ -125,10 +124,10 @@
                         <i id="settings-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="settingsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('/setting/revision-history') }}" class="block">Revision History</a></li>
+                        <li><a href="{{ url('cluster0/setting-revision-history') }}" class="block">Revision History</a></li>
                         <li><a href="#" class="block">Access Control</a></li>
-                        <li><a href="{{ url('/setting/trello-config') }}" class="block">Trello Configuration</a></li>
-                        <li><a href="{{ url('/setting/default-password') }}" class="block">Default Configuration</a></li>
+                        <li><a href="{{ url('cluster0/setting-trello-config') }}" class="block">Trello Configuration</a></li>
+                        <li><a href="{{ url('cluster0/setting-default-password') }}" class="block">Default Configuration</a></li>
                     </ul>
                 </li>
 
@@ -157,14 +156,14 @@
                     class="profileDropdown absolute top-[100px] right-[20px] bg-[var(--primary-color)] w-[200px] h-[170px] rounded-xl flex justify-center items-center hidden z-999">
                     <ul id="profileDropdownList" class="flex flex-col">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
-                            <a href="/myprofile" class="inline-flex gap-2">
+                            <a href="cluster0/myprofile" class="inline-flex gap-2">
                                 <img src="../resources/Images/Icons/user.png" alt=""
                                     class="w-[20px] h-[20px]">
                                 <span id="myProfile-text">My profile</span>
                             </a>
                         </li>
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
-                            <a href="/changepassword" class="inline-flex gap-2">
+                            <a href="cluster0/changepassword" class="inline-flex gap-2">
                                 <img src="../resources/Images/Icons/lock.png" alt=""
                                     class="w-[20px] h-[20px]">
                                 <span id="changePassword-text">Change Password</span>
@@ -172,7 +171,7 @@
                         </li>
                         <hr class="my-2">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
-                            <a href="/logout" class="inline-flex gap-2">
+                            <a href="cluster0/logout" class="inline-flex gap-2">
                                 <img src="../resources/Images/Icons/log-out.png" alt=""
                                     class="ml-[4px] w-[20px] h-[20px]">
                                 <span id="signOut-text">Sign Out</span>

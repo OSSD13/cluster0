@@ -92,6 +92,30 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Point" value="{{ old('point_all') }}" required />
             </div>
+            <!-- Input Year -->
+            <div class="w-full sm:w-1/4">
+                <label for="spr_year" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Year
+                    <span class="text-red-500">*</span></label>
+                <select id="spr_year" name="spr_year"
+                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
+                    <option value="" disabled selected hidden class="text-center">Year</option>
+                    @foreach ($years as $year)
+                        <option value="{{ $year->year }}">{{ $year->year }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <!-- Input Sprint -->
+            <div class="w-full sm:w-1/4">
+                <label for="sprint_number" class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Sprint
+                    <span class="text-red-500">*</span></label>
+                <select id="spr_number" name="spr_number"
+                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
+                    <option value="" disabled selected hidden class="text-center">Sprint</option>
+                    @foreach ($sprints as $sprint)
+                        <option value="{{ $sprint->number }}">{{ $sprint->number }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <!-- Buttons -->

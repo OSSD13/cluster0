@@ -19,5 +19,9 @@ class DashboardController extends Controller
         return view('pages.dashboard.testerDashboard', compact('points'));
     }
 
+    function card() {
+        return view('pages.chooseCard');
+    }
+
 
 }
