@@ -24,5 +24,11 @@ class Card extends Model
         'crd_member_fullname',
         'crd_point',
     ];
+
+    public function trelloCredential(){
+        return $this->belongsTo(TrelloCredential::class, 'crd_trc_id');
+    }
+
+
 }
 
