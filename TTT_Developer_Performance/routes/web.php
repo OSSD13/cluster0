@@ -66,67 +66,63 @@ Route::prefix('tester')->group(function () {
 });
 
 // วิธีการตั้งชื่อ url Route menu/submenu/การทำงานอื่นๆ (add, edit)
-// Cluster 0
-Route::prefix('cluster0')->group(function () {
-    // ****************************************************************************************************** //
-    // Every one can use
-    Route::get('/myprofile', [ProfileController::class,'myProfile']);
-    Route::get('/change-password', [ProfileController::class,'changePassword']);
-    // ****************************************************************************************************** //
-    // View Summary Points
-    Route::get('/dash-team-performance', [TeamPerformanceController::class,'card']);
-    Route::get('/dash-overview', [DashboardController::class, 'tester']);
-    // ****************************************************************************************************** //
-    // Minor case
-    Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
-    Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
-    Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
-    // ****************************************************************************************************** //
-    // Backlog
-    Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
-    Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
-    Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklog');
-    // ****************************************************************************************************** //
-    // Extra Points
-    Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-    Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtrapoint');
-    Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+// ****************************************************************************************************** //
+// Every one can use
+Route::get('/myprofile', [ProfileController::class,'myProfile']);
+Route::get('/change-password', [ProfileController::class,'changePassword']);
+// ****************************************************************************************************** //
+// View Summary Points
+Route::get('/dash/team-performance', [TeamPerformanceController::class,'TeamPerformance']);
+Route::get('/dash/overview', [DashboardController::class, 'tester']);
+// ****************************************************************************************************** //
+// Minor case
+Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
+Route::get('/minorcase/add', [MinorcaseController::class,'add'])->name('addminorcase');
+Route::get('/minorcase/edit', [MinorcaseController::class,'edit'])->name('editminorcase');
+Route::post('/minorcase/store', [MinorcaseController::class, 'store'])->name('storeMinorcase');
+Route::delete('/minorcase/delete/{id}', [MinorcaseController::class, 'delete'])->name('deleteminorcase');
+// ****************************************************************************************************** //
+// Backlog
+Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
+Route::get('/backlog/add', [BacklogController::class,'add'])->name('addbacklog');
+Route::get('/backlog/edit', [BacklogController::class,'edit'])->name('editbacklog');
+// ****************************************************************************************************** //
+// Extra Points
+Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
+Route::get('/extrapoint/add', [ExtrapointController::class, 'add'])->name('createExtrapoint');
+Route::get('/extrapoint/edit', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 
-    Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
+Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
 
-    Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
-    Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
-    // ****************************************************************************************************** //
-    // Teams Managment
-    Route::get('/team', [TeamManagementController::class,'index']);
-    Route::get('/team-add', [TeamManagementController::class,'add']);
-    Route::get('/team-edit', [TeamManagementController::class,'edit']);
-    // ****************************************************************************************************** //
-    // Users Managment
-    //Route::get('/user', [UserController::class,'']);
-    //Route::get('/user/add', [UserController::class,'']);
-    //Route::get('/user/edit', [UserController::class,'']);
-    // ****************************************************************************************************** //
-    // Settings
-    Route::get('/setting-default-password', [UserController::class,'defaultConfiguration']);
-    Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']);
-    // ****************************************************************************************************** //
-    // Report
-    Route::get('/report', [ReportController::class, 'index']);
-    Route::get('/report-generate', [ReportController::class, 'reportGenerate']);
-    // ****************************************************************************************************** //
-    // History
-    Route::get('/setting-revision-history', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
-    Route::get('/review-performance-history', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
-    // ****************************************************************************************************** //
-    // Trello Configuration
-    Route::get('/setting-trello-config', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
-    Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trelloConfigurationAPI');
-    Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trelloConfigurationList');
-    // ****************************************************************************************************** //
-    // Test
-    Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
-});
-
-
-
+Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
+Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+// ****************************************************************************************************** //
+// Teams Managment
+Route::get('/team', [TeamManagementController::class,'index']);
+Route::get('/team/add', [TeamManagementController::class,'add']);
+Route::get('/team/edit', [TeamManagementController::class,'edit']);
+// ****************************************************************************************************** //
+// Users Managment
+//Route::get('/user', [UserController::class,'']);
+//Route::get('/user/add', [UserController::class,'']);
+//Route::get('/user/edit', [UserController::class,'']);
+// ****************************************************************************************************** //
+// Settings
+Route::get('/setting/default-password', [UserController::class,'defaultConfiguration']);
+Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']);
+// ****************************************************************************************************** //
+// Report
+Route::get('/report', [ReportController::class, 'index']);
+Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
+// ****************************************************************************************************** //
+// History
+Route::get('/setting/revision-history', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
+Route::get('/review/performance-history', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+// ****************************************************************************************************** //
+// Trello Configuration
+Route::get('/setting/trello-config', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
+Route::get('/setting/trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trelloConfigurationAPI');
+Route::get('/setting/trello-configList', [TrelloConfigurationController::class, 'list'])->name('trelloConfigurationList');
+// ****************************************************************************************************** //
+// Test
+Route::get('/test/fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);

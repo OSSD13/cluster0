@@ -26,13 +26,16 @@
 
             <!-- Year Dropdown -->
             <div class="relative">
-                <button id="dropdownYear" class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
+                <button id="dropdownYear"
+                    class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
                     <span id="dropdownYearSelected" class="truncate text-center w-full">Year:</span>
-                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div id="dropdownYearMenu" class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
+                <div id="dropdownYearMenu"
+                    class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
                     <div class="flex items-center px-3 py-1">
                         <input type="checkbox" id="year2568" value="2568" class="mr-2 h-3 w-3">
                         <label for="year2568" class="text-black">2568</label>
@@ -58,13 +61,16 @@
 
             <!-- Sprint Dropdown -->
             <div class="relative">
-                <button id="dropdownSprint" class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
+                <button id="dropdownSprint"
+                    class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
                     <span id="dropdownSprintSelected" class="truncate text-center w-full">Sprint:</span>
-                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div id="dropdownSprintMenu" class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
+                <div id="dropdownSprintMenu"
+                    class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
                     <div class="flex items-center px-3 py-1">
                         <input type="checkbox" id="sprint1" value="Sprint 1" class="mr-2 h-3 w-3">
                         <label for="sprint1" class="text-black">Sprint 1</label>
@@ -86,14 +92,17 @@
 
             <!-- Team Dropdown -->
             <div class="relative">
-                <button id="dropdownTeam" class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
+                <button id="dropdownTeam"
+                    class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
                     <span id="dropdownTeamSelected" class="truncate text-center w-full">Team:</span>
-                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                         </path>
                     </svg>
                 </button>
-                <div id="dropdownTeamMenu" class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
+                <div id="dropdownTeamMenu"
+                    class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
                     <div class="flex items-center px-3 py-1">
                         <input type="checkbox" id="allTeams" value="All Teams" class="mr-2 h-3 w-3">
                         <label for="allTeams" class="text-black">All Teams</label>
@@ -111,14 +120,17 @@
 
             <!-- Member Dropdown -->
             <div class="relative">
-                <button id="dropdownMember" class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
+                <button id="dropdownMember"
+                    class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
                     <span id="dropdownMemberSelected" class="truncate text-center w-full">Member:</span>
-                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                         </path>
                     </svg>
                 </button>
-                <div id="dropdownMemberMenu" class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
+                <div id="dropdownMemberMenu"
+                    class="absolute mt-1 w-30 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm hidden">
                     <div class="flex items-center px-3 py-1">
                         <input type="checkbox" id="member01" value="Member 01" class="mr-2 h-3 w-3">
                         <label for="member01" class="text-black">Member 01</label>
@@ -130,13 +142,15 @@
                 </div>
             </div>
 
-            <a href="http://localhost:1300/addminorcase" class="flex items-center bg-blue-900 text-white px-2 py-1 w-28 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
-                <img src="http://localhost:1300/resources/Images/Icons/image-gallery.png" alt="Add" class="w-6 h-6 mr-2 transition-transform duration-300 hover:rotate-12">
+            <a href=" {{route('addminorcase')}}"
+                class="flex items-center bg-blue-900 text-white px-2 py-1 w-28 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                <img src="http://localhost:1300/resources/Images/Icons/image-gallery.png" alt="Add"
+                    class="w-6 h-6 mr-2 transition-transform duration-300 hover:rotate-12">
                 Add New
             </a>
         </div>
 
-       
+
     </div>
 
 
@@ -186,84 +200,86 @@
             </thead>
             <!-- Table body -->
             <tbody>
+                @foreach ($points as $key => $item)
                 <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
                     <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                     <!-- ลำดับ # -->
                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                        1
+                        {{ $key + 1 }}
                     </th>
                     <!-- Sprint-->
                     <td class="px-6 py-4">
-                        67-52
+                        {{ $item->sprint_year . '-' . $item->sprint_num }}
                     </td>
-                    <!-- Actions -->
+                    <!-- Team -->
                     <td class="px-6 py-4">
-                        Team 2
+                        {{ $item->team }}
                     </td>
                     <!-- Member -->
                     <td class="px-6 py-4">
-                        Steve
+                        {{ $item->member }}
                     </td>
                     <!-- card Detail -->
                     <td class="px-6 py-4">
-                        Lorem
+
                     </td>
                     <!-- Defect detail -->
                     <td class="px-6 py-4">
-                        Lorem
+
                     </td>
                     <!-- Point -->
                     <td class="px-6 py-4">
-                        3
+                        {{ $item->value }}
                     </td>
-                    <!-- Actions button-->
-                    <td class="px-6 py-4 flex items-center justify-center space-x-2">
 
-                        <a href="{{'editminorcase'}}"> <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                alt="" class="w-[35px] h-[35px]" onclick=""> </a>
-                        <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
-                                class="w-[35px] h-[35px]" onclick=""></a>
-                    </td>
-                </tr>
-
-                <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
-                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                        2
-                    </th>
-                    <!-- Sprint-->
-                    <td class="px-6 py-4">
-                        67-52
-                    </td>
-                    <!-- Actions -->
-                    <td class="px-6 py-4">
-                        Team 2
-                    </td>
-                    <!-- Member -->
-                    <td class="px-6 py-4">
-                        Steve
-                    </td>
-                    <!-- card Detail -->
-                    <td class="px-6 py-4">
-                        Lorem
-                    </td>
-                    <!-- Defect detail -->
-                    <td class="px-6 py-4">
-                        Lorem
-                    </td>
-                    <!-- Point -->
-                    <td class="px-6 py-4">
-                        4
-                    </td>
                     <!-- Actions button-->
-                    <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                        <a href=" {{'editminorcase'}}"> <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
-                                alt="" class="w-[35px] h-[35px]" onclick=""> </a>
-                        <a href=" "> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
-                                class="w-[35px] h-[35px]" onclick=""></a>
-                    </td>
+                    <td class="px-6 py-4 flex items-center justify-center space-x-2  h-full ">
+                        <a href="{{ route('editminorcase')}}"> <img
+                                src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                class="w-[35px] h-[35px]" onclick=""> </a>
+                        <form action="{{ route('deleteminorcase', $item->id) }}" method="POST" id="deleteForm{{ $item->id }}" class="flex justify-center items-center"
+
+                            id="deleteForm{{ $item->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <!-- Change the delete button to trigger the alert -->
+                            <button type="button" onclick="showAlert({{ $item->id }})">
+                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
+                                    class="w-[35px] h-[35px]  items-center">
+                            </button>
+                        </form>
                     </td>
 
                 </tr>
+                <div id="alertBox"
+                    class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+                    <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                        <button onclick="closeAlert()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="flex justify-center mb-4">
+                            <img alt="Cross icon" class="rounded-full" height="64"
+                                src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
+                        </div>
+                        <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
+                        <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
+                        <div class="flex justify-center space-x-4">
+                            <!-- Add a data attribute to store the form ID -->
+                            <button id="confirmDelete"
+                                class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                                Delete
+                            </button>
+                            <button onclick="closeAlert()"
+                                class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                </tr>
+                @endforeach
 
             </tbody>
         </table>
@@ -407,13 +423,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Alert Box script
-function showAlert() {
+let formIdToDelete = null;
+
+function showAlert(formId) {
+    // Store the form ID for later use
+    formIdToDelete = formId;
+
+    // Show the confirmation modal
     document.getElementById('alertBox').classList.remove('hidden');
 }
 
 function closeAlert() {
+    // Hide the confirmation modal
     document.getElementById('alertBox').classList.add('hidden');
 }
+
+document.getElementById('confirmDelete').addEventListener('click', function() {
+    // If a form ID was stored, submit the form
+    if (formIdToDelete) {
+        document.getElementById('deleteForm' + formIdToDelete).submit();
+    }
+});
+
 </script>
 @endsection
 
@@ -430,6 +461,12 @@ function closeAlert() {
 
 body {
     font-family: "Inter", sans-serif;
+}
+
+#alertBox {
+    z-index: 9999;
+    /* ให้สูงกว่าทุกอย่างในหน้า */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 </style>
 @endsection
