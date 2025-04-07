@@ -9,7 +9,7 @@ class Users extends Authenticatable
     protected $table = 'users';
     protected $primaryKey = 'usr_id';
     public $timestamps = false;
-    protected $table = 'users';
+   
 
     protected $fillable = [
         'usr_username',

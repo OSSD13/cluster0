@@ -23,7 +23,7 @@ class UserTeamHistory extends Model
 
         return $this->belongsTo(Users::class, 'uth_usr_id');
 
-        return $this->belongsTo(User::class, 'uth_usr_id', 'usr_id');
+        return $this->belongsTo(Users::class, 'uth_usr_id', 'usr_id');
 
     }
 
