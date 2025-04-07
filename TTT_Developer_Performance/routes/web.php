@@ -1,21 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// Auth
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+// Every one can use
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MinorcaseController;
+// Report
+use App\Http\Controllers\ReportController;
+// Teams
 use App\Http\Controllers\TeamManagementController;
-use App\Http\Controllers\DashboardController;
+// Users
+use App\Http\Controllers\UserController;
+// Points
+use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\BacklogController;
 use App\Http\Controllers\ExtrapointController;
+// View Summary Points
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TeamPerformanceController;
+// History
 use App\Http\Controllers\PerformanceHistoryController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\RevisionHistoryController;
+// Trello
+use App\Http\Controllers\TrelloConfigurationController;
 
-
+// ****************************************************************************************************** //
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -37,6 +48,7 @@ Route::prefix('register')->group(function () {
     Route::post('/google/2', [RegisterController::class, 'googleAuthenticationStep2'])->name('register.google.2');
     Route::get('/google/view', [RegisterController::class, 'registerWithGooglePage']);
 });
+// ****************************************************************************************************** //
 
 // Test view
 Route::prefix('test')->group(function () {
@@ -53,32 +65,33 @@ Route::prefix('tester')->group(function () {
 
 });
 
-// Report
-Route::get('/report', [ReportController::class, 'index']);
-Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
-
+// วิธีการตั้งชื่อ url Route menu/submenu/การทำงานอื่นๆ (add, edit)
+// ****************************************************************************************************** //
+// Every one can use
 Route::get('/myprofile', [ProfileController::class,'myProfile']);
-Route::get('/changepassword', [ProfileController::class,'changePassword']);
-
-Route::get('/minorcase', [MinorcaseController::class,'index']);
-Route::get('/addminorcase', [MinorcaseController::class,'add']);
-Route::get('/editminorcase', [MinorcaseController::class,'edit']);
-
-// Team Managment
-Route::get('/teammanagment', [TeamManagementController::class,'index']);
-Route::get('/addteam', [TeamManagementController::class,'add']);
-Route::get('/edit', [TeamManagementController::class,'edit']);
-
-Route::get('/backlog', [BacklogController::class,'index']);
-Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
-
-//mypage
+Route::get('/change-password', [ProfileController::class,'changePassword']);
+// ****************************************************************************************************** //
+// View Summary Points
+Route::get('/dash/team-performance', [TeamPerformanceController::class,'TeamPerformance']);
+Route::get('/dash/overview', [DashboardController::class, 'tester']);
+// ****************************************************************************************************** //
+// Minor case
+Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
+Route::get('/minorcase/add', [MinorcaseController::class,'add'])->name('addminorcase');
+Route::get('/minorcase/edit', [MinorcaseController::class,'edit'])->name('editminorcase');
+// ****************************************************************************************************** //
+// Backlog
+Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
+Route::get('/backlog/add', [BacklogController::class,'add'])->name('addbacklog');
+Route::get('/backlog/edit', [BacklogController::class,'edit'])->name('editbacklog');
+// ****************************************************************************************************** //
+// Extra Points
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
-Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::get('/extrapoint/add', [ExtrapointController::class, 'add'])->name('createExtrapoint');
+Route::get('/extrapoint/edit', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
 
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
 
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
-

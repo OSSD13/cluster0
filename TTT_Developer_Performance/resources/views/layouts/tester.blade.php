@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('title')
-    <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}" />
-    <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
+    <link rel="icon" type="image/jpg" sizes="16x16" href="../resources/Images/ttt_logo.jpg" />
+    <link rel="stylesheet" href="../resources/css/global.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -21,7 +21,7 @@
             class="bg-[var(--primary-color)] rounded-r-[10px] p-4 pt-[30px] text-white transition-all duration-300 w-[300px] shadow-lg">
             <!-- Logo -->
             <div id="logo-container" class="flex mb-6 gap-[10px] items-center">
-                <img src="/resources/Images/ttt_logo.jpg" alt="" class="w-[50px] h-[50px] rounded-[5px]">
+                <img src="../resources/Images/ttt_logo.jpg" alt="" class="w-[50px] h-[50px] rounded-[5px]">
                 <h1 id="navbar-title" class="text-lg">TTT Developer <br>Performance</h1>
             </div>
 
@@ -32,15 +32,15 @@
                     <button onclick="toggleMenu('dashboardMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-3">
-                            <img src="{{ asset('resources/Images/Icons/visualization.png') }}" alt=""
+                            <img src="../resources/Images/Icons/visualization.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="dashboard-text">Dashboard</span>
                         </div>
                         <i id="dashboard-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="dashboardMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Overview</a></li>
-                        <li><a href="#" class="block">Team Performance</a></li>
+                        <li><a href="{{ url('/dash/overview') }}" class="block">Overview</a></li>
+                        <li><a href="{{ url('/dash/team-performance') }}" class="block">Team Performance</a></li>
                     </ul>
                 </li>
 
@@ -49,17 +49,17 @@
                     <button onclick="toggleMenu('performanceReviewMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/evaluation.png') }}" alt=""
+                            <img src="../resources/Images/Icons/evaluation.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="performanceReview-text">Performance Review</span>
                         </div>
                         <i id="performanceReview-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="performanceReviewMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Performance History</a></li>
-                        <li><a href="#" class="block">Extra Point</a></li>
-                        <li><a href="#" class="block">Backlog</a></li>
-                        <li><a href="#" class="block">Minor Case</a></li>
+                        <li><a href="{{ url('/review/performance-history') }}" class="block">Performance History</a></li>
+                        <li><a href="{{ url('/extrapoint') }}" class="block">Extra Point</a></li>
+                        <li><a href="{{ url('/backlog') }}" class="block">Backlog</a></li>
+                        <li><a href="{{ url('/minorcase') }}" class="block">Minor Case</a></li>
                     </ul>
                 </li>
 
@@ -68,15 +68,15 @@
                     <button onclick="toggleMenu('teamManagementMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/group.png') }}" alt=""
+                            <img src="../resources/Images/Icons/group.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="teamManagement-text">Team Management</span>
                         </div>
                         <i id="teamManagement-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="teamManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Team List</a></li>
-                        <li><a href="#" class="block">Add Team</a></li>
+                        <li><a href="{{ url('/team') }}" class="block">Team List</a></li>
+                        <li><a href="{{ url('/team/add') }}" class="block">Add Team</a></li>
                     </ul>
                 </li>
 
@@ -85,7 +85,7 @@
                     <button onclick="toggleMenu('memberManagementMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/user.png') }}" alt=""
+                            <img src="../resources/Images/Icons/user.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="memberManagement-text">Member Management</span>
                         </div>
@@ -102,14 +102,14 @@
                     <button onclick="toggleMenu('reportsMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/report.png') }}" alt=""
+                            <img src="../resources/Images/Icons/report.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="reports-text">Reports</span>
                         </div>
                         <i id="reports-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="reportsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Generate Report</a></li>
+                        <li><a href="{{ url('/report') }}" class="block">Generate Report</a></li>
                     </ul>
                 </li>
 
@@ -118,17 +118,17 @@
                     <button onclick="toggleMenu('settingsMenu', this)"
                         class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
                         <div class="flex items-center gap-2">
-                            <img src="{{ asset('resources/Images/Icons/setting.png') }}" alt=""
+                            <img src="../resources/Images/Icons/setting.png" alt=""
                                 class="w-[25px] h-[25px]" onclick="toggleNavbar()">
                             <span id="settings-text">Settings</span>
                         </div>
                         <i id="settings-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="settingsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Revision History</a></li>
+                        <li><a href="{{ url('/setting/revision-history') }}" class="block">Revision History</a></li>
                         <li><a href="#" class="block">Access Control</a></li>
-                        <li><a href="#" class="block">Trello Configuration</a></li>
-                        <li><a href="#" class="block">Default Configuration</a></li>
+                        <li><a href="{{ url('/setting/trello-config') }}" class="block">Trello Configuration</a></li>
+                        <li><a href="{{ url('/setting/default-password') }}" class="block">Default Configuration</a></li>
                     </ul>
                 </li>
 
@@ -147,25 +147,25 @@
                 </div>
                 <div class="relative">
                     <button onclick="toggleProfileDropdown()" class="focus:outline-none">
-                        <img src="{{ asset('resources/Images/ttt_logo.jpg') }}" alt=""
+                        <img src="../resources/Images/ttt_logo.jpg" alt=""
                             class="w-[50px] h-[50px] rounded-[50px]">
                     </button>
                 </div>
 
                 <!-- DropdownProfile menu -->
                 <div id="profileDropdown"
-                    class="profileDropdown absolute top-[100px] right-[20px] bg-[var(--primary-color)] w-[200px] h-[170px] rounded-xl flex justify-center items-center  hidden">
+                    class="profileDropdown absolute top-[100px] right-[20px] bg-[var(--primary-color)] w-[200px] h-[170px] rounded-xl flex justify-center items-center hidden z-999">
                     <ul id="profileDropdownList" class="flex flex-col">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/myprofile" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/user.png') }}" alt=""
+                                <img src="../resources/Images/Icons/user.png" alt=""
                                     class="w-[20px] h-[20px]">
                                 <span id="myProfile-text">My profile</span>
                             </a>
                         </li>
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/changepassword" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/lock.png') }}" alt=""
+                                <img src="../resources/Images/Icons/lock.png" alt=""
                                     class="w-[20px] h-[20px]">
                                 <span id="changePassword-text">Change Password</span>
                             </a>
@@ -173,7 +173,7 @@
                         <hr class="my-2">
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
                             <a href="/logout" class="inline-flex gap-2">
-                                <img src="{{ asset('resources/Images/Icons/log-out.png') }}" alt=""
+                                <img src="../resources/Images/Icons/log-out.png" alt=""
                                     class="ml-[4px] w-[20px] h-[20px]">
                                 <span id="signOut-text">Sign Out</span>
                             </a>
@@ -195,7 +195,7 @@
     </div>
 
     @yield('javascripts')
-    <script src="{{ asset('resources/js/global.js') }}"></script>
+    <script src="../resources/js/global.js"></script>
 </body>
 
 </html>

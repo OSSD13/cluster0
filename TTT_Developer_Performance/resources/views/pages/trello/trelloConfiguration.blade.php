@@ -20,7 +20,7 @@
             <div class="bg-white rounded-lg shadow-lg p-4 w-full lg:w-1/2">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello API</h2>
-                    <a href="">
+                    <a href=" {{ route('trelloConfigurationAPI') }} ">
                         <!-- Add New API -->
                         <button class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
                             <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
@@ -89,9 +89,9 @@
             <div class="bg-white rounded-lg shadow-lg p-4 w-full lg:w-1/2">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello Lists</h2>
-                    <a href="">
+                    <a href=" {{ route('trelloConfigurationList') }} ">
                         <!-- Add New List -->
-                        <button class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
+                        <button class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center ">
                             <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
                                 class="w-[20px] h-[20px] mr-2">
                             Add New

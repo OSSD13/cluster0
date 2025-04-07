@@ -62,8 +62,9 @@
                 <select id="member" name="member"
                     class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
                     <option value="" disabled selected hidden class="text-center">Member</option>
-                    <option value="1" {{ old('member') == 1 ? 'selected' : '' }}>Sun</option>
-                    <option value="2" {{ old('member') == 2 ? 'selected' : '' }}>ohm</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -74,8 +75,9 @@
                 <select id="current_team" name="current_team"
                     class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
                     <option value="" disabled selected hidden class="text-center">Team</option>
-                    <option value="1" {{ old('current_team') == 1 ? 'selected' : '' }}>Team A</option>
-                    <option value="2" {{ old('current_team') == 2 ? 'selected' : '' }}>Team B</option>
+                    @foreach ($teams as $team)
+                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>

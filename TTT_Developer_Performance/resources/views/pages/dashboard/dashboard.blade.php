@@ -26,7 +26,7 @@
                     <!-- Year Dropdown -->
                     <div class="relative">
                         <button id="dropdownButton"
-                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-30 h-10 bg-white text-center flex justify-between items-center">
                             <span id="dropdownSelected" class="truncate text-center w-full">Year:</span>
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">

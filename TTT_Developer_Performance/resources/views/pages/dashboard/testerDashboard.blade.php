@@ -23,37 +23,66 @@
                     <label class="text-[var(--primary-color)] text-2xl"><strong>Filter</strong></label>
                 </div>
                 <div class="flex justify-end gap-4 ml-4">
-                    <!-- Year Dropdown -->
+
+                    <!-- Team Dropdown -->
                     <div class="relative">
-                        <button id="dropdownButton"
-                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
-                            <span id="dropdownSelected" class="truncate text-center w-full">Year:</span>
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        <button id="dropdownTeam"
+                            class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
+                            <span id="dropdownTeamSelected" class="truncate text-center w-full">Team:</span>
+                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                                 </path>
                             </svg>
                         </button>
-                        <div id="dropdownMenu"
-                            class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="year2568" value="2568" class="mr-2">
+                        <div id="dropdownTeamMenu"
+                            class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="allTeams" value="All Teams" class="mr-2 h-3 w-3">
+                                <label for="allTeams" class="text-black">All Teams</label>
+                            </div>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="team1" value="Team 1" class="mr-2 h-3 w-3">
+                                <label for="team1" class="text-black">Team 1</label>
+                            </div>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="team2" value="Team 2" class="mr-2 h-3 w-3">
+                                <label for="team2" class="text-black">Team 2</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Year Dropdown -->
+                    <div class="relative">
+                        <button id="dropdownYear"
+                            class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
+                            <span id="dropdownYearSelected" class="truncate text-center w-full text-[14px]">Year:</span>
+                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+                        <div id="dropdownYearMenu"
+                            class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="year2568" value="2568" class="mr-2 h-3 w-3">
                                 <label for="year2568" class="text-black">2568</label>
                             </div>
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="year2567" value="2567" class="mr-2">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="year2567" value="2567" class="mr-2 h-3 w-3">
                                 <label for="year2567" class="text-black">2567</label>
                             </div>
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="year2566" value="2566" class="mr-2">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="year2566" value="2566" class="mr-2 h-3 w-3">
                                 <label for="year2566" class="text-black">2566</label>
                             </div>
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="year2565" value="2565" class="mr-2">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="year2565" value="2565" class="mr-2 h-3 w-3">
                                 <label for="year2565" class="text-black">2565</label>
                             </div>
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="year2564" value="2564" class="mr-2">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="year2564" value="2564" class="mr-2 h-3 w-3">
                                 <label for="year2564" class="text-black">2564</label>
                             </div>
                         </div>
@@ -62,30 +91,37 @@
                     <!-- Sprint Dropdown -->
                     <div class="relative">
                         <button id="dropdownSprint"
-                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                            class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
                             <span id="dropdownSprintSelected" class="truncate text-center w-full">Sprint:</span>
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                                 </path>
                             </svg>
                         </button>
                         <div id="dropdownSprintMenu"
-                            class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="sprint01" value="Sprint 01" class="mr-2">
-                                <label for="sprint01" class="text-black">Sprint 01</label>
+                            class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="sprint1" value="Sprint 1" class="mr-2 h-3 w-3">
+                                <label for="sprint1" class="text-black">Sprint 1</label>
                             </div>
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="sprint02" value="Sprint 02" class="mr-2">
-                                <label for="sprint02" class="text-black">Sprint 02</label>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="sprint2" value="Sprint 2" class="mr-2 h-3 w-3">
+                                <label for="sprint2" class="text-black">Sprint 2</label>
+                            </div>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="sprint3" value="Sprint 3" class="mr-2 h-3 w-3">
+                                <label for="sprint3" class="text-black">Sprint 3</label>
+                            </div>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="sprint4" value="Sprint 4" class="mr-2 h-3 w-3">
+                                <label for="sprint4" class="text-black">Sprint 4</label>
                             </div>
                         </div>
                     </div>
+
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -208,31 +244,55 @@
                     <label class="text-[var(--primary-color)] text-2xl"><strong>Filter</strong></label>
                 </div>
 
-                {{-- dropdown team --}}
                 <div class="flex justify-end gap-4 ml-4">
+                    <!-- Dropdown Team 2 -->
                     <div class="relative">
-                        <button id="dropdownTeam"
-                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
-                            <span id="dropdownTeamSelected" class="truncate text-center w-full">Team:</span>
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        <button id="dropdownTeam2"
+                            class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
+                            <span id="dropdownTeamSelected2" class="truncate text-center w-full">Team:</span>
+                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                                 </path>
                             </svg>
                         </button>
-                        <div id="dropdownTeamMenu"
-                            class="absolute hidden mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="allTeams" value="All Teams" class="mr-2">
-                                <label for="allTeams" class="text-black">All Teams</label>
+                        <div id="dropdownTeamMenu2"
+                            class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="allTeams2" value="All Teams" class="mr-2 h-3 w-3">
+                                <label for="allTeams2" class="text-black">All Teams</label>
                             </div>
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="team1" value="Team 1" class="mr-2">
-                                <label for="team1" class="text-black">Team 1</label>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="team1-2" value="Team 1" class="mr-2 h-3 w-3">
+                                <label for="team1-2" class="text-black">Team 1</label>
                             </div>
-                            <div class="flex items-center px-4 py-2">
-                                <input type="checkbox" id="team2" value="Team 2" class="mr-2">
-                                <label for="team2" class="text-black">Team 2</label>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="team2-2" value="Team 2" class="mr-2 h-3 w-3">
+                                <label for="team2-2" class="text-black">Team 2</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Member Dropdown -->
+                    <div class="relative">
+                        <button id="dropdownMember"
+                            class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-40 bg-white h-9 text-center flex justify-between items-center">
+                            <span id="dropdownMemberSelected" class="truncate text-center w-full">Member:</span>
+                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+                        <div id="dropdownMemberMenu"
+                            class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="member01" value="Member 01" class="mr-2 h-3 w-3">
+                                <label for="member01" class="text-black">Member 01</label>
+                            </div>
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="member02" value="Member 02" class="mr-2 h-3 w-3">
+                                <label for="member02" class="text-black">Member 02</label>
                             </div>
                         </div>
                     </div>
@@ -585,7 +645,35 @@
 
 @section('javascripts')
     <script>
-        // Sprint dropdown
+        // Dropdown Year script
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownYear = document.getElementById('dropdownYear');
+            const dropdownYearMenu = document.getElementById('dropdownYearMenu');
+            const dropdownYearSelected = document.getElementById('dropdownYearSelected');
+            const yearCheckboxes = dropdownYearMenu.querySelectorAll('input[type="checkbox"]');
+
+            dropdownYear.addEventListener('click', function() {
+                dropdownYearMenu.classList.toggle('hidden');
+            });
+
+            yearCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const selectedYears = Array.from(yearCheckboxes)
+                        .filter(cb => cb.checked)
+                        .map(cb => cb.value)
+                        .join(', ');
+                    dropdownYearSelected.textContent = `Year: ${selectedYears}`;
+                });
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!dropdownYear.contains(event.target) && !dropdownYearMenu.contains(event.target)) {
+                    dropdownYearMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Dropdown Sprint script
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownSprint = document.getElementById('dropdownSprint');
             const dropdownSprintMenu = document.getElementById('dropdownSprintMenu');
@@ -613,7 +701,7 @@
             });
         });
 
-        // Team dropdown
+        // Dropdown Team script
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownTeam = document.getElementById('dropdownTeam');
             const dropdownTeamMenu = document.getElementById('dropdownTeamMenu');
@@ -647,16 +735,100 @@
             });
 
             function updateSelectedTeams() {
-                const selectedTeams = Array.from(teamCheckboxes)
-                    .filter(cb => cb.checked && cb !== allTeamsCheckbox)
-                    .map(cb => cb.value)
-                    .join(', ');
-                dropdownTeamSelected.textContent = selectedTeams ? `Team: ${selectedTeams}` : 'Team:';
+                if (allTeamsCheckbox.checked) {
+                    dropdownTeamSelected.textContent = "Team: All Teams";
+                } else {
+                    const selectedTeams = Array.from(teamCheckboxes)
+                        .filter(cb => cb.checked && cb !== allTeamsCheckbox)
+                        .map(cb => cb.value)
+                        .join(', ');
+                    dropdownTeamSelected.textContent = selectedTeams ? `Team: ${selectedTeams}` : 'Team:';
+                }
             }
 
             document.addEventListener('click', function(event) {
                 if (!dropdownTeam.contains(event.target) && !dropdownTeamMenu.contains(event.target)) {
                     dropdownTeamMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Dropdown Team 2 script
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownTeam2 = document.getElementById('dropdownTeam2');
+            const dropdownTeamMenu2 = document.getElementById('dropdownTeamMenu2');
+            const dropdownTeamSelected2 = document.getElementById('dropdownTeamSelected2');
+            const teamCheckboxes2 = dropdownTeamMenu2.querySelectorAll('input[type="checkbox"]');
+            const allTeamsCheckbox2 = document.getElementById('allTeams2');
+
+            dropdownTeam2.addEventListener('click', function() {
+                dropdownTeamMenu2.classList.toggle('hidden');
+            });
+
+            allTeamsCheckbox2.addEventListener('change', function() {
+                const isChecked = allTeamsCheckbox2.checked;
+                teamCheckboxes2.forEach(checkbox => {
+                    if (checkbox !== allTeamsCheckbox2) {
+                        checkbox.checked = isChecked;
+                    }
+                });
+                updateSelectedTeams2();
+            });
+
+            teamCheckboxes2.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (checkbox !== allTeamsCheckbox2) {
+                        allTeamsCheckbox2.checked = Array.from(teamCheckboxes2)
+                            .filter(cb => cb !== allTeamsCheckbox2)
+                            .every(cb => cb.checked);
+                    }
+                    updateSelectedTeams2();
+                });
+            });
+
+            function updateSelectedTeams2() {
+                if (allTeamsCheckbox2.checked) {
+                    dropdownTeamSelected2.textContent = "Team: All Teams";
+                } else {
+                    const selectedTeams = Array.from(teamCheckboxes2)
+                        .filter(cb => cb.checked && cb !== allTeamsCheckbox2)
+                        .map(cb => cb.value)
+                        .join(', ');
+                    dropdownTeamSelected2.textContent = selectedTeams ? `Team: ${selectedTeams}` : 'Team:';
+                }
+            }
+
+            document.addEventListener('click', function(event) {
+                if (!dropdownTeam2.contains(event.target) && !dropdownTeamMenu2.contains(event.target)) {
+                    dropdownTeamMenu2.classList.add('hidden');
+                }
+            });
+        });
+
+        // Dropdown Member script
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownMember = document.getElementById('dropdownMember');
+            const dropdownMemberMenu = document.getElementById('dropdownMemberMenu');
+            const dropdownMemberSelected = document.getElementById('dropdownMemberSelected');
+            const memberCheckboxes = dropdownMemberMenu.querySelectorAll('input[type="checkbox"]');
+
+            dropdownMember.addEventListener('click', function() {
+                dropdownMemberMenu.classList.toggle('hidden');
+            });
+
+            memberCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const selectedMembers = Array.from(memberCheckboxes)
+                        .filter(cb => cb.checked)
+                        .map(cb => cb.value)
+                        .join(', ');
+                    dropdownMemberSelected.textContent = `Member: ${selectedMembers}`;
+                });
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!dropdownMember.contains(event.target) && !dropdownMemberMenu.contains(event.target)) {
+                    dropdownMemberMenu.classList.add('hidden');
                 }
             });
         });

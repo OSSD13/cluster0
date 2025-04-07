@@ -52,8 +52,9 @@
             <select id="member"
                 class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
                 <option value="" disabled selected hidden class="text-center">Member</option>
-                <option value="Member A">Sun</option>
-                <option value="Member B">ohm</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -64,8 +65,9 @@
             <select id="member"
                 class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
                 <option value="" disabled selected hidden class="text-center">Team</option>
-                <option value="Team A">Team A</option>
-                <option value="Team B">Team B</option>
+                @foreach ($teams as $team)
+                    <option value="{{ $team->id }}">{{ $team->name }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -89,8 +91,8 @@
         <!-- Cancel Button -->
         <a href="{{ route('extrapoint') }}">
             <button type="button"
-            class="w-full sm:w-[250px] h-[50px] p-2 bg-zinc-500 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
-            Cancel
+                class="w-full sm:w-[250px] h-[50px] p-2 bg-zinc-500 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
+                Cancel
             </button>
         </a>
 
@@ -99,8 +101,8 @@
             @csrf
             @method('PUT')
             <button type="submit" id="saveBtn"
-            class="w-full sm:w-[250px] h-[50px] p-2 bg-blue-900 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
-            Apply
+                class="w-full sm:w-[250px] h-[50px] p-2 bg-blue-900 text-white rounded-[10px] font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900">
+                Apply
             </button>
         </form>
     </div>

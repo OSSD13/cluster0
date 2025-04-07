@@ -17,14 +17,14 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'usr_email'            => 'ohm@gmail.com',
-                'usr_google_id'        => 'google_123',
+                'usr_email'            => 'Pizza@gmail.com',
+                'usr_google_id'        => 'google_123456',
                 'usr_is_use'           => 1,
-                'usr_name'             => 'Ohm',
-                'usr_password'         => Hash::make('ohm123'),
-                'usr_role'             => 'Tester',
-                'usr_trello_fullname'  => 'OhmTrello',
-                'usr_username'         => 'Tester_Ohm',
+                'usr_name'             => 'Pizza',
+                'usr_password'         => Hash::make('pizza123'),
+                'usr_role'             => 'Developer',
+                'usr_trello_fullname'  => 'PizzaTrello',
+                'usr_username'         => 'Developer_pizza'
             ],
 
         ]);
