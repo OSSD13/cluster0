@@ -27,4 +27,6 @@ class UserTeamHistory extends Model
     {
         return $this->belongsTo(Team::class, 'uth_tm_id');
     }
+
+    
 }

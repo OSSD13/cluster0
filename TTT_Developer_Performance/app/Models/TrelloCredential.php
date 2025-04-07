@@ -15,4 +15,9 @@ class TrelloCredential extends Model
         'trc_api_token',
         'trc_usr_id',
     ];
+
+    public function trelloCredential()
+    {
+        return $this->belongTo(User::class, 'trc_usr_id');
+    }
 }
