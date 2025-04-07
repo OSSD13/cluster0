@@ -1,4 +1,4 @@
-@extends('layouts.tester')
+@extends('layouts.tester') <!-- Replace 'app' with the correct layout name if different -->
 
 @section('title')
     <title>Create Extrapoint</title>
