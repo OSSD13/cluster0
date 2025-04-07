@@ -33,30 +33,30 @@
                 <th class="px-4 py-2 text-center">Email</th>
                 <th class="px-4 py-2 text-center w-45">Trello Full Name</th>
                 <th class="px-4 py-2 text-center">Password</th>
-                <th class="px-4 py-2 text-center">Team</th>
-                <th class="px-4 py-2 text-center">Access</th>
+                <th class="px-4 py-2 text-center" colspan="2">Team / Access</th>
                 <th class="px-4 py-2 text-center">Action</th>
             </tr>
         </thead>
         <!-- Table body -->
         <tbody>
+            @foreach($users as $user)
             <tr class="bg-white text-black">
                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                  <!-- ลำดับ # -->
                 <th scope="row" class="text-center px-6 py-4 font-medium text-black whitespace-nowrap ">
-                    1
+                    {{ $loop->iteration }}
                 </th>
                  <!-- Name -->
                 <td class="px-6 py-4 text-center">
-                    Max
+                    {{ $user->usr_name }}
                 </td>
                  <!-- Username -->
                 <td class="px-6 py-4 text-center">
-                    Maxttt1234
+                    {{ $user->usr_username }}
                 </td>
                 <!-- Email -->
                 <td class="px-6 py-4 text-center">
-                    max@gmail.com
+                    {{ $user->usr_email }}
                 </td>
                  <!-- Trello full name -->
                 <td class="px-6 py-4 text-center">
@@ -67,44 +67,72 @@
                     <button class="w-25 bg-[#00408e] hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" style="border-radius: 7px;">Reset</button>
                 </td>
                  <!-- Team -->
-                 <td class="py-4 text-center">
-                    <div class="relative">
-                        <select class="w-32 border-2 p-2 rounded-lg appearance-none pr-12 text-blue-900 text-center
-                                      focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
-                                      hover:bg-blue-100"
-                            style="border-color: #00408e;
-                                   background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300408e%22><path d=%22M7 10l5 5 5-5z%22 /></svg>');
-                                   background-repeat: no-repeat;
-                                   background-position: right 1rem center;
-                                   background-size: 1.2rem;">
-                            <option class="text-center text-blue-900 bg-white">-</option>
-                            <option class="text-center text-blue-900 bg-white">Team 1</option>
-                            <option class="text-center text-blue-900 bg-white">Team 2</option>
-                            <option class="text-center text-blue-900 bg-white">Team 3</option>
-                        </select>
-                    </div>
-                </td>
-                <td class="py-4 text-center">
-                    <div class="relative">
-                        <select class="w-32 border-2 p-2 rounded-lg appearance-none pr-12 text-blue-900 text-center
-                                      focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
-                                      hover:bg-blue-100"
-                            style="border-color: #00408e;
-                                   background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300408e%22><path d=%22M7 10l5 5 5-5z%22 /></svg>');
-                                   background-repeat: no-repeat;
-                                   background-position: right 1rem center;
-                                   background-size: 1.2rem;">
-                            <option class="text-center text-blue-900 bg-white">-</option>
-                            <option class="text-center text-blue-900 bg-white">Developer</option>
-                            <option class="text-center text-blue-900 bg-white">Tester</option>
-                        </select>
+                 <td class="py-4 text-center" colspan="2">
+                    <div class="flex justify-center gap-4">
+                        <div class="relative">
+                            <select class="w-32 border-2 p-2 rounded-lg appearance-none pr-12 text-blue-900 text-center
+                                        focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
+                                        hover:bg-blue-100"
+                                style="border-color: #00408e;
+                                    background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300408e%22><path d=%22M7 10l5 5 5-5z%22 /></svg>');
+                                    background-repeat: no-repeat;
+                                    background-position: right 1rem center;
+                                    background-size: 1.2rem;">
+                                <option class="text-center text-blue-900 bg-white">-</option>
+                                <option class="text-center text-blue-900 bg-white">Team 1</option>
+                                <option class="text-center text-blue-900 bg-white">Team 2</option>
+                                <option class="text-center text-blue-900 bg-white">Team 3</option>
+                            </select>
+                        </div>
+                        <div class="relative">
+                            <select class="w-32 border-2 p-2 rounded-lg appearance-none pr-12 text-blue-900 text-center
+                                        focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
+                                        hover:bg-blue-100"
+                                style="border-color: #00408e;
+                                    background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300408e%22><path d=%22M7 10l5 5 5-5z%22 /></svg>');
+                                    background-repeat: no-repeat;
+                                    background-position: right 1rem center;
+                                    background-size: 1.2rem;">
+                                <option class="text-center text-blue-900 bg-white">-</option>
+                                <option class="text-center text-blue-900 bg-white">Developer</option>
+                                <option class="text-center text-blue-900 bg-white">Tester</option>
+                            </select>
+                        </div>
                     </div>
                 </td>
                 <!-- Actions button-->
                 <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="" class="w-[35px] h-[35px]" onclick="" ></a>
+                    <button onclick="openAlertDelete()" class="p-0 border-0 bg-transparent">
+                        <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="" class="w-[35px] h-[35px]">
+                    </button>
                 </td>
             </tr>
+            @endforeach
+            <div id="alertDeleteBox"
+                class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+                <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                    <button onclick="closeAlertDelete()"
+                        class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="flex justify-center mb-4">
+                        <img alt="Cross icon" class="rounded-full" height="64"
+                        src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
+                    <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
+                    <div class="flex justify-center space-x-4">
+                        <button
+                            class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                            Delete
+                        </button>
+                        <button onclick="closeAlertDelete()"
+                            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
         </tbody>
     </table>
 </div>

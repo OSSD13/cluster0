@@ -52,6 +52,28 @@
                     </button>
                 </div>
 
+                <!-- Alert Error Toast -->
+                <div id="alertErrorToast" class="hidden fixed bottom-5 right-5 bg-white border-l-[5px] border-red-500 p-4 rounded-md shadow-md w-[500px] z-50 flex justify-between items-center transition-all duration-500 translate-x-full opacity-0">
+                    <!-- Icon + Text -->
+                    <div class="flex space-x-4">
+                        <!-- Green Circle Icon -->
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 mt-1 rounded-full flex items-center justify-center">
+                                <img src="{{ asset('resources/Images/Icons/cross.png') }}" alt="Error icon" class="w-9 h-9">
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-black">Error</h3>
+                            <p class="text-sm text-black font-semibold mt-1">Sorry, but you're not authorized to look at this page.</p>
+                        </div>
+                    </div>
+
+                    <!-- Close Button -->
+                    <button onclick="closeAlertErrorToast()" class="text-gray-400 hover:text-gray-600 text-3xl font-bold leading-none ml-4">
+                        &times;
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -62,10 +84,14 @@
     document.addEventListener('DOMContentLoaded', function () {
         const passwordInput = document.getElementById('password');
         const saveButton = document.getElementById('saveButton');
-        let originalText = passwordInput.value;
+        let originalText = passwordInput.value.trim(); // ตัด space เผื่อผู้ใช้ใส่ space ล้วน
 
         function updateButtonState() {
-            if (passwordInput.value !== originalText) {
+            const currentValue = passwordInput.value.trim();
+            const isChanged = currentValue !== originalText;
+            const isEmpty = currentValue === '';
+
+            if (isChanged && !isEmpty) {
                 saveButton.classList.add('changed');
                 saveButton.classList.remove('disabled-button');
             } else {
@@ -81,8 +107,10 @@
         saveButton.addEventListener('click', function (e) {
             e.preventDefault();
 
-            if (!saveButton.classList.contains('changed')) {
-                return; // ไม่มีการเปลี่ยนแปลง ไม่ต้องทำอะไร
+            const newValue = passwordInput.value.trim();
+
+            if (!saveButton.classList.contains('changed') || newValue === '') {
+                return; // ไม่มีการเปลี่ยนแปลง หรือ ค่าว่าง ไม่ต้องทำอะไร
             }
 
             fetch('/save-configuration', {
@@ -92,17 +120,17 @@
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                 },
                 body: JSON.stringify({
-                    defaultPassword: passwordInput.value
+                    defaultPassword: newValue
                 })
             })
             .then(res => res.json())
             .then(data => {
                 openAlertSuccessToast();
-                originalText = passwordInput.value;
+                originalText = newValue;
                 updateButtonState(); // รีเซ็ตสถานะ
             })
             .catch(err => {
-                alert("Failed to save!");
+                openAlertErrorToast();
                 console.error(err);
             });
         });
@@ -134,6 +162,36 @@
 
     function closeAlertSuccessToast() {
         const toast = document.getElementById("alertSuccessToast");
+        toast.classList.add("translate-x-full", "opacity-0");
+        setTimeout(() => {
+            toast.classList.add("hidden");
+        }, 500);
+    }
+
+</script>
+
+<script>
+    //function ของ alertErrorToast
+
+    function openAlertErrorToast() {
+        const toast = document.getElementById("alertErrorToast");
+        toast.classList.remove("hidden");
+        setTimeout(() => {
+            toast.classList.remove("translate-x-full", "opacity-0");
+        }, 10); // เล็กน้อยเพื่อให้ transition ทำงาน
+
+        // ซ่อนอัตโนมัติหลัง 3 วิ
+        setTimeout(() => {
+            toast.classList.add("translate-x-full", "opacity-0");
+            // ซ่อน div จริง ๆ หลัง animation เสร็จ
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 500);
+        }, 3000);
+    }
+
+    function closeAlertErrorToast() {
+        const toast = document.getElementById("alertErrorToast");
         toast.classList.add("translate-x-full", "opacity-0");
         setTimeout(() => {
             toast.classList.add("hidden");

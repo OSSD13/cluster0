@@ -81,3 +81,4 @@ Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
 
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
+
