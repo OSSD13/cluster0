@@ -68,15 +68,15 @@ Route::prefix('tester')->group(function () {
 // วิธีการตั้งชื่อ url Route menu/submenu/การทำงานอื่นๆ (add, edit)
 // ****************************************************************************************************** //
 // Every one can use
-Route::get('/myprofile', [ProfileController::class,'myProfile']);
-Route::get('/change-password', [ProfileController::class,'changePassword']);
+Route::get('/myprofile', [ProfileController::class,'myProfile'])->name('myprofile');
+Route::get('/change-password', [ProfileController::class,'changePassword'])->name('change.password');
 // ****************************************************************************************************** //
 // View Summary Points
-Route::get('/dash-team-performance', [TeamPerformanceController::class,'card']);
-Route::get('/dash-overview', [DashboardController::class, 'tester']);
+Route::get('/dash-team-performance', [TeamPerformanceController::class,'card'])->name('team.performance');
+Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('overview');
 // ****************************************************************************************************** //
 // Minor case
-Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
+Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
 Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
 Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
 // ****************************************************************************************************** //
@@ -96,8 +96,8 @@ Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->
 Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 // ****************************************************************************************************** //
 // Teams Managment
-Route::get('/team', [TeamManagementController::class,'index']);
-Route::get('/team-add', [TeamManagementController::class,'add']);
+Route::get('/team', [TeamManagementController::class,'index'])->name('team');
+Route::get('/team-add', [TeamManagementController::class,'add'])->name('team.add');
 Route::get('/team-edit', [TeamManagementController::class,'edit']);
 // ****************************************************************************************************** //
 // Members Managment
@@ -106,21 +106,21 @@ Route::get('/team-edit', [TeamManagementController::class,'edit']);
 //Route::get('/member-edit', [UserController::class,'']);
 // ****************************************************************************************************** //
 // Settings
-Route::get('/setting-default-password', [UserController::class,'defaultConfiguration']);
+Route::get('/setting-default-password', [UserController::class,'defaultConfiguration'])->name('default.password');
 Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']);
 // ****************************************************************************************************** //
 // Report
-Route::get('/report', [ReportController::class, 'index']);
-Route::get('/report-generate', [ReportController::class, 'reportGenerate']);
+Route::get('/report', [ReportController::class, 'index'])->name('report');
+Route::get('/report-generate', [ReportController::class, 'reportGenerate'])->name('report.generate');
 // ****************************************************************************************************** //
 // History
-Route::get('/setting-revision-history', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
-Route::get('/review-performance-history', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+Route::get('/setting-revision-history', [RevisionHistoryController::class, 'index'])->name('revision.history');
+Route::get('/review-performance-history', [PerformanceHistoryController::class, 'index'])->name('performance.history');
 // ****************************************************************************************************** //
 // Trello Configuration
-Route::get('/setting-trello-config', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
-Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trelloConfigurationAPI');
-Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trelloConfigurationList');
+Route::get('/setting-trello-config', [TrelloConfigurationController::class, 'index'])->name('trello.config');
+Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trello.api');
+Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trello.list');
 // ****************************************************************************************************** //
 // Test
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
