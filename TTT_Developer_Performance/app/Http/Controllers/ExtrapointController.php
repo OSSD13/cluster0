@@ -11,7 +11,6 @@ use App\Models\Version; // Add this line to import the Version model
 
 class ExtrapointController extends Controller
 {
-    public function index()
 //
     function index()
     {
@@ -33,15 +32,12 @@ class ExtrapointController extends Controller
             )
             ->where([
                 ['points.pts_type', '=', 'extra'],
-                ['points.pts_is_use', '=', 1]
                 ['points.pts_is_use', '=', 1],
                 ['points.pts_ver_id', '=',$lastVersion->ver_id]
             ])
             ->get();
         return view('pages.extraPoint.list', compact('points'));
     }
-
-    public function add()
     {
         $users = DB::table('users')
             ->where('usr_is_use', '=', 1)
@@ -53,10 +49,6 @@ class ExtrapointController extends Controller
             ->select('tm_id as id', 'tm_name as name')
             ->get();
 
-        return view('pages.extraPoint.list', compact('users', 'teams'));
-    }
-
-    public function edit(Request $request, $id)
     {
         $users = DB::table('users')
             ->where('usr_is_use', '=', 1)
@@ -68,7 +60,6 @@ class ExtrapointController extends Controller
             ->select('tm_id as id', 'tm_name as name')
             ->get();
 
-        return view('pages.extraPoint.edit', compact('users', 'teams', 'id'));
         $years = DB::table('sprints')
             ->select('spr_year as year')
             ->distinct('spr_year')
@@ -82,21 +73,6 @@ class ExtrapointController extends Controller
     }
     //
     function update(Request $request)
-        {
-            try {
-                // Validate the request data
-                $validatedData = request()->validate([
-                    'id' => 'required|integer',
-                    'name' => 'required|string|max:255',
-                    'description' => 'nullable|string',
-                ]);
-                // Find the extrapoint by ID
-                $extrapoint = Point::findOrFail($validatedData['id']);
-
-                // Find the extrapoint by ID and update it
-
-                // Update other fields as needed
-
     {
         try {
             // Validate the request data
@@ -110,9 +86,6 @@ class ExtrapointController extends Controller
             // Find the extrapoint by ID
             $oldExtrapoint = Point::find(request('id'));
 
-                return redirect()->route('extrapoint.index')->with('success', 'Extrapoint updated successfully.');
-            } catch (Exception $e) {
-                return redirect()->back()->with('error', 'Failed to update extrapoint: ' . $e->getMessage());
             //create new extrapoint
             $newExtrapoint = new Point();
             $newExtrapoint->pts_category = $oldExtrapoint->pts_category;
@@ -152,7 +125,6 @@ class ExtrapointController extends Controller
             return redirect()->back()->withInput()->withErrors(['error' => 'Failed to create extrapoint: ' . $e->getMessage()]);
         }
     }
-    public function store(Request $request)
     function store(Request $request)
     {
         $validated = $request->validate([
@@ -164,49 +136,13 @@ class ExtrapointController extends Controller
         ]);
 
         try {
-            // find uth_id by member and current_team
-            $uth_id = DB::table('user_team_history')
-                ->join('users', 'user_team_history.uth_usr_id', '=', 'users.usr_id')
-                ->join('teams', 'user_team_history.uth_tm_id', '=', 'teams.tm_id')
-                ->where([
-                    ['users.usr_id', '=', $validated['member']],
-                    ['teams.tm_id', '=', $validated['current_team']],
-                    ['user_team_history.uth_end_date', '=', null]
-                ])
-                ->value('user_team_history.uth_id');
-
             $point = new Point();
-            $point->pts_created_time = now();
             $point->pts_category = 'pass';
             $point->pts_type = 'extra';
-            if ($uth_id != null) {
-                // Set the uth_id if found
-                $point->pts_uth_id = $uth_id;
-            } else {
-                //Set uth_end_date to now
-                DB::table('user_team_history')
-                    ->where('uth_usr_id', '=', $validated['member'])
-                    ->orderBy('uth_id', 'desc')
-                    ->limit(1)
-                    ->update([
-                        'uth_end_date' => now()
-                    ]);
-                //create new user_team_history
-                $uth = DB::table('user_team_history')->insertGetId([
-                    'uth_usr_id' => DB::table('users')->where('usr_id', $validated['member'])->value('usr_id'),
-                    'uth_tm_id' => DB::table('teams')->where('tm_id', $validated['current_team'])->value('tm_id'),
-                    'uth_start_date' => now()
-                ]);
-                $point->pts_uth_id = $uth;
-            }
-            $point->pts_updated_time = now();
             $point->pts_uth_id = $this->findUTHID($validated['member'], $validated['current_team']);
             $point->pts_spr_id = $this->findSprintID($validated['spr_year'],$validated['spr_number']);
             $point->pts_ver_id = $this->findVersionID($validated['spr_year'], $validated['spr_number']);
             $point->pts_value = $validated['point_all'];
-            $point->pts_is_use = 1;
-            $point->pts_version_id = DB::table('versions')->latest('ver_id')->value('ver_id');
-            $point->pts_spr_id = DB::table('sprints')->latest('spr_id')->value('spr_id');
             $point->save();
             return redirect()->route('extrapoint')->with('success', 'Extrapoint created successfully!');
         } catch (Exception $e) {
