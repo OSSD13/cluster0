@@ -35,7 +35,7 @@ class Users extends Model
     public function teamHistories()
     {
         return $this->hasMany(UserTeamHistory::class, 'uth_usr_id', 'usr_id');
-        // หาก primary key เป็น usr_id ให้เปลี่ยน 'id' เป็น 'usr_id'
+        
     }
 }
 

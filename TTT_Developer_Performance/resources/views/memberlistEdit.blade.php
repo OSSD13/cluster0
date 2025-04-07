@@ -20,16 +20,17 @@
             <!-- Name Input -->
             <div class="w-[400px] ml-5">
                 <label class="block font-bold text-gray-700">Name</label>
-                <input type="text" placeholder="Your Name"
+                <input type="text" value="{{ $usr_name }}" placeholder="Your Name"
                     class="w-full p-3 border border-gray-400 rounded-lg placeholder-gray-400 text-base">
             </div>
 
             <!-- Trello Name Input -->
             <div class="w-[400px] mt-4 ml-5">
                 <label class="block font-bold text-gray-700">Trello Full Name</label>
-                <input type="text" placeholder="Your Trello Name"
+                <input type="text" value="{{ $usr_trello_fullname }}" placeholder="Your Trello Name"
                     class="w-full p-3 border border-gray-400 rounded-lg placeholder-gray-400 text-base">
             </div>
+
 
             <!-- Dropdown -->
             <div class="w-[400px] mt-3 ml-5">
@@ -52,7 +53,8 @@
 
             <!-- Buttons -->
             <div class="flex justify-start mt-6 gap-1 ml-5">
-                <button class="w-[199px] h-[50px] bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-800">
+                <button class="w-[199px] h-[50px] bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-800"
+                    onclick="window.location.href='{{ route('memberlist') }}'">
                     Cancel
                 </button>
                 <button class="w-[199px] h-[50px] bg-blue-900 text-white rounded-lg font-bold hover:bg-blue-700">

@@ -23,8 +23,7 @@
         </div>
         <div class="flex items-center justify-between mb-4 ml-auto">
             <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" class="absolute ml-2 mt-0 w-[30px] h-[30px]">
-            <button
-                class="w-[150px] h-[40px] p-2 bg-[var(--primary-color)] text-white font-bold rounded-sm"
+            <button class="w-[150px] h-[40px] p-2 bg-[var(--primary-color)] text-white font-bold rounded-sm"
                 onclick="window.location.href='{{ route('memberlist.add') }}'">
                 Add new
             </button>
@@ -67,15 +66,17 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-500 text-center">{{ $index + 1 }}</th>
                         <td class="px-6 py-4 text-center">{{ $history->user->usr_name }}</td>
                         <td class="px-6 py-4 text-center">{{ $history->team->tm_name }}</td>
-                        <td class="px-6 py-4 text-center">{{ $history->user->usr_trello_name }}</td>
+                        <td class="px-6 py-4 text-center">{{ $history->user->usr_trello_fullname }}</td>
                         <td class="px-6 py-4 text-center">
                             {{ \Carbon\Carbon::parse($history->uth_start_date)->format('m/d') }}/{{ \Carbon\Carbon::parse($history->uth_start_date)->addYears(543)->format('y') }}
                         </td>
                         <td class="px-6 py-4 pr-6 flex items-center justify-end space-x-2">
-                            <a href="{{ route('memberlist.edit', ['usr_name' => $history->user->usr_name, 'usr_trello_name' => $history->user->usr_trello_name]) }}">
-                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="" class="w-[35px] h-[35px]">
+                            <a href="{{ route('memberlist.edit', $history->user->usr_id) }}">
+                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
+                                    alt="Edit"
+                                    class="w-[35px] h-[35px]">
                             </a>
-                            <a href=""> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
+                            <a href="{{ route('memberlist.delete', $history->user->usr_id) }}"> <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
                                     alt="" class="w-[35px] h-[35px]" onclick=""></a>
                         </td>
 

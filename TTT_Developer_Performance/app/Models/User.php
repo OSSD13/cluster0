@@ -2,26 +2,46 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    protected $table = 'users';
-    protected $primaryKey = 'usr_id';
-    public $timestamps = false;
+    use HasApiTokens, HasFactory, Notifiable;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'usr_email',
-        'usr_google_id',
-        'usr_is_use',
-        'usr_name',
-        'usr_password',
-        'usr_role',
-        'usr_trello_fullname',
-        'usr_username',
+        'name',
+        'email',
+        'password',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
-        'usr_password',
+        'password',
+        'remember_token',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    // กำหนดให้ไม่ต้องใช้ timestamps (หากไม่ได้ใช้ created_at, updated_at)
+    public $timestamps = true;
 }

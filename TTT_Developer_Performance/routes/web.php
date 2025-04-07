@@ -25,6 +25,8 @@ use App\Http\Controllers\PerformanceHistoryController;
 use App\Http\Controllers\RevisionHistoryController;
 // Trello
 use App\Http\Controllers\TrelloConfigurationController;
+// MemberList
+use App\Http\Controllers\MemberListController;
 
 // ****************************************************************************************************** //
 // Login
@@ -94,6 +96,15 @@ Route::get('/performancehistory', [PerformanceHistoryController::class, 'index']
 
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
 
-Route::get('memberlistAdd', function () {
+// MemberList
+Route::get('memberlist', [MemberListController::class, 'index'])->name('memberlist');
+
+Route::get('/memberlistAdd', function () {
     return view('memberlistAdd');
-});
+})->name('memberlist.add');
+
+Route::get('memberlist/edit{id}', [MemberListController::class, 'edit'])->name('memberlist.edit');
+
+Route::get('memberlist/delete{id}', [MemberListController::class, 'delete'])->name('memberlist.delete');
+
+Route::post('memberlist/update{id}', [MemberListController::class, 'delete'])->name('memberlist.update');
