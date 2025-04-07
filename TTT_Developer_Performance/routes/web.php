@@ -68,11 +68,14 @@ Route::prefix('tester')->group(function () {
 // วิธีการตั้งชื่อ url Route menu/submenu/การทำงานอื่นๆ (add, edit)
 // ****************************************************************************************************** //
 // Every one can use
-Route::get('/myprofile', [ProfileController::class,'myProfile']);
+// Route::get('/myprofile', [ProfileController::class,'myProfile']);
+Route::get('/myprofile/{id}', [ProfileController::class, 'editProfile']);
+Route::put('/myprofile', [ProfileController::class, 'editProfile_action']);
+
 Route::get('/change-password', [ProfileController::class,'changePassword']);
 // ****************************************************************************************************** //
 // View Summary Points
-Route::get('/dash/team-performance', [TeamPerformanceController::class,'TeamPerformance']);
+Route::get('/dash/team-performance', [TeamPerformanceController::class,'card']);
 Route::get('/dash/overview', [DashboardController::class, 'tester']);
 // ****************************************************************************************************** //
 // Minor case
@@ -124,4 +127,3 @@ Route::get('/setting/trello-configList', [TrelloConfigurationController::class, 
 // ****************************************************************************************************** //
 // Test
 Route::get('/test/fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
-
