@@ -18,6 +18,6 @@ class TrelloCredential extends Model
 
     public function trelloCredential()
     {
-        return $this->belongTo(User::class, 'trc_usr_id');
+        return $this->belongTo(Users::class, 'trc_usr_id');
     }
 }

@@ -11,10 +11,10 @@ class Sprint extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'spr_created_time',
-        'spr_date_finish',
-        'spr_date_start',
-        'spr_number',
         'spr_year',
+        'spr_number',
+        'spr_date_start',
+        'spr_date_finish',
+        'spr_created_time',
     ];
 }

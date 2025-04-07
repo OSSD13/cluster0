@@ -11,11 +11,10 @@ class Version extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'ver_created_time',
-        'ver_editor_id',
         'ver_spr_id',
         'ver_version',
-        'ver_editor_id'
+        'ver_created_time',
+        'ver_editor_id',
     ];
 
     public function sprint()
@@ -25,6 +24,6 @@ class Version extends Model
 
     public function editor()
     {
-        return $this->belongsTo(User::class, 'ver_editor_id');
+        return $this->belongsTo(Users::class, 'ver_editor_id');
     }
 }

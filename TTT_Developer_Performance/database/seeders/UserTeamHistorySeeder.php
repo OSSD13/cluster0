@@ -20,7 +20,7 @@ class UserTeamHistorySeeder extends Seeder
             'uth_is_current' => 1,
             'uth_start_date' => now()->today(),
             'uth_tm_id' => 1,
-            'uth_usr_id' => 9,
+            'uth_usr_id' => 2,
         ]);
     }
 }

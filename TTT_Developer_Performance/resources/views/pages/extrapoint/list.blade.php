@@ -359,11 +359,11 @@
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <!-- ลำดับ # -->
                         <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                            {{ $key + 1 }}
+                            {{ intval($key) + 1 }}
                         </th>
                         <!-- Sprint -->
                         <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
-                            {{ $item->sprint_year . '-' . $item->sprint_num }}
+                            {{ $item->year . '-' . $item->sprintNum }}
                         </td>
                         <!-- Team -->
                         <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
