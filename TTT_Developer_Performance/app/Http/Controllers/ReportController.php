@@ -12,8 +12,9 @@ class ReportController extends Controller
     }
 
     public function reportGenerate(){
-        // $pdf = Pdf::loadView('layouts.pdf');
+        $pdf = Pdf::loadView('layouts.pdf');
         // return $pdf->download('report.pdf');
-        return view('layouts.pdf');
+        return $pdf->stream('layouts.pdf');
+        // return view('layouts.pdf');
     }
 }

@@ -75,14 +75,6 @@
                 </div>
             </div>
 
-            <!-- Point All - Wider Version (50% width on medium screens) -->
-            <div class="w-full md:w-1/3">
-                <label for="point_all" class="block mb-2 text-sm font-bold text-gray-900">Point All <span
-                        class="text-red-500">*</span></label>
-                <input type="text" id="point_all"
-                    class="w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Point" required />
-            </div>
 
             <!-- Test Metrics -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
