@@ -72,7 +72,7 @@
                 <label for="setting-name" class="block text-sm font-bold text-black mb-2">
                     Setting Name
                 </label>
-                <input type="text" id="setting-name" placeholder="Setting Name"
+                <input type="text" id="setting-name" placeholder="Setting Name" name="setting_name"
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             {{-- Choose List --}}
@@ -81,13 +81,13 @@
                 <select id="Choose List"
                     class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-md focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
                     <option value="" disabled selected hidden>Choose List</option>
-                    <option value="">To-do</option>
-                    <option value="">In-progress</option>
-                    <option value="">Done</option>
-                    <option value="">Bug / Backlog</option>
-                    <option value="">Minor case</option>
-                    <option value="">Extra</option>
-                    <option value="">Cancel</option>
+                    <option value="stl_todo">To-do</option>
+                    <option value="stl_inprogress">In-progress</option>
+                    <option value="stl_done">Done</option>
+                    <option value="stl_bug">Bug / Backlog</option>
+                    <option value="stl_minor_case">Minor case</option>
+                    <option value="stl_name">Extra</option>
+                    <option value="stl_cancel">Cancel</option>
                 </select>
             </div>
             {{-- List Name --}}
@@ -97,7 +97,7 @@
                 </label>
 
                 <div class="relative">
-                    <input type="text" id="list-name" placeholder="List Name"
+                    <input type="text" id="list-name" placeholder="List Name" name="list_name"
                         class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value="">
 
