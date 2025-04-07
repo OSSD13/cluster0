@@ -132,12 +132,12 @@ class TeamPerformanceController extends Controller
         }
 
         // หลังจากบันทึกข้อมูลแล้ว
-        return redirect()->route('teamPerformance')->with('success', 'ข้อมูลการ์ดได้รับการบันทึกเรียบร้อยแล้ว!');
+        return redirect()->route('pages.dashboard.teamPerformance')->with('success', 'ข้อมูลการ์ดได้รับการบันทึกเรียบร้อยแล้ว!');
     }
 
     public function card(){
         $cards = Card::All();
-        return view('/resources/views/pages/dashboard/teamPerformance.blade.php',compact('cards'));
+        return view('pages.dashboard.teamPerformance',compact('cards'));
     }
 
     // public function insertCard(){
