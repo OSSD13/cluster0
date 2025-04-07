@@ -11,14 +11,14 @@ class SettingTrello extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'stl_bug',
-        'stl_cancel',
-        'stl_done',
-        'stl_inprogress',
-        'stl_minor_case',
+        'stl_trc_id',
         'stl_name',
         'stl_todo',
-        'stl_trc_id',
+        'stl_inprogress',
+        'stl_done',
+        'stl_bug',
+        'stl_minor_case',
+        'stl_cancel',
     ];
 
     public function settingTrello(){

@@ -18,13 +18,11 @@ class PointSeeder extends Seeder
         //
         DB::table('points')->insert([
             //'pts_id' => 1,
-            'pts_category' => 'pass',
             'pts_created_time' => now(),
             'pts_is_use' => 1,
             'pts_spr_id' => 1,
             'pts_status' => 'success',
-            'pts_type' => 'minorcase',
-            'pts_updated_time' => now(),
+            'pts_type' => 'extra',
             'pts_uth_id' => 1,
             'pts_value' => 10,
             'pts_version_id' => 1

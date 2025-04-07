@@ -17,7 +17,7 @@ class VersionSeeder extends Seeder
     {
         DB::table('versions')->insert([
             'ver_created_time' => now(),
-            'ver_editor_id' => 9,
+            'ver_editor_id' => 2,
             'ver_spr_id' => 1,
             'ver_version' => 1,
         ]);

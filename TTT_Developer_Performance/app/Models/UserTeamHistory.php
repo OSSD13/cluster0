@@ -11,16 +11,16 @@ class UserTeamHistory extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'uth_usr_id',
+        'uth_tm_id',
+        'uth_start_date',
         'uth_end_date',
         'uth_is_current',
-        'uth_start_date',
-        'uth_tm_id',
-        'uth_usr_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'uth_usr_id');
+        return $this->belongsTo(Users::class, 'uth_usr_id');
     }
 
     public function team()
@@ -28,5 +28,5 @@ class UserTeamHistory extends Model
         return $this->belongsTo(Team::class, 'uth_tm_id');
     }
 
-    
+
 }

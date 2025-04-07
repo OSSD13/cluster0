@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Users extends Model
+class Users extends Authenticatable
 {
-    use HasFactory;
-
-    public $timestamps = false;
     protected $table = 'users';
+    protected $primaryKey = 'usr_id';
+    public $timestamps = false;
 
     protected $fillable = [
-        'usr_username', 
-        'usr_email', 
-        'usr_password', 
-        'usr_name', 
-        'usr_trello_fullname', 
+        'usr_username',
+        'usr_password',
+        'usr_email',
+        'usr_name',
+        'usr_trello_fullname',
         'usr_role',
         'usr_is_use',
         'usr_google_id'
@@ -27,8 +25,4 @@ class Users extends Model
         'usr_password',
     ];
 
-    public function getAuthPassword()
-    {
-        return $this->usr_password; // ระบุฟิลด์รหัสผ่านให้ Laravel ใช้
-    }
 }
