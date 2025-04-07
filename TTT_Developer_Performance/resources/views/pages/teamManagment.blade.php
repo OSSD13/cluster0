@@ -80,7 +80,7 @@
                             <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" class="w-[35px] h-[35px]" /></a>
                         </td>
                     </tr>
-                @endforeach --}}
+                @endforeach  --}}
             </tbody>
             
         </td>
