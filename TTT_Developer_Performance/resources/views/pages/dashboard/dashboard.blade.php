@@ -1,4 +1,4 @@
-@extends('layouts.tester') {{-- everyone can use ต้องใช้ layout อื่นที่ไม่ใช่ของ tester--}}
+@extends('layouts.tester') {{-- allUser ใช้ layout อื่น --}}
 
 @section('title')
     <title>Dashboard</title>
@@ -15,7 +15,7 @@
 
 @section('filter')
     {{-- filter --}}
-    <div class="my-3 m-2 flex item-center justify-between">
+    <div class="flex item-center justify-between">
         <div class="bg-white w-full h-[70px] rounded-lg shadow-md shadow-lg flex items-center">
             <div class="gap-4 flex flex-row items-center w-full justify-between mx-10">
                 <div class="flex justify-start items-center gap-2 ">
@@ -26,7 +26,7 @@
                     <!-- Year Dropdown -->
                     <div class="relative">
                         <button id="dropdownButton"
-                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-48 bg-white text-center flex justify-between items-center">
+                            class="border border-blue-900 text-blue-900 font-bold rounded px-4 py-2 w-30 h-10 bg-white text-center flex justify-between items-center">
                             <span id="dropdownSelected" class="truncate text-center w-full">Year:</span>
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -148,11 +148,13 @@
 @endsection
 
 @section('dashboard')
+    {{-- column chart --}}
     <div class="my-3 flex flex-row gap-4 grid grid-cols-3">
         <div class="col-span-2 bg-white h-full w-full rounded-lg shadow-md shadow-lg">
             <div id="columnChart"></div>
         </div>
 
+        {{-- pie chart, show pass & fail point --}}
         <div class="bg-white h-full rounded-lg shadow-md shadow-lg flex flex-col items-center">
             <div id="pieChart"></div>
             <div class="flex flex-col h-full justify-center items-center gap-2">
@@ -186,6 +188,8 @@
 
 @section('javascripts')
     <script>
+
+        // sprint dropdown
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownSprint = document.getElementById('dropdownSprint');
             const dropdownSprintMenu = document.getElementById('dropdownSprintMenu');
@@ -213,7 +217,7 @@
             });
         });
 
-        // Year dashboard
+        // column dashboard
         var options = {
             series: [{
                 name: 'Net Profit',

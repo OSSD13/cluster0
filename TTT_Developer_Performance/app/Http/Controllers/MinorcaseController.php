@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class MinorcaseController extends Controller
 {
     public function index(){
-        return view('pages.minorcase');
+        return view('pages.minorCase.minorcase');
     }
-    public function addMinorcase(){
-        return view('pages.addMinorcase');
+    public function add(){
+        return view('pages.minorCase.addMinorcase');
     }
-    public function editMinorcase(){
-        return view('pages.editMinorcase');
+    public function edit(){
+        return view('pages.minorCase.editMinorcase');
     }
 }

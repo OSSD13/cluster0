@@ -1,7 +1,41 @@
 @extends('layouts.tester')
 
 @section('title')
-    <title>Backlog</title>
+    <title>Extrapoint</title>
+@endsection
+
+@section('javascripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.getElementById("deleteBtn").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent page reload
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+                allowOutsideClick: false, // Prevent closing when clicking outside modal
+                allowEscapeKey: false // Prevent closing with ESC key
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                        allowOutsideClick: false, // Prevent closing when clicking outside modal
+                        allowEscapeKey: false // Prevent closing with ESC key
+                    });
+
+                    // Example: Remove element from DOM
+                    // document.getElementById("someElement").remove();
+                }
+            });
+        });
+    </script>
 @endsection
 
 @section('pagename')
@@ -9,19 +43,20 @@
         {{-- Main Menu --}}
         <h2 class="text-2xl font-bold">Performance Review</h2>
         {{-- Sub Menu --}}
-        <p class="font-bold text-neutral-400"> Backlog</p>
+        <p class="font-bold text-neutral-400">Extrapoint</p>
     </div>
 @endsection
 
 @section('contents')
-    <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
+    <!-- รอใส่ filter dropdown -->
+    <div class="relative overflow-x-auto sm:rounded-lg">
         <div class="flex justify-between items-center mb-4">
             <div class="text-2xl font-bold text-blue-900">
-                <p>Backlog</p>
+                <p>Extrapoint</p>
             </div>
             <!-- Dropdown Filters -->
             <div class="flex gap-4 ml-4">
-    
+
                 <!-- Year Dropdown -->
                 <div class="relative">
                     <button id="dropdownYear"
@@ -56,18 +91,18 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         const dropdownYear = document.getElementById('dropdownYear');
                         const dropdownYearMenu = document.getElementById('dropdownYearMenu');
                         const dropdownYearSelected = document.getElementById('dropdownYearSelected');
                         const yearCheckboxes = dropdownYearMenu.querySelectorAll('input[type="checkbox"]');
-    
+
                         dropdownYear.addEventListener('click', function() {
                             dropdownYearMenu.classList.toggle('hidden');
                         });
-    
+
                         yearCheckboxes.forEach(checkbox => {
                             checkbox.addEventListener('change', function() {
                                 const selectedYears = Array.from(yearCheckboxes)
@@ -77,7 +112,7 @@
                                 dropdownYearSelected.textContent = `Year: ${selectedYears}`;
                             });
                         });
-    
+
                         document.addEventListener('click', function(event) {
                             if (!dropdownYear.contains(event.target) && !dropdownYearMenu.contains(event.target)) {
                                 dropdownYearMenu.classList.add('hidden');
@@ -85,7 +120,7 @@
                         });
                     });
                 </script>
-    
+
                 <!-- Sprint Dropdown -->
                 <div class="relative">
                     <button id="dropdownSprint"
@@ -122,11 +157,11 @@
                         const dropdownSprintMenu = document.getElementById('dropdownSprintMenu');
                         const dropdownSprintSelected = document.getElementById('dropdownSprintSelected');
                         const sprintCheckboxes = dropdownSprintMenu.querySelectorAll('input[type="checkbox"]');
-    
+
                         dropdownSprint.addEventListener('click', function() {
                             dropdownSprintMenu.classList.toggle('hidden');
                         });
-    
+
                         sprintCheckboxes.forEach(checkbox => {
                             checkbox.addEventListener('change', function() {
                                 const selectedSprints = Array.from(sprintCheckboxes)
@@ -136,7 +171,7 @@
                                 dropdownSprintSelected.textContent = `Sprint: ${selectedSprints}`;
                             });
                         });
-    
+
                         document.addEventListener('click', function(event) {
                             if (!dropdownSprint.contains(event.target) && !dropdownSprintMenu.contains(event.target)) {
                                 dropdownSprintMenu.classList.add('hidden');
@@ -144,8 +179,8 @@
                         });
                     });
                 </script>
-    
-    
+
+
                 <!-- Team Dropdown -->
                 <div class="relative">
                     <button id="dropdownTeam"
@@ -153,7 +188,8 @@
                         <span id="dropdownTeamSelected" class="truncate text-center w-full">Team:</span>
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
                         </svg>
                     </button>
                     <div id="dropdownTeamMenu"
@@ -163,16 +199,16 @@
                             <label for="allTeams" class="text-black">All Teams</label>
                         </div>
                         <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="team1" value="Team 1" class="mr-2">
+                            <input type="checkbox" id="team1" value="1" class="mr-2">
                             <label for="team1" class="text-black">Team 1</label>
                         </div>
                         <div class="flex items-center px-4 py-2">
-                            <input type="checkbox" id="team2" value="Team 2" class="mr-2">
+                            <input type="checkbox" id="team2" value="2" class="mr-2">
                             <label for="team2" class="text-black">Team 2</label>
                         </div>
                     </div>
                 </div>
-    
+
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         const dropdownTeam = document.getElementById('dropdownTeam');
@@ -180,11 +216,11 @@
                         const dropdownTeamSelected = document.getElementById('dropdownTeamSelected');
                         const teamCheckboxes = dropdownTeamMenu.querySelectorAll('input[type="checkbox"]');
                         const allTeamsCheckbox = document.getElementById('allTeams');
-    
+
                         dropdownTeam.addEventListener('click', function() {
                             dropdownTeamMenu.classList.toggle('hidden');
                         });
-    
+
                         allTeamsCheckbox.addEventListener('change', function() {
                             const isChecked = allTeamsCheckbox.checked;
                             teamCheckboxes.forEach(checkbox => {
@@ -194,7 +230,7 @@
                             });
                             updateSelectedTeams();
                         });
-    
+
                         teamCheckboxes.forEach(checkbox => {
                             checkbox.addEventListener('change', function() {
                                 if (checkbox !== allTeamsCheckbox) {
@@ -205,7 +241,7 @@
                                 updateSelectedTeams();
                             });
                         });
-    
+
                         function updateSelectedTeams() {
                             const selectedTeams = Array.from(teamCheckboxes)
                                 .filter(cb => cb.checked && cb !== allTeamsCheckbox)
@@ -213,7 +249,7 @@
                                 .join(', ');
                             dropdownTeamSelected.textContent = selectedTeams ? `Team: ${selectedTeams}` : 'Team:';
                         }
-    
+
                         document.addEventListener('click', function(event) {
                             if (!dropdownTeam.contains(event.target) && !dropdownTeamMenu.contains(event.target)) {
                                 dropdownTeamMenu.classList.add('hidden');
@@ -221,7 +257,7 @@
                         });
                     });
                 </script>
-    
+
                 <!-- Member Dropdown -->
                 <div class="relative">
                     <button id="dropdownMember"
@@ -229,7 +265,8 @@
                         <span id="dropdownMemberSelected" class="truncate text-center w-full">Member:</span>
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
                         </svg>
                     </button>
                     <div id="dropdownMemberMenu"
@@ -244,18 +281,18 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         const dropdownMember = document.getElementById('dropdownMember');
                         const dropdownMemberMenu = document.getElementById('dropdownMemberMenu');
                         const dropdownMemberSelected = document.getElementById('dropdownMemberSelected');
                         const memberCheckboxes = dropdownMemberMenu.querySelectorAll('input[type="checkbox"]');
-    
+
                         dropdownMember.addEventListener('click', function() {
                             dropdownMemberMenu.classList.toggle('hidden');
                         });
-    
+
                         memberCheckboxes.forEach(checkbox => {
                             checkbox.addEventListener('change', function() {
                                 const selectedMembers = Array.from(memberCheckboxes)
@@ -265,7 +302,7 @@
                                 dropdownMemberSelected.textContent = `Member: ${selectedMembers}`;
                             });
                         });
-    
+
                         document.addEventListener('click', function(event) {
                             if (!dropdownMember.contains(event.target) && !dropdownMemberMenu.contains(event.target)) {
                                 dropdownMemberMenu.classList.add('hidden');
@@ -273,114 +310,148 @@
                         });
                     });
                 </script>
-                <button class="flex items-center bg-blue-900 text-white px-4 py-2 rounded font-bold">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-7 h-7 mr-2">
-                    Add New
-                </button>
+                <a href="{{ route('createExtrapoint') }}">
+                    <button class="flex items-center bg-blue-900 text-white px-4 py-2 rounded font-bold">
+                        <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                            class="w-7 h-7 mr-2">
+                        Add New
+                    </button>
+                </a>
+
             </div>
         </div>
-    
-    
         <!-- Table -->
-        <div class="relative overflow-x-auto sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
-                <!-- Table header -->
-                <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b dark:border-gray-300">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-center">#</th>
-                        <th scope="col" class="px-6 py-3 text-center">Sprint</th>
-                        <th scope="col" class="px-6 py-3 text-center">Team</th>
-                        <th scope="col" class="px-6 py-3 text-center">Member</th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            <div class="flex items-center justify-center">
-                                <span>Point All</span>
-                                <button class="ml-2">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            <div class="flex items-center justify-center">
-                                <span>Test Pass</span>
-                                <button class="ml-2">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            <div class="flex items-center justify-center">
-                                <span>Bug</span>
-                                <button class="ml-2">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            <div class="flex items-center justify-center">
-                                <span>Cancel</span>
-                                <button class="ml-2">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">Action</th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody>
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
+            <!-- Table header -->
+            <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b dark:border-gray-300">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        #
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Sprint
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Team
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Member
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        <div class="flex items-center justify-center">
+                            Point
+                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                </svg></a>
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <!-- Table body -->
+            <tbody>
+                @foreach ($points as $key => $item)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">1</th>
-                        <td class="px-6 py-4 text-center text-black">67-52</td>
-                        <td class="px-6 py-4 text-center text-black">Team2</td>
-                        <td class="px-6 py-4 text-center text-black">Louis</td>
-                        <td class="px-6 py-4 text-center text-black">2</td>
-                        <td class="px-6 py-4 text-center text-black">1</td>
-                        <td class="px-6 py-4 text-center text-black">1</td>
-                        <td class="px-6 py-4 text-center text-black">0</td>
+                        <!-- ลำดับ # -->
+                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
+                            {{ $key + 1 }}
+                        </th>
+                        <!-- Sprint -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            {{ $item->sprint_year . '-' . $item->sprint_num }}
+                        </td>
+                        <!-- Team -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            {{ $item->team }}
+                        </td>
+                        <!-- Member -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            {{ $item->member }}
+                        </td>
+                        <!-- Point -->
+                        <td class="px-6 py-4 text-center text-black whitespace-nowrap text-center">
+                            <div class="flex items-center justify-center">
+                                {{ $item->value }}
+                            </div>
+                        </td>
+                        <!-- Actions button -->
                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                            <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                    class="w-[35px] h-[35px]"></a>
-                            <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
-                                    class="w-[35px] h-[35px]"></a>
+                            <a href="{{ route('editExtrapoint','$item->id') }}">
+                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt=""
+                                    class="w-[35px] h-[35px]" onclick="">
+                            </a>
+                            <form action="{{ route('deleteExtrapoint', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                @csrf
+                                @method('put')
+                                <button type="submit">
+                                    <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
+                                        class="w-[35px] h-[35px]">
+                                </button>
+                            </form>
+
+                            <script>
+                                function deleteExtrapoint(id) {
+                                    Swal.fire({
+                                        title: "Are you sure?",
+                                        text: "You won't be able to revert this!",
+                                        icon: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#3085d6",
+                                        cancelButtonColor: "#d33",
+                                        confirmButtonText: "Yes, delete it!",
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            fetch(`{{ url('deleteExtrapoint') }}/${id}`, {
+                                                method: 'DELETE',
+                                                headers: {
+                                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                                }
+                                            }).then(response => {
+                                                if (response.ok) {
+                                                    Swal.fire({
+                                                        title: "Deleted!",
+                                                        text: "Your file has been deleted.",
+                                                        icon: "success",
+                                                        allowOutsideClick: false,
+                                                        allowEscapeKey: false
+                                                    }).then(() => {
+                                                        location.reload(); // Reload the page
+                                                    });
+                                                } else {
+                                                    Swal.fire({
+                                                        title: "Error!",
+                                                        text: "Something went wrong.",
+                                                        icon: "error",
+                                                        allowOutsideClick: false,
+                                                        allowEscapeKey: false
+                                                    });
+                                                }
+                                            }).catch(error => {
+                                                Swal.fire({
+                                                    title: "Error!",
+                                                    text: "Something went wrong.",
+                                                    icon: "error",
+                                                    allowOutsideClick: false,
+                                                    allowEscapeKey: false
+                                                });
+                                            });
+                                        }
+                                    });
+                                }
+                            </script>
                         </td>
                     </tr>
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">2</th>
-                        <td class="px-6 py-4 text-center text-black">67-52</td>
-                        <td class="px-6 py-4 text-center text-black">Team1</td>
-                        <td class="px-6 py-4 text-center text-black">Harry</td>
-                        <td class="px-6 py-4 text-center text-black">1</td>
-                        <td class="px-6 py-4 text-center text-black">1</td>
-                        <td class="px-6 py-4 text-center text-black">0</td>
-                        <td class="px-6 py-4 text-center text-black">0</td>
-                        <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                            <a href="#"><img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                    class="w-[35px] h-[35px]"></a>
-                            <a href="#"><img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
-                                    class="w-[35px] h-[35px]"></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+
+            </tbody>
+        </table>
     </div>
 @endsection
 
