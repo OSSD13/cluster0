@@ -31,29 +31,29 @@
                     <div class="grid grid-cols-3 gab-2 ">
                         <div class="flex justify-end col-span-2 items-center">
                             <p class="text-[12px] pr-[5px] ">Date: 13/01/2025-17/01/2025 </p>
-                            <img src="{{ asset('resources/Images/Icons/editIcon.png')}}" alt="Add"
+                            <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Add"
                                 class="w-6 h-6 mr-2 rounded">
                         </div>
                         <div class="flex justify-end">
-                            <button
+                            <a href=""
                                 class="flex items-center bg-green-500 text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center ">
                                 Finish
-                            </button>
+                            </a>
                         </div>
                     </div>
 
                 </div>
                 <div class="flex justify-end">
-                    <button
-                        class="flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center">
-                        <img src="{{ asset('resources/Images/Icons/refresh.png') }}" alt="Add" class="w-4 h-4 mr-2">
+                    <a href="javascript:window.location.reload();"
+                        class="flex items-center bg-blue-900 text-white px-3 py-1 rounded text-sm font-bold hover:bg-blue-700 transition-all duration-200 cursor-pointer">
+                        <img src="{{ asset('resources/Images/Icons/refresh.png') }}" alt="Reload"
+                            class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
                         Reload
-                    </button>
+                    </a>
                 </div>
             </div>
 
         </div>
-
     </div>
 </div>
 
@@ -390,10 +390,12 @@
 <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-6">
     <div class="text-xl font-bold mb-4 text-blue-900 flex justify-between items-center">
         <p>Team Members</p>
-        <button class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
-            <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+        <a href=""
+            class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+            <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
             Add New
-        </button>
+        </a>
     </div>
 
     <div class="overflow-x-auto">
@@ -491,11 +493,11 @@
                     <td class="px-6 py-4">0</td>
                     <td class="px-6 py-4">10</td>
                     <!-- Dropdown Test and Not-test  -->
-                    <td class="px-6 py-4 text-center items-center">
+                    <td class="px-6 py-4 text-center">
                         <select onchange="changeColor(this)"
-                            class="px-2 py-1 rounded-md text-white text-[10px] bg-red-600 font-semibold transition-colors duration-300">
-                            <option value="not-test">Not Test</option>
-                            <option value="test" class="text-center">Test</option>
+                            class="px-2 py-1 rounded-md text-white text-[10px] font-semibold transition-colors duration-300 text-center mx-auto block">
+                            <option value="not-test" class="text-left">Not Test</option>
+                            <option value="test" class="text-left">Test</option>
                         </select>
                     </td>
                     <td class="px-4 py-2">
@@ -526,11 +528,11 @@
                     <td class="px-6 py-4">0</td>
                     <td class="px-6 py-4">10</td>
                     <!-- Dropdown Test and Not-test  -->
-                    <td class="px-6 py-4 text-center items-center">
+                    <td class="px-6 py-4 text-center">
                         <select onchange="changeColor(this)"
-                            class="px-2 py-1 rounded-md text-white text-[10px] bg-red-600 font-semibold transition-colors duration-300">
-                            <option value="not-test">Not Test</option>
-                            <option value="test" class="text-center">Test</option>
+                            class="px-2 py-1 rounded-md text-white text-[10px] font-semibold transition-colors duration-300 text-center mx-auto block">
+                            <option value="not-test" class="text-left">Not Test</option>
+                            <option value="test" class="text-left">Test</option>
                         </select>
                     </td>
                     <td class="px-4 py-2">
@@ -578,10 +580,12 @@
         <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
             <div class="flex justify-between items-center mb-2">
                 <h2 class="text-lg font-bold text-blue-900 text-[20px]">Backlog</h2>
-                <button class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+                <a href="{{ route ('addbacklog')}}"
+                    class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                     Add New
-                </button>
+                </a>
             </div>
             <!-- Backlog Table -->
             <div class="overflow-x-auto">
@@ -669,10 +673,13 @@
         <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
             <div class="flex justify-between items-center mb-2">
                 <h2 class="text-lg font-bold text-blue-900 text-[20px]">Minor Case</h2>
-                <button class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+
+                <a href=" {{ route ('addminorcase')}}"
+                    class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                     Add New
-                </button>
+                </a>
             </div>
             <!-- Minor Case Table -->
             <div class="overflow-x-auto">
@@ -738,10 +745,12 @@
 
             <div class="flex justify-between items-center w-full">
                 <p class="text-[15px] font-bold text-zinc-400">Extra Point</p>
-                <button class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
-                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add" class="w-5 h-5 mr-2">
+                <a href="{{route('createExtrapoint')}}"
+                    class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                     Add New
-                </button>
+                </a>
             </div>
             <!-- Extra Point Table -->
             <div class="overflow-x-auto">
@@ -798,11 +807,6 @@
 
 
             </div>
-
-
-
-
-
             @endsection
 
             @section('javascripts')
@@ -855,16 +859,50 @@
             chart.render();
 
             function changeColor(dropdown) {
-                // Remove old color classes
-                dropdown.classList.remove('bg-red-600', 'bg-lime-600');
-
-                // Add new color class based on the selected value
+                // เปลี่ยนสีพื้นหลังของ Dropdown เอง (ไม่ใช่ตัวเลือก)
                 if (dropdown.value === 'test') {
-                    dropdown.classList.add('bg-lime-600');
+                    dropdown.classList.remove('bg-red-600');
+                    dropdown.classList.add('bg-green-500');
                 } else {
+                    dropdown.classList.remove('bg-green-500');
                     dropdown.classList.add('bg-red-600');
                 }
             }
+
+            // ตั้งค่าสีเริ่มต้นเมื่อโหลดหน้า
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('select[onchange="changeColor(this)"]').forEach(dropdown => {
+                    // ตั้งค่าเริ่มต้นให้เป็นสีแดง (not-test)
+                    dropdown.classList.add('bg-red-600');
+                    // เรียกฟังก์ชันเพื่ออัปเดตสีตามค่าเริ่มต้น
+                    changeColor(dropdown);
+                });
+            });
+
+            // ตั้งค่าให้ปุ่มรีโหลดทำงานเมื่อคลิก
+            document.getElementById('reloadButton').addEventListener('click', function() {
+                // เพิ่มเอฟเฟกต์การหมุนไอคอน
+                const icon = this.querySelector('img');
+                icon.classList.add('animate-spin');
+
+                // ล็อกปุ่มชั่วคราวเพื่อป้องกันการคลิกซ้ำ
+                this.disabled = true;
+
+                // Reload หน้าจริง (หรือเรียกฟังก์ชันที่ต้องการ)
+                setTimeout(() => {
+                    window.location.reload();
+
+                    // หรือถ้าต้องการแค่รีเฟรชข้อมูลบางส่วน:
+                    // fetchDataAndUpdateUI();
+
+                }, 500);
+
+                // เคลียร์เอฟเฟกต์หลังจาก 1 วินาที (ถ้าไม่มีการรีโหลดหน้าจริง)
+                setTimeout(() => {
+                    icon.classList.remove('animate-spin');
+                    this.disabled = false;
+                }, 1000);
+            });
             </script>
             @endsection
 
@@ -881,6 +919,25 @@
 
             body {
                 font-family: "Inter", sans-serif;
+            }
+
+            select option {
+                background-color: white;
+                color: black;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .animate-spin {
+                animation: spin 0.5s linear infinite;
             }
             </style>
             @endsection

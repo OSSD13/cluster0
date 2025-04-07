@@ -9,6 +9,6 @@ class PerformanceHistoryController extends Controller
     //
     function index()
     {
-        return view('pages.performanceHistory');
+        return view('pages.dashboard.performanceHistory');
     }
 }
