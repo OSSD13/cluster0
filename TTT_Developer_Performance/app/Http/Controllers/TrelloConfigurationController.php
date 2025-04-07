@@ -9,7 +9,7 @@ class TrelloConfigurationController extends Controller
     public function index()
     {
 
-        //$apiSets = TrelloApi::all();
+        $apiSets = TrelloApi::all();
         //$listSets = TrelloList::all();
 
         return view('pages.trello.trelloConfiguration');
