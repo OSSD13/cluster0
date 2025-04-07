@@ -17,7 +17,7 @@ class ExtrapointController extends Controller
         $lastVersion = Version::select('ver_id')
             ->orderBy('ver_version')
             ->first();
-        $points = DB::table('points')
+        $points = DB::table('`points')
             ->join('user_team_history', 'points.pts_uth_id', '=', 'user_team_history.uth_id')
             ->join('teams', 'user_team_history.uth_tm_id', '=', 'tm_id')
             ->join('users', 'user_team_history.uth_usr_id', '=', 'usr_id')
