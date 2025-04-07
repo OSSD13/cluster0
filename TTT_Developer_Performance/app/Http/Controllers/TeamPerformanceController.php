@@ -137,7 +137,7 @@ class TeamPerformanceController extends Controller
 
     public function card(){
         $cards = Card::All();
-        return view('pages.teamPerformance',compact('cards'));
+        return view('/resources/views/pages/dashboard/teamPerformance.blade.php',compact('cards'));
     }
 
     // public function insertCard(){
