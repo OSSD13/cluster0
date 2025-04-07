@@ -75,11 +75,14 @@ Route::get('/change-password', [ProfileController::class,'changePassword'])->nam
 Route::get('/dash-team-performance', [TeamPerformanceController::class,'card'])->name('team.performance');
 Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('overview');
 // ****************************************************************************************************** //
+// ** //
 // Minor case
-Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
-Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
-Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
-// ****************************************************************************************************** //
+Route::get('/minorcase', [MinorcaseController::class,'index'])->name('Minorcase');
+Route::get('/minorcase/add', [MinorcaseController::class,'add'])->name('addminorcase');
+Route::get('/minorcase/edit', [MinorcaseController::class,'edit'])->name('editminorcase');
+Route::post('/minorcase/store', [MinorcaseController::class, 'store'])->name('storeMinorcase');
+Route::delete('/minorcase/delete/{id}', [MinorcaseController::class, 'delete'])->name('deleteminorcase');
+// ** //
 // Backlog
 Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
 Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
