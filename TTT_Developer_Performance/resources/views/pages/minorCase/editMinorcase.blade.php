@@ -87,7 +87,7 @@
         </div>
         <br>
         <!-- button create -->
-        <div class="flex gap-4"> 
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-3"> 
              <button type="submit" class="w-[450px] h-[50px] p-2 bg-zinc-500 text-white rounded-[10px] font-bold hover:bg-[#ffffff] hover:text-[var(--primary-color)] hover:border-3 hover:border-[var(--primary-color)]">Cancel</button>
              <button type="submit" class="w-[450px] h-[50px] p-2 bg-[var(--primary-color)] text-white rounded-[10px] font-bold hover:bg-[#ffffff] hover:text-[var(--primary-color)] hover:border-3 hover:border-[var(--primary-color)]">Create</button>
         </div>
