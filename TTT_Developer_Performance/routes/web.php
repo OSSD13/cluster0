@@ -69,7 +69,7 @@ Route::get('/addteam', [TeamManagementController::class,'add']);
 Route::get('/edit', [TeamManagementController::class,'edit']);
 
 Route::get('/backlog', [BacklogController::class,'index']);
-Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
+// Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformance']);
 
 //mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
@@ -80,6 +80,9 @@ Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('
 Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
 
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
+Route::get('/teamPerformance', [TeamPerformanceController::class,'card']);
+// Route::get('/insertCard', [TeamPerformanceController::class,'insertCard']);
+
 
 
 
