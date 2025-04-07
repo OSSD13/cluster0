@@ -2,44 +2,39 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\Card;
-//use App\Models\Team;
-//use App\Models\SettingTrello;
 use Illuminate\Http\Request;
 
 class RevisionHistoryController extends Controller
 {
     public function index(Request $request)
     {
-       /*
-        // รับค่า Filter ที่ส่งมาจาก Dropdown
-        $year = $request->input('year');
-        $sprint = $request->input('sprint');
-        $version = $request->input('version');
+        $revisionHistories = [
+            [
+                'editor' => 'You edited',
+                'sprint' => '67-50',
+                'version' => 1,
+                'updated_at' => '30/08/2024 17:55',
+            ],
+            [
+                'editor' => 'Sumo',
+                'sprint' => '67-50',
+                'version' => 2,
+                'updated_at' => '15/10/2024 12:55',
+            ],
+            [
+                'editor' => 'Hade',
+                'sprint' => '67-50',
+                'version' => 3,
+                'updated_at' => '03/12/2024 09:55',
+            ],
+            [
+                'editor' => 'Zoom',
+                'sprint' => '67-50',
+                'version' => 3,
+                'updated_at' => '03/12/2024 09:55',
+            ],
+        ];
 
-        // สร้าง query เพื่อดึงข้อมูลตามฟิลเตอร์
-        $query = Card::query();
-
-        // ฟิลเตอร์ตามปี
-        if ($year) {
-            $query->whereYear('updated_at', $year);
-        }
-
-        // ฟิลเตอร์ตาม Sprint
-        if ($sprint) {
-            $query->where('sprint', $sprint);
-        }
-
-        // ฟิลเตอร์ตาม Version
-        if ($version) {
-            $query->where('version', $version);
-        }
-
-        // ดึงข้อมูลทั้งหมด
-        $revisionHistory = $query->get();
-        */
-
-        // ส่งข้อมูลไปยัง View
-        return view('pages.revisionHistory');
+        return view('pages.revisionHistory', compact('revisionHistories'));
     }
 }

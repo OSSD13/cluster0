@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 
 class TrelloConfigurationController extends Controller
 {
-    public function index()
-    {
+    public function index(){
+        $apis = collect([
+            (object)['id' => 1, 'name' => 'API Set 1'],
+            (object)['id' => 2, 'name' => 'API Set 2'],
+        ]);
 
-        //$apiSets = TrelloApi::all();
-        //$listSets = TrelloList::all();
+        $lists = collect([
+            (object)['id' => 1, 'name' => 'List Set 1'],
+            (object)['id' => 2, 'name' => 'List Set 2'],
+            (object)['id' => 5, 'name' => 'List Set 2'],
+        ]);
 
-        return view('pages.trelloConfiguration');
+        return view('pages.trelloConfiguration', compact('apis', 'lists'));
     }
 }
