@@ -20,23 +20,24 @@
         </div>
 
         {{-- Form Trello API --}}
-        <form action="{{ route('trelloConfiguration') }}" method="get">
+        <form action="{{ route('trelloConfigurationAPI') }}" method="post">
+            @csrf
             {{-- Setting Name --}}
             <div class="mb-4">
                 <label for="setting-name" class="block text-sm font-bold text-black mb-2">Setting Name</label>
-                <input type="text" id="setting-name" placeholder="Setting Name"
+                <input type="text" id="setting-name" placeholder="Setting Name" name = "setting_name"
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             {{-- API Key --}}
             <div class="mb-4">
                 <label for="api-key" class="block text-sm font-bold text-black mb-2">API Key</label>
-                <input type="text" id="api-key" placeholder="Your API Key"
+                <input type="text" id="api-key" placeholder="Your API Key" name = "api_key"
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             {{-- API Token --}}
             <div class="mb-6">
                 <label for="api-token" class="block text-sm font-bold text-black mb-2">API Token</label>
-                <input type="text" id="api-token" placeholder="Your API Token"
+                <input type="text" id="api-token" placeholder="Your API Token" name = "api_token"
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             {{-- Cancel And Create --}}

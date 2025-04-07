@@ -116,7 +116,7 @@
                             <td class="px-6 py-4 text-center">
                                 <!-- กดปุ่ม View ไปยัง TeamPerformance -->
                                 <div class="flex items-center justify-center">
-                                    <a href=" {{ route('TeamPerformance') }}">
+                                    <a href=" ">
                                         <button class="bg-[#FFA533] text-white py-1 px-1 rounded flex items-center">
                                             <img src="{{ asset('resources/Images/Icons/eye.png') }}" alt=""
                                                 class="w-[20px] h-[20px] mr-2">
