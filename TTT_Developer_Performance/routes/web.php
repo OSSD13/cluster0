@@ -89,8 +89,8 @@ Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklo
 // ****************************************************************************************************** //
 // Extra Points
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/extrapoint/add', [ExtrapointController::class, 'add'])->name('createExtrapoint');
-Route::get('/extrapoint/edit', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtrapoint');
+Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
 
@@ -99,16 +99,18 @@ Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name
 // ****************************************************************************************************** //
 // Teams Managment
 Route::get('/team', [TeamManagementController::class,'index']);
-Route::get('/team/add', [TeamManagementController::class,'add']);
-Route::get('/team/edit', [TeamManagementController::class,'edit']);
+Route::get('/team-add', [TeamManagementController::class,'add']);
+Route::get('/team-edit', [TeamManagementController::class,'edit']);
 // ****************************************************************************************************** //
-// Users Managment
-//Route::get('/user', [UserController::class,'']);
-//Route::get('/user/add', [UserController::class,'']);
-//Route::get('/user/edit', [UserController::class,'']);
+// Members Managment
+Route::get('/member', [MemberListController::class,'index'])->name('member.add');
+Route::get('/member-add', [MemberListController::class,'add']);
+//Route::get('/member-edit', [MemberListController::class,'']);
 // ****************************************************************************************************** //
 // Settings
-Route::get('/setting/default-password', [UserController::class,'defaultConfiguration']);
+Route::get('/setting-default-password', [UserController::class,'defaultConfiguration']);
+Route::get('/setting-access-control', [UserController::class,'manageUser']);
+Route::get('/setting-revision-history', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
 Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']);
 // ****************************************************************************************************** //
 // Report
@@ -116,13 +118,12 @@ Route::get('/report', [ReportController::class, 'index']);
 Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
 // ****************************************************************************************************** //
 // History
-Route::get('/setting/revision-history', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
-Route::get('/review/performance-history', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+Route::get('/review-performance-history', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
 // ****************************************************************************************************** //
 // Trello Configuration
-Route::get('/setting/trello-config', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
-Route::get('/setting/trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trelloConfigurationAPI');
-Route::get('/setting/trello-configList', [TrelloConfigurationController::class, 'list'])->name('trelloConfigurationList');
+Route::get('/setting-trello-config', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
+Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trelloConfigurationAPI');
+Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trelloConfigurationList');
 // ****************************************************************************************************** //
 // Test
-Route::get('/test/fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);

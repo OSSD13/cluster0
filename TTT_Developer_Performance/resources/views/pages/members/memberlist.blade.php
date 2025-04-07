@@ -14,6 +14,8 @@
 @endsection
 
 @section('contents')
+<div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
+
     <div class="flex items-center gap-4 w-full mb-4">
         <p class="text-xl font-bold text-blue-900">Member List</p>
         <div class="flex justify-between mb-4 ml-auto">
@@ -24,7 +26,7 @@
         <div class="flex items-center justify-between mb-4 ml-auto">
             <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" class="absolute ml-2 mt-0 w-[30px] h-[30px]">
             <button class="w-[150px] h-[40px] p-2 bg-[var(--primary-color)] text-white font-bold rounded-sm"
-                onclick="window.location.href='{{ route('memberlist.add') }}'">
+                onclick="window.location.href='{{ route('member.add') }}'">
                 Add new
             </button>
         </div>
@@ -108,6 +110,7 @@
             </tbody>
         </table>
     </div>
+</div>
 @endsection
 
 @section('javascripts')

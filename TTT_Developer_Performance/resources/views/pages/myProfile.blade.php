@@ -32,21 +32,21 @@
                 </button>
             </div>
 
-            <form action="{{ url('/myprofile', $user->usr_id) }}" method="POST">
+            <form action="{{ route('myprofile') }}" method="POST">
                 @csrf
                 @method('put')
                 {{-- username, name, email input --}}
-                <input type="hidden" name="id" value="{{ $user->usr_id }}">
+                <input type="hidden" name="id" value="">
                 <div class="mt-5">
                     <div class="mb-[30px] w-full">
-                        <label for="username" class="block font-bold">{{ $user->usr_username }}</label>
-                        <input type="text" name="username" value="{{ $user->usr_username }}"
+                        <label for="username" class="block font-bold">Username</label>
+                        <input type="text" name="username" value="your_username"
                             class="w-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px] pointer-events-none">
                     </div>
 
                     <div class="mb-[30px] w-full">
                         <label for="name" class="block font-bold">Name</label>
-                        <input type="text" name="name" placeholder="Name" required="" value="{{ $user->usr_name }}"
+                        <input type="text" name="name" placeholder="Name" required="" value="your_name"
                             class="w-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                     </div>
 
@@ -55,7 +55,7 @@
                     <div class="mb-[30px] w-full">
                         <label for="email" class="block font-bold">Email</label>
                         <input type="email" name="email" placeholder="Email" required=""
-                            value="{{ $user->usr_email }}"
+                            value="your_email"
                             class="w-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
                     </div>
                 </div>

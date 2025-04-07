@@ -49,7 +49,7 @@
 
 @section('contents')
     <!-- รอใส่ filter dropdown -->
-    <div class="relative overflow-x-auto sm:rounded-lg">
+    <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
         <div class="flex justify-between items-center mb-4">
             <div class="text-2xl font-bold text-blue-900">
                 <p>Extrapoint</p>
@@ -354,7 +354,7 @@
             </thead>
             <!-- Table body -->
             <tbody>
-                @foreach ($points as $key => $item)
+                {{-- @foreach ($points as $key => $item)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <!-- ลำดับ # -->
@@ -396,7 +396,7 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @endforeach --}}
 
             </tbody>
         </table>

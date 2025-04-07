@@ -14,7 +14,7 @@ class ExtrapointController extends Controller
     //
     function index()
     {
-        
+        return view('pages.extraPoint.list');
     }
     //
     function add()

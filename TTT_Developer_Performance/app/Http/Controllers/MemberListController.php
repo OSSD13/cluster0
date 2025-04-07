@@ -17,7 +17,7 @@ class MemberListController extends Controller
             })
             ->get();
 
-        return view('memberlist', compact('histories'));
+        return view('pages.members.memberlist', compact('histories'));
     }
 
 
@@ -47,8 +47,7 @@ class MemberListController extends Controller
         // Redirect ไปยังหน้า memberlist
         return redirect()->route('memberlist');
     }
-    public function add($id) {
-        $team = Teams::all();
-        
+    public function add() {
+        return view('pages.members.memberlistAdd');
     }
 }
