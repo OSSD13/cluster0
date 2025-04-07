@@ -92,6 +92,36 @@ Route::get('/extrapoint/edit', [ExtrapointController::class, 'edit'])->name('edi
 
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
 
-Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
+Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
+Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+// ****************************************************************************************************** //
+// Teams Managment
+Route::get('/team', [TeamManagementController::class,'index']);
+Route::get('/team/add', [TeamManagementController::class,'add']);
+Route::get('/team/edit', [TeamManagementController::class,'edit']);
+// ****************************************************************************************************** //
+// Users Managment
+//Route::get('/user', [UserController::class,'']);
+//Route::get('/user/add', [UserController::class,'']);
+//Route::get('/user/edit', [UserController::class,'']);
+// ****************************************************************************************************** //
+// Settings
+Route::get('/setting/default-password', [UserController::class,'defaultConfiguration']);
+Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']);
+// ****************************************************************************************************** //
+// Report
+Route::get('/report', [ReportController::class, 'index']);
+Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
+// ****************************************************************************************************** //
+// History
+Route::get('/setting/revision-history', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
+Route::get('/review/performance-history', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
+// ****************************************************************************************************** //
+// Trello Configuration
+Route::get('/setting/trello-config', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
+Route::get('/setting/trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trelloConfigurationAPI');
+Route::get('/setting/trello-configList', [TrelloConfigurationController::class, 'list'])->name('trelloConfigurationList');
+// ****************************************************************************************************** //
+// Test
+Route::get('/test/fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
 
-Route::get('/testerdashboard', [DashboardController::class,'tester']);

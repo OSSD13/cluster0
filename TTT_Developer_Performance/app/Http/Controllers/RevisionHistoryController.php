@@ -35,6 +35,6 @@ class RevisionHistoryController extends Controller
             ],
         ];
 
-        return view('pages.revisionHistory', compact('revisionHistories'));
+        return view('pages.setting.revisionHistory', compact('revisionHistories'));
     }
 }
