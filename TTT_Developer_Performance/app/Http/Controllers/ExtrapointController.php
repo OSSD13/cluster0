@@ -38,18 +38,9 @@ class ExtrapointController extends Controller
             ->get();
         return view('pages.extraPoint.list', compact('points'));
     }
+    function edit($id)
     {
-        $users = DB::table('users')
-            ->where('usr_is_use', '=', 1)
-            ->where('usr_role', '=', 'Developer')
-            ->select('usr_id as id', 'usr_name as name')
-            ->get();
-        $teams = DB::table('teams')
-            ->where('tm_is_use', '=', 1)
-            ->select('tm_id as id', 'tm_name as name')
-            ->get();
-
-    {
+        
         $users = DB::table('users')
             ->where('usr_is_use', '=', 1)
             ->where('usr_role', '=', 'Developer')
@@ -69,7 +60,7 @@ class ExtrapointController extends Controller
             ->distinct('spr_number')
             ->get();
         return view('pages.extrapoint.edit', compact('users', 'teams', 'id', 'sprints', 'years'));
->>>>>>> feature-66160100
+
     }
     //
     function update(Request $request)
