@@ -15,5 +15,16 @@ class Version extends Model
         'ver_editor_id',
         'ver_spr_id',
         'ver_version',
+        'ver_editor_id'
     ];
+
+    public function sprint()
+    {
+        return $this->belongsTo(Sprint::class, 'ver_spr_id');
+    }
+
+    public function editor()
+    {
+        return $this->belongsTo(User::class, 'ver_editor_id');
+    }
 }

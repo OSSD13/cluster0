@@ -23,7 +23,7 @@ class PointSeeder extends Seeder
             'pts_is_use' => 1,
             'pts_spr_id' => 1,
             'pts_status' => 'success',
-            'pts_type' => 'extra',
+            'pts_type' => 'minorcase',
             'pts_updated_time' => now(),
             'pts_uth_id' => 1,
             'pts_value' => 10,

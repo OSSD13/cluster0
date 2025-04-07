@@ -20,4 +20,8 @@ class SettingTrello extends Model
         'stl_todo',
         'stl_trc_id',
     ];
+
+    public function settingTrello(){
+        return $this->belongsTo(TrelloCredential::class, 'stl_trc_id');
+    }
 }

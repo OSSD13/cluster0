@@ -73,12 +73,12 @@ Route::get('/teamPerformance', [TeamPerformanceController::class,'TeamPerformanc
 //mypage
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
 Route::get('/createextrapoint', [ExtrapointController::class, 'add'])->name('createExtrapoint');
-Route::get('/editextrapoint', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::get('/editextrapoint/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
 Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
-Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::post('/extrapoint/edit/{id}', [ExtrapointController::class, 'update'])->name('editExtrapointSave');
 
-Route::get('/performancehistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
+Route::get('/performanceHistory', [PerformanceHistoryController::class, 'index'])->name('performanceHistory');
 
 Route::get('/testerdashboard', [DashboardController::class,'tester']);
 
