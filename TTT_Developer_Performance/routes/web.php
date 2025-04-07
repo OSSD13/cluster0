@@ -112,16 +112,5 @@ Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']
 // Report
 Route::get('/report', [ReportController::class, 'index']);
 Route::get('/report/generate', [ReportController::class, 'reportGenerate']);
-// ****************************************************************************************************** //
-// History
-Route::get('/setting/revision-history', [RevisionHistoryController::class, 'index'])->name('revisionHistory');
-Route::get('/review/performance-history', [PerformanceHistoryController::class, 'index'])->name('performancehistory');
-// ****************************************************************************************************** //
-// Trello Configuration
-Route::get('/setting/trello-config', [TrelloConfigurationController::class, 'index'])->name('trelloConfiguration');
-Route::get('/setting/trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trelloConfigurationAPI');
-Route::get('/setting/trello-configList', [TrelloConfigurationController::class, 'list'])->name('trelloConfigurationList');
-// ****************************************************************************************************** //
-// Test
-Route::get('/test/fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+
 

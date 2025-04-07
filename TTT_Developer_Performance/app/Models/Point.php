@@ -35,4 +35,10 @@ class Point extends Model
     {
         return $this->belongsTo(UserTeamHistory::class, 'pts_uth_id');
     }
+
+    public function version()
+    {
+        return $this->belongsTo(Version::class, 'pts_ver_id');
+    }
+
 }
