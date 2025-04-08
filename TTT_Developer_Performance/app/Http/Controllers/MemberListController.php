@@ -28,7 +28,7 @@ class MemberListController extends Controller
         $teams = Teams::all();
 
         // ส่งให้หน้า view
-        return view('memberlistEdit', [
+        return view('pages.members.memberlistEdit', [
             'usr_name' => $user->usr_name,
             'usr_trello_fullname' => $user->usr_trello_fullname
 

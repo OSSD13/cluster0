@@ -37,10 +37,25 @@
             <!-- Dropdown -->
             <div class="w-[400px] mt-3 ml-5">
                 <select
+                    class="w-[400px] h-[50px] border-2 p-2 rounded-lg pr-10 text-blue-900
+                focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
+                hover:bg-blue-100 mt-4"
+                    style="border-color: #00408e;
+                background-image: url('data:image/svg+xml;utf8,<svg fill=\'%2300408e\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>');
+                background-repeat: no-repeat;
+                background-position: right 1rem center;
+                background-size: 1.5rem;
+                appearance: none;">
+                    <option class="text-center text-blue-900 bg-white">Choose Team</option>
+                    <option class="text-center text-blue-900 bg-white">Team 1</option>
+                    <option class="text-center text-blue-900 bg-white">Team 2</option>
+                    <option class="text-center text-blue-900 bg-white">Team 3</option>
+                </select>
+            </div>
 
             <!-- Buttons -->
             <div class="flex justify-start mt-6 gap-1 ml-5">
-                
+
                 <button class="w-[199px] h-[50px] bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-800"
                     onclick="window.location.href='{{ route('memberlist') }}'">
                     Cancel
