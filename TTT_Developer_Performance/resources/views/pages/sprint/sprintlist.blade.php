@@ -26,7 +26,7 @@
                         class="px-4 py-2 rounded-[10px] text-black w-[300px] bg-white border border-gray-300 shadow-sm focus:ring focus:ring-blue-300" />
                 </div>
 
-                <a href="{{ route('team.add') }}"
+                <a href="{{ route('sprint.add') }}"
                     class="flex items-center bg-blue-900 text-white px-2 py-1 w-28 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                     <img src="http://localhost:1300/resources/Images/Icons/image-gallery.png" alt="Add"
                         class="w-6 h-6 mr-2 transition-transform duration-300 hover:rotate-12">
