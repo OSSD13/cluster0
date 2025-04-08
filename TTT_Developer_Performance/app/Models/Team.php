@@ -26,5 +26,5 @@ class Team extends Model
     {
         return $this->hasMany(UserTeamHistory::class, 'tm_stl_');
     }
-    
+
 }
