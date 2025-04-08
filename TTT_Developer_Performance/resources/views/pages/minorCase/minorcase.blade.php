@@ -200,88 +200,48 @@
             </thead>
             <!-- Table body -->
             <tbody>
-                @foreach ($points as $key => $item)
-                <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
-                    <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                    <!-- ลำดับ # -->
-                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                        {{ $key + 1 }}
-                    </th>
-                    <!-- Sprint-->
-                    <td class="px-6 py-4">
-                        {{ $item->sprint_year . '-' . $item->sprint_num }}
-                    </td>
-                    <!-- Team -->
-                    <td class="px-6 py-4">
-                        {{ $item->team }}
-                    </td>
-                    <!-- Member -->
-                    <td class="px-6 py-4">
-                        {{ $item->member }}
-                    </td>
-                    <!-- card Detail -->
-                    <td class="px-6 py-4">
-
-                    </td>
-                    <!-- Defect detail -->
-                    <td class="px-6 py-4">
-
-                    </td>
-                    <!-- Point -->
-                    <td class="px-6 py-4">
-                        {{ $item->value }}
-                    </td>
-
-                    <!-- Actions button-->
-                    <td class="px-6 py-4 flex items-center justify-center space-x-2  h-full ">
-                        <a href="{{ route('editminorcase')}}"> <img
-                                src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                class="w-[35px] h-[35px]" onclick=""> </a>
-                        <form action="{{ route('deleteminorcase', $item->id) }}" method="POST" id="deleteForm{{ $item->id }}" class="flex justify-center items-center"
-
-                            id="deleteForm{{ $item->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <!-- Change the delete button to trigger the alert -->
-                            <button type="button" onclick="showAlert({{ $item->id }})">
-                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
-                                    class="w-[35px] h-[35px]  items-center">
-                            </button>
-                        </form>
-                    </td>
-
-                </tr>
-                <div id="alertBox"
-                    class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
-                    <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
-                        <button onclick="closeAlert()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <div class="flex justify-center mb-4">
-                            <img alt="Cross icon" class="rounded-full" height="64"
-                                src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
-                        </div>
-                        <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
-                        <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
-                        <div class="flex justify-center space-x-4">
-                            <!-- Add a data attribute to store the form ID -->
-                            <button id="confirmDelete"
-                                class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
-                                Delete
-                            </button>
-                            <button onclick="closeAlert()"
-                                class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-
-                </tr>
-                @endforeach
-
-            </tbody>
+    @foreach ($points as $key => $point)
+    <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
+        <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+            {{ $key + 1 }}
+        </th>
+        <td class="px-6 py-4">
+            {{ $point->sprint_year . '-' . $point->sprint_num }}
+        </td>
+        <td class="px-6 py-4">
+            {{ $point->team }}
+        </td>
+        <td class="px-6 py-4">
+            {{ $point->member }}
+        </td>
+        <td class="px-6 py-4">
+            {{ $point->card_detail }}
+        </td>
+        <td class="px-6 py-4">
+            {{ $point->defect_detail }}
+        </td>
+        <td class="px-6 py-4">
+            {{ $point->value }}
+        </td>
+        <!-- Actions -->
+        <td class="px-6 py-4 flex items-center justify-center space-x-2">
+            <a href="{{ route('editminorcase', $point->id) }}">
+                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                    class="w-[35px] h-[35px]">
+            </a>
+            <form action="{{ route('deleteminorcase', $point->id) }}" method="POST"
+                id="deleteForm{{ $point->id }}" class="flex justify-center items-center">
+                @csrf
+                @method('DELETE')
+                <button type="button" onclick="showAlert({{ $point->id }})">
+                    <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
+                        class="w-[35px] h-[35px] items-center">
+                </button>
+            </form>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
         </table>
     </div>
 </div>
@@ -444,7 +404,6 @@ document.getElementById('confirmDelete').addEventListener('click', function() {
         document.getElementById('deleteForm' + formIdToDelete).submit();
     }
 });
-
 </script>
 @endsection
 
