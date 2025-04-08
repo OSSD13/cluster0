@@ -6,15 +6,27 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\Point;
+use App\Models\PointCurrentSprint;
 use App\Models\UserTeamHistory; // Add this line to import the UserTeamHistory model
-use App\Models\Version; // Add this line to import the Version model
+use App\Models\Sprint;
+use App\Models\Backlog;
 
 class ExtrapointController extends Controller
 {
     //
     function index()
     {
-        return view('pages.extraPoint.list');
+        $pointsCurrentSprint = PointCurrentSprint::all();
+        $sprints = Sprint::where('spr_id',$pointsCurrentSprint->pcs_spr_id)
+            ->select('spr_year','spr_number')
+            ->get();
+        $members = UserTeamHistory::where('uth_id', $pointsCurrentSprint->pcs_uth_id)
+            ->with([
+                'user:usr_name',
+                'team:tm_name'
+            ])
+            ->get();
+        return view('pages.extraPoint.list', $pointsCurrentSprint, $sprints, $members);
     }
     //
     function add()
