@@ -18,8 +18,13 @@ class Team extends Model
         'tm_trc_id',
     ];
 
-    public function teamSettingTrello()
+    public function settingTrelloList()
     {
         return $this->belongsTo(SettingTrello::class, 'tm_stl_id');
     }
+    public function TrelloCretential()
+    {
+        return $this->hasMany(UserTeamHistory::class, 'tm_stl_');
+    }
+    
 }

@@ -129,7 +129,7 @@
 
 @section('javascripts')
 <script>
-    // Optional custom JS if needed later
+
 </script>
 @endsection
 

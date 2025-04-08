@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register Step-2</title>
-  <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}"/>
-  <link rel="stylesheet" href="{{ asset('resources/css/register.css') }}">
-  <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="resources/Images/ttt_logo.jpg"/>
+  <link rel="stylesheet" href="resources/css/register.css">
+  <link rel="stylesheet" href="resources/css/global.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
@@ -21,7 +21,7 @@
           <p class="w-full h-full max-h-[50px] font-bold bg-transparent">{{ $googleUser->email ?? 'N/A' }}</p>
       </div>
     </div>
-  
+
     <div class="mb-[30px] w-full">
       <label for="username" class="block font-bold">Your Username</label>
       <input type="text" name="username" placeholder="Your Username" required class="w-full h-full max-h-[50px] p-2 border border-gray-300 rounded rounded-[10px]">
