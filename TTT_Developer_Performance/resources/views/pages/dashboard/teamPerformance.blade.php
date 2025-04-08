@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="flex justify-end">
                                     <a href=""
-                                        class="flex items-center bg-green-500 text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center">
+                                        class="flex items-center bg-green-500 text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center  hover:bg-[var(--green-color-text)] transition-all duration-200 transform">
                                         Finish
                                     </a>
                                 </div>
@@ -793,7 +793,7 @@
     </div>
 
     {{-- Pop-up choose card --}}
-    <div class="flex justify-center items-center fixed inset-0 bg-gray-900 bg-opacity-60 flex justify-center items-center z-50 hidden"
+    <div class="flex justify-center items-center fixed inset-0 flex justify-center items-center z-50 hidden"
         id="chooseCard">
         <div class="absolute top-[5%] bg-white w-[1200px] h-[750px] rounded-lg shadow-md shadow-lg">
 

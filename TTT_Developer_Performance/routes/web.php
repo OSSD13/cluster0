@@ -143,9 +143,9 @@ Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloAp
 Route::get('/dash-team-performance-card', [TeamPerformanceController::class, 'showCard']);
 
 //Sprint
-Route::get('/listsprint', [SprintController::class, 'index']);
-Route::get('/listsprint-add', [SprintController::class, 'index']);
-Route::get('/listsprint-edit', [SprintController::class, 'index']);
-
-
-
+Route::get('/listsprint', [SprintController::class, 'index'])->name('sprint');
+Route::get('/listsprint-add', [SprintController::class, 'add'])->name('sprint.add');
+Route::get('/listsprint-edit', [SprintController::class, 'edit'])->name('sprint.edit');
+// Route::post('/listsprint-store', [SprintController::class, 'store'])->name('sprint.store');
+// Route::get('/listsprint-update', [SprintController::class, 'update'])->name('sprint.update');
+// Route::get('/listsprint-delete', [SprintController::class, 'delete'])->name('sprint.delete');

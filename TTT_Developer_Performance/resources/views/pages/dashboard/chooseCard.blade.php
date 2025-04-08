@@ -15,7 +15,7 @@
 
 @section('contents')
     <!-- ฺBox Team performance -->
-    <div class="relative" id="big-background">
+    <div class="relative opacity-20" id="big-background">
         <div
             class=" w-full h-20 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-6 flex justify-between items-center mb-[20px] opacity">
             <div class="grid grid-cols-2 gap-2 w-full">
@@ -784,7 +784,9 @@
 
     {{-- Pop-up choose card --}}
     <div class="flex justify-center items-center" id="chooseCard">
-        <div class="absolute top-[5%] bg-white w-[1200px] h-[750px] rounded-lg shadow-md shadow-lg">
+        <div class="fixed top-[5%] left-1/2 transform -translate-x-1/2
+            bg-white w-[1200px] h-[750px] rounded-lg shadow-lg
+            z-[9999] opacity-100">
 
             {{-- cross x --}}
             <div class="flex justify-end mx-5 my-5">
