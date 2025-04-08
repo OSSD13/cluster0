@@ -143,7 +143,9 @@ class TeamPerformanceController extends Controller
     public function card(){
         return view('pages.dashboard.teamPerformance');
     }
+    
     public function showCard(){
+        $this->testTrelloApi();
         $cards = Card::all();
         return view('pages.dashboard.chooseCard',compact('cards'));
     }
