@@ -13,6 +13,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TeamManagementController;
 // Users
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MemberListController;
 // Points
 use App\Http\Controllers\MinorcaseController;
 use App\Http\Controllers\BacklogController;
@@ -104,6 +105,13 @@ Route::get('/team-edit', [TeamManagementController::class,'edit'])->name('team.e
 //Route::get('/member', [UserController::class,'']);
 //Route::get('/member-add', [UserController::class,'']);
 //Route::get('/member-edit', [UserController::class,'']);
+Route::get('memberlist', [MemberListController::class, 'index'])->name('memberlist');
+Route::get('/memberlistAdd', function () {
+    return view('memberlistAdd');
+})->name('memberlist.add');
+Route::get('memberlist-edit{id}', [MemberListController::class, 'edit'])->name('memberlist.edit');
+Route::get('memberlist-delete{id}', [MemberListController::class, 'delete'])->name('memberlist.delete');
+Route::post('memberlist-update{id}', [MemberListController::class, 'delete'])->name('memberlist.update');
 // ****************************************************************************************************** //
 // Settings
 Route::get('/setting-default-password', [UserController::class,'defaultConfiguration'])->name('default.password');
