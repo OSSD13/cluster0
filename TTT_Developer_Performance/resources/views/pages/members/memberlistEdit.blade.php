@@ -56,6 +56,7 @@
             <!-- Buttons -->
             <div class="flex justify-start mt-6 gap-1 ml-5">
 
+
                 <button class="w-[199px] h-[50px] bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-800"
                     onclick="window.location.href='{{ route('memberlist') }}'">
                     Cancel

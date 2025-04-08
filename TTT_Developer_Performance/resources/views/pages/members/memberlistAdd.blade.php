@@ -1,5 +1,5 @@
 @extends('layouts.tester')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 @section('title')
     <title>Member Management</title>

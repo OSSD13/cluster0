@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Users;
-use App\Models\Teams;
+use App\Models\Team;
 use App\Models\UserTeamHistory;
 
 class MemberListController extends Controller
@@ -16,6 +16,7 @@ class MemberListController extends Controller
                 $query->where('usr_is_use', 1);
             })
             ->get();
+           
 
         return view('pages.members.memberlist', compact('histories'));
     }
@@ -25,7 +26,7 @@ class MemberListController extends Controller
     {
         // ดึงข้อมูล user ตาม id
         $user = Users::findOrFail($id);
-        $teams = Teams::all();
+        $teams = Team::all();
 
         // ส่งให้หน้า view
         return view('pages.members.memberlistEdit', [

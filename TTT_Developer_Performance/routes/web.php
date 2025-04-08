@@ -134,4 +134,15 @@ Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 
 
 
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+// Member List
+Route::get('memberlist', [MemberListController::class, 'index'])->name('memberlist');
 
+Route::get('/memberlistAdd', function () {
+    return view('pages.members.memberlistAdd');
+})->name('memberlist.add');
+
+Route::get('memberlist/edit{id}', [MemberListController::class, 'edit'])->name('memberlist.edit');
+
+Route::get('memberlist/delete{id}', [MemberListController::class, 'delete'])->name('memberlist.delete');
+
+Route::post('memberlist/update{id}', [MemberListController::class, 'delete'])->name('memberlist.update');
