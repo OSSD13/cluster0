@@ -69,17 +69,17 @@
                         <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
                             <th class="px-6 py-6 font-medium whitespace-nowrap">{{ $index + 1 }}</th>
                             <td class="px-6 py-6">{{ $team->name }}</td>
-                            <td class="px-6 py-6"></td> {{-- ใส่จำนวนสมาชิกถ้ามีข้อมูล --}}
-                            <td class="px-6 py-6">
-                                {{ \Carbon\Carbon::parse($team->start_date)->format('d M Y') }}
-                                {{-- หรือ $team->start_date ถ้าไม่อยาก format --}}
+                            <td class="px-6 py-6">{{$team->current}}</td> 
+                            <td class="px-6 py-6">{{ \Carbon\Carbon::parse($team->created)->format('d/m/Y H:i') }}
                             </td>
                             <td class="px-6 py-6">
                                 <div class="flex items-center justify-center gap-2">
-                                    <a href="{{ url('/team-edit/' . $team->id) }}">
+                                    <a href="{{url('/team-edit' . $team->id) }}">
                                         <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit" class="w-[35px] h-[35px]" />
                                     </a>
+                                    <a href="{{url('team-delete' . $team->id) }}">
                                     <button type="button" onclick="showAlert()">
+
                                         <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete" class="w-[35px] h-[35px]" />
                                     </button>
                                 </div>

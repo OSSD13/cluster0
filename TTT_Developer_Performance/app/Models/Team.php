@@ -16,6 +16,7 @@ class Team extends Model
         'tm_is_use',
         'tm_stl_id',
         'tm_trc_id',
+        'tec_created_time'
     ];
 
     public function settingTrelloList()
@@ -25,6 +26,11 @@ class Team extends Model
     public function TrelloCretential()
     {
         return $this->hasMany(UserTeamHistory::class, 'tm_stl_');
+    }
+    public function members(){
+        return $this->belongsToMany(User::class, 'user_team_history', 'uth_tm_id', 'uth_usr_id')
+        ->withPivot(['uth_start_date', 'uth_end_date', 'uth_is_current'])
+        ->wherePivot('uth_is_current', 1);
     }
     
 }
