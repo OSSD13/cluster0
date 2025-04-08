@@ -134,3 +134,8 @@ Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 
 // ****************************************************************************************************** //
 // Test
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi'])->name('fetch_cards');
+Route::get('/dash-team-performance-card', [TeamPerformanceController::class, 'showCard']);
+
+Route::post('/setting-trello-configAPI', [TrelloConfigurationController::class, 'createAPI'])->name('trello.api.create');
+Route::get('/setting-trello-configAPI-delete/{id}', [TrelloConfigurationController::class, 'deleteAPI'])->name('trello.api.delete');
+Route::get('/setting-trello-configList-delete/{id}', [TrelloConfigurationController::class, 'deleteList'])->name('trello.list.delete');
