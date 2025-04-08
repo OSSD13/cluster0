@@ -82,18 +82,13 @@
                                     class="w-[35px] h-[35px]">
                             </a>
                             <a href="{{ route('memberlist.delete', $history->user->usr_id) }}"> <img
-                                    src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt=""
+                                    src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
                                     class="w-[35px] h-[35px]" onclick=""></a>
                         </td>
 
                     </tr>
                 @endforeach
-                <tr class="bg-white border-b hover:bg-gray-50">
-                <tr class="bg-white border-b hover:bg-gray-50">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-500 text-center">1</th>
-                    <td class="px-6 py-4 text-center">67-52</td>
-                    <td class="px-6 py-4 text-center">Team 2</td>
-                </tr>
+                
 
             </tbody>
         </table>
