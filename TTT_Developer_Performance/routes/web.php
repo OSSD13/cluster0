@@ -138,4 +138,7 @@ Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 
 
 
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+Route::get('/dash-team-performance-card', [TeamPerformanceController::class, 'showCard']);
+
+
 
