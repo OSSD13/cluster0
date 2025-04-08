@@ -15,7 +15,7 @@
 
 @section('contents')
     <!-- ฺBox Team performance -->
-    <div class="relative">
+    <div class="relative" id="big-background">
         <div
             class=" w-full h-20 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-6 flex justify-between items-center mb-[20px]">
             <div class="grid grid-cols-2 gap-2 w-full">
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="flex justify-end">
                                     <a href=""
-                                        class="flex items-center bg-green-500 text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center ">
+                                        class="flex items-center bg-green-500 text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center">
                                         Finish
                                     </a>
                                 </div>
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="flex justify-end">
-                            <button onclick="togglechooseCardPopup()"
+                            <button onclick="openModal()"
                                 class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
                                 <img src="../resources/Images/Icons/refresh.png" alt="Reload"
                                     class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
@@ -783,12 +783,12 @@
     </div>
 
     {{-- Pop-up choose card --}}
-    <div class="flex justify-center items-center hidden" id="chooseCard">
+    <div class="flex justify-center items-center fixed inset-0 bg-gray-900 bg-opacity-60 flex justify-center items-center z-50 hidden" id="chooseCard">
         <div class="absolute top-[15%] bg-white w-[1200px] h-[810px] rounded-lg shadow-md shadow-lg">
 
             {{-- cross x --}}
             <div class="flex justify-end mx-5 my-5">
-                <button onclick="togglechooseCardPopup()">
+                <button onclick="closeModal()">
                     <img src="../resources/Images/Icons/x-button.png" alt="" class="w-[20px] h-[20px]">
                 </button>
             </div>
@@ -1181,10 +1181,23 @@
             });
         });
 
-        function togglechooseCardPopup() {
-            var dropdown = document.getElementById('chooseCard');
-            dropdown.classList.toggle('hidden');
+
+        function openModal(){
+            var background =  document.getElementById('chooseCard')
+            background.style.background = 'rgba(0,0,0,0.2)';
+            background.classList.toggle('hidden');
         }
+
+        function closeModal(){
+            var background =  document.getElementById('chooseCard')
+            background.classList.add('hidden');
+        }
+        // แสดง pop up choose card
+        // function togglechooseCardPopup() {
+        //     var dropdown = document.getElementById('chooseCard');
+        //     dropdown.classList.toggle('hidden');
+        // }
+
     </script>
 @endsection
 

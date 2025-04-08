@@ -170,8 +170,7 @@
                     </div>
                 </div>
 
-                <div
-                    class="bg-[var(--primary-color-red)] w-[180px] h-[35px] rounded-lg flex justify-between items-center">
+                <div class="bg-[var(--primary-color-red)] w-[180px] h-[35px] rounded-lg flex justify-between items-center">
                     <div
                         class="bg-[var(--primary-color-red)] w-[90px] h-[35px] rounded-lg flex justify-center items-center">
                         <p class="text-white font-bold">Fail</p>
@@ -188,7 +187,6 @@
 
 @section('javascripts')
     <script>
-
         // sprint dropdown
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownSprint = document.getElementById('dropdownSprint');
@@ -275,7 +273,7 @@
         // Pie chart
 
         var options = {
-            series: [44, 55],
+            series: [36, 3],
             chart: {
                 type: 'donut',
             },
@@ -283,6 +281,25 @@
             colors: ['#60A563', '#DC5959'],
             legend: {
                 position: 'bottom'
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        labels: {
+                            show: true,
+                            total: {
+                                show: true,
+                                label: 'Total',
+                                fontSize: '16px',
+                                fontWeight: 600,
+                                color: '#333',
+                                formatter: function(w) {
+                                    return w.globals.seriesTotals.reduce((a, b) => a + b, 0)
+                                }
+                            }
+                        }
+                    }
+                }
             },
             responsive: [{
                 breakpoint: 480,

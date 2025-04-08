@@ -1,6 +1,7 @@
-.table-container{
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    display: block;
+.img-ttt{
+    display: flex row;
+    flex-basis: 10px ;
+    justify-items: center;
+    width: 100px;
+    height: 100px;
 }

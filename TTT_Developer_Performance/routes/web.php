@@ -126,3 +126,4 @@ Route::get('/setting/trello-configList', [TrelloConfigurationController::class, 
 // ****************************************************************************************************** //
 // Test
 Route::get('/test/fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+Route::get('/api/chart-data', [DashController::class, 'getPietData']);

@@ -22,6 +22,4 @@ class DashboardController extends Controller
     function card() {
         return view('pages.chooseCard');
     }
-
-
 }
