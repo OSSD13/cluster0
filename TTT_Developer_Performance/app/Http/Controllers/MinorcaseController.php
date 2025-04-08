@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\PointCurrentSprint;
 use App\Models\MinorCase;
@@ -15,78 +16,79 @@ class MinorcaseController extends Controller
 {
     public function index()
     {
-        // Join tables and retrieve data
-        $points = MinorCase::join('points_current_sprint', 'minor_cases.mnc_id', '=', 'points_current_sprint.pcs_mnc_id')
-            ->join('user_team_history', 'points_current_sprint.pcs_uth_id', '=', 'user_team_history.uth_id')
-            ->join('users', 'user_team_history.uth_usr_id', '=', 'users.usr_id')
-            ->join('teams', 'user_team_history.uth_tm_id', '=', 'teams.tm_id')
-            ->join('sprints', 'points_current_sprint.pcs_spr_id', '=', 'sprints.spr_id')
-            ->select(
-                'points_current_sprint.pcs_id as id',
-                'points_current_sprint.pcs_pass as value',
-                'users.usr_name as member',
-                'teams.tm_name as team',
-                'sprints.spr_year as sprint_year',
-                'sprints.spr_number as sprint_num',
-                'minor_cases.mnc_card_detail as card_detail',
-                'minor_cases.mnc_defect_detail as defect_detail'
-            )
-            ->where([
-                ['points_current_sprint.pcs_is_use', '=', 1],
-                ['minor_cases.mnc_is_use', '=', 1]
-            ])
-            ->get();
-
+        $points = DB::select('SELECT spr_year, spr_number, usr_username, tm_name, mnc_point,mnc_card_detail,mnc_defect_detail
+        FROM minor_cases
+        JOIN points_current_sprint ON pcs_mnc_id = mnc_id
+        JOIN sprints ON pcs_spr_id = spr_id
+        JOIN user_team_history ON pcs_uth_id = uth_id
+        JOIN users ON uth_usr_id = usr_id
+        JOIN teams ON uth_tm_id = tm_id
+        ');
         return view('pages.minorCase.minorcase', compact('points'));
     }
 
     public function add()
     {
-        $users = Users::where('usr_is_use', 1)
-            ->where('usr_role', 'Developer')
-            ->select('usr_id as id', 'usr_name as name')
-            ->get();
+        $users = Users::all();
+        $teams = Team::all();
+        $sprints = Sprint::all();
+        $points = PointCurrentSprint::all();
 
-        $teams = Team::where('tm_is_use', 1)
-            ->select('tm_id as id', 'tm_name as name')
-            ->get();
 
-        $years = Sprint::select('spr_year as year')->distinct()->get();
-        $sprints = Sprint::select('spr_number as number')->distinct()->get();
 
-        return view('pages.minorCase.addminorcase', compact('users', 'teams', 'years', 'sprints'));
+        return view('pages.minorCase.addminorcase', compact('users' , 'teams'  ,'sprints', 'points'));
+    }
+    public function insert()
+    {
+        $minorcases = DB::table('minor_cases')->insert('SELECT spr_year, spr_number, usr_username, tm_name, mnc_point,mnc_card_detail,mnc_defect_detail
+            FROM minor_cases
+            JOIN points_current_sprint ON pcs_mnc_id = mnc_id
+            JOIN sprints ON pcs_spr_id = spr_id
+            JOIN user_team_history ON pcs_uth_id = uth_id
+            JOIN users ON uth_usr_id = usr_id
+            JOIN teams ON uth_tm_id = tm_id'
+                        
+        );
+    
+        return view('pages.minorCase.addminorcase', compact('minorcases'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'pcs_pass' => 'required|numeric|min:0',
-            'pcs_spr_id' => 'required|exists:sprints,spr_id',
-            'pcs_uth_id' => 'required|exists:user_team_history,uth_id',
-            'mnc_card_detail' => 'nullable|string',
-            'mnc_defect_detail' => 'nullable|string',
-        ]);
+        $user = Users::find($request->uth_usr_id);
+        $team = Team::find($request->uth_tm_id);
+        $sprint = Sprint::find($request->spr_number);
 
-        // 1. สร้าง Minor Case
-        $minorCase = MinorCase::create([
-            'mnc_card_detail' => $request->mnc_card_detail,
-            'mnc_defect_detail' => $request->mnc_defect_detail,
-            'mnc_point' => $request->pcs_pass,
-            'mnc_is_use' => 1,
-        ]);
+        $uth = UserTeamHistory::where('uth_usr_id', $user->usr_id)
+            ->where('uth_tm_id', $team->tm_id)
+            // ->where('uth_is_use', 1)
+            ->first();
 
-        // 2. สร้าง PointCurrentSpri nt
-        PointCurrentSprint::create([
-            'pcs_spr_id' => $request->pcs_spr_id,
-            'pcs_uth_id' => $request->pcs_uth_id,
-            'pcs_mnc_id' => $minorCase->mnc_id,
-            'pcs_pass' => $request->pcs_pass,
-            'pcs_is_use' => 1,
-        ]);
+        $point = PointCurrentSprint::where('pcs_spr_id', $sprint->sprint_id)
+            ->where('pcs_uth_id', $uth->uth_id)
+            ->where('pcs_is_use', 1)
+            ->first();
 
+        if ($point) {
+            // เพิ่ม Minor Case ใหม่และดึง ID ที่เพิ่ม
+            $minorCaseId = DB::table('minor_cases')->insertGetId([
+                'mnc_card_detail'   => $request->mnc_card_detail ?? null,
+                'mnc_defect_detail' => $request->mnc_defect_detail ?? null,
+                'mnc_point'         => $request->mnc_point,
+                'mnc_is_use'        => 1,
+            ]);
+
+            // อัปเดต ID ของ minor case ไปยังตาราง pcs
+            $point->pcs_mnc_id = $minorCaseId;
+            $point->save();
+        }
         return redirect()->route('minorcase')->with('success', 'Minorcase added successfully.');
     }
+    
+        public function edit($id){
 
+        }
+  
     public function delete($id)
     {
         $point = PointCurrentSprint::find($id);
