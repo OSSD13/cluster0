@@ -141,8 +141,11 @@ class TeamPerformanceController extends Controller
     }
 
     public function card(){
+        return view('pages.dashboard.teamPerformance');
+    }
+    public function showCard(){
         $cards = Card::all();
-        return view('pages.dashboard.teamPerformance',compact('cards'));
+        return view('pages.dashboard.chooseCard',compact('cards'));
     }
 
     // public function insertCard(){
