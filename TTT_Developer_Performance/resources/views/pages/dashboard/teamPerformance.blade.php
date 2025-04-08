@@ -43,7 +43,15 @@
 
                             </div>
                         </div>
-                        <div class="flex justify-end">
+                        <div class="flex justify-end gap-3">
+                            <a href="{{ url('/listsprint') }}">
+                                <button
+                                    class="flex items-center bg-blue-900 text-white px-4 py-1 h-[25px] rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
+                                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
+                                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12 ">
+                                    Add New Sprint
+                                </button>
+                            </a>
                             <a href="{{ url('/dash-team-performance-card') }}">
                                 <button onclick="openModal()"
                                     class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
@@ -52,7 +60,6 @@
                                     Reload
                                 </button>
                             </a>
-
                         </div>
                     </div>
                 </div>

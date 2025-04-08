@@ -26,6 +26,8 @@ use App\Http\Controllers\PerformanceHistoryController;
 use App\Http\Controllers\RevisionHistoryController;
 // Trello
 use App\Http\Controllers\TrelloConfigurationController;
+// Sprint
+use App\Http\Controllers\SprintController;
 
 // ****************************************************************************************************** //
 // Login
@@ -76,13 +78,15 @@ Route::get('/change-password', [ProfileController::class,'changePassword'])->nam
 Route::get('/dash-team-performance', [TeamPerformanceController::class,'card'])->name('team.performance');
 Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('overview');
 // ****************************************************************************************************** //
+// ** //
 // Minor case
 Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
 Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
 Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
-Route::post('/minorcase-store', [MinorcaseController::class, 'store'])->name('storeMinorcase');
-Route::delete('/minorcase-delete/{id}', [MinorcaseController::class, 'delete'])->name('deleteminorcase');
-// ****************************************************************************************************** //
+Route::post('/minorcase/store', [MinorcaseController::class, 'store'])->name('storeMinorcase');
+Route::delete('/minorcase/delete/{id}', [MinorcaseController::class, 'delete'])->name('deleteminorcase');
+// ** //
+
 // Backlog
 Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
 Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
@@ -133,9 +137,15 @@ Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, '
 Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trello.list');
 // ****************************************************************************************************** //
 // Test
-Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi'])->name('fetch_cards');
+
+
+Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
 Route::get('/dash-team-performance-card', [TeamPerformanceController::class, 'showCard']);
 
-Route::post('/setting-trello-configAPI', [TrelloConfigurationController::class, 'createAPI'])->name('trello.api.create');
-Route::get('/setting-trello-configAPI-delete/{id}', [TrelloConfigurationController::class, 'deleteAPI'])->name('trello.api.delete');
-Route::get('/setting-trello-configList-delete/{id}', [TrelloConfigurationController::class, 'deleteList'])->name('trello.list.delete');
+//Sprint
+Route::get('/listsprint', [SprintController::class, 'index']);
+Route::get('/listsprint-add', [SprintController::class, 'index']);
+Route::get('/listsprint-edit', [SprintController::class, 'index']);
+
+
+
