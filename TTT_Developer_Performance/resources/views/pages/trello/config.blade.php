@@ -21,7 +21,7 @@
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello API</h2>
                     <!-- Add New API -->
-                    <button type="button" onclick="window.location.href='{{ route('trelloConfigurationAPI') }}'"
+                    <button type="button" onclick="window.location.href='{{ route('trello.api') }}'"
                         class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
                         <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
                             class="w-[20px] h-[20px] mr-2">
@@ -45,14 +45,13 @@
                                         <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">
                                             {{ $index + 1 }}
                                         </th>
-                                        <td class="px-6 py-4 text-center">{{ $api->name }}</td>
+                                        <td class="px-6 py-4 text-center">{{ $api->trc_name }}</td>
                                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
                                             <a href="">
                                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                                     alt="Edit Icon" class="w-[35px] h-[35px]">
                                             </a>
-                                            <a href=" {{ route('trelloConfiguration') }} "
-                                                onclick="openAlertDelete({{ $api->id }})">
+                                            <a href="#" onclick="confirmDeleteAPI({{ $api->trc_id }})">
                                                 <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
                                                     alt="Delete Icon" class="w-[35px] h-[35px]">
                                             </a>
@@ -73,7 +72,7 @@
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-blue-900">Trello Lists</h2>
                     <!-- Add New List -->
-                    <button type="button" onclick="window.location.href='{{ route('trelloConfigurationList') }}'"
+                    <button type="button" onclick="window.location.href='{{ route('trello.list') }}'"
                         class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center ">
                         <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
                             class="w-[20px] h-[20px] mr-2">
@@ -103,8 +102,7 @@
                                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                                     alt="Edit Icon" class="w-[35px] h-[35px]">
                                             </a>
-                                            <a href=" {{ route('trelloConfiguration') }} "
-                                                onclick="openAlertDelete({{ $api->id }})">
+                                            <a href="#" onclick="confirmDeleteList({{ $list->stl_id }})">
                                                 <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
                                                     alt="Delete Icon" class="w-[35px] h-[35px]">
                                             </a>
@@ -123,9 +121,10 @@
         </div>
     </div>
 
-    <div id="alertDeleteBox" class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+    <!-- Alert Delete Trello API -->
+    <div id="alertDeleteBox_API" class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
         <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
-            <button onclick="closeAlertDelete()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+            <button onclick="closeAlertDeleteAPI()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
                 <i class="fas fa-times"></i>
             </button>
             <div class="flex justify-center mb-4">
@@ -135,21 +134,42 @@
             <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
             <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
             <div class="flex justify-center space-x-4">
-                <button onclick="confirmDelete()"
+                <button onclick="deleteAPI()"
                     class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
                     Delete
                 </button>
-                <button onclick="closeAlertDelete()"
+                <button onclick="closeAlertDeleteAPI()"
                     class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
                     Cancel
                 </button>
             </div>
         </div>
     </div>
-    <form id="deleteForm" method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
-    </form>
+
+    <!-- Alert Delete Trello List -->
+    <div id="alertDeleteBox_List" class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+        <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+            <button onclick="closeAlertDeleteList()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex justify-center mb-4">
+                <img alt="Cross icon" class="rounded-full" height="64"
+                    src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
+            <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="deleteList()"
+                    class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                    Delete
+                </button>
+                <button onclick="closeAlertDeleteList()"
+                    class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Alert Success Box -->
     <div id="alertSuccessBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -179,29 +199,49 @@
 
 @section('javascripts')
     <script>
-        let deleteId = null;
+        let deleteApiId = null;
 
-        function openAlertDelete(id) {
-            deleteId = id;
-            document.getElementById("alertDeleteBox").classList.remove("hidden");
+        function confirmDeleteAPI(id) {
+            deleteApiId = id;
+            document.getElementById("alertDeleteBox_API").classList.remove("hidden");
         }
 
-        function closeAlertDelete() {
-            deleteId = null;
-            document.getElementById("alertDeleteBox").classList.add("hidden");
+        function deleteAPI() {
+            if (!deleteApiId) return;
+            window.location.href = `/setting-trello-configAPI-delete/${deleteApiId}`;
         }
 
-        function confirmDelete() {
-            if (deleteId) {
-                const form = document.getElementById('deleteForm');
-                form.action = `/trello/delete/${deleteId}`; // route ที่คุณจะลบ
-                form.submit();
-            }
+        function closeAlertDeleteAPI() {
+            document.getElementById("alertDeleteBox_API").classList.add("hidden");
         }
 
-        document.getElementById("alertDeleteBox").addEventListener('click', function(e) {
+        document.getElementById("alertDeleteBox_API").addEventListener('click', function(e) {
             if (e.target === this) {
-                closeAlertDelete();
+                closeAlertDeleteAPI();
+            }
+        });
+    </script>
+
+    <script>
+        let deleteListId = null;
+
+        function confirmDeleteList(id) {
+            deleteListId = id;
+            document.getElementById("alertDeleteBox_List").classList.remove("hidden");
+        }
+
+        function deleteList() {
+            if (!deleteListId) return;
+            window.location.href = `/setting-trello-configList-delete/${deleteListId}`;
+        }
+
+        function closeAlertDeleteList() {
+            document.getElementById("alertDeleteBox_List").classList.add("hidden");
+        }
+
+        document.getElementById("alertDeleteBox_List").addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAlertDeleteList();
             }
         });
     </script>
@@ -245,7 +285,13 @@
             font-family: "Inter", sans-serif;
         }
 
-        #alertDeleteBox {
+        #alertDeleteBox_API {
+            z-index: 9999;
+            /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #alertDeleteBox_List {
             z-index: 9999;
             /* ให้สูงกว่าทุกอย่างในหน้า */
             background-color: rgba(0, 0, 0, 0.5);
