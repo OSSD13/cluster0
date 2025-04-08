@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
-  <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}"/>
-  <link rel="stylesheet" href="{{ asset('resources/css/register.css') }}">
-  <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="resources/Images/ttt_logo.jpg">
+  <link rel="stylesheet" href="resources/css/register.css">
+  <link rel="stylesheet" href="resources/css/global.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 </head>
@@ -43,7 +43,7 @@
     </div>
 
     <a href="{{ route('auth.google') }}" class="w-full h-[50px] p-2 border border-gray-300 text-gray-700 flex items-center justify-center rounded-[10px] hover:bg-gray-100 font-bold">
-      <img src="/resources/Images/Icons/google.png" alt="Google Logo" class="w-5 mr-2"> Sign up with Google
+      <img src="resources/Images/Icons/google.png" alt="Google Logo" class="w-5 mr-2"> Sign up with Google
     </a>
 
     <div class="text-center mt-4">
