@@ -13,16 +13,16 @@ class TrelloConfigurationController extends Controller
         $apis = TrelloCredential::all();
         $lists = SettingTrello::all();
 
-        return view('pages.trello.trelloConfiguration', compact('apis', 'lists'));
+        return view('pages.trello.config', compact('apis', 'lists'));
     }
 
     //Trello API
     public function api(){
-        return view('pages.trello.trelloConfigurationAPI');
+        return view('pages.trello.api');
     }
 
-    //Function Create API
-    public function CreateAPI(Request $request){
+    //Create API
+    public function createAPI(Request $request){
     $validator = Validator::make($request->all(), [
         'setting_name' => 'required',
         'api_key' => 'required',
@@ -34,28 +34,55 @@ class TrelloConfigurationController extends Controller
     }
 
     $trello = new TrelloCredential();
-    $trello->trc_id = 3;
     $trello->trc_name = $request->setting_name;
     $trello->trc_api_key = $request->api_key;
     $trello->trc_api_token = $request->api_token;
     $trello->save();
 
-    return redirect()->route('trelloConfiguration')->with('success', 'Trello credentials saved successfully!');
+    return redirect()->route('trello.config')->with('success', 'Trello credentials saved successfully!');
     }
 
-    /*public function deleteAPI($id){
-    $api = TrelloCredential::findOrFail($id);
-    $api->delete();
+    //Edit API
+    public function editAPI($id) {
+        $trello = TrelloCredential::findOrFail($id);
+        return view('trello.edit', compact('trello'));
+    }
 
-    return redirect()->route('trelloConfiguration')->with('success', 'Deleted successfully!');
-    }*/
+    //Update API
+    public function updateAPI(Request $request, $id) {
+    $validator = Validator::make($request->all(), [
+        'setting_name' => 'required',
+        'api_key' => 'required',
+        'api_token' => 'required',
+    ]);
 
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
 
+    $trello = TrelloCredential::findOrFail($id);
+    $trello->trc_name = $request->setting_name;
+    $trello->trc_api_key = $request->api_key;
+    $trello->trc_api_token = $request->api_token;
+    $trello->save();
+
+    return redirect()->route('trello.config')->with('success', 'Trello credentials updated successfully!');
+    }
+
+    public function deleteAPI($id) {
+        $trello = TrelloCredential::findOrFail($id);
+        $trello->delete();
+
+        return redirect()->route('trello.config')->with('success', 'Trello API deleted successfully!');
+    }
+
+    //Trello List
     public function list(){
-        return view('pages.trello.trelloConfigurationList');
+        return view('pages.trello.list');
     }
 
-    public function CreateList(Request $request)
+    //Create List
+    public function createList(Request $request)
     {
         $request->validate([
             'stl_bug' => 'required',
@@ -80,5 +107,12 @@ class TrelloConfigurationController extends Controller
         ]);
 
         return redirect()->route('trelloConfigurationList')->with('success', 'List created successfully!');
+    }
+
+    public function deleteList($id) {
+        $trello = SettingTrello::findOrFail($id);
+        $trello->delete();
+
+        return redirect()->route('trello.config')->with('success', 'Trello API deleted successfully!');
     }
 }
