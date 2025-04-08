@@ -107,7 +107,9 @@ Route::get('/team-edit', [TeamManagementController::class,'edit']);
 // ****************************************************************************************************** //
 // Settings
 Route::get('/setting-default-password', [UserController::class,'defaultConfiguration']);
-Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']);
+Route::post('/setting-save-config', [UserController::class, 'saveConfiguration']);
+Route::get('/setting-manage-user', [UserController::class,'manageUser']);
+Route::post('/setting-update-role', [UserController::class, 'updateRole'])->name('setting.update.role');
 // ****************************************************************************************************** //
 // Report
 Route::get('/report', [ReportController::class, 'index']);
@@ -124,3 +126,6 @@ Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 
 // ****************************************************************************************************** //
 // Test
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+Route::get('/test-alert' , function () {
+    return view('exampleAlert');
+});

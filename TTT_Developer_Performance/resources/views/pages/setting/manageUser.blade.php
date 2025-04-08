@@ -2,6 +2,7 @@
 
 @section('title')
     <title>Manage Users</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('pagename')
@@ -15,9 +16,9 @@
 
 @section('contents')
 <div class="flex justify-between items-center mb-4">
-    <h2 class="text-2xl font-bold text-blue-700">Manage Users</h2>
+    <h2 class="text-2xl font-bold text-[#00408e]">Manage Users</h2>
     <div></div>
-    <input type="text" placeholder="Search" class="px-3 py-2 border border-black rounded-lg shadow-sm w-64 placeholder:font-bold">
+    <input type="text" name="searhingUser" placeholder="Search" class="px-3 py-2 border border-black rounded-lg shadow-sm w-64 placeholder:font-bold">
 </div>
 <!-- รอใส่ filter dropdown -->
 <div class="relative sm:rounded-lg">
@@ -68,7 +69,7 @@
                     <button class="w-25 bg-[#00408e] hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" style="border-radius: 7px;">Reset</button>
                 </td>
                  <!-- Team -->
-                <td class="py-4 text-center">
+                 <td class="py-4 text-center">
                     <div class="relative">
                         <select class="w-32 border-2 p-2 rounded-lg appearance-none pr-12 text-blue-900 text-center
                                       focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
@@ -78,40 +79,48 @@
                                    background-repeat: no-repeat;
                                    background-position: right 1rem center;
                                    background-size: 1.2rem;">
-                            <option value="">{{ $user->current_team_name ?? '-' }}</option>
-                            @foreach($teams as $team)
-                                <option value="{{ $team->tm_id }}">{{ $team->tm_name }}</option>
-                            @endforeach
+
+                            @if($user->current_team_name)
+                                <option class="text-center text-blue-900 bg-white" value="">
+                                    {{ $user->current_team_name }}
+                                </option>
+                                @foreach($teams as $team)
+                                    @if($team->tm_name !== $user->current_team_name)
+                                        <option class="text-center text-blue-900 bg-white" value="{{ $team->tm_id }}">
+                                            {{ $team->tm_name }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            @else
+                                <option class="text-center text-blue-900 bg-white" value="">-</option>
+                                @foreach($teams as $team)
+                                    <option class="text-center text-blue-900 bg-white" value="{{ $team->tm_id }}">
+                                        {{ $team->tm_name }}
+                                    </option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                 </td>
                 <td class="py-4 text-center">
-                    <div class="relative">
-                        <select class="w-32 border-2 p-2 rounded-lg appearance-none pr-12 text-blue-900 text-center
-                                      focus:outline-none focus:ring-2 focus:ring-[#00408e] focus:border-[#00408e]
-                                      hover:bg-blue-100"
-                            style="border-color: #00408e;
-                                   background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300408e%22><path d=%22M7 10l5 5 5-5z%22 /></svg>');
-                                   background-repeat: no-repeat;
-                                   background-position: right 1rem center;
-                                   background-size: 1.2rem;">
-                            <option class="text-center text-blue-900 bg-white" value="">
-                                {{ $user->usr_role ? $user->usr_role : '-' }}
+                    <form method="POST" action="{{ route('setting.update.role') }}">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $user->usr_id }}">
+                        <select name="role"
+                                class="w-32 border-2 p-2 rounded-lg text-blue-900 text-center"
+                                onchange="this.form.submit()"
+                                style="border-color: #00408e;">
+                            <option value="" {{ $user->usr_role ? '' : 'selected' }}>
+                                {{ $user->usr_role ?? '-' }}
                             </option>
-                            @if(!$user->usr_role)
-                                <!-- ถ้าไม่มี role ให้โชว์ตัวเลือก Tester กับ Developer -->
-                                <option class="text-center text-blue-900 bg-white">Tester</option>
-                                <option class="text-center text-blue-900 bg-white">Developer</option>
-                            @else
-                                <!-- ถ้ามี role แล้ว แสดงอีกอันที่ไม่ได้เลือกไว้ -->
-                                @if($user->usr_role === 'Tester')
-                                    <option class="text-center text-blue-900 bg-white">Developer</option>
-                                @elseif($user->usr_role === 'Developer')
-                                    <option class="text-center text-blue-900 bg-white">Tester</option>
-                                @endif
+                            @if($user->usr_role !== 'Tester')
+                                <option value="Tester">Tester</option>
+                            @endif
+                            @if($user->usr_role !== 'Developer')
+                                <option value="Developer">Developer</option>
                             @endif
                         </select>
-                    </div>
+                    </form>
                 </td>
 
                 <!-- Actions button-->
@@ -174,6 +183,12 @@
         }
         });
     </script>
+    <script>
+        //ใช้จัดการ dropdown ของ access
+        document.addEventListener('DOMContentLoaded', () => {
+        });
+    </script>
+
 @endsection
 
 @section('styles')

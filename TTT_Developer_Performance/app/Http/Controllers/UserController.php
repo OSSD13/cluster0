@@ -66,4 +66,32 @@ class UserController extends Controller
             return response()->json(['status' => 'error', 'message' => 'User not found']);
         }
     }
+
+    public function updateRole(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,usr_id',
+            'role' => 'nullable|in:Tester,Developer'
+        ]);
+
+        $user = Users::find($request->user_id);
+        $user->usr_role = $request->role;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Role updated successfully.');
+    }
+
+
+    public function updateTeam(Request $request)
+    {
+        $user = Users::where('usr_id', $request->user_id)->first();
+        if (!$user) {
+            return response('User not found', 404);
+        }
+
+        $user->usr_tm_id = $request->team_id; // เปลี่ยนชื่อตรงนี้ให้ตรงกับ column จริง
+        $user->save();
+
+        return response('Team updated', 200);
+    }
 }
