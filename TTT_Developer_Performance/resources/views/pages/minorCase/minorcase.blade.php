@@ -200,40 +200,42 @@
             </thead>
             <!-- Table body -->
             <tbody>
-    @foreach ($points as $key => $point)
+            @foreach ($points as $key => $point)
     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
-        <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+       
+    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
             {{ $key + 1 }}
         </th>
         <td class="px-6 py-4">
-            {{ $point->sprint_year . '-' . $point->sprint_num }}
+        {{  $point->spr_year ."-". $point->spr_number }}
         </td>
         <td class="px-6 py-4">
-            {{ $point->team }}
+            {{ $point->tm_name }}
         </td>
         <td class="px-6 py-4">
-            {{ $point->member }}
+            {{ $point->usr_username }}
         </td>
         <td class="px-6 py-4">
-            {{ $point->card_detail }}
+            {{ $point->mnc_card_detail }}
         </td>
         <td class="px-6 py-4">
-            {{ $point->defect_detail }}
+            {{ $point->mnc_defect_detail }}
         </td>
         <td class="px-6 py-4">
-            {{ $point->value }}
+            {{ $point->mnc_point }}
         </td>
+
+
         <!-- Actions -->
         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-            <a href="{{ route('editminorcase', $point->id) }}">
+            <a href="">
                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
                     class="w-[35px] h-[35px]">
             </a>
-            <form action="{{ route('deleteminorcase', $point->id) }}" method="POST"
-                id="deleteForm{{ $point->id }}" class="flex justify-center items-center">
-                @csrf
-                @method('DELETE')
-                <button type="button" onclick="showAlert({{ $point->id }})">
+            <form action="" 
+                id="" class="flex justify-center items-center">
+               
+                <button type="button" onclick="showAlert()">
                     <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
                         class="w-[35px] h-[35px] items-center">
                 </button>

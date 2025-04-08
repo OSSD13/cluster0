@@ -81,8 +81,8 @@ Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('over
 Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
 Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
 Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
-Route::post('/minorcase/store', [MinorcaseController::class, 'store'])->name('storeMinorcase');
-Route::delete('/minorcase/delete/{id}', [MinorcaseController::class, 'delete'])->name('deleteminorcase');
+Route::post('/minorcase-store', [MinorcaseController::class, 'store'])->name('storeMinorcase');
+Route::delete('/minorcase-delete/{id}', [MinorcaseController::class, 'delete'])->name('deleteminorcase');
 // ** //
 
 // Backlog
