@@ -35,45 +35,107 @@
 
   <!-- Team Members -->
 <div class="mb-6">
-    <label class="block text-black font-bold text-2xl mb-2">Team Member</label>
-    <div class="flex flex-wrap gap-4 p-4 rounded-2xl border border-gray-400 bg-gray-50">
-        @foreach (['Name 1', 'Name 2', 'Name 3', 'Name 4', 'Name 5'] as $member)
-            <span class="inline-flex items-center px-4 py-2 rounded-full border border-blue-700 text-black font-bold">
-                {{ $member }}
-                <button class="ml-3 text-black hover:text-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="9" stroke="black" fill="white"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 8l8 8m0-8l-8 8" />
-                    </svg>
-                </button>
-            </span>
-        @endforeach
+    <label class="block text-black font-bold text-2xl mb-2">Team Members</label>
+
+    <!-- Hidden Input สำหรับส่งค่า tag ไป backend -->
+    <input type="hidden" name="team_members" id="team_members">
+
+    <!-- Tag Input Container -->
+    <div id="tag-container" class="flex flex-wrap gap-2 p-4 border border-gray-400 bg-gray-50 rounded-2xl mb-4">
+        <input type="text" id="tag-input" 
+               placeholder="Type and press Enter" 
+               class="border-none outline-none bg-transparent flex-1 min-w-[120px] text-base">
+    </div>
+
+    <!-- Choose API & Setting (ภายในกรอบเดียวกัน) -->
+    <div class="mb-4 flex gap-4">
+        <div class="w-1/2">
+            <label class="block text-gray-700 font-bold mb-2">Choose API</label>
+            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                <option>API set 1</option>
+            </select>
+        </div>
+        <div class="w-1/2">
+            <label class="block text-gray-700 font-bold mb-2">Choose Setting</label>
+            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                <option>Setting 1</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Buttons (ภายในกรอบเดียวกัน) -->
+    <div class="mb-4 flex gap-4">
+        <div class="w-1/2">
+            <a href="{{ route('team') }}" 
+               class="inline-flex items-center justify-center w-full h-[50px] bg-gray-500 text-white text-lg rounded-lg hover:bg-gray-600">
+                Cancel
+            </a>
+        </div>
+        <div class="w-1/2">
+            <button type="submit" 
+                class="inline-flex items-center justify-center w-full h-[50px] bg-blue-800 text-white text-lg rounded-lg hover:bg-blue-900">
+                Create
+            </button>
+        </div>
     </div>
 </div>
 
-
-
-        <!-- Choose API & Setting -->
-        <div class="mb-4 flex gap-4">
-            <div class="w-1/2">
-                <label class="block text-gray-700 font-bold mb-2">Choose API</label>
-                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
-                    <option>API set 1</option>
-                </select>
-            </div>
-            <div class="w-1/2">
-                <label class="block text-gray-700 font-bold mb-2">Choose Setting</label>
-                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
-                    <option>Setting 1</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="flex justify-center gap-4 mt-4">
-            <button type="button" class="w-1/2 h-[50px] bg-gray-500 text-white text-lg rounded-lg hover:bg-gray-600">Cancel</button> 
-                <button type="submit"class="w-1/2 h-[50px] bg-blue-900 text-white text-lg rounded-lg hover:bg-blue-800">Create</button>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const input = document.getElementById("tag-input");
+                const container = document.getElementById("tag-container");
+                const hiddenInput = document.getElementById("team_members");
+        
+                let tags = [];
+        
+                const updateHiddenInput = () => {
+                    hiddenInput.value = tags.join(',');
+                };
+        
+                const createTagElement = (name) => {
+                    const span = document.createElement('span');
+                    span.className = 'inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium';
+        
+                    span.innerText = name;
+        
+                    const removeBtn = document.createElement('a');
+                    removeBtn.innerText = '×';
+                    removeBtn.className = 'ml-2 font-bold text-blue-600 hover:text-red-500 cursor-pointer';
+        
+                    removeBtn.onclick = () => {
+                        tags = tags.filter(tag => tag !== name);
+                        container.removeChild(span);
+                        updateHiddenInput();
+                    };
+        
+                    span.appendChild(removeBtn);
+                    container.insertBefore(span, input);
+                };
+        
+                input.addEventListener('keydown', (e) => {
+                    if ((e.key === 'Enter' || e.key === ',') && input.value.trim() !== '') {
+                        e.preventDefault();
+                        const value = input.value.trim();
+                        if (!tags.includes(value)) {
+                            tags.push(value);
+                            createTagElement(value);
+                            updateHiddenInput();
+                        }
+                        input.value = '';
+                    }
+                });
+        
+                // หากต้องการ preload tag เก่า
+                const initialTags = ['Name 1', 'Name 2', 'Name 3'];
+                initialTags.forEach(tag => {
+                    tags.push(tag);
+                    createTagElement(tag);
+                });
+                updateHiddenInput();
+            });
+        </script>
+        
+    </div>
 </div>
     </form>
 </div>
