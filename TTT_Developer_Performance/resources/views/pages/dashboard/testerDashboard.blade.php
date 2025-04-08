@@ -201,6 +201,21 @@
     <div class="my-3 flex flex-row gap-4 grid grid-cols-3">
         <div class="col-span-2 bg-white h-full w-full rounded-lg shadow-md shadow-lg">
             <div id="columnChart"></div>
+            <div class="flex justify-end">
+                <div class="mx-4 mb-4 bg-[var(--primary-color)] w-[190px] h-[40px] rounded-md shadow-md shadow-lg">
+                    <div class="flex justify-center items-center h-full">
+                        <div class="flex justify-center w-[30px]">
+                             <img src="resources/Images/Icons/report.png" alt="icon-report" class="w-[25px] h-[25px]">
+                        </div>
+                        <div class="flex justify-center w-[140px]">
+                             <a href="/report"><p class="text-white font-semibold">Generate Report</p></a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
         {{-- pie chart, show pass & fail point --}}
@@ -361,12 +376,10 @@
                         </thead>
                         <!-- Table body -->
                         <tbody>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     1
                                 </th>
                                 <!-- Member-->
@@ -386,12 +399,10 @@
                                     0
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     2
                                 </th>
                                 <!-- Member-->
@@ -411,12 +422,10 @@
                                     0
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     3
                                 </th>
                                 <!-- Member-->
@@ -436,12 +445,10 @@
                                     0
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     4
                                 </th>
                                 <!-- Member-->
@@ -461,12 +468,10 @@
                                     0
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     5
                                 </th>
                                 <!-- Member-->
@@ -530,12 +535,10 @@
                         </thead>
                         <!-- Table body -->
                         <tbody>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white text-center">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
                                     1
                                 </th>
                                 <!-- Team-->
@@ -551,12 +554,10 @@
                                     8
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white text-center">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
                                     2
                                 </th>
                                 <!-- Team-->
@@ -572,12 +573,10 @@
                                     8
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 text-center">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     3
                                 </th>
                                 <!-- Team-->
@@ -593,12 +592,10 @@
                                     8
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 text-center">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     4
                                 </th>
                                 <!-- Team-->
@@ -614,12 +611,10 @@
                                     8
                                 </td>
                             </tr>
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 text-center">
+                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                                     5
                                 </th>
                                 <!-- Team-->
