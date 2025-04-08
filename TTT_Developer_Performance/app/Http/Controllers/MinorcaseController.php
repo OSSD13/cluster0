@@ -10,36 +10,36 @@ use App\Models\Team;
 use App\Models\UserTeamHistory;
 use Illuminate\Support\Facades\DB;
 
+
 class MinorcaseController extends Controller
 {
-  
-public function index()
-{
-    // Join tables and retrieve data
-    $points = MinorCase::join('points_current_sprint', 'minor_cases.mnc_id', '=', 'points_current_sprint.pcs_mnc_id')
-        ->join('user_team_history', 'points_current_sprint.pcs_uth_id', '=', 'user_team_history.uth_id')
-        ->join('users', 'user_team_history.uth_usr_id', '=', 'users.usr_id')
-        ->join('teams', 'user_team_history.uth_tm_id', '=', 'teams.tm_id')
-        ->join('sprints', 'points_current_sprint.pcs_spr_id', '=', 'sprints.spr_id')
-        ->select(
-            'points_current_sprint.pcs_id as id',
-            'points_current_sprint.pcs_pass as value',
-            'users.usr_name as member',
-            'teams.tm_name as team',
-            'sprints.spr_year as sprint_year',
-            'sprints.spr_number as sprint_num',
-            'minor_cases.mnc_card_detail as card_detail',
-            'minor_cases.mnc_defect_detail as defect_detail'
-        )
-        ->where([
-            ['points_current_sprint.pcs_is_use', '=', 1],
-            ['minor_cases.mnc_is_use', '=', 1]
-        ])
-        ->get();
+    public function index()
+    {
+        // Join tables and retrieve data
+        $points = MinorCase::join('points_current_sprint', 'minor_cases.mnc_id', '=', 'points_current_sprint.pcs_mnc_id')
+            ->join('user_team_history', 'points_current_sprint.pcs_uth_id', '=', 'user_team_history.uth_id')
+            ->join('users', 'user_team_history.uth_usr_id', '=', 'users.usr_id')
+            ->join('teams', 'user_team_history.uth_tm_id', '=', 'teams.tm_id')
+            ->join('sprints', 'points_current_sprint.pcs_spr_id', '=', 'sprints.spr_id')
+            ->select(
+                'points_current_sprint.pcs_id as id',
+                'points_current_sprint.pcs_pass as value',
+                'users.usr_name as member',
+                'teams.tm_name as team',
+                'sprints.spr_year as sprint_year',
+                'sprints.spr_number as sprint_num',
+                'minor_cases.mnc_card_detail as card_detail',
+                'minor_cases.mnc_defect_detail as defect_detail'
+            )
+            ->where([
+                ['points_current_sprint.pcs_is_use', '=', 1],
+                ['minor_cases.mnc_is_use', '=', 1]
+            ])
+            ->get();
 
-    // Pass data to the view
-    return view('pages.minorCase.minorcase', compact('points'));
-}
+        return view('pages.minorCase.minorcase', compact('points'));
+    }
+
     public function add()
     {
         $users = Users::where('usr_is_use', 1)
@@ -75,7 +75,7 @@ public function index()
             'mnc_is_use' => 1,
         ]);
 
-        // 2. สร้าง PointCurrentSprint
+        // 2. สร้าง PointCurrentSpri nt
         PointCurrentSprint::create([
             'pcs_spr_id' => $request->pcs_spr_id,
             'pcs_uth_id' => $request->pcs_uth_id,
