@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="flex justify-end">
-                            <a href="{{ route('fetch_cards') }}">
+                            <a href="{{ url('/dash-team-performance-card') }}">
                                 <button onclick="openModal()"
                                     class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
                                     <img src="../resources/Images/Icons/refresh.png" alt="Reload"
@@ -52,6 +52,7 @@
                                     Reload
                                 </button>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -785,8 +786,9 @@
     </div>
 
     {{-- Pop-up choose card --}}
-    <div class="flex justify-center items-center fixed inset-0 bg-gray-900 bg-opacity-60 flex justify-center items-center z-50 hidden" id="chooseCard">
-        <div class="absolute top-[15%] bg-white w-[1200px] h-[810px] rounded-lg shadow-md shadow-lg">
+    <div class="flex justify-center items-center fixed inset-0 bg-gray-900 bg-opacity-60 flex justify-center items-center z-50 hidden"
+        id="chooseCard">
+        <div class="absolute top-[5%] bg-white w-[1200px] h-[750px] rounded-lg shadow-md shadow-lg">
 
             {{-- cross x --}}
             <div class="flex justify-end mx-5 my-5">
@@ -826,7 +828,8 @@
                             </div>
                             {{-- right --}}
                             <div class="flex basis-1/2 justify-end items-center gap-4 mx-5">
-                                <p class="text-black rounded-md font-semibold text-md">2 selected</p>
+                                <p class="text-black rounded-md font-semibold text-md"><span
+                                        id="count">0</span>selected</p>
                                 <button>
                                     <img src="../resources/Images/Icons/deleteIcon.png" alt=""
                                         class="w-[30px] h-[30px]">
@@ -974,45 +977,6 @@
                                     class="bg-gray-200 w-[100px] h-[30px] text-white rounded-md font-semibold text-md">Clear</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Show cards --}}
-            <div class="flex justify-center items-center">
-                <div class="bg-white w-[1100px] h-[530px] mt-5">
-                    <div class="relative overflow-x-auto sm:rounded-lg max-h-[530px] overflow-y-auto">
-                        <!-- Table -->
-                        <table class="w-full text-[12px] text-left rtl:text-right text-gray-500">
-                            <!-- Table header -->
-                            <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b text-center">
-                                <tr>
-                                    <!-- Table header -->
-                                    <th scope="col" class="px-6 py-3"><input type="checkbox" id="selectAll"
-                                            class="w-[20px] h-[20px]"></th>
-                                    <th scope="col" class="px-6 py-3">#</th>
-                                    <th scope="col" class="px-6 py-3">Board</th>
-                                    <th scope="col" class="px-6 py-3">List</th>
-                                    <th scope="col" class="px-6 py-3">title</th>
-                                    <th scope="col" class="px-6 py-3">Detail</th>
-                                    <th scope="col" class="px-6 py-3">Full name</th>
-                                    <th scope="col" class="px-6 py-3">Point</th>
-                                </tr>
-                            </thead>
-                            @foreach ($cards as $index => $card)
-                                <tr class="text-center bg-white hover:bg-gray-200">
-                                    <td scope="col" class="px-6 py-3"><input type="checkbox"
-                                            class="w-[20px] h-[20px]"></td>
-                                    <td scope="col" class="px-6 py-3">{{ $index + 1 }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_boardname }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_listname }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_title }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_detail }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_member_fullname }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_point }}</td>
-                                </tr>
-                            @endforeach
-                        </table>
                     </div>
                 </div>
             </div>
@@ -1176,7 +1140,6 @@
         // checkbox select
         const selectAllCheckbox = document.getElementById('selectAll');
         const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#selectAll)');
-
         selectAllCheckbox.addEventListener('change', function() {
             checkboxes.forEach(function(checkbox) {
                 checkbox.checked = selectAllCheckbox.checked;
@@ -1184,22 +1147,21 @@
         });
 
 
-        function openModal(){
-            var background =  document.getElementById('chooseCard')
-            background.style.background = 'rgba(0,0,0,0.2)';
-            background.classList.toggle('hidden');
+        function openModal() {
+            var popUpCard = document.getElementById('chooseCard')
+            popUpCard.style.background = 'rgba(0,0,0,0.2)';
+            popUpCard.classList.toggle('hidden');
         }
 
-        function closeModal(){
-            var background =  document.getElementById('chooseCard')
-            background.classList.add('hidden');
+        function closeModal() {
+            var popUpCard = document.getElementById('chooseCard')
+            popUpCard.classList.add('hidden');
         }
         // แสดง pop up choose card
         // function togglechooseCardPopup() {
         //     var dropdown = document.getElementById('chooseCard');
         //     dropdown.classList.toggle('hidden');
         // }
-
     </script>
 @endsection
 
