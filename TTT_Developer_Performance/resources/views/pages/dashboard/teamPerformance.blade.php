@@ -44,12 +44,14 @@
                             </div>
                         </div>
                         <div class="flex justify-end">
-                            <button onclick="openModal()"
-                                class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
-                                <img src="../resources/Images/Icons/refresh.png" alt="Reload"
-                                    class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
-                                Reload
-                            </button>
+                            <a href="{{ route('fetch_cards') }}">
+                                <button onclick="openModal()"
+                                    class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
+                                    <img src="../resources/Images/Icons/refresh.png" alt="Reload"
+                                        class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
+                                    Reload
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
