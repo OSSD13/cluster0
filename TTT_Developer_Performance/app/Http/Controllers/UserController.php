@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function manageUser()
     {
-        $users = Users::where('usr_is_use', 1)->paginate(5);
+        $users = Users::where('usr_is_use', 1)->get();
         $teams = Team::where('tm_is_use', 1)->get();
 
         // เตรียมข้อมูลทีมปัจจุบันให้กับแต่ละ user
@@ -52,18 +52,61 @@ class UserController extends Controller
 
     public function resetPassword(Request $request)
     {
-        $userId = $request->input('userId');
+        $userId = $request->input('user_id');
         $defaultPassword = json_decode(Storage::disk('local')->get('config/defaultPassword.json'), true)['defaultPassword'];
 
-        // Update the user's password in the database
-        // Assuming you have a User model and you're using Eloquent ORM
         $user = \App\Models\User::find($userId);
         if ($user) {
             $user->usr_password = bcrypt($defaultPassword);
             $user->save();
-            return response()->json(['status' => 'success']);
+            return redirect()->back()->with('success', 'Password reset successfully.');
         } else {
-            return response()->json(['status' => 'error', 'message' => 'User not found']);
+            return redirect()->back()->with('error', 'User not found.');
         }
+    }
+
+
+    public function updateRole(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,usr_id',
+            'role' => 'nullable|in:Tester,Developer'
+        ]);
+
+        // ใช้ query builder แทน Eloquent save
+        Users::where('usr_id', $request->user_id)->update([
+            'usr_role' => $request->role
+        ]);
+
+        return redirect()->back()->with('success', 'Role updated successfully.');
+    }
+
+
+    public function updateTeam(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,usr_id',
+            'team_id' => 'nullable|exists:teams,tm_id'
+        ]);
+
+        UserTeamHistory::create([
+            'uth_usr_id' => $request->user_id,
+            'uth_tm_id' => $request->team_id,
+            'uth_start_date' => now(),
+            'uth_end_date' => null,
+            'uth_is_current' => 1
+        ]);
+
+        return redirect()->back()->with('success', 'Team updated successfully.');;
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $userId = $request->input('user_id');
+
+        // Update the user's status to inactive
+        Users::where('usr_id', $userId)->update(['usr_is_use' => 0]);
+
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
 }

@@ -64,7 +64,7 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-black">Error</h3>
-                            <p class="text-sm text-black font-semibold mt-1">Sorry, but you're not authorized to look at this page.</p>
+                            <p class="text-sm text-black font-semibold mt-1">Sorry, but it have something wrong.</p>
                         </div>
                     </div>
 
@@ -113,7 +113,7 @@
                 return; // ไม่มีการเปลี่ยนแปลง หรือ ค่าว่าง ไม่ต้องทำอะไร
             }
 
-            fetch('/save-configuration', {
+            fetch('/setting-save-config', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
