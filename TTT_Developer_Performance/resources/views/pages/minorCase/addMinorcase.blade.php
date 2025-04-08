@@ -114,7 +114,7 @@
 
         <!-- Buttons -->
         <div class="flex gap-4 w-full">
-            <a href="{{ route('Minorcase') }}"
+            <a href="{{ route('minorcase') }}"
                 class="w-[450px] h-[50px] p-2 bg-zinc-500 text-white rounded-[10px] font-bold flex items-center justify-center hover:bg-white hover:text-[var(--primary-color)] hover:border hover:border-[var(--primary-color)]">
                 Cancel
             </a>
@@ -129,6 +129,22 @@
 
 @section('javascripts')
 <script>
+@section('javascripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const memberInput = document.getElementById('member');
+        const teamInput = document.getElementById('team');
+
+        // Example of handling member selection or adding dynamic behavior
+        memberInput.addEventListener('change', function() {
+            console.log('Member selected:', memberInput.value);
+            // Handle team or other dynamic behavior here
+        });
+
+        // Similarly, you can add event listeners for other fields
+    });
+</script>
+@endsection
 
 </script>
 @endsection
