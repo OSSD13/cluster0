@@ -52,68 +52,33 @@ class MinorcaseController extends Controller
         return view(('pages.minorCase.addMinorcase') , compact('users', 'teams' , 'years' , 'sprints'));
 
     }
-    public function edit(){
-        return view('pages.minorCase.editMinorcase');
-    }
 
-    public function store(Request $request){
-        $validated = $request->validate([
-            'member' => 'required|string',
-            'point' => 'required|numeric',
-            'current_team' => 'required|string',
-            'sprint_year' => 'required|numeric',
-            'sprint_num' => 'required|numeric',
-        ]);
-        try {
-        // find uth_id by member and current_team
-        $uth_id = DB::table('user_team_history')
-        ->join('users', 'user_team_history.uth_usr_id', '=', 'users.usr_id')
-        ->join('teams', 'user_team_history.uth_tm_id', '=', 'teams.tm_id')
-        ->where([
-            ['users.usr_id', '=', $validated['member']],
-            ['teams.tm_id', '=', $validated['current_team']],
-            ['user_team_history.uth_end_date', '=', null]
-        ])
-        ->value('user_team_history.uth_id');
+public function store(Request $request){
+    $request->validate([
+        'member' => 'required',
+        'your_point' => 'required|numeric|min:0|max:100',
+        'team' => 'required',
+        'sprint_year' => 'required',
+        'sprint_num' => 'required',
 
-    $point = new Point();
-    $point->pts_created_time = now();
-    $point->pts_type = 'extra';
-    if ($uth_id != null) {
-        // Set the uth_id if found
-        $point->pts_uth_id = $uth_id;
-    } else {
-        //Set uth_end_date to now
-        DB::table('user_team_history')
-            ->where('uth_usr_id', '=', $validated['member'])
-            ->orderBy('uth_id', 'desc')
-            ->limit(1)
-            ->update([
-                'uth_end_date' => now()
-            ]);
-        //create new user_team_history
-        $uth = DB::table('user_team_history')->insertGetId([
-            'uth_usr_id' => DB::table('users')->where('usr_id', $validated['member'])->value('usr_id'),
-            'uth_tm_id' => DB::table('teams')->where('tm_id', $validated['current_team'])->value('tm_id'),
-            'uth_start_date' => now()
-        ]);
-        $point->pts_uth_id = $uth;
-    }
-    $point->pts_updated_time = now();
-    $point->pts_value = $validated['point_all'];
-    $point->pts_is_use = 1;
-    $point->pts_version_id = DB::table('versions')->latest('ver_id')->value('ver_id');
-    $point->pts_spr_id = DB::table('sprints')->latest('spr_id')->value('spr_id');
-    $point->save();
-    return redirect()->route('minorcase')->with('success', 'Extrapoint created successfully!');
-} catch (Exception $e) {
-    // แสดงข้อผิดพลาดในหน้าเว็บ
-    return redirect()->back()->withInput()->withErrors(['error' => 'Failed to create extrapoint: ' . $e->getMessage()]);
+        
+    ]);
+
+    $minorcase = new Point;
+
+    $minorcase->pts_value = $request->your_point;
+    $minorcase->pts_uth_id = $request->member;
+    $minorcase->mcn_card_detail =  ;
+    $minorcase->mnc_defect_detail = ;
+    $mnc_point->
+    
+    $minorcase->save();
+    return redirect()->route('Minorcase')->with('success', 'Minorcase added successfully.');
 
 }
-    }
-    public function delete($id)
-{
+
+
+    public function delete($id){
     // ค้นหาข้อมูล Point โดยใช้ ID
     $point = Point::find($id);
 
