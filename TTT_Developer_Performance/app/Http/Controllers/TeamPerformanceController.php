@@ -47,7 +47,7 @@ class TeamPerformanceController extends Controller
 
         // 2. ดึงชื่อบอร์ดที่ตรงกับใน DB
         //$teamBoardNames = Team::pluck('trello_board_name')->toArray();
-        $teamBoardNames = ['TTT Developer Performance (TestAPI)'];
+        $teamBoardNames = ['SumoBoard'];
 
         // 3. กรองเฉพาะบอร์ดที่ตรงกับชื่อใน DB
         $matchedBoards = collect($allBoards)->filter(function ($board) use ($teamBoardNames) {
@@ -119,20 +119,24 @@ class TeamPerformanceController extends Controller
         return $cardsWithDetails;
     }
 
-    public function saveCards($cardsData)
-    {
+    public function saveCards($cardsData){
         foreach ($cardsData as $card) {
-            // บันทึกข้อมูลลงในฐานข้อมูล
-            Card::create([
-                'crd_trc_id' => 1,
-                'crd_trello_id' => $card['card_id'],
-                'crd_boardname' => $card['board_name'],
-                'crd_listname' => $card['list_name'],
-                'crd_title' => $card['card_title'],
-                'crd_detail' => $card['card_description'],
-                'crd_member_fullname' => $card['members'][0] ?? null,  // รวมชื่อสมาชิกทั้งหมด
-                'crd_point' => isset($card['plugin_value']['points']) ? $card['plugin_value']['points'] : 0
-            ]);
+            // ตรวจสอบว่า card_id นี้มีอยู่ในฐานข้อมูลแล้วหรือไม่
+            $existingCard = Card::where('crd_trello_id', $card['card_id'])->first();
+
+            if (!$existingCard) {
+                // หากไม่พบการ์ดในฐานข้อมูล ก็ทำการบันทึกข้อมูลใหม่
+                Card::create([
+                    'crd_trc_id' => 1,
+                    'crd_trello_id' => $card['card_id'],
+                    'crd_boardname' => $card['board_name'],
+                    'crd_listname' => $card['list_name'],
+                    'crd_title' => $card['card_title'],
+                    'crd_detail' => $card['card_description'],
+                    'crd_member_fullname' => $card['members'][0] ?? null,  // รวมชื่อสมาชิกทั้งหมด
+                    'crd_point' => isset($card['plugin_value']['points']) ? $card['plugin_value']['points'] : 0
+                ]);
+            }
         }
     }
 
