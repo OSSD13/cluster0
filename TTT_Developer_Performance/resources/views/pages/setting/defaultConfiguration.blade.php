@@ -113,7 +113,7 @@
                 return; // ไม่มีการเปลี่ยนแปลง หรือ ค่าว่าง ไม่ต้องทำอะไร
             }
 
-            fetch('/save-configuration', {
+            fetch('/setting-save-config', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
