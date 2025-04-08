@@ -809,7 +809,7 @@
                     <div class="bg-white w-[1100px] h-[50px] rounded-lg shadow-md shadow-lg flex items-center">
                         {{-- left --}}
                         <div class="flex justify-between w-full">
-                            <div class="flex flex-row gap-4 mx-5 basis-1/2">
+                            <div class="flex flex-row gap-4 mx-5 basis-2/3">
                                 <p class="text-[var(--primary-color)] font-bold text-xl">Add to</p>
                                 <button
                                     class="bg-[var(--primary-color)] text-white rounded-md font-semibold text-md w-[100px] h-[30px]">
@@ -825,7 +825,7 @@
                                 </button>
                             </div>
                             {{-- right --}}
-                            <div class="flex basis-1/2 justify-end items-center gap-4 mx-5">
+                            <div class="flex basis-1/3 justify-end items-center gap-4 mx-5">
                                 <p class="text-black rounded-md font-semibold text-md"><span
                                         id="count">0</span>selected</p>
                                 <button>

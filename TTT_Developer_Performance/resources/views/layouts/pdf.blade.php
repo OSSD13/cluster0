@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Report</title>
-    <link rel="stylesheet" href="../resources/css/pdf.css">
+    <link rel="stylesheet" href="resources/css/pdf.css">
     <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}" />
-    <link rel="stylesheet" href="{{ asset('resources/css/global.css') }}">
+    <link rel="stylesheet" href="resources/css/global.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
