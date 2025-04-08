@@ -31,7 +31,7 @@
                             <div class="grid grid-cols-3 gab-2 ">
                                 <div class="flex justify-end col-span-2 items-center">
                                     <p class="text-[12px] pr-[5px] ">Date: 13/01/2025-17/01/2025 </p>
-                                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Add"
+                                    <img src="resources/Images/Icons/editIcon.png" alt="Add"
                                         class="w-6 h-6 mr-2 rounded">
                                 </div>
                                 <div class="flex justify-end">
@@ -44,12 +44,14 @@
                             </div>
                         </div>
                         <div class="flex justify-end">
-                            <button onclick="togglechooseCardPopup()"
-                                class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
-                                <img src="../resources/Images/Icons/refresh.png" alt="Reload"
-                                    class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
-                                Reload
-                            </button>
+                            <a href="{{ route('fetch_cards') }}">
+                                <button onclick="togglechooseCardPopup()"
+                                    class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
+                                    <img src="resources/Images/Icons/refresh.png" alt="Reload"
+                                        class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
+                                    Reload
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

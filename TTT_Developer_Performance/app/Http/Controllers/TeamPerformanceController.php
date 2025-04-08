@@ -14,7 +14,8 @@ class TeamPerformanceController extends Controller
         return view('pages.dashboard.teamPerformance');
     }
 
-    public function testTrelloApi(){
+    public function testTrelloApi()
+    {
         // API key และ token ของ Trello
         $key = 'b683c2629414230b29ab2bfc3ac2ddb1';
         $token = 'ATTAd32cb8066cf7993bbd622dab6f0f6475110b47b32767ad3b8f690474537efbcb913D3106';
@@ -22,8 +23,12 @@ class TeamPerformanceController extends Controller
         // ดึงข้อมูลการ์ดที่กรองจาก Trello
         $cardsWithDetails = $this->getFilteredCardsWithDetails($key, $token);
 
-        // ส่งข้อมูลไปยัง view
-        return view('fetchcards', compact('cardsWithDetails'));
+        // บันทึกข้อมูลการ์ดลงในฐานข้อมูล
+        $this->saveCards($cardsWithDetails);
+
+        // กลับไปยังหน้าที่ต้องการ พร้อมข้อความแจ้งเตือน
+        return redirect()->route('team.performance')
+                        ->with('success', 'ข้อมูลการ์ดได้รับการบันทึกเรียบร้อยแล้ว!');
     }
 
     public function getFilteredCardsWithDetails($key, $token){
@@ -100,6 +105,7 @@ class TeamPerformanceController extends Controller
 
                 // เก็บข้อมูลการ์ดทั้งหมดพร้อมชื่อสมาชิกเต็ม
                 $cardsWithDetails[] = [
+                    'card_id' => $card['id'],
                     'board_name' => $board['name'],
                     'list_name' => $listName,
                     'card_title' => $card['name'],
@@ -113,31 +119,25 @@ class TeamPerformanceController extends Controller
         return $cardsWithDetails;
     }
 
-    public function saveCards(Request $request)
+    public function saveCards($cardsData)
     {
-        // รับข้อมูลจาก request
-        $cardsData = $request->input('cards'); // cardsData ควรจะเป็น array ของข้อมูลที่ดึงมา
-
         foreach ($cardsData as $card) {
             // บันทึกข้อมูลลงในฐานข้อมูล
             Card::create([
-                'crd_trc_id' => 1,  // ใช้ค่าคงที่ 1
-                'crd_trello_id' => 1,  // ใช้ค่าคงที่ 1
+                'crd_trc_id' => 1,
+                'crd_trello_id' => $card['card_id'],
                 'crd_boardname' => $card['board_name'],
                 'crd_listname' => $card['list_name'],
                 'crd_title' => $card['card_title'],
                 'crd_detail' => $card['card_description'],
-                'crd_member_fullname' => implode(', ', $card['members']),  // รวมชื่อสมาชิกทั้งหมด
-                'crd_point' => isset($card['plugin_value']) ? $card['plugin_value'] : null,  // สมมติว่า plugin_value คือคะแนน
+                'crd_member_fullname' => $card['members'][0] ?? null,  // รวมชื่อสมาชิกทั้งหมด
+                'crd_point' => isset($card['plugin_value']['points']) ? $card['plugin_value']['points'] : 0
             ]);
         }
-
-        // หลังจากบันทึกข้อมูลแล้ว
-        return redirect()->route('pages.dashboard.teamPerformance')->with('success', 'ข้อมูลการ์ดได้รับการบันทึกเรียบร้อยแล้ว!');
     }
 
     public function card(){
-        $cards = Card::All();
+        $cards = Card::all();
         return view('pages.dashboard.teamPerformance',compact('cards'));
     }
 
@@ -151,7 +151,6 @@ class TeamPerformanceController extends Controller
     //         'crd_member_fullname' => 'nah',
     //         'crd_point' => 10
     //     ]);
-    //     return redirect('pages.teamPerformance');
-    // // return redirect('/card');
+    //     return redirect('pages.dashboard.teamPerformance');
     // }
 }

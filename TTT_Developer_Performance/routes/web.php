@@ -131,4 +131,4 @@ Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, '
 Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trello.list');
 // ****************************************************************************************************** //
 // Test
-Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi'])->name('fetch_cards');
