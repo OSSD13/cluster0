@@ -9,7 +9,7 @@ class Users extends Authenticatable
     protected $table = 'users';
     protected $primaryKey = 'usr_id';
     public $timestamps = false;
-   
+
 
     protected $fillable = [
         'usr_username',
@@ -30,5 +30,8 @@ class Users extends Authenticatable
     {
         return $this->usr_password; // ระบุฟิลด์รหัสผ่านให้ Laravel ใช้
     }
+    public function teamHistories()
+    {
+        return $this->hasMany(UserTeamHistory::class, 'uth_usr_id', 'usr_id');
+    }
 }
-
