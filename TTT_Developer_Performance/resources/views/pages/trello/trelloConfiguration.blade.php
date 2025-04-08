@@ -51,7 +51,8 @@
                                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                                     alt="Edit Icon" class="w-[35px] h-[35px]">
                                             </a>
-                                            <a href="">
+                                            <a href=" {{ route('trelloConfiguration') }} "
+                                                onclick="openAlertDelete({{ $api->id }})">
                                                 <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
                                                     alt="Delete Icon" class="w-[35px] h-[35px]">
                                             </a>
@@ -96,13 +97,14 @@
                                         <th scope="row" class="px-6 py-4 font-medium text-center whitespace-nowrap">
                                             {{ $index + 1 }}
                                         </th>
-                                        <td class="px-6 py-4 text-center">{{ $list->name }}</td>
+                                        <td class="px-6 py-4 text-center">{{ $list->stl_name }}</td>
                                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
                                             <a href="">
                                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                                     alt="Edit Icon" class="w-[35px] h-[35px]">
                                             </a>
-                                            <a href="">
+                                            <a href=" {{ route('trelloConfiguration') }} "
+                                                onclick="openAlertDelete({{ $api->id }})">
                                                 <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}"
                                                     alt="Delete Icon" class="w-[35px] h-[35px]">
                                             </a>
@@ -120,10 +122,112 @@
             </div>
         </div>
     </div>
+
+    <div id="alertDeleteBox" class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+        <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+            <button onclick="closeAlertDelete()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex justify-center mb-4">
+                <img alt="Cross icon" class="rounded-full" height="64"
+                    src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
+            <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="confirmDelete()"
+                    class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                    Delete
+                </button>
+                <button onclick="closeAlertDelete()"
+                    class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <form id="deleteForm" method="POST" style="display: none;">
+        @csrf
+        @method('DELETE')
+    </form>
+
+    <!-- Alert Success Box -->
+    <div id="alertSuccessBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+            <!-- ปุ่มปิด -->
+            <button onclick="closeSuccessAlert()" class="absolute top-2 right-4 text-gray-400 text-2xl hover:text-gray-600">
+                &times;
+            </button>
+
+            <!-- ไอคอน -->
+            <div class="flex justify-center mb-4">
+                <img src="{{ asset('resources/Images/Icons/check (1).png') }}" alt="Check icon" class="w-16 h-16">
+            </div>
+
+            <!-- ข้อความ -->
+            <h2 class="text-2xl font-bold text-black mb-2">Successful</h2>
+            <p class="text-gray-500 mb-6"> Trello credentials saved successfully! </p>
+
+            <!-- ปุ่ม Done -->
+            <button onclick="closeSuccessAlert()"
+                class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                Done
+            </button>
+        </div>
+    </div>
 @endsection
 
 @section('javascripts')
-    <script></script>
+    <script>
+        let deleteId = null;
+
+        function openAlertDelete(id) {
+            deleteId = id;
+            document.getElementById("alertDeleteBox").classList.remove("hidden");
+        }
+
+        function closeAlertDelete() {
+            deleteId = null;
+            document.getElementById("alertDeleteBox").classList.add("hidden");
+        }
+
+        function confirmDelete() {
+            if (deleteId) {
+                const form = document.getElementById('deleteForm');
+                form.action = `/trello/delete/${deleteId}`; // route ที่คุณจะลบ
+                form.submit();
+            }
+        }
+
+        document.getElementById("alertDeleteBox").addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAlertDelete();
+            }
+        });
+    </script>
+
+    <script>
+        @if (session('success'))
+            window.addEventListener('DOMContentLoaded', function() {
+                openSuccessAlert();
+            });
+
+            function openSuccessAlert() {
+                document.getElementById("alertSuccessBox").classList.remove("hidden");
+            }
+
+            function closeSuccessAlert() {
+                document.getElementById("alertSuccessBox").classList.add("hidden");
+            }
+
+            // ปิด alert ถ้าคลิกนอกกล่อง
+            document.getElementById("alertSuccessBox").addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeSuccessAlert();
+                }
+            });
+        @endif
+    </script>
 @endsection
 
 @section('styles')
@@ -139,6 +243,18 @@
 
         body {
             font-family: "Inter", sans-serif;
+        }
+
+        #alertDeleteBox {
+            z-index: 9999;
+            /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #alertSuccessBox {
+            z-index: 9999;
+            /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
         }
     </style>
 @endsection

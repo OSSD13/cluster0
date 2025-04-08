@@ -92,8 +92,8 @@
                         <i id="memberManagement-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="memberManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="#" class="block">Member List</a></li>
-                        <li><a href="#" class="block">Add Member</a></li>
+                        <li><a href="{{ url('member') }}" class="block">Member List</a></li>
+                        <li><a href="{{ url('member-add') }}" class="block">Add Member</a></li>
                     </ul>
                 </li>
 
@@ -126,7 +126,7 @@
                     </button>
                     <ul id="settingsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
                         <li><a href="{{ url('setting-revision-history') }}" class="block">Revision History</a></li>
-                        <li><a href="#" class="block">Access Control</a></li>
+                        <li><a href="{{ url('/setting-access-control') }}" class="block">Access Control</a></li>
                         <li><a href="{{ url('setting-trello-config') }}" class="block">Trello Configuration</a></li>
                         <li><a href="{{ url('setting-default-password') }}" class="block">Default Configuration</a></li>
                     </ul>
@@ -164,7 +164,7 @@
                             </a>
                         </li>
                         <li class="py-2 px-3 rounded-xl hover:bg-black/20">
-                            <a href="{{ url('/changepassword')}}" class="inline-flex gap-2">
+                            <a href="{{ url('/change-password')}}" class="inline-flex gap-2">
                                 <img src="../resources/Images/Icons/lock.png" alt=""
                                     class="w-[20px] h-[20px]">
                                 <span id="changePassword-text">Change Password</span>

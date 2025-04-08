@@ -9,6 +9,7 @@
     <div class="flex items-end gap-[10px] mb-4">
         <h2 class="text-2xl font-bold">Member Management</h2>
         <p class="font-bold text-neutral-400 ml-4">Member List / Add Member</p>
+
     </div>
 @endsection
 
@@ -19,41 +20,110 @@
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-blue-900">Create New Member</h3>
 
-            </div>
+                <button
+                    class="w-[150px] h-[40px] px-4 flex items-center justify-center gap-2 bg-[var(--primary-color)] text-white font-bold rounded-sm"
+                    onclick="addMoreRow()">
 
-            <div>
-                <!-- Member Input Fields -->
-                @for ($i = 1; $i <= 3; $i++)
-                    <div class="flex items-center gap-4 mb-3 member-row">
+                    <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" class="w-[20px] h-[20px]"
+                        alt="icon">
+
+                    Add More
+                </button>
+
+            </div>
+            <script>
+                let rowCount = 1;
+
+                function addMoreRow() {
+                    rowCount++;
+
+                    const container = document.getElementById('member-list-container');
+
+                    const newRow = document.createElement('div');
+                    newRow.className = 'flex items-center gap-4 mb-3 member-row';
+
+                    newRow.innerHTML = `
                         <div class="w-1/3">
-                            <label class="block font-bold text-gray-700">{{ $i }}. Name <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block font-bold text-gray-700">${rowCount}. Name <span class="text-red-500">*</span></label>
                             <input type="text" placeholder="Your Name"
                                 class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
-           placeholder-gray-300 placeholder:font-medium placeholder:text-base">
+                                placeholder-gray-300 placeholder:font-medium placeholder:text-base">
                         </div>
                         <div class="w-1/3">
-                            <label class="block font-bold text-gray-700">{{ $i }}. Username <span
-                                    class="text-red-500">*</span></label>
+                            <label class="block font-bold text-gray-700">${rowCount}. Username <span class="text-red-500">*</span></label>
                             <input type="text" placeholder="Your Username"
                                 class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
-           placeholder-gray-300 placeholder:font-medium placeholder:text-base">
+                                placeholder-gray-300 placeholder:font-medium placeholder:text-base">
                         </div>
                         <div class="w-1/3 flex items-center">
                             <div class="w-full">
-                                <label class="block font-bold text-gray-700">{{ $i }}. Trello Full Name</label>
+                                <label class="block font-bold text-gray-700">${rowCount}. Trello Full Name</label>
                                 <input type="text" placeholder="Trello Name"
                                     class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
-           placeholder-gray-300 placeholder:font-medium placeholder:text-base">
+                                    placeholder-gray-300 placeholder:font-medium placeholder:text-base">
+                            </div>
+                            <a href="javascript:void(0)" class="block mt-6 delete-btn" onclick="handleDelete(this)">
+                                <img src="http://localhost:1300/resources/Images/Icons/deleteIcon.png" alt="Delete"
+                                    class="w-[53px] h-[53px] ml-2 rounded-xl">
+                            </a>
+                        </div>
+                    `;
+
+                    container.appendChild(newRow);
+                }
+
+                function handleDelete(el) {
+                    const row = el.closest('.member-row');
+                    if (row) {
+                        row.remove();
+                    }
+                }
+
+                function renumberRows() {
+                    const rows = document.querySelectorAll('.member-row');
+                    rows.forEach((row, index) => {
+                        const number = index + 1;
+                        row.querySelector('.name-label').innerHTML = `${number}. Name <span class="text-red-500">*</span>`;
+                        row.querySelector('.username-label').innerHTML =
+                            `${number}. Username <span class="text-red-500">*</span>`;
+                        row.querySelector('.trello-label').innerHTML = `${number}. Trello Full Name`;
+                    });
+                }
+            </script>
+
+            <div>
+                <div id="member-list-container">
+                    <div class="flex items-center gap-4 mb-3 member-row">
+                        <div class="w-1/3">
+                            <label class="block font-bold text-gray-700">Name <span class="text-red-500">*</span></label>
+                            <input type="text" placeholder="Your Name"
+                                class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
+       placeholder-gray-300 placeholder:font-medium placeholder:text-base">
+                        </div>
+                        <div class="w-1/3">
+                            <label class="block font-bold text-gray-700">Username <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" placeholder="Your Username"
+                                class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
+       placeholder-gray-300 placeholder:font-medium placeholder:text-base">
+                        </div>
+                        <div class="w-1/3 flex items-center">
+                            <div class="w-full">
+                                <label class="block font-bold text-gray-700">Trello Full Name</label>
+                                <input type="text" placeholder="Trello Name"
+                                    class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
+       placeholder-gray-300 placeholder:font-medium placeholder:text-base">
                             </div>
 
-                            <a href="javascript:void(0)" class="block mt-6 delete-btn" onclick="handleDelete()">
+                            <a href="javascript:void(0)" class="block mt-6 delete-btn" onclick="handleDelete(this)">
                                 <img src="http://localhost:1300/resources/Images/Icons/deleteIcon.png" alt="Delete"
                                     class="w-[53px] h-[53px] ml-2 rounded-xl">
                             </a>
                         </div>
                     </div>
-                @endfor
+                </div>
+
+
 
 
                 <!-- Dropdown -->
@@ -81,7 +151,8 @@
                 <!-- Buttons -->
                 <div class="flex justify-between mt-6">
                     <button
-                        class="w-[450px] h-[60px] p-2 bg-[#636363] text-white rounded-[10px] font-bold hover:bg-[#a6a6a6] hover:text-white hover:border-3 hover:border-[#636363]">
+                        class="w-[450px] h-[60px] p-2 bg-[#636363] text-white rounded-[10px] font-bold hover:bg-[#a6a6a6] hover:text-white hover:border-3 hover:border-[#636363]"
+                        onclick="window.location.href='{{ route('memberlist') }}'">
                         Cancel
                     </button>
                     <button onclick = "openErrorAlert()"
@@ -155,10 +226,10 @@
                 }
 
                 /* #alertWarningBox {
-                    z-index: 9999; */
-                    /* ให้สูงกว่าทุกอย่างในหน้า */
-                    /* background-color: rgba(0, 0, 0, 0.5);
-                } */
+                                                                    z-index: 9999; */
+                /* ให้สูงกว่าทุกอย่างในหน้า */
+                /* background-color: rgba(0, 0, 0, 0.5);
+                                                                } */
 
                 #alertErrorBox {
                     z-index: 9999;
@@ -167,7 +238,7 @@
                 }
             </style>
 
-            <script>
+            {{-- <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     // หา element ทุกปุ่มที่มี class delete-btn
                     document.querySelectorAll('.delete-btn').forEach(function(btn) {
@@ -196,7 +267,7 @@
                         });
                     });
                 });
-            </script>
+            </script> --}}
             <script>
                 // function openWarningAlert() {
                 //     document.getElementById("alertWarningBox").classList.remove("hidden");

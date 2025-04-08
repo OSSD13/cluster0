@@ -45,7 +45,7 @@
                         </div>
                         <div class="flex justify-end">
                             <button onclick="togglechooseCardPopup()"
-                                class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center">
+                                class="focus:outline-none flex items-center bg-[var(--primary-color)] text-white px-5 py-1 w-[100px] h-[25px] rounded text-[12px] font-bold justify-center hover:bg-blue-700 transition-all duration-200 cursor-pointer">
                                 <img src="../resources/Images/Icons/refresh.png" alt="Reload"
                                     class="w-5 h-5 mr-1 hover:rotate-180 transition-transform duration-300">
                                 Reload
@@ -388,9 +388,10 @@
         <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-6">
             <div class="text-xl font-bold mb-4 text-blue-900 flex justify-between items-center">
                 <p>Team Members</p>
-                <button class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
+                <button
+                    class="flex items-center bg-blue-900 text-white px-4 py-1 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                     <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
-                        class="w-5 h-5 mr-2">
+                        class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                     Add New
                 </button>
             </div>
@@ -543,9 +544,10 @@
                 <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
                     <div class="flex justify-between items-center mb-2">
                         <h2 class="text-lg font-bold text-blue-900 text-[20px]">Backlog</h2>
-                        <button class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
+                        <button
+                            class="flex items-center bg-blue-900 text-white px-4 py-1 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                             <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
-                                class="w-5 h-5 mr-2">
+                                class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                             Add New
                         </button>
                     </div>
@@ -637,9 +639,10 @@
                 <div class="w-full bg-white border-gray-300 rounded-lg shadow-xl p-4">
                     <div class="flex justify-between items-center mb-2">
                         <h2 class="text-lg font-bold text-blue-900 text-[20px]">Minor Case</h2>
-                        <button class="bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold flex items-center">
+                        <button
+                            class="flex items-center bg-blue-900 text-white px-4 py-1 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                             <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
-                                class="w-5 h-5 mr-2">
+                                class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                             Add New
                         </button>
                     </div>
@@ -709,9 +712,10 @@
 
                     <div class="flex justify-between items-center w-full">
                         <p class="text-[15px] font-bold text-zinc-400">Extra Point</p>
-                        <button class="flex items-center bg-blue-900 text-white px-2 py-1 rounded text-[12px] font-bold">
+                        <button
+                            class="flex items-center bg-blue-900 text-white px-4 py-1 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                             <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
-                                class="w-5 h-5 mr-2">
+                                class="w-5 h-5 mr-2 transition-transform duration-300 hover:rotate-12">
                             Add New
                         </button>
                     </div>
