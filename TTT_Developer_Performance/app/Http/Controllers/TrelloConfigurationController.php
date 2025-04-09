@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Card;
+use App\Models\Team;
 use App\Models\TrelloCredential;
 use App\Models\SettingTrello;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
 
 class TrelloConfigurationController extends Controller
 {
@@ -73,8 +76,12 @@ class TrelloConfigurationController extends Controller
     //Delete Trello API
     public function deleteAPI($id) {
         $trello = TrelloCredential::findOrFail($id);
-        $trello->delete();
 
+        // ลบลูก (cards) โดยการ query โดยตรง
+        Card::where('crd_trc_id', $trello->id)->delete();
+
+        // ค่อยลบพ่อ
+        $trello->delete();
         return redirect()->route('trello.config')->with('success', 'Trello API deleted successfully!');
     }
 
@@ -102,7 +109,7 @@ class TrelloConfigurationController extends Controller
         $setting->stl_done = $request->stl_done ?? 'Done';
         $setting->stl_bug = $request->stl_bug ?? 'Bug';
         $setting->stl_minor_case = $request->stl_minor_case ?? 'Minor case';
-        $setting->stl_extra = $request->stl_extra ?? '0';
+        $setting->stl_extra = $request->stl_extra ?? 'Extra';
         $setting->stl_cancel = $request->stl_cancel ?? 'Cancel';
         $setting->save();
 
@@ -143,6 +150,8 @@ class TrelloConfigurationController extends Controller
     //Delete Trello List
     public function deleteList($id) {
         $trello = SettingTrello::findOrFail($id);
+
+        Team::where('tm_stl_id', $trello->id)->delete();
         $trello->delete();
 
         return redirect()->route('trello.config')->with('success', 'Trello API deleted successfully!');
