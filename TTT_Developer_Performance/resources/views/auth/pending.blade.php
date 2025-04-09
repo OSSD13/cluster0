@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="resources/css/global.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+  <style>
+    body {
+        background-image: url('/resources/Images/background.avif');
+        backdrop-filter: blur(10px);
+    }
+</style>
+
 </head>
 <body class="flex justify-center items-center h-screen bg-cover bg-center">
     <div class="absolute top-0 left-0 flex items-center ml-4 mt-4">

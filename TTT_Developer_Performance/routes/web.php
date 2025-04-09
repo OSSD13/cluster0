@@ -80,11 +80,17 @@ Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('over
 Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
 Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
 Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
+Route::post('/minorcase/store', [MinorcaseController::class,'store'])->name('storeMinorcase');
+Route::put('/minorcase/{id}', [MinorcaseController::class, 'update'])->name('minorcase.update');
+//Route::get('/minorcase/edit/{id}', [MinorcaseController::class, 'edit'])->name('minorcase.edit');
 // ****************************************************************************************************** //
 // Backlog
-Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
-Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
-Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklog');
+Route::get('/backlog', [BacklogController::class, 'index'])->name('backlog'); // แสดงรายการ backlog
+Route::get('/backlog-add', [BacklogController::class, 'create'])->name('addbacklog'); // ฟอร์มการเพิ่ม backlog
+Route::get('/backlog-edit/{id}', [BacklogController::class, 'edit'])->name('editbacklog'); // ฟอร์มการแก้ไข backlog
+Route::delete('/backlog/{id}', [BacklogController::class, 'destroy'])->name('deletebacklog'); // ลบ backlog
+Route::put('/backlog/{id}', [BacklogController::class, 'update'])->name('backlog.update'); // อัพเดต backlog
+Route::post('/backlogs/store', [BacklogController::class, 'store'])->name('backlogs.store'); // บันทึก backlog ใหม่
 // ****************************************************************************************************** //
 // Extra Points
 Route::post('/extrapoint-update/{id}', [ExtrapointController::class, 'update'])->name('updateExtraPoint');

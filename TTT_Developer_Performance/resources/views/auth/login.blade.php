@@ -10,11 +10,17 @@
     <link rel="stylesheet" href="resources/css/global.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <style>
+        body {
+            background-image: url('resources/Images/background.avif');
+            backdrop-filter: blur(10px);
+        }
+    </style>
 </head>
 <body class="flex justify-center items-center h-screen bg-cover bg-center ">
     <form action="{{ url('/login') }}" method="post" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
         @csrf
-        <img src="/resources/Images/ttt_logo.jpg" alt="Logo" class="w-24">
+        <img src="resources/Images/ttt_logo.jpg" alt="Logo" class="w-24">
         <h2 class="text-[24px] font-bold text-[var(--primary-color)] mb-5">TTT Developer Performance</h2>
 
         <div class="mb-[30px] w-full">
@@ -43,7 +49,7 @@
         </div>
 
         <a href="{{ route('auth.google') }}" class="w-full h-[50px] p-2 border border-gray-300 text-gray-700 flex items-center justify-center rounded-[10px] hover:bg-gray-100 font-bold">
-            <img src="/resources/Images/Icons/google.png" alt="Google Logo" class="w-5 mr-2"> Sign in with Google
+            <img src="resources/Images/Icons/google.png" alt="Google Logo" class="w-5 mr-2"> Sign in with Google
         </a>
 
         <div class="mt-[30px] text-sm">

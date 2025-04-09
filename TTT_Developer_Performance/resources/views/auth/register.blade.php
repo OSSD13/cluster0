@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="resources/css/global.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+  <style>
+    body {
+        background-image: url('resources/Images/background.avif');
+        backdrop-filter: blur(10px);
+    }
+</style>
+
 </head>
 <body class="flex justify-center items-center h-screen bg-cover bg-center">
   <form action="{{ route('step1') }}" method="POST" class="w-full h-full max-w-[480px] max-h-[700px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
