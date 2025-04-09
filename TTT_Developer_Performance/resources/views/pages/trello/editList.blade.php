@@ -88,7 +88,7 @@
                     <option value="stl_done">Done</option>
                     <option value="stl_bug">Bug / Backlog</option>
                     <option value="stl_minor_case">Minor case</option>
-                    <option value="stl_name">Extra</option>
+                    <option value="stl_extra">Extra</option>
                     <option value="stl_cancel">Cancel</option>
                 </select>
             </div>

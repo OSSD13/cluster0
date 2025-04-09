@@ -22,7 +22,7 @@
                     <h2 class="text-xl font-bold text-blue-900">Trello API</h2>
                     <!-- Add New API -->
                     <button type="button" onclick="window.location.href='{{ route('trello.api') }}'"
-                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg" >
+                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                         <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
                             class="w-[20px] h-[20px] mr-2 transition-transform duration-300 hover:rotate-12">
                         Add New
@@ -175,7 +175,8 @@
     <div id="alertSuccessBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
             <!-- ปุ่มปิด -->
-            <button onclick="closeSuccessAlert()" class="absolute top-2 right-4 text-gray-400 text-2xl hover:text-gray-600">
+            <button onclick="closeSuccessAlert()"
+                class="absolute top-2 right-4 text-gray-400 text-2xl hover:text-gray-600">
                 &times;
             </button>
 
