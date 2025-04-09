@@ -41,6 +41,7 @@ class ExtrapointController extends Controller
         $userTeamHistories = DB::table('user_team_history')
             ->leftJoin('users','users.usr_id','uth_usr_id')
             ->leftJoin('teams', 'teams.tm_id','uth_tm_id')
+            ->where('uth_is_current', '=','1')
             ->select('users.usr_username as name', 'teams.tm_name as teamName','user_team_history.uth_id as id')
             ->get();
         $years = DB::table('sprints')

@@ -98,7 +98,7 @@ Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extraPo
 Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtraPoint');
 Route::post('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtraPoint');
-Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtraPoint');
+Route::delete('/extrapoint-delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtraPoint');
 
 // ****************************************************************************************************** //
 // Teams Managment
