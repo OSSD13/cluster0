@@ -123,9 +123,57 @@ class MinorcaseController extends Controller
         return redirect()->route('minorcase')->with('success', 'Minorcase added successfully.');
     }
     
-        public function edit($id){
+    public function edit()
+    {
 
-        }
+        return view('pages.minorCase.editminorcase');
+    }
+public function update(Request $request, $id)
+{
+    // Validate
+    $request->validate([
+        'uth_usr_id' => 'required',
+        'uth_tm_id' => 'required',
+        'spr_year' => 'required',
+        'spr_number' => 'required',
+        'mnc_point' => 'required|numeric',
+    ]);
+
+    // หา uth_id
+    $uth = DB::table('user_team_history')
+        ->where('uth_usr_id', $request->uth_usr_id)
+        ->where('uth_tm_id', $request->uth_tm_id)
+        ->where('uth_is_current', 1)
+        ->first();
+
+    if (!$uth) {
+        return back()->withErrors('ไม่พบประวัติทีมของสมาชิกนี้');
+    }
+
+    $sprint = DB::table('sprints')
+        ->where('spr_year', $request->spr_year)
+        ->where('spr_number', $request->spr_number)
+        ->first();
+
+    if (!$sprint) {
+        return back()->withErrors('ไม่พบข้อมูล Sprint');
+    }
+
+    DB::table('minor_cases')
+        ->where('mnc_id', $id)
+        ->update([
+            'mnc_point'         => $request->mnc_point,
+            'mnc_card_detail'   => $request->mnc_card_detail ?? null,
+            'mnc_defect_detail' => $request->mnc_defect_detail ?? null,
+            'mnc_uth_id'        => $uth->uth_id,
+            'mnc_spr_id'        => $sprint->spr_id,
+        ]);
+
+    return redirect()->route('minorcase')->with('success', 'Minor Case updated successfully.');
+}
+
+
+
   
     public function delete($id)
     {

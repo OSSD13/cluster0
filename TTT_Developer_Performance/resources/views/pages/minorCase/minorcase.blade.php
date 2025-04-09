@@ -228,10 +228,14 @@
 
         <!-- Actions -->
         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-            <a href="">
-                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                    class="w-[35px] h-[35px]">
-            </a>
+            <form action="{{ route('editminorcase') }}" >
+                @csrf
+                <button type="submit">
+                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                        class="w-[35px] h-[35px]">
+                </button>
+            </form>
+
             <form action="" 
                 id="" class="flex justify-center items-center">
                
