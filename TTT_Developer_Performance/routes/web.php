@@ -87,14 +87,14 @@ Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog')
 Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklog');
 // ****************************************************************************************************** //
 // Extra Points
-Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtrapoint');
-Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extraPoint');
+Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtraPoint');
+Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 
-Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
+Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtraPoint');
 
-Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
-Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtraPoint');
+Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 // ****************************************************************************************************** //
 // Teams Managment
 Route::get('/team', [TeamManagementController::class,'index'])->name('team');

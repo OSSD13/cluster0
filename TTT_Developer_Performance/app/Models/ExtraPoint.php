@@ -10,12 +10,14 @@ class ExtraPoint extends Model
     use HasFactory;
     protected $table =  'extra_points';
     protected $primaryKey = 'ext_id';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'ext_id',
         'ext_value',
-        'ext_is_use'
+        'ext_is_use',
+        'ext_spr_id',
+        'ext_uth_id'
     ];
 
 
