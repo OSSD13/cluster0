@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Backlog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -15,7 +16,6 @@ class BacklogController extends Controller
             ->join('users as u', 'uth.uth_usr_id', '=', 'u.usr_id')
             ->join('teams as t', 'uth.uth_tm_id', '=', 't.tm_id')
             ->join('sprints as s', 'b.blg_spr_id', '=', 's.spr_id')
-            ->join('backlogs as b2', 'b.blg_id', '=', 'b2.blg_id')
             ->select(
                 'b.blg_id',
                 's.spr_year',
@@ -61,136 +61,130 @@ class BacklogController extends Controller
 
     public function destroy($id)
     {
-        // ทำ soft delete โดยไม่ลบข้อมูลจริง
         $backlog = Backlog::find($id);
         if ($backlog) {
-            $backlog->delete();
+            $backlog->blg_is_use = 0;
+            $backlog->save();
             return redirect()->route('backlog')->with('success', 'ลบข้อมูลเรียบร้อยแล้ว');
         }
-
         return redirect()->route('backlog')->with('error', 'ไม่พบข้อมูลที่ต้องการลบ');
     }
-
-
     public function edit($id)
     {
-        // ดึงข้อมูล backlog
-        $backlog = DB::table('backlogs')
-            ->leftJoin('points_current_sprint', 'backlogs.blg_id', '=', 'points_current_sprint.pcs_id')
-            ->leftJoin('sprints', 'points_current_sprint.pcs_spr_id', '=', 'sprints.spr_id')
-            ->leftJoin('user_team_history', 'points_current_sprint.pcs_uth_id', '=', 'user_team_history.uth_id')
-            ->leftJoin('users', 'user_team_history.uth_usr_id', '=', 'users.usr_id')
-            ->leftJoin('teams', 'user_team_history.uth_tm_id', '=', 'teams.tm_id')
-            ->select(
-                'backlogs.blg_id',
-                'teams.tm_id',
-                'teams.tm_name',  // ดึงข้อมูลชื่อทีม
-                'users.usr_id',
-                'users.usr_username',
-                'sprints.spr_id',
-                'sprints.spr_year',
-                'sprints.spr_number',
-                DB::raw('backlogs.blg_pass_point as blg_pass'),
-                'backlogs.blg_bug',
-                'backlogs.blg_cancel',
-                DB::raw('(backlogs.blg_pass_point + backlogs.blg_bug + backlogs.blg_cancel) as blg_point_all')
-            )
-            ->where('backlogs.blg_id', $id)
-            ->first();
+        // ค้นหา Backlog ตาม ID
+        $backlog = Backlog::findOrFail($id);
 
-        // ดึงข้อมูลอื่นๆ ที่จำเป็น
-        $users = DB::table('users')->get();
+        // ดึงข้อมูลทีม, ผู้ใช้, สปรินท์ และปีที่ไม่ซ้ำจากสปรินท์
         $teams = DB::table('teams')->get();
+        $users = DB::table('users')->get();
         $sprints = DB::table('sprints')->get();
+        $years = DB::table('sprints')->select('spr_year')->distinct()->get();
 
-        // ส่งข้อมูลไปยัง View
-        return view('pages.backlog.editBacklog', compact('backlog', 'users', 'teams', 'sprints'));
+        // คิวรีข้อมูลตามการเชื่อมโยง
+        $backlogDetails = DB::table('backlogs as b')
+            ->join('user_team_history as uth', 'b.blg_uth_id', '=', 'uth.uth_id')
+            ->join('users as u', 'uth.uth_usr_id', '=', 'u.usr_id')
+            ->join('teams as t', 'uth.uth_tm_id', '=', 't.tm_id')
+            ->join('sprints as s', 'b.blg_spr_id', '=', 's.spr_id')
+            ->select(
+                'b.blg_id',
+                's.spr_year',
+                's.spr_number',
+                'u.usr_username',
+                't.tm_name',
+                'b.blg_pass_point as blg_pass',
+                'b.blg_bug',
+                'b.blg_cancel',
+                DB::raw('(b.blg_pass_point + b.blg_bug + b.blg_cancel) as blg_point_all')
+            )
+            ->where('b.blg_is_use', 1)
+            ->where('b.blg_id', $id)  // กรองตาม ID ของ backlog ที่ต้องการแก้ไข
+            ->first();  // ดึงข้อมูล 1 แถวเนื่องจากเรากำหนด ID ที่เฉพาะเจาะจง
+
+        return view('pages.backlog.editBacklog', compact('backlog', 'teams', 'users', 'sprints', 'years', 'backlogDetails'));
     }
+
 
 
     public function update(Request $request, $id)
     {
-        DB::table('backlogs')->where('blg_id', $id)->update([
-            'blg_pass_point' => $request->input('test_pass'),
-            'blg_bug' => $request->input('bug'),
-            'blg_cancel' => $request->input('cancel'),
+        // ค้นหา Backlog ตาม ID
+        $backlog = Backlog::findOrFail($id);
+
+        // ตรวจสอบและยืนยันข้อมูลที่ส่งมา
+        $validated = $request->validate([
+            'team_id' => 'required|exists:teams,tm_id',
+            'member_id' => 'required|exists:users,usr_id',
+            'year' => 'required|exists:sprints,spr_id',
+            'sprint_id' => 'required|exists:sprints,spr_id',
+            'test_pass' => 'required|numeric',
+            'bug' => 'required|numeric',
+            'cancel' => 'required|numeric',
         ]);
 
-        $pcs = DB::table('points_current_sprint')->where('pcs_id', $id)->first();
+        // อัปเดตข้อมูลของ Backlog
+        $backlog->blg_tm_id = $request->team_id;        // อัปเดตทีม
+        $backlog->blg_usr_id = $request->member_id;     // อัปเดตสมาชิก
+        $backlog->blg_spr_id = $request->sprint_id;     // อัปเดต Sprint
+        $backlog->blg_pass_point = $request->test_pass; // อัปเดต Test Pass
+        $backlog->blg_bug = $request->bug;              // อัปเดต Bug
+        $backlog->blg_cancel = $request->cancel;        // อัปเดต Cancel
 
-        if ($pcs) {
-            DB::table('sprints')->where('spr_id', $pcs->pcs_spr_id)->update([
-                'spr_year' => $request->input('year'),
-                'spr_number' => $request->input('sprint')
-            ]);
+        // บันทึกข้อมูลในฐานข้อมูล
+        $backlog->save();
 
-            DB::table('user_team_history')->where('uth_id', $pcs->pcs_uth_id)->update([
-                'uth_usr_id' => $request->input('member'),
-                'uth_tm_id' => $request->input('current_team')
-            ]);
-        }
-
-        return redirect()->route('backlog')->with('success', 'Backlog updated successfully!');
-    }
-
-    public function store(Request $request)
-    {
-        // Validate the incoming data
-        $request->validate([
-            'blg_pass_point' => 'required|numeric',
-            'blg_bug' => 'required|string|max:255',
-            'blg_cancel' => 'required|string|max:255',
-            'blg_is_use' => 'required|boolean',
-            'blg_uth_id' => 'required|integer',
-            'blg_spr_id' => 'required|integer',
-        ]);
-
-        // Insert into the 'backlogs' table
-        $backlogId = DB::table('backlogs')->insertGetId([
-            'blg_pass_point' => $request->blg_pass_point,
-            'blg_bug' => $request->blg_bug,
-            'blg_cancel' => $request->blg_cancel,
-            'blg_is_use' => $request->blg_is_use,
-            'blg_uth_id' => $request->blg_uth_id,
-            'blg_spr_id' => $request->blg_spr_id,
-        ]);
-
-        // Optionally, you can handle the related data, for example, updating other tables based on the inserted backlog
-        // For example, handling points_current_sprint or other related data...
-
-        return redirect()->route('backlog')->with('success', 'Backlog added successfully!');
+        // ส่งกลับไปยังหน้ารายการ backlog พร้อมข้อความสำเร็จ
+        return redirect()->route('backlog')->with('success', 'Backlog updated successfully');
     }
 
     public function add()
     {
-        return view('pages.backlog.addBacklog');
+        $teams = DB::table('teams')->get();
+        $sprints = DB::table('sprints')->get();
+
+        return view('pages.backlog.addBacklog', compact('teams', 'sprints'));
     }
 
-    public function create()
-    {
-        // Query to fetch data for the "create" form
-        $backlogs = DB::table('backlogs')
-            ->leftJoin('points_current_sprint', 'backlogs.blg_id', '=', 'points_current_sprint.pcs_id')
-            ->leftJoin('sprints', 'points_current_sprint.pcs_spr_id', '=', 'sprints.spr_id')
-            ->leftJoin('user_team_history', 'points_current_sprint.pcs_uth_id', '=', 'user_team_history.uth_id')
-            ->leftJoin('users', 'user_team_history.uth_usr_id', '=', 'users.usr_id')
-            ->leftJoin('teams', 'user_team_history.uth_tm_id', '=', 'teams.tm_id')
-            ->select(
-                'backlogs.blg_id',
-                'teams.tm_id as tm_id',
-                'teams.tm_name as tm_name',
-                'users.usr_id as usr_id',
-                'users.usr_username as usr_username',
-                'sprints.spr_id as spr_id',
-                'sprints.spr_year as spr_year', 
-                'sprints.spr_number as spr_number',
-                DB::raw('backlogs.blg_pass_point as blg_pass'),
-                'backlogs.blg_bug',
-                'backlogs.blg_cancel',
-                DB::raw('(backlogs.blg_pass_point + backlogs.blg_bug + backlogs.blg_cancel) as blg_point_all')
-            )
-            ->get();
 
-        return view('pages.backlog.addBacklog', compact('backlogs'));
+    public function store(Request $request)
+    {
+        // ตรวจสอบและยืนยันข้อมูลที่ส่งมา
+        $validated = $request->validate([
+            'team_id' => 'required|exists:teams,tm_id',
+            'member_id' => 'required|exists:users,usr_id',
+            'year' => 'required|exists:sprints,spr_year',
+            'sprint_id' => 'required|exists:sprints,spr_id',
+            'test_pass' => 'required|numeric',
+            'bug' => 'required|numeric',
+            'cancel' => 'required|numeric',
+        ]);
+
+        // สร้าง Backlog ใหม่
+        $backlog = new Backlog();
+        $backlog->blg_pass_point = $request->test_pass;
+        $backlog->blg_personal_point = 220; // กำหนดค่าเริ่มต้น
+        $backlog->blg_bug = $request->bug;
+        $backlog->blg_cancel = $request->cancel;
+        $backlog->blg_is_use = 1; // ค่าเริ่มต้น
+        $backlog->blg_uth_id = 56; // ค่าเริ่มต้น
+        $backlog->blg_spr_id = $request->sprint_id;
+
+        // บันทึกข้อมูลลงในฐานข้อมูล
+        $backlog->save();
+
+        return redirect()->route('backlog')->with('success', 'Backlog added successfully');
+    }
+
+    public function getMembersByTeam($teamId)
+    {
+        // ค้นหาสมาชิกทีมล่าสุดที่มีสถานะเป็นปัจจุบัน (uth_is_current = 1)
+        $members = DB::select('
+        SELECT u.usr_id, u.usr_username
+        FROM user_team_history uth
+        JOIN users u ON uth.uth_usr_id = u.usr_id
+        WHERE uth.uth_tm_id = ? AND uth.uth_is_current = 1
+    ', [$teamId]);
+
+        return response()->json($members);
     }
 }

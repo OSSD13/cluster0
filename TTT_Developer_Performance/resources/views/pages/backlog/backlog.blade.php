@@ -239,10 +239,11 @@
                             </td>
                             <td class="px-4 py-3 flex justify-center items-center space-x-3 h-full">
                                 <!-- ปุ่มแก้ไข -->
-                                <a href="{{ route('editbacklog', ['id' => $item->blg_id, 'team' => $item->tm_name]) }}"
+                                <a href="{{ route('editbacklog', $item->blg_id) }}"
                                     class="text-blue-600 hover:text-blue-800 transform translate-y-[-2px]">
-                                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit" class="w-[35px] h-[35px]">
-                                 </a>
+                                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                        class="w-[35px] h-[35px]">
+                                </a>
                                 <!-- ปุ่มลบ -->
                                 <button type="button" onclick="openAlertDelete({{ $item->blg_id }})"
                                     class="text-red-600 hover:text-red-800 transform translate-y-[-2px] ml-2">
