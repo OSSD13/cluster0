@@ -15,7 +15,7 @@
 
 @section('contents')
     <!-- ฺBox Team performance -->
-    <div class="relative opacity-20" id="big-background">
+    <div class="relative" id="big-background">
         <div
             class=" w-full h-20 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-6 flex justify-between items-center mb-[20px] opacity">
             <div class="grid grid-cols-2 gap-2 w-full">
@@ -784,7 +784,8 @@
 
     {{-- Pop-up choose card --}}
     <div class="flex justify-center items-center" id="chooseCard">
-        <div class="fixed top-[5%] left-1/2 transform -translate-x-1/2
+        <div
+            class="fixed top-[5%] left-1/2 transform -translate-x-1/2
             bg-white w-[1200px] h-[750px] rounded-lg shadow-lg
             z-[9999] opacity-100">
 
@@ -1174,6 +1175,21 @@
                 dropdown.classList.add('bg-red-600');
             }
         }
+
+        // window.addEventListener('DOMContentLoaded', function() {
+        //     openModal();
+        // });
+
+        (function (){
+            openModal();
+        })();
+
+        function openModal() {
+            var popUpCard = document.getElementById('chooseCard');
+            popUpCard.style.background = 'rgba(0,0,0,0.2)';
+        }
+
+
 
         // checkbox select
         const selectAllCheckbox = document.getElementById('selectAll');
