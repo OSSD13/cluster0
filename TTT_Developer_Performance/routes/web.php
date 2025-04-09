@@ -34,26 +34,26 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // With Google
-Route::get('/auth-google', [LoginController::class, 'googleLogin'])->name('auth.google');
-Route::get('/auth-google-callback', [LoginController::class, 'googleAuthentication'])->name('auth.google-callback');
+Route::get('/auth/google', [LoginController::class, 'googleLogin'])->name('auth.google');
+Route::get('/auth/google-callback', [LoginController::class, 'googleAuthentication'])->name('auth.google-callback');
 
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::prefix('register')->group(function () {
-    Route::get('-2', [RegisterController::class, 'step2']);
-    Route::post('-step1', [RegisterController::class, 'registerStep1'])->name('step1');
-    Route::post('-step2', [RegisterController::class, 'registerStep2'])->name('step2');
-    Route::get('-pending', [RegisterController::class, 'pendingPage'])->name('pending');
+    Route::get('/2', [RegisterController::class, 'step2']);
+    Route::post('/step1', [RegisterController::class, 'registerStep1'])->name('step1');
+    Route::post('/step2', [RegisterController::class, 'registerStep2'])->name('step2');
+    Route::get('/pending', [RegisterController::class, 'pendingPage'])->name('pending');
 
     // With Google
-    Route::post('-google-2', [RegisterController::class, 'googleAuthenticationStep2'])->name('register.google.2');
-    Route::get('-google-view', [RegisterController::class, 'registerWithGooglePage']);
+    Route::post('/google/2', [RegisterController::class, 'googleAuthenticationStep2'])->name('register.google.2');
+    Route::get('/google/view', [RegisterController::class, 'registerWithGooglePage']);
 });
 // ****************************************************************************************************** //
 
 // Test view
 Route::prefix('test')->group(function () {
-    Route::get('-login-success', [HomeController::class, 'index'])->name('home');
+    Route::get('/login/success', [HomeController::class, 'index'])->name('home');
 });
 
 // Developer
