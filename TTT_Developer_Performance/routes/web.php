@@ -27,6 +27,8 @@ use App\Http\Controllers\RevisionHistoryController;
 // Trello
 use App\Http\Controllers\TrelloConfigurationController;
 
+use App\Http\Controllers\EmailController;
+
 // ****************************************************************************************************** //
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -138,3 +140,13 @@ Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 
 // ****************************************************************************************************** //
 // Test
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
+
+Route::get('sendbasicemail','EmailController@basic_email');
+Route::get('sendhtmlemail','EmailController@html_email');
+Route::get('sendattachmentemail','EmailController@attachment_email');
+
+Route::post('senData', array('uses' => 'EmailController@attachment_email'));
+
+Route::get('send-email', [App\Http\Controllers\EmailController::class, 'showForm']);
+Route::post('send-email', [App\Http\Controllers\EmailController::class, 'sendEmail']);
+
