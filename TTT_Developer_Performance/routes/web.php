@@ -26,8 +26,6 @@ use App\Http\Controllers\PerformanceHistoryController;
 use App\Http\Controllers\RevisionHistoryController;
 // Trello
 use App\Http\Controllers\TrelloConfigurationController;
-// Sprint
-use App\Http\Controllers\SprintController;
 
 // ****************************************************************************************************** //
 // Login
@@ -78,37 +76,30 @@ Route::get('/change-password', [ProfileController::class,'changePassword'])->nam
 Route::get('/dash-team-performance', [TeamPerformanceController::class,'card'])->name('team.performance');
 Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('overview');
 // ****************************************************************************************************** //
-// ** //
 // Minor case
 Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
 Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
 Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
-Route::post('/minorcase/store', [MinorcaseController::class, 'store'])->name('storeMinorcase');
-Route::delete('/minorcase/delete/{id}', [MinorcaseController::class, 'delete'])->name('deleteminorcase');
-// ** //
-
+// ****************************************************************************************************** //
 // Backlog
 Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
 Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
 Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklog');
 // ****************************************************************************************************** //
 // Extra Points
-Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
-Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtrapoint');
-Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extraPoint');
+Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtraPoint');
+//Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 
-Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtrapoint');
+Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtraPoint');
 
-Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtrapoint');
-Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtrapoint');
+Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtraPoint');
+Route::get('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 // ****************************************************************************************************** //
 // Teams Managment
 Route::get('/team', [TeamManagementController::class,'index'])->name('team');
 Route::get('/team-add', [TeamManagementController::class,'add'])->name('team.add');
-Route::get('/team-edit{id}', [TeamManagementController::class,'edit'])->name('team.edit');
-Route::get('/team-store', [TeamManagementController::class,'edit'])->name('team.store');
-Route::post('/team-create', [TeamManagementController::class, 'store'])->name('team.create');
-Route::delete('/team-delete{id}', [TeamManagementController::class, 'destroy'])->name('team.delete');
+Route::get('/team-edit', [TeamManagementController::class,'edit'])->name('team.edit');
 // ****************************************************************************************************** //
 // Members Managment
 //Route::get('/member', [UserController::class,'']);
@@ -140,15 +131,4 @@ Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, '
 Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trello.list');
 // ****************************************************************************************************** //
 // Test
-
-
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
-Route::get('/dash-team-performance-card', [TeamPerformanceController::class, 'showCard']);
-
-//Sprint
-Route::get('/listsprint', [SprintController::class, 'index'])->name('sprint');
-Route::get('/listsprint-add', [SprintController::class, 'add'])->name('sprint.add');
-Route::get('/listsprint-edit', [SprintController::class, 'edit'])->name('sprint.edit');
-// Route::post('/listsprint-store', [SprintController::class, 'store'])->name('sprint.store');
-// Route::get('/listsprint-update', [SprintController::class, 'update'])->name('sprint.update');
-// Route::get('/listsprint-delete', [SprintController::class, 'delete'])->name('sprint.delete');
