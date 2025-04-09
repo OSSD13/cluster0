@@ -26,7 +26,7 @@ class BacklogController extends Controller
                 'backlogs.blg_cancel as cancel'
             )
             ->where('points_current_sprint.pcs_is_use', 1)
-            ->where('backlogs.blg__is_use', 1)
+            ->where('backlogs.blg_is_use', 1)
             ->get();
 
         return view('pages.backlog.backlog', compact('backlogs'));

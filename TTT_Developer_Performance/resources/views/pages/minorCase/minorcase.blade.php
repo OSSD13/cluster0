@@ -228,10 +228,25 @@
 
 
                     <!-- Actions -->
-                    <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                        <a href="{{ route('editminorcase') }}">
+                    <td class="px-6 py-4 flex items-center justify-center space-x-2 h-full">
+                        <a href="{{ route('editminorcase', $point->mnc_id) }}">
+                            <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                class="w-[35px] h-[35px]">
+                        </a>
+                        <form action="{{ route('minorcase.delete', $point->mnc_id) }}" method="POST" class="flex justify-center items-center">
+                            @csrf
+                            @method('put')
                             <button type="submit">
-                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
+                                    class="w-[35px] h-[35px] items-center">
+                            </button>
+                        </form>
+                    </td>
+
+                    {{-- <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                        <a href="{{ route('editminorcase', $point->mnc_id) }}">
+                            <button type="submit">
+                                <img src="resources/Images/Icons/editIcon.png" alt="Edit"
                                     class="w-[35px] h-[35px]">
                             </button>
                         </a>
@@ -240,7 +255,7 @@
                             <!-- ปุ่มลบ ที่เรียก Alert Modal -->
                             <button type="button" onclick="openAlertDelete({{ $point->mnc_id }})"
                                 class="flex justify-center items-center">
-                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
+                                <img src="resources/Images/Icons/deleteIcon.png" alt="Delete"
                                     class="w-[35px] h-[35px] items-center">
                             </button>
                             <!-- Simple Alert Box for delete confirmation -->
@@ -264,7 +279,7 @@
                             </div>
 
                         </div>
-                    </td>
+                    </td> --}}
 
                     <!-- Simple Alert Box for delete confirmation -->
                     <div id="alertDeleteBox"
