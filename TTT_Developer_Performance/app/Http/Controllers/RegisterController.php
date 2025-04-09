@@ -73,7 +73,7 @@ class RegisterController extends Controller
             session([
                 'usr_google_id' => $googleUser->id
             ]);
-            return view('registerWithGoogle_step2');
+            return view('auth.registerWithGoogle_step2');
         }
     }
 

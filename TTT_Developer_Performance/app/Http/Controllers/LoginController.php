@@ -60,7 +60,7 @@ class LoginController extends Controller
                 session([
                     'usr_google_id' => $googleUser->id
                 ]);
-                return view('registerWithGoogle_step2', compact('googleUser'));
+                return view('auth.registerWithGoogle_step2', compact('googleUser'));
             }
         } catch (\Exception $e) {
             dd($e);
