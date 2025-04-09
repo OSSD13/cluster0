@@ -4,38 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {{-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> --}}
     <title>Report</title>
     <link rel="stylesheet" href="resources/css/pdf.css">
-    <link rel="icon" type="image/jpg" sizes="16x16" href="{{ asset('resources/Images/ttt_logo.jpg') }}" />
+    <link rel="icon" type="image/jpg" sizes="16x16" href="resources/Images/ttt_logo.jpg" />
     <link rel="stylesheet" href="resources/css/global.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+        body {
+            font-size: 10px;
+        }
+    </style>
+
 </head>
 
 <body>
     <table class="table-container">
         <thead>
             <tr>
-                <td class="TTT-logo"><img src="..\resources\Images\ttt_logo.jpg" alt=""></td>
-                <td>เอกสารประเมินทีม DEV รายสัปดาห์ (Document Weekly Developer Report)</td>
+                <td class="TTT-logo"><img src="../resources/Images/ttt_logo.jpg" alt="" style="width: 50px; height: 50px;"></td>
+                <td>Document Weekly Developer Report</td>
             </tr>
             <tr>
                 Introduction
             </tr>
             <tr>
-                เอกสารชุดนี้เรียกว่า Document Weekly Developer Report มีวัถตุประสงค์เพื่อ
+                This document is called the Weekly Developer Report and serves the following purposes
             </tr>
             <tr>
-                1. เป็นเอกสารบันทึกข้อมูลผลลัพธืการประเมินทีม Developer รายสัปดาห์
+                1. To record the results of the weekly Developer team evaluation.
             </tr>
             <tr>
-                2. ใช้สำหรับแสดงผลการประเมินการทำงานของทีม Developer
+                2. To present the evaluation outcomes of the Developer team's work.
             </tr>
             <tr>
-                3. สำหรับการดำเนินการติดตามผลลัพธ์รายสัปดาห์
+                3. To facilitate the tracking of weekly results.
             </tr>
         </thead>
         <tbody>
