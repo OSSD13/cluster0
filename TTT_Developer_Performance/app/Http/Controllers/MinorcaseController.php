@@ -15,181 +15,250 @@ use Illuminate\Support\Facades\DB;
 class MinorcaseController extends Controller
 {
     public function index()
-    {
-        $points = DB::select('
-            SELECT 
-                s.spr_year,
-                s.spr_number,
-                u.usr_username,
-                t.tm_name,
-                m.mnc_point,
-                m.mnc_card_detail,
-                m.mnc_defect_detail
-            FROM minor_cases m
-            JOIN user_team_history uth ON m.mnc_uth_id = uth.uth_id
-            JOIN users u ON uth.uth_usr_id = u.usr_id
-            JOIN teams t ON uth.uth_tm_id = t.tm_id
-            JOIN sprints s ON m.mnc_spr_id = s.spr_id
-            WHERE m.mnc_is_use = 1
-        ');
-    
-        return view('pages.minorCase.minorcase', compact('points'));
-    }
+{
+    $points = DB::select('
+        SELECT 
+            m.mnc_id,
+            s.spr_year,
+            s.spr_number,
+            u.usr_username,
+            t.tm_name,
+            m.mnc_point,
+            m.mnc_card_detail,
+            m.mnc_defect_detail
+        FROM minor_cases m
+        JOIN user_team_history uth ON m.mnc_uth_id = uth.uth_id
+        JOIN users u ON uth.uth_usr_id = u.usr_id
+        JOIN teams t ON uth.uth_tm_id = t.tm_id
+        JOIN sprints s ON m.mnc_spr_id = s.spr_id
+        WHERE m.mnc_is_use = 1  -- เฉพาะที่ยังไม่ถูกลบ
+    ');
+
+    return view('pages.minorCase.minorcase', compact('points'));
+}
+
     
     // ฟอร์มเพิ่มข้อมูล
     public function add()
     {
         $teams = DB::table('teams')->get();
         $sprints = DB::table('sprints')->get();
-
+    
         return view('pages.minorCase.addminorcase', compact('teams', 'sprints'));
     }
-
-    public function getMembersByTeam($teamId)
-    {
-        $members = DB::select('
-            SELECT u.usr_id, u.usr_username
-            FROM user_team_history uth
-            JOIN users u ON uth.uth_usr_id = u.usr_id
-            WHERE uth.uth_tm_id = ?
-        ', [$teamId]);
     
-        return response()->json($members);
-    }
+    public function getMembersByTeam($teamId)
+{
+    // ค้นหาสมาชิกทีมล่าสุดที่มีสถานะเป็นปัจจุบัน (uth_is_current = 1)
+    $members = DB::select('
+        SELECT u.usr_id, u.usr_username
+        FROM user_team_history uth
+        JOIN users u ON uth.uth_usr_id = u.usr_id
+        WHERE uth.uth_tm_id = ? AND uth.uth_is_current = 1
+    ', [$teamId]);
 
+    return response()->json($members);
+}
+
+    
     public function insert(Request $request)
     {
+        // Validate ข้อมูลเบื้องต้น
+        $validated = $request->validate([
+            'uth_usr_id'         => 'required|exists:users,usr_id',
+            'uth_tm_id'          => 'required|exists:teams,tm_id',
+            'spr_year'           => 'required|exists:sprints,spr_year',
+            'spr_number'         => 'required|exists:sprints,spr_number',
+            'mnc_point'          => 'required|numeric',
+        ]);
+    
+        // ค้นหา user_team_history
         $uth = DB::table('user_team_history')
             ->where('uth_usr_id', $request->uth_usr_id)
             ->where('uth_tm_id', $request->uth_tm_id)
             ->where('uth_is_current', 1)
             ->first();
-
+    
         if (!$uth) {
             return redirect()->back()->withErrors('ไม่พบประวัติทีมของสมาชิกนี้');
         }
-
+    
+        // ค้นหา Sprint
         $sprint = DB::table('sprints')
             ->where('spr_year', $request->spr_year)
             ->where('spr_number', $request->spr_number)
             ->first();
-
+    
         if (!$sprint) {
             return redirect()->back()->withErrors('ไม่พบข้อมูล Sprint');
         }
-
-        DB::table('minor_cases')->insert([
-            'mnc_point'         => $request->mnc_point,
-            'mnc_card_detail'   => $request->mnc_card_detail,
-            'mnc_defect_detail' => $request->mnc_defect_detail,
-            'mnc_uth_id'        => $uth->uth_id,
-            'mnc_spr_id'        => $sprint->spr_id,
-            'mnc_is_use'        => 1,
+    
+        // Insert ข้อมูล minor_case
+        $minorCaseId = DB::table('minor_cases')->insertGetId([
+            'mnc_card_detail'      => $request->mnc_card_detail ?? null,
+            'mnc_defect_detail'    => $request->mnc_defect_detail ?? null,
+            'mnc_point'            => $request->mnc_point,
+            'mnc_personal_point'   => $request->mnc_point, // ✅ สำคัญ
+            'mnc_uth_id'           => $uth->uth_id,
+            'mnc_spr_id'           => $sprint->spr_id,
+            'mnc_is_use'           => 1,
         ]);
-
+    
+        // อัปเดต point ในตาราง points_current_sprint (ถ้ามี)
+        $point = DB::table('points_current_sprint')
+            ->where('pcs_spr_id', $sprint->spr_id)
+            ->where('pcs_uth_id', $uth->uth_id)
+            ->first();
+    
+        if ($point) {
+            DB::table('points_current_sprint')
+                ->where('pcs_id', $point->pcs_id)
+                ->update(['pcs_mnc_id' => $minorCaseId]);
+        }
+    
         return redirect()->route('minorcase')->with('success', 'เพิ่ม Minor Case สำเร็จ');
     }
+    
     
 
     public function store(Request $request)
     {
-        $user = Users::find($request->uth_usr_id);
-        $team = Team::find($request->uth_tm_id);
-        $sprint = Sprint::find($request->spr_number);
-
-        $uth = UserTeamHistory::where('uth_usr_id', $user->usr_id)
-            ->where('uth_tm_id', $team->tm_id)
-            // ->where('uth_is_use', 1)
-            ->first();
-
-        $point = PointCurrentSprint::where('pcs_spr_id', $sprint->sprint_id)
-            ->where('pcs_uth_id', $uth->uth_id)
-            ->where('pcs_is_use', 1)
-            ->first();
-
-        if ($point) {
-            // เพิ่ม Minor Case ใหม่และดึง ID ที่เพิ่ม
+        // ตรวจสอบข้อมูลจากฟอร์ม
+        // dd($request->all()); // ยืนยันว่าได้ข้อมูลมาครบ
+    
+        $validated = $request->validate([
+            'uth_usr_id' => 'required|exists:users,usr_id',
+            'uth_tm_id'  => 'required|exists:teams,tm_id',
+            'spr_year'   => 'required|exists:sprints,spr_year',
+            'spr_number' => 'required|exists:sprints,spr_number',
+            'mnc_point'  => 'required|numeric',
+        ]);
+    
+        try {
+            $user = Users::find($request->uth_usr_id);
+            $team = Team::find($request->uth_tm_id);
+    
+            // หา Sprint จาก year + number
+            $sprint = Sprint::where('spr_year', $request->spr_year)
+                ->where('spr_number', $request->spr_number)
+                ->first();
+    
+            if (!$sprint) {
+                return redirect()->back()->withErrors('ไม่พบข้อมูล Sprint');
+            }
+    
+            // หา UserTeamHistory
+            $uth = UserTeamHistory::where('uth_usr_id', $user->usr_id)
+                ->where('uth_tm_id', $team->tm_id)
+                ->where('uth_is_current', 1)
+                ->first();
+    
+            if (!$uth) {
+                return redirect()->back()->withErrors('ไม่พบประวัติทีมของสมาชิกนี้');
+            }
+    
+            // หา point sprint
+            $point = PointCurrentSprint::where('pcs_spr_id', $sprint->spr_id)
+                ->where('pcs_uth_id', $uth->uth_id)
+                ->first();
+    
+            // สร้าง Minor Case
             $minorCaseId = DB::table('minor_cases')->insertGetId([
-                'mnc_card_detail'   => $request->mnc_card_detail ?? null,
-                'mnc_defect_detail' => $request->mnc_defect_detail ?? null,
+                'mnc_card_detail'   => $request->mnc_card_detail,
+                'mnc_defect_detail' => $request->mnc_defect_detail,
                 'mnc_point'         => $request->mnc_point,
+                'mnc_uth_id'        => $uth->uth_id,
+                'mnc_spr_id'        => $sprint->spr_id,
                 'mnc_is_use'        => 1,
             ]);
-
-            // อัปเดต ID ของ minor case ไปยังตาราง pcs
-            $point->pcs_mnc_id = $minorCaseId;
-            $point->save();
+    
+            // ถ้ามี point ให้อัพเดต
+            if ($point) {
+                $point->pcs_mnc_id = $minorCaseId;
+                $point->save();
+            }
+    
+            return redirect()->route('minorcase')->with('success', 'Minorcase added successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors('เกิดข้อผิดพลาด: ' . $e->getMessage());
         }
-        return redirect()->route('minorcase')->with('success', 'Minorcase added successfully.');
     }
     
-    public function edit()
-    {
+    
 
-        return view('pages.minorCase.editminorcase');
-    }
-public function update(Request $request, $id)
+    public function edit($point)
 {
-    // Validate
-    $request->validate([
-        'uth_usr_id' => 'required',
-        'uth_tm_id' => 'required',
-        'spr_year' => 'required',
-        'spr_number' => 'required',
-        'mnc_point' => 'required|numeric',
-    ]);
+    // ดึงข้อมูล Minor Case จาก DB ด้วย ID
+    $minorCase = DB::table('minor_cases')->where('mnc_id', $point)->first();
 
-    // หา uth_id
-    $uth = DB::table('user_team_history')
-        ->where('uth_usr_id', $request->uth_usr_id)
-        ->where('uth_tm_id', $request->uth_tm_id)
-        ->where('uth_is_current', 1)
-        ->first();
+    // ดึง team และ sprint จาก DB
+    $teams = DB::table('teams')->get();
+    $sprints = DB::table('sprints')->get();
 
-    if (!$uth) {
-        return back()->withErrors('ไม่พบประวัติทีมของสมาชิกนี้');
-    }
-
-    $sprint = DB::table('sprints')
-        ->where('spr_year', $request->spr_year)
-        ->where('spr_number', $request->spr_number)
-        ->first();
-
-    if (!$sprint) {
-        return back()->withErrors('ไม่พบข้อมูล Sprint');
-    }
-
-    DB::table('minor_cases')
-        ->where('mnc_id', $id)
-        ->update([
-            'mnc_point'         => $request->mnc_point,
-            'mnc_card_detail'   => $request->mnc_card_detail ?? null,
-            'mnc_defect_detail' => $request->mnc_defect_detail ?? null,
-            'mnc_uth_id'        => $uth->uth_id,
-            'mnc_spr_id'        => $sprint->spr_id,
-        ]);
-
-    return redirect()->route('minorcase')->with('success', 'Minor Case updated successfully.');
+    // ส่งข้อมูลไปยัง view
+    return view('minorcase.edit', compact('minorCase', 'teams', 'sprints'));
 }
 
+    
+    public function update(Request $request, $point)
+{
+    $request->validate([
+        'mnc_card_detail'   => 'nullable|string',
+        'mnc_defect_detail' => 'nullable|string',
+        'mnc_point'         => 'required|numeric',
+        'mnc_is_use'        => 'required|boolean',
+        'mnc_uth_id'        => 'required|exists:user_team_history,uth_id',
+        'mnc_spr_id'        => 'required|exists:sprints,spr_id',
+    ]);
 
+    $affected = DB::table('minor_cases')
+        ->where('mnc_id', $point)
+        ->update([
+            'mnc_card_detail'   => $request->mnc_card_detail,
+            'mnc_defect_detail' => $request->mnc_defect_detail,
+            'mnc_point'         => $request->mnc_point,
+            'mnc_is_use'        => $request->mnc_is_use,
+            'mnc_uth_id'        => $request->mnc_uth_id,
+            'mnc_spr_id'        => $request->mnc_spr_id,
+        ]);
 
-  
-    public function delete($id)
-    {
-        $point = PointCurrentSprint::find($id);
-
-        if (!$point) {
-            return redirect()->route('minorcase')->with('error', 'Minorcase not found.');
-        }
-
-        if ($point->pcs_is_use == 0) {
-            return redirect()->route('minorcase')->with('error', 'Minorcase already deleted.');
-        }
-
-        $point->pcs_is_use = 0;
-        $point->save();
-
-        return redirect()->route('minorcase')->with('success', 'Minorcase deleted successfully.');
+    if ($affected) {
+        return redirect()->route('minorcase')->with('success', 'อัปเดต Minor Case สำเร็จ');
+    } else {
+        return redirect()->back()->withErrors('ไม่สามารถอัปเดต Minor Case ได้');
     }
+}
+
+    
+    public function delete($mnc_id)
+{
+    // ค้นหาข้อมูล MinorCase ตาม ID (ใช้ mnc_id)
+    $minorCase = MinorCase::find($mnc_id);
+
+    if (!$minorCase) {
+        return redirect()->route('minorcase')->with('error', 'Minorcase not found.');
+    }
+
+    // ตรวจสอบว่า Minorcase นี้ถูกลบไปแล้วหรือไม่
+    if ($minorCase->mnc_is_use == 0) {
+        return redirect()->route('minorcase')->with('error', 'Minorcase already deleted.');
+    }
+
+    // ทำการ Soft Delete โดยการอัปเดตค่า mnc_is_use เป็น 0
+    $minorCase->mnc_is_use = 0;
+    $minorCase->save();
+
+    // ลบการเชื่อมโยง MinorCase ออกจาก point ในตาราง points_current_sprint
+    $point = PointCurrentSprint::where('pcs_mnc_id', $minorCase->mnc_id)->first();
+    
+    if ($point) {
+        // ลบการเชื่อมโยง MinorCase ออกจาก point ในตาราง points_current_sprint
+        $point->pcs_mnc_id = null;
+        $point->save();
+    }
+
+    return redirect()->route('minorcase')->with('success', 'Minorcase soft deleted successfully.');
+}
+
+    
 }

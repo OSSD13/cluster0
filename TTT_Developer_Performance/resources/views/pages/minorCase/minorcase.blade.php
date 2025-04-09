@@ -185,8 +185,9 @@
                     <th scope="col" class="px-6 py-3">
                         <div class="flex items-center justify-center">
                             Point
-                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <a href="#" onclick="sortTable()">
+                                <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
                                     <path
                                         d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
                                 </svg></a>
@@ -200,54 +201,106 @@
             </thead>
             <!-- Table body -->
             <tbody>
-            @foreach ($points as $key => $point)
-    <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
-       
-    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-            {{ $key + 1 }}
-        </th>
-        <td class="px-6 py-4">
-        {{  $point->spr_year ."-". $point->spr_number }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $point->tm_name }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $point->usr_username }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $point->mnc_card_detail }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $point->mnc_defect_detail }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $point->mnc_point }}
-        </td>
+                @foreach ($points as $key => $point)
+                <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
+
+                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                        {{ $key + 1 }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{  $point->spr_year ."-". $point->spr_number }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $point->tm_name }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $point->usr_username }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $point->mnc_card_detail }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $point->mnc_defect_detail }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $point->mnc_point }}
+                    </td>
 
 
-        <!-- Actions -->
-        <td class="px-6 py-4 flex items-center justify-center space-x-2">
-            <form action="{{ route('editminorcase') }}" >
-                @csrf
-                <button type="submit">
-                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                        class="w-[35px] h-[35px]">
-                </button>
-            </form>
+                    <!-- Actions -->
+                    <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                        <a href="{{ route('editminorcase') }}">
+                            <button type="submit">
+                                <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                    class="w-[35px] h-[35px]">
+                            </button>
+                        </a>
 
-            <form action="" 
-                id="" class="flex justify-center items-center">
-               
-                <button type="button" onclick="showAlert()">
-                    <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
-                        class="w-[35px] h-[35px] items-center">
-                </button>
-            </form>
-        </td>
-    </tr>
-    @endforeach
-</tbody>
+                        <div>
+                            <!-- ปุ่มลบ ที่เรียก Alert Modal -->
+                            <button type="button" onclick="openAlertDelete({{ $point->mnc_id }})"
+                                class="flex justify-center items-center">
+                                <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
+                                    class="w-[35px] h-[35px] items-center">
+                            </button>
+                            <!-- Simple Alert Box for delete confirmation -->
+                            <div id="alertDeleteBox"
+                                class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
+                                <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                                    <h2 class="text-2xl font-bold mb-2">Confirm Deletion</h2>
+                                    <p class="text-gray-500 mb-6">Are you sure you want to delete this item?</p>
+
+                                    <div class="flex justify-center space-x-4">
+                                        <button id="confirmDeleteBtn"
+                                            class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                                            Delete
+                                        </button>
+                                        <button type="button" onclick="closeAlertDelete()"
+                                            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <!-- Simple Alert Box for delete confirmation -->
+                    <div id="alertDeleteBox"
+                                    class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
+                                    <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                                        <button onclick="closeAlertDelete()"
+                                            class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <div class="flex justify-center mb-4">
+                                            <img alt="Cross icon" class="rounded-full" height="64"
+                                                src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
+                                        </div>
+                                        <h2 class="text-2xl font-bold mb-2">Confirm Delection</h2>
+                                        <p class="text-gray-500 mb-6">Are you sure want to delete this item?</p>
+
+                                        <form id="deleteBacklogForm" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="flex justify-center space-x-4">
+                                                <button type="submit"
+                                                    class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                                                    Delete
+                                                </button>
+                                                <button type="button" onclick="closeAlertDelete()"
+                                                    class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 </div>
@@ -255,6 +308,27 @@
 
 @section('javascripts')
 <script>
+// Sort table by point
+function sortTable() {
+    // ตัวแปรที่ใช้เก็บตาราง
+    const table = document.querySelector('table');
+    const rows = Array.from(table.querySelectorAll('tr:nth-child(n+2)')); // เก็บแถวที่มีข้อมูล
+
+    // สลับระหว่างการจัดเรียงจาก A-Z (ascending) และ Z-A (descending)
+    const isAscending = table.dataset.sortOrder === 'ascending';
+    table.dataset.sortOrder = isAscending ? 'descending' : 'ascending';
+
+    rows.sort((rowA, rowB) => {
+        const pointA = rowA.querySelector('td:nth-child(1)').textContent.trim(); // คอลัมน์ที่ต้องการจัดเรียง
+        const pointB = rowB.querySelector('td:nth-child(1)').textContent.trim();
+
+        return isAscending ? pointA.localeCompare(pointB) : pointB.localeCompare(pointA);
+    });
+
+    // เพิ่มแถวที่จัดเรียงแล้วลงในตาราง
+    rows.forEach(row => table.appendChild(row));
+}
+
 // Dropdown Year script
 document.addEventListener('DOMContentLoaded', function() {
     const dropdownYear = document.getElementById('dropdownYear');
@@ -387,29 +461,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 // Alert Box script
-let formIdToDelete = null;
-
-function showAlert(formId) {
-    // Store the form ID for later use
-    formIdToDelete = formId;
-
-    // Show the confirmation modal
+function showAlert() {
     document.getElementById('alertBox').classList.remove('hidden');
 }
 
 function closeAlert() {
-    // Hide the confirmation modal
     document.getElementById('alertBox').classList.add('hidden');
 }
 
-document.getElementById('confirmDelete').addEventListener('click', function() {
-    // If a form ID was stored, submit the form
-    if (formIdToDelete) {
-        document.getElementById('deleteForm' + formIdToDelete).submit();
-    }
-});
+function openAlertDelete(mnc_id) {
+    // กำหนด action ให้กับฟอร์มลบ
+    const form = document.getElementById('deleteBacklogForm');
+    form.action = /minorcase/$ {
+        mnc_id
+    }; // ให้ตรงกับ Route::delete('/backlog/{id}')
+
+    // แสดง modal
+    document.getElementById('alertDeleteBox').classList.remove('hidden');
+}
+
+function closeAlertDelete() {
+    document.getElementById('alertDeleteBox').classList.add('hidden');
+}
 </script>
 @endsection
 
@@ -428,7 +502,7 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-#alertBox {
+#alertDeleteBox {
     z-index: 9999;
     /* ให้สูงกว่าทุกอย่างในหน้า */
     background-color: rgba(0, 0, 0, 0.5);
