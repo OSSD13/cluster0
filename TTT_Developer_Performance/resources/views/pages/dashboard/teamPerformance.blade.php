@@ -1153,12 +1153,18 @@
             });
         });
 
+        function lockPageScroll() {
+            document.body.style.overflow = 'hidden'; // ปิดการเลื่อน
+        }
 
         function openModal() {
             var popUpCard = document.getElementById('chooseCard')
             popUpCard.style.background = 'rgba(0,0,0,0.2)';
+            lockPageScroll();
             popUpCard.classList.toggle('hidden');
+
         }
+
 
         function closeModal() {
             var popUpCard = document.getElementById('chooseCard')
