@@ -14,6 +14,7 @@
 @endsection
 
 @section('contents')
+    @yield('editContainer')
     <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
         <div class="flex justify-between items-center mb-4">
             <div class="text-2xl font-bold text-blue-900">
@@ -186,7 +187,7 @@
                             </th>
                             <!-- Sprint -->
                             <td class="px-6 py-4">
-                                {{ $extraPoint->spr_year . '-'. $extraPoint->spr_number}}
+                                {{ $extraPoint->spr_year . '-' . $extraPoint->spr_number }}
                             </td>
                             <!-- Team -->
                             <td class="px-6 py-4">
@@ -203,11 +204,18 @@
 
                             <!-- Actions button -->
                             <td class="px-6 py-4 flex items-center justify-center space-x-2 h-full">
-                                <a href="{{ route('editExtraPoint',['id' , $extraPoint->ext_id])}}">
-                                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                        class="w-[35px] h-[35px]">
-                                </a>
-                                <form action="{{ route('deleteExtraPoint', $extraPoint->ext_id) }}" method="POST" class="flex justify-center items-center">
+
+                                <form action="{{ route('editExtraPoint') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" name="editID" value="{{ $extraPoint->ext_id }}">
+                                        <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                            class="w-[35px] h-[35px]">
+                                    </button>
+                                </form>
+
+
+                                <form action="{{ route('deleteExtraPoint', $extraPoint->ext_id) }}" method="POST"
+                                    class="flex justify-center items-center">
                                     @csrf
                                     @method('put')
                                     <button type="submit">
@@ -226,7 +234,7 @@
     </div>
 @endsection
 
-@section('javascripts')
+@section(' javascripts')
     <script>
         // Dropdown Year script
         document.addEventListener('DOMContentLoaded', function() {

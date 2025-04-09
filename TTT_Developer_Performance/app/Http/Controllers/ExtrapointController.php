@@ -11,6 +11,9 @@ use App\Models\UserTeamHistory;
 class ExtrapointController extends Controller
 {
     //
+    function test(){
+        return view('pages.Extrapoint.edit');
+    }
     function index()
     {
 
@@ -51,49 +54,65 @@ class ExtrapointController extends Controller
 
         return view('pages.extraPoint.add', compact('userTeamHistories', 'sprints', 'years'));
     }
-    function edit($id)
-    {
-        $users = DB::table('users')
-            ->where('usr_is_use', '=', 1)
-            ->where('usr_role', '=', 'Developer')
-            ->select('usr_id as id', 'usr_name as name')
-            ->get();
-        $teams = DB::table('teams')
-            ->where('tm_is_use', '=', 1)
-            ->select('tm_id as id', 'tm_name as name')
-            ->get();
+    public function edit(Request $request)
+{
+    // รับค่าจากฟอร์ม
+    $editID = $request->editID;
 
-        $years = DB::table('sprints')
-            ->select('spr_year as year')
-            ->distinct('spr_year')
-            ->get();
-        $sprints = DB::table('sprints')
-            ->select('spr_number as number')
-            ->distinct('spr_number')
-            ->get();
-        return view('pages.extraPoint.edit', compact('users', 'teams', 'id', 'sprints', 'years'));
-    }
+    // ดึงข้อมูลผู้ใช้ที่เป็น Developer และใช้งานอยู่
+    $users = DB::table('users')
+        ->where('usr_is_use', '=', 1)
+        ->where('usr_role', '=', 'Developer')
+        ->select('usr_id as id', 'usr_username as name')
+        ->get();
+
+    // ดึงข้อมูลทีมที่ใช้งานอยู่
+    $teams = DB::table('teams')
+        ->where('tm_is_use', '=', 1)
+        ->select('tm_id as id', 'tm_name as teamName')
+        ->get();
+
+    // ดึงปีที่ไม่ซ้ำจากตาราง sprints
+    $years = DB::table('sprints')
+        ->select('spr_year as year')
+        ->distinct()
+        ->get();
+
+    // ดึงหมายเลขสปรินต์ที่ไม่ซ้ำจากตาราง sprints
+    $sprints = DB::table('sprints')
+        ->select('spr_number as number')
+        ->distinct()
+        ->get();
+
+    // ส่งข้อมูลไปยัง view
+    return view('pages.extraPoint.edit', compact('users', 'teams', 'sprints', 'years', 'editID'));
+}
+
     //
-    function update(Request $request) {
+    public function update(Request $request, $id) {
         try {
-            $extraPoint = new ExtraPoint();
+            $extraPoint = ExtraPoint::findOrFail($id);
+
             $validated = $request->validate([
-                'member' => 'required|string',
-                'current_team' => 'required|string',
-                'point_all' => 'required|numeric',
-                'spr_number' => 'required|integer',
-                'spr_year' => 'required|integer',
+                'userID' => 'required|string',
+                'teamID' => 'required|string',
+                'point' => 'required|numeric',
+                'year' => 'required|integer',
+                'sprint' => 'required|integer',
             ]);
-            $extraPoint->ext_value = $validated['point_all'];
-            $extraPoint->ext_uth_id = $this->findUTHID($validated['member'], $validated['current_team']);
-            $extraPoint->ext_spr_id = $this->findSprintID($validated['spr_year'], $validated['spr_number']);
+
+            $extraPoint->ext_value = $validated['point'];
+            $extraPoint->ext_uth_id = $this->findUTHID($validated['userID'], $validated['teamID']);
+            $extraPoint->ext_spr_id = $this->findSprintID($validated['year'], $validated['sprint']);
             $extraPoint->save();
-            return redirect()->route('extraPoint')->with('success', 'Extrapoint created successfully!');
+
+            return redirect()->route('extraPoint')->with('success', 'Extrapoint updated successfully!');
         } catch (Exception $e) {
-            // แสดงข้อผิดพลาดในหน้าเว็บ
-            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to create extrapoint: ' . $e->getMessage()]);
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to update extrapoint: ' . $e->getMessage()]);
         }
     }
+
+
     function store(Request $request)
     {
         try {
@@ -110,15 +129,12 @@ class ExtrapointController extends Controller
             $extraPoint->save();
             return redirect()->route('extraPoint')->with('success', 'Extrapoint created successfully!');
         } catch (Exception $e) {
-            // แสดงข้อผิดพลาดในหน้าเว็บ
             return redirect()->back()->withInput()->withErrors(['error' => 'Failed to create extrapoint: ' . $e->getMessage()]);
         }
     }
     function delete($id)
     {
-        //find the extrapoint by ID and delete it
         $extraPoint = ExtraPoint::find($id);
-        //change pts_is_use to 0
         $extraPoint->ext_is_use = 0;
         $extraPoint->save();
         return redirect()->route('extraPoint')->with('success', 'Extrapoint deleted successfully.');
