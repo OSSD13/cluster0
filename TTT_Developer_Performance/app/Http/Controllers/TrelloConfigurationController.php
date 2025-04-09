@@ -82,31 +82,33 @@ class TrelloConfigurationController extends Controller
     }
 
     //Create List
-    public function createList(Request $request)
-    {
-        $request->validate([
-            'stl_bug' => 'required',
-            'stl_cancel' => 'required',
-            'stl_done' => 'required',
-            'stl_inprogress' => 'required',
-            'stl_minor_case' => 'required',
-            'stl_name' => 'required',
-            'stl_todo' => 'required',
-            'stl_id' => 'required',
-        ]);
+    public function createList(Request $request){
+    // ตรวจสอบข้อมูลที่ต้องการ
+    $request->validate([
+        'stl_name' => 'required',
+        'stl_todo' => 'required',
+        'stl_inprogress' => 'required',
+        'stl_done' => 'required',
+        'stl_bug' => 'required',
+        'stl_minor_case' => 'required',
+        'stl_cancel' => 'required',
+    ]);
 
-        SettingTrello::create([
-            'stl_name' => $request->input('stl_name'),
-            'stl_todo' => $request->input('stl_todo'),
-            'stl_inprogress' => $request->input('stl_inprogress'),
-            'stl_done' => $request->input('stl_done'),
-            'stl_bug' => $request->input('stl_bug'),
-            'stl_cancel' => $request->input('stl_cancel'),
-            'stl_minor_case' => $request->input('stl_minor_case'),
-            'stl_trc_id' => $request->input('stl_trc_id'),
-        ]);
+    // บันทึกข้อมูลที่ได้จาก session
+    $settingTrello = new SettingTrello();
+    $settingTrello->stl_name = $request->input('stl_name');
+    $settingTrello->stl_todo = session('stl_todo');
+    $settingTrello->stl_inprogress = session('stl_inprogress');
+    $settingTrello->stl_done = session('stl_done');
+    $settingTrello->stl_bug = session('stl_bug');
+    $settingTrello->stl_cancel = session('stl_cancel');
+    $settingTrello->stl_minor_case = session('stl_minor_case');
+    $settingTrello->save();
 
-        return redirect()->route('trelloConfigurationList')->with('success', 'List created successfully!');
+    // ล้างข้อมูลจาก session หลังจากบันทึก
+    session()->forget(['stl_todo', 'stl_inprogress', 'stl_done', 'stl_bug', 'stl_minor_case', 'stl_cancel']);
+
+    return redirect()->route('trelloConfigurationList')->with('success', 'Trello List created successfully!');
     }
 
     public function deleteList($id) {
