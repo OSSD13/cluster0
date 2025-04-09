@@ -119,27 +119,21 @@
 
 @section('javascripts')
 <script>
-   document.getElementById('team').addEventListener('change', function () {
-    const teamId = this.value;
-    const memberSelect = document.getElementById('member');
-    memberSelect.innerHTML = '<option disabled selected>Loading...</option>';
+    document.addEventListener('DOMContentLoaded', function () {
+        const teamSelect = document.getElementById('team');
+        const memberSelect = document.getElementById('member');
 
-    fetch(`/api/team/${teamId}/members`)
-        .then(response => response.json())
-        .then(data => {
-            memberSelect.innerHTML = '<option disabled selected>Select Member</option>';
-            data.forEach(member => {
-                const option = document.createElement('option');
-                option.value = member.usr_id;
-                option.textContent = member.usr_username;
-                memberSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            memberSelect.innerHTML = '<option disabled selected>Error loading</option>';
-            console.error('Fetch error:', error);
+        teamSelect.addEventListener('change', function () {
+            const teamId = this.value;
+            fetch(`/api/members/${teamId}`)
+                .then(response => response.json())
+                .then(data => {
+                    memberSelect.innerHTML = '<option value="" disabled selected hidden>Member</option>';
+                    data.forEach(member => {
+                        memberSelect.innerHTML += `<option value="${member.usr_id}">${member.usr_username}</option>`;
+                    });
+                });
         });
-});
-
+    });
 </script>
 @endsection
