@@ -16,42 +16,80 @@ class MinorcaseController extends Controller
 {
     public function index()
     {
-        $points = DB::select('SELECT spr_year, spr_number, usr_username, tm_name, mnc_point,mnc_card_detail,mnc_defect_detail
-        FROM minor_cases
-        JOIN points_current_sprint ON pcs_mnc_id = mnc_id
-        JOIN sprints ON pcs_spr_id = spr_id
-        JOIN user_team_history ON pcs_uth_id = uth_id
-        JOIN users ON uth_usr_id = usr_id
-        JOIN teams ON uth_tm_id = tm_id
+        $points = DB::select('
+            SELECT 
+                s.spr_year,
+                s.spr_number,
+                u.usr_username,
+                t.tm_name,
+                m.mnc_point,
+                m.mnc_card_detail,
+                m.mnc_defect_detail
+            FROM minor_cases m
+            JOIN user_team_history uth ON m.mnc_uth_id = uth.uth_id
+            JOIN users u ON uth.uth_usr_id = u.usr_id
+            JOIN teams t ON uth.uth_tm_id = t.tm_id
+            JOIN sprints s ON m.mnc_spr_id = s.spr_id
+            WHERE m.mnc_is_use = 1
         ');
+    
         return view('pages.minorCase.minorcase', compact('points'));
     }
-
+    
+    // ฟอร์มเพิ่มข้อมูล
     public function add()
     {
-        $users = Users::all();
-        $teams = Team::all();
-        $sprints = Sprint::all();
-        $points = PointCurrentSprint::all();
+        $teams = DB::table('teams')->get();
+        $sprints = DB::table('sprints')->get();
 
-
-
-        return view('pages.minorCase.addminorcase', compact('users' , 'teams'  ,'sprints', 'points'));
+        return view('pages.minorCase.addminorcase', compact('teams', 'sprints'));
     }
-    public function insert()
+
+    public function getMembersByTeam($teamId)
     {
-        $minorcases = DB::table('minor_cases')->insert('SELECT spr_year, spr_number, usr_username, tm_name, mnc_point,mnc_card_detail,mnc_defect_detail
-            FROM minor_cases
-            JOIN points_current_sprint ON pcs_mnc_id = mnc_id
-            JOIN sprints ON pcs_spr_id = spr_id
-            JOIN user_team_history ON pcs_uth_id = uth_id
-            JOIN users ON uth_usr_id = usr_id
-            JOIN teams ON uth_tm_id = tm_id'
-                        
-        );
+        $members = DB::select('
+            SELECT u.usr_id, u.usr_username
+            FROM user_team_history uth
+            JOIN users u ON uth.uth_usr_id = u.usr_id
+            WHERE uth.uth_tm_id = ?
+        ', [$teamId]);
     
-        return view('pages.minorCase.addminorcase', compact('minorcases'));
+        return response()->json($members);
     }
+
+    public function insert(Request $request)
+    {
+        $uth = DB::table('user_team_history')
+            ->where('uth_usr_id', $request->uth_usr_id)
+            ->where('uth_tm_id', $request->uth_tm_id)
+            ->where('uth_is_current', 1)
+            ->first();
+
+        if (!$uth) {
+            return redirect()->back()->withErrors('ไม่พบประวัติทีมของสมาชิกนี้');
+        }
+
+        $sprint = DB::table('sprints')
+            ->where('spr_year', $request->spr_year)
+            ->where('spr_number', $request->spr_number)
+            ->first();
+
+        if (!$sprint) {
+            return redirect()->back()->withErrors('ไม่พบข้อมูล Sprint');
+        }
+
+        DB::table('minor_cases')->insert([
+            'mnc_point'         => $request->mnc_point,
+            'mnc_card_detail'   => $request->mnc_card_detail,
+            'mnc_defect_detail' => $request->mnc_defect_detail,
+            'mnc_uth_id'        => $uth->uth_id,
+            'mnc_spr_id'        => $sprint->spr_id,
+            'mnc_is_use'        => 1,
+        ]);
+
+        return redirect()->route('minorcase')->with('success', 'เพิ่ม Minor Case สำเร็จ');
+    }
+    
 
     public function store(Request $request)
     {

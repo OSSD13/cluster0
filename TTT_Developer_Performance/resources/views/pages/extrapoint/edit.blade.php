@@ -82,7 +82,7 @@
             </div>
             <!-- Buttons -->
             <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                <button type="button" onclick="window.location.href='{{ route('backlog') }}'"
+                <button type="button" onclick="window.location.href='{{  route('extraPoint') }}'"
                     class="min-w-[400px] px-8 py-3 bg-zinc-500 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
                     Cancel
                 </button>
