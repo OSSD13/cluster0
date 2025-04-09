@@ -41,30 +41,18 @@
                 <!-- First Row - Dropdowns -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <!-- Member -->
-                    <div>
+                    <div class="w-full max-w-2xl">
                         <label for="member" class="block mb-2 text-sm font-bold text-gray-900">Member <span
                                 class="text-red-500">*</span></label>
                         <select id="member" name="member"
                             class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
                             <option value="" disabled selected hidden class="text-center">Member</option>
-                            @foreach ($users as $user)
-                                <option value={{$user->id}}>{{ $user->name }}</option>
+                            @foreach ($userTeamHistories as $userTeamHistory)
+                                <option value={{$userTeamHistory->id ,}}>{{ $userTeamHistory->name . ',' . $userTeamHistory->teamName}}</option>
                             @endforeach
                         </select>
                     </div>
 
-                    <!-- Current Team -->
-                    <div>
-                        <label for="current_team" class="block mb-2 text-sm font-bold text-gray-900">Current Team <span
-                                class="text-red-500">*</span></label>
-                        <select id="current_team" name="current_team"
-                            class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
-                            <option value="" disabled selected hidden class="text-center">Team</option>
-                            @foreach ($teams as $team)
-                                <option value={{$team->id}}>{{ $team->teamName }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <!-- Year -->
                     <div>

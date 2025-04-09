@@ -34,16 +34,11 @@ class ExtrapointController extends Controller
     //
     function add()
     {
-        $users = DB::table('users')
-            ->where([
-                ['usr_is_use', '=', 1],
-                ['usr_role', '=', 'Developer'],
-            ])
-            ->select('usr_id as id', 'usr_name as name')
-            ->get();
-        $teams = DB::table('teams')
-            ->where('tm_is_use', '=', 1)
-            ->select('tm_id as id', 'tm_name as teamName')
+
+        $userTeamHistories = DB::table('user_team_history')
+            ->leftJoin('users','users.usr_id','uth_usr_id')
+            ->leftJoin('teams', 'teams.tm_id','uth_tm_id')
+            ->select('users.usr_username as name', 'teams.tm_name as teamName','user_team_history.uth_id as id')
             ->get();
         $years = DB::table('sprints')
             ->select('spr_year as year')
@@ -54,7 +49,7 @@ class ExtrapointController extends Controller
             ->distinct('spr_number')
             ->get();
 
-        return view('pages.extraPoint.add', compact('users', 'teams', 'sprints', 'years'));
+        return view('pages.extraPoint.add', compact('userTeamHistories', 'sprints', 'years'));
     }
     function edit($id)
     {
@@ -79,9 +74,7 @@ class ExtrapointController extends Controller
         return view('pages.extraPoint.edit', compact('users', 'teams', 'id', 'sprints', 'years'));
     }
     //
-    function update(Request $request) {}
-    function store(Request $request)
-    {
+    function update(Request $request) {
         try {
             $extraPoint = new ExtraPoint();
             $validated = $request->validate([
@@ -93,6 +86,26 @@ class ExtrapointController extends Controller
             ]);
             $extraPoint->ext_value = $validated['point_all'];
             $extraPoint->ext_uth_id = $this->findUTHID($validated['member'], $validated['current_team']);
+            $extraPoint->ext_spr_id = $this->findSprintID($validated['spr_year'], $validated['spr_number']);
+            $extraPoint->save();
+            return redirect()->route('extraPoint')->with('success', 'Extrapoint created successfully!');
+        } catch (Exception $e) {
+            // แสดงข้อผิดพลาดในหน้าเว็บ
+            return redirect()->back()->withInput()->withErrors(['error' => 'Failed to create extrapoint: ' . $e->getMessage()]);
+        }
+    }
+    function store(Request $request)
+    {
+        try {
+            $extraPoint = new ExtraPoint();
+            $validated = $request->validate([
+                'member' => 'required|string',
+                'point_all' => 'required|numeric',
+                'spr_number' => 'required|integer',
+                'spr_year' => 'required|integer',
+            ]);
+            $extraPoint->ext_value = $validated['point_all'];
+            $extraPoint->ext_uth_id = $validated['member'];
             $extraPoint->ext_spr_id = $this->findSprintID($validated['spr_year'], $validated['spr_number']);
             $extraPoint->save();
             return redirect()->route('extraPoint')->with('success', 'Extrapoint created successfully!');

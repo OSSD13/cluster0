@@ -203,7 +203,7 @@
 
                             <!-- Actions button -->
                             <td class="px-6 py-4 flex items-center justify-center space-x-2 h-full">
-                                <a href="">
+                                <a href="{{ route('editExtraPoint',['id' , $extraPoint->ext_id])}}">
                                     <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
                                         class="w-[35px] h-[35px]">
                                 </a>

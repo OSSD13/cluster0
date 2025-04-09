@@ -89,12 +89,12 @@ Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklo
 // Extra Points
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extraPoint');
 Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtraPoint');
-Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
+//Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtraPoint');
 
 Route::put('/extrapoint/delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtraPoint');
-Route::put('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
+Route::get('/extrapoint/edit/{id}', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 // ****************************************************************************************************** //
 // Teams Managment
 Route::get('/team', [TeamManagementController::class,'index'])->name('team');
