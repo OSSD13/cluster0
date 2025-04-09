@@ -39,8 +39,8 @@
                         <i id="dashboard-icon" class="fi fi-br-angle-small-right transition-transform"></i>
                     </button>
                     <ul id="dashboardMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('dash-overview') }}" class="block">Overview</a></li>
-                        <li><a href="{{ url('dash-team-performance') }}" class="block">Team Performance</a></li>
+                        <li><a href="{{ url('dash-overview-dev') }}" class="block">Overview</a></li>
+                        <li><a href="{{ url('dash-team-performance-dev') }}" class="block">Team Performance</a></li>
                     </ul>
                 </li>
 
@@ -57,78 +57,6 @@
                     </button>
                     <ul id="performanceReviewMenu" class="submenu hidden space-y-2 ml-4 mt-2">
                         <li><a href="{{ url('review-performance-history') }}" class="block">Performance History</a></li>
-                        <li><a href="{{ url('extrapoint') }}" class="block">Extra Point</a></li>
-                        <li><a href="{{ url('backlog') }}" class="block">Backlog</a></li>
-                        <li><a href="{{ url('minorcase') }}" class="block">Minor Case</a></li>
-                    </ul>
-                </li>
-
-                <!-- Team Management -->
-                <li>
-                    <button onclick="toggleMenu('teamManagementMenu', this)"
-                        class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
-                        <div class="flex items-center gap-2">
-                            <img src="resources/Images/Icons/group.png" alt=""
-                                class="w-[25px] h-[25px]" onclick="toggleNavbar()">
-                            <span id="teamManagement-text">Team Management</span>
-                        </div>
-                        <i id="teamManagement-icon" class="fi fi-br-angle-small-right transition-transform"></i>
-                    </button>
-                    <ul id="teamManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('team') }}" class="block">Team List</a></li>
-                        <li><a href="{{ url('team-add') }}" class="block">Add Team</a></li>
-                    </ul>
-                </li>
-
-                <!-- Member Management -->
-                <li>
-                    <button onclick="toggleMenu('memberManagementMenu', this)"
-                        class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
-                        <div class="flex items-center gap-2">
-                            <img src="resources/Images/Icons/user.png" alt=""
-                                class="w-[25px] h-[25px]" onclick="toggleNavbar()">
-                            <span id="memberManagement-text">Member Management</span>
-                        </div>
-                        <i id="memberManagement-icon" class="fi fi-br-angle-small-right transition-transform"></i>
-                    </button>
-                    <ul id="memberManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('member') }}" class="block">Member List</a></li>
-                        <li><a href="{{ url('member-add') }}" class="block">Add Member</a></li>
-                    </ul>
-                </li>
-
-                <!-- Reports -->
-                <li>
-                    <button onclick="toggleMenu('reportsMenu', this)"
-                        class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
-                        <div class="flex items-center gap-2">
-                            <img src="resources/Images/Icons/report.png" alt=""
-                                class="w-[25px] h-[25px]" onclick="toggleNavbar()">
-                            <span id="reports-text">Reports</span>
-                        </div>
-                        <i id="reports-icon" class="fi fi-br-angle-small-right transition-transform"></i>
-                    </button>
-                    <ul id="reportsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('report') }}" class="block">Generate Report</a></li>
-                    </ul>
-                </li>
-
-                <!-- Settings -->
-                <li>
-                    <button onclick="toggleMenu('settingsMenu', this)"
-                        class="w-full text-left flex justify-between items-center font-bold px-2 py-2">
-                        <div class="flex items-center gap-2">
-                            <img src="resources/Images/Icons/setting.png" alt=""
-                                class="w-[25px] h-[25px]" onclick="toggleNavbar()">
-                            <span id="settings-text">Settings</span>
-                        </div>
-                        <i id="settings-icon" class="fi fi-br-angle-small-right transition-transform"></i>
-                    </button>
-                    <ul id="settingsMenu" class="submenu hidden space-y-2 ml-4 mt-2">
-                        <li><a href="{{ url('setting-revision-history') }}" class="block">Revision History</a></li>
-                        <li><a href="{{ url('/setting-access-control') }}" class="block">Access Control</a></li>
-                        <li><a href="{{ url('setting-trello-config') }}" class="block">Trello Configuration</a></li>
-                        <li><a href="{{ url('setting-default-password') }}" class="block">Default Configuration</a></li>
                     </ul>
                 </li>
 

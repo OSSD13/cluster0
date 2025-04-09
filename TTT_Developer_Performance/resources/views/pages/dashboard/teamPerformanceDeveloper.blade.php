@@ -1,4 +1,4 @@
-@extends('layouts.tester')
+@extends('layouts.dev')
 
 @section('title')
     <title>Team Performance</title>

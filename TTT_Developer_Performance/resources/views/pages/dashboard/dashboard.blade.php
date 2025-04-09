@@ -1,4 +1,4 @@
-@extends('layouts.tester') {{-- allUser ใช้ layout อื่น --}}
+@extends('layouts.dev') {{-- allUser ใช้ layout อื่น --}}
 
 @section('title')
     <title>Dashboard</title>
