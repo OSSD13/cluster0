@@ -15,7 +15,9 @@ class ExtraPoint extends Model
     protected $fillable = [
         'ext_id',
         'ext_value',
-        'ext_is_use'
+        'ext_is_use',
+        'ext_uth_id',
+        'ext_spr_id'
     ];
 
 

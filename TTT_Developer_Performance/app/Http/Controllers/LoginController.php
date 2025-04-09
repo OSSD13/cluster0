@@ -11,7 +11,7 @@ use App\Models\Users;
 class LoginController extends Controller
 {
     public function index(){
-        return view('login');
+        return view('auth.login');
     }
 
     public function login(Request $req)
@@ -29,9 +29,9 @@ class LoginController extends Controller
 
         // ตรวจสอบรหัสผ่าน
         if ($user && Hash::check($validated['password'], $user->usr_password)) {
-            return view('home', compact('user'));
+            return view('auth.home', compact('user'));
         } else {
-            return view('login');
+            return view('auth.login');
         }
     }
 

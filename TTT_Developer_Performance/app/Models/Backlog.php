@@ -15,6 +15,8 @@ class Backlog extends Model
         'blg_personal_point',
         'blg_bug',
         'blg_cancel',
-        'blg_is_use'
+        'blg_is_use',
+        'blg_uth_id',
+        'blg_spr_id'
     ];
 }
