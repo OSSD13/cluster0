@@ -34,11 +34,65 @@
         </div>
 
   <!-- Team Members -->
-<div class="mb-6">
+  <div class="mb-6">
     <label class="block text-black font-bold text-2xl mb-2">Team Members</label>
 
-    <!-- Hidden Input สำหรับส่งค่า tag ไป backend -->
-    <input type="hidden" name="team_members" id="team_members">
+    <!-- Hidden Input สำหรับส่งค่า team_members ไป backend -->
+    <input type="hidden" name="team_members" id="team_members" value="{{ implode(',', old('team_members', $currentMembers ?? [])) }}">
+
+    <!-- Tag Input Container -->
+    <div x-data="{
+            tags: @entangle('team_members'), 
+            availableMembers: @js($users), 
+            selectedTags: [],
+            addTag(event) {
+                const inputValue = event.target.value.trim();
+                if (inputValue && !this.selectedTags.includes(inputValue)) {
+                    this.selectedTags.push(inputValue);
+                    this.$refs.inputTag.value = ''; // Clear input after adding tag
+                    this.updateHiddenField();
+                }
+            },
+            removeTag(index) {
+                this.selectedTags.splice(index, 1);
+                this.updateHiddenField();
+            },
+            updateHiddenField() {
+                this.$refs.hiddenInput.value = this.selectedTags.join(',');
+            }
+        }"
+        class="border border-gray-400 rounded-xl p-4 bg-gray-50">
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-4">
+            <template x-for="(tag, index) in selectedTags" :key="index">
+                <span class="flex items-center justify-between bg-blue-500 text-white rounded-lg px-3 py-1">
+                    <span x-text="tag"></span>
+                    <button @click="removeTag(index)" class="ml-2 text-xs">✖</button>
+                </span>
+            </template>
+        </div>
+
+        <!-- Input for adding tags -->
+        <input x-ref="inputTag" type="text" 
+               placeholder="Type and press Enter" 
+               class="w-full border-none outline-none bg-transparent flex-1 min-w-[120px] text-base"
+               @input="addTag($event)" />
+
+        <!-- Display available members as suggestions below -->
+        <div class="mt-2">
+            <ul class="list-none">
+                <template x-for="(member, index) in availableMembers" :key="index">
+                    <li @click="selectedTags.push(member.username); updateHiddenField()" class="cursor-pointer p-2 hover:bg-blue-100 rounded-md">
+                        <span x-text="member.username"></span>
+                    </li>
+                </template>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
 
     <!-- Tag Input Container -->
     <div id="tag-container" class="flex flex-wrap gap-2 p-4 border border-gray-400 bg-gray-50 rounded-2xl mb-4">
@@ -51,14 +105,20 @@
     <div class="mb-4 flex gap-4">
         <div class="w-1/2">
             <label class="block text-gray-700 font-bold mb-2">Choose API</label>
-            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
-                <option>API set 1</option>
+            <select name="api_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                {{-- <option value=""></option> --}}
+                @foreach($apis as $api)
+                    <option value="{{ $api->id }}">{{ $api->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="w-1/2">
             <label class="block text-gray-700 font-bold mb-2">Choose Setting</label>
-            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
-                <option>Setting 1</option>
+            <select name="setting_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                {{-- <option value=""></option> --}}
+                @foreach($settings as $setting)
+                    <option value="{{ $setting->id }}">{{ $setting->name }}</option>
+                @endforeach
             </select>
         </div>
     </div>
