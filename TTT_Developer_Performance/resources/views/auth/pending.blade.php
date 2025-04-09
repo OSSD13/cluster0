@@ -11,7 +11,7 @@
 
   <style>
     body {
-        background-image: url('resources/Images/background.avif');
+        background-image: url('/resources/Images/background.avif');
         backdrop-filter: blur(10px);
     }
 </style>
@@ -19,11 +19,11 @@
 </head>
 <body class="flex justify-center items-center h-screen bg-cover bg-center">
     <div class="absolute top-0 left-0 flex items-center ml-4 mt-4">
-        <img src="resources/Images/ttt_logo.jpg" alt="Logo" class="w-24 rounded-[10px]">
+        <img src="/resources/Images/ttt_logo.jpg" alt="Logo" class="w-24 rounded-[10px]">
         <h2 class="text-[24px] font-bold text-[#ffffff] ml-3 text-[32px]">TTT Developer<br>Performance</h2>
     </div>
     <div class="w-full h-full max-w-[520px] max-h-[320px] bg-white p-[50px] rounded-[20px] shadow-lg flex flex-col items-center">
-        <img src="resources/Images/Icons/warning.png" alt="Logo" class="w-24 mb-[30px]">
+        <img src="/resources/Images/Icons/warning.png" alt="Logo" class="w-24 mb-[30px]">
         <h2 class="text-[24px] font-bold text-[var(--primary-color)] block text-center w-full">Please wait for permission approval.</h2>
     </div>
 </body>

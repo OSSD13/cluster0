@@ -11,7 +11,7 @@
 
   <style>
     body {
-        background-image: url('resources/Images/background.avif');
+        background-image: url('/resources/Images/background.avif');
         backdrop-filter: blur(10px);
     }
 </style>

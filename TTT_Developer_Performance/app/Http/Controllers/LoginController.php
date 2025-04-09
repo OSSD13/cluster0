@@ -55,7 +55,7 @@ class LoginController extends Controller
             $user = Users::where('usr_google_id', $googleUser->id)->first();
 
             if ($user) {
-                return view('home', compact('user'));
+                return view('auth.home', compact('user'));
             } else {
                 session([
                     'usr_google_id' => $googleUser->id
