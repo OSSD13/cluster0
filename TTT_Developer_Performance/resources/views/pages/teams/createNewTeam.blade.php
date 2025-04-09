@@ -20,7 +20,7 @@
 
             <!-- Team Name -->
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2">
+                <label class="block text-black font-bold mb-2">
                     Team Name <span class="text-red-500">*</span>
                 </label>
                 <input type="text" name="team_name" placeholder="Team Name"
@@ -29,7 +29,7 @@
 
             <!-- Trello Board Name -->
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2">
+                <label class="block text-black font-bold mb-2">
                     Trello Board Name <span class="text-red-500">*</span>
                 </label>
                 <input type="text" name="trello_board" placeholder="Trello Board Name"
@@ -38,7 +38,7 @@
 
             <!-- Team Members -->
             <div class="mb-6">
-                <label class="block text-black font-bold text-2xl mb-2">Team Members</label>
+                <label class="block text-black font-bold mb-2">Team Members</label>
 
                 <!-- Hidden input ที่จะเก็บค่า team members -->
                 <input type="hidden" name="team_members" id="team_members" value="">
@@ -48,7 +48,7 @@
                     <!-- Tags will render here -->
                     <input type="text" id="tag-input" 
                            placeholder="Add team member..." 
-                           class="flex-1 min-w-[120px] bg-transparent outline-none text-base"
+                           class="w-full px-4 py-2 bg-gray-50 text-gray-700 rounded-lg focus:outline-none focus:ring-0 border-none shadow-none"
                            onfocus="showDropdown()" autocomplete="off">
                     
                     <!-- Dropdown suggestion box -->
@@ -66,40 +66,47 @@
 
             <!-- Choose API & Setting -->
             <div class="mb-4 flex gap-4">
+                <!-- API Select -->
                 <div class="w-1/2">
-                    <label class="block text-gray-700 font-bold mb-2">Choose API</label>
+                    <label class="block text-black font-bold mb-2">Choose API</label>
                     <select name="trc_id"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                            class="w-full px-4 py-2 border border-blue-800 rounded-md text-black focus:outline-none">
                         @foreach($apis as $api)
                             <option value="{{ $api->id }}">{{ $api->name }}</option>
                         @endforeach
                     </select>
                 </div>
+            
+                <!-- Setting Select -->
                 <div class="w-1/2">
-                    <label class="block text-gray-700 font-bold mb-2">Choose Setting</label>
+                    <label class="block text-black font-bold mb-2">Choose Setting</label>
                     <select name="stl_id"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300">
+                            class="w-full px-4 py-2 border border-blue-800 rounded-md text-black focus:outline-none">
                         @foreach($settings as $setting)
                             <option value="{{ $setting->id }}">{{ $setting->name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
+            
+            
+            
 
-            <!-- Buttons -->
-            <div class="mb-4 flex gap-4">
-                <div class="w-1/2">
-                    <a href="{{ route('team') }}"
-                       class="inline-flex items-center justify-center w-full h-[50px] bg-gray-500 text-white text-lg rounded-lg hover:bg-gray-600">
-                        Cancel
-                    </a>
-                </div>
-                <div class="w-1/2">
-                    <button type="submit"
-                            class="inline-flex items-center justify-center w-full h-[50px] bg-blue-800 text-white text-lg rounded-lg hover:bg-blue-900">
-                        Create
-                    </button>
-                </div>
+             <!-- Buttons -->
+<div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+    <div class="w-full sm:w-1/2">
+        <button type="button" onclick="window.location.href='{{ route('team') }}'"
+            class="w-full px-8 py-3 bg-zinc-500 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
+            Cancel
+        </button>
+    </div>
+    <div class="w-full sm:w-1/2">
+        <button type="submit"
+            class="w-full px-8 py-3 bg-blue-900 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
+            Create
+        </button>
+    </div>
+</div>
             </div>
         </form>
     </div>
@@ -136,7 +143,6 @@ function renderTags() {
         tagContainer.appendChild(hiddenInput);
     });
 }
-
 
 // ฟังก์ชั่นเพิ่ม tag ใหม่
 function addTag(username) {

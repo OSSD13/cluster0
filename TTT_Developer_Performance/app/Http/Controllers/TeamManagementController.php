@@ -5,29 +5,46 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use App\Models\Team;
+use App\Models\Team;  
+
 
 class TeamManagementController extends Controller
 {
-    public function index()
-{
-    $teams = DB::table('teams')
-        ->join('user_team_history', function ($join) {
-            $join->on('teams.tm_id', '=', 'user_team_history.uth_tm_id')
-                 ->where('user_team_history.uth_is_current', '=', 1);
-        })
-        ->where('teams.tm_is_use', '=', 1)
-        ->select(
-            'teams.tm_id as id',
-            'teams.tm_name as name',
-            DB::raw('MIN(user_team_history.uth_start_date) as created'),
-            DB::raw('COUNT(user_team_history.uth_usr_id) as current')
-        )
-        ->groupBy('teams.tm_id', 'teams.tm_name')
-        ->get();
-
-    return view('pages.teams.teamManagment', compact('teams'));
-}
+    public function index(Request $request)
+    {
+        $sortField = $request->query('sort', 'created');
+        $sortOrder = $request->query('order', 'desc');
+    
+        $validSorts = ['created', 'current', 'name'];
+        if (!in_array($sortField, $validSorts)) {
+            $sortField = 'created';
+        }
+    
+        // mapping ชื่อคอลัมน์ sort ให้ตรงกับที่ใช้ใน DB
+        $sortColumn = match($sortField) {
+            'name' => 'teams.tm_name',
+            'current' => DB::raw('COUNT(user_team_history.uth_usr_id)'),
+            default => DB::raw('MIN(user_team_history.uth_start_date)'),
+        };
+    
+        $teams = DB::table('teams')
+            ->join('user_team_history', function ($join) {
+                $join->on('teams.tm_id', '=', 'user_team_history.uth_tm_id')
+                     ->where('user_team_history.uth_is_current', '=', 1);
+            })
+            ->where('teams.tm_is_use', '=', 1)
+            ->select(
+                'teams.tm_id as id',
+                'teams.tm_name as name',
+                DB::raw('MIN(user_team_history.uth_start_date) as created'),
+                DB::raw('COUNT(user_team_history.uth_usr_id) as current')
+            )
+            ->groupBy('teams.tm_id', 'teams.tm_name')
+            ->orderByRaw("{$sortColumn} {$sortOrder}")
+            ->get();
+    
+        return view('pages.teams.teamManagment', compact('teams', 'sortField', 'sortOrder'));
+    }
 
 public function add(){
     $users = DB::table('users')
@@ -122,59 +139,61 @@ public function store(Request $request)
     
     
     public function update(Request $request, $id)
-    {
-        // Update ข้อมูล team
-        DB::table('teams')
-            ->where('tm_id', $id)
-            ->update([
-                'tm_name' => $request->team_name,
-                'tm_trello_boardname' => $request->trello_board,
-                'tm_trc_id' => $request->api_id,
-                'tm_stl_id' => $request->setting_id,
-                
-            ]);
-    
-        // ดึง user id จาก username (tag input)
-        $usernames = explode(',', $request->team_members);
-        $userIds = DB::table('users')
-            ->whereIn('usr_username', $usernames)
-            ->pluck('usr_id')
-            ->toArray();
-    
-        // ปิดสมาชิกเดิม (uth_is_current = 0)
-        DB::table('user_team_history')
-            ->where('uth_tm_id', $id)
-            ->where('uth_is_current', 1)
-            ->update(['uth_is_current' => 0, 'uth_end_date' => now()]);
-    
-        // เพิ่มสมาชิกใหม่
-        foreach ($userIds as $userId) {
-            DB::table('user_team_history')->insert([
-                'uth_usr_id' => $userId,
-                'uth_tm_id' => $id,
-                'uth_start_date' => now(),
-                'uth_is_current' => 1,
-            ]);
-        }
-    
-        return redirect()->route('team')->with('success', 'Team updated successfully');
+{
+    // Update ข้อมูล team
+    DB::table('teams')
+        ->where('tm_id', $id)
+        ->update([
+            'tm_name' => $request->team_name,
+            'tm_trello_boardname' => $request->trello_board,
+            'tm_trc_id' => $request->api_id,
+            'tm_stl_id' => $request->setting_id,
+        ]);
+
+    // ตรวจสอบว่า team_members เป็น array หรือไม่
+    $usernames = is_array($request->team_members) ? $request->team_members : explode(',', $request->team_members);
+    $userIds = DB::table('users')
+        ->whereIn('usr_username', $usernames)
+        ->pluck('usr_id')
+        ->toArray();
+
+    // ปิดสมาชิกเดิม (uth_is_current = 0)
+    DB::table('user_team_history')
+        ->where('uth_tm_id', $id)
+        ->where('uth_is_current', 1)
+        ->update(['uth_is_current' => 0, 'uth_end_date' => now()]);
+
+    // เพิ่มสมาชิกใหม่
+    foreach ($userIds as $userId) {
+        DB::table('user_team_history')->insert([
+            'uth_usr_id' => $userId,
+            'uth_tm_id' => $id,
+            'uth_start_date' => now(),
+            'uth_is_current' => 1,
+        ]);
     }
-    
+
+    return redirect()->route('team')->with('success', 'Team updated successfully');
+}
  
     public function delete($id)
-    {
-        // ดึงข้อมูล team ตาม id
-        $teams = Team::findOrFail($id);
+{
+    // ดึงข้อมูล team ตาม id
+    $team = Team::findOrFail($id);
 
-        // ลบข้อมูล user
+    // อัปเดตสถานะทีมก่อน (ถ้าจำเป็น)
+    $team->tm_is_use = 0;
+    $team->save();
 
-        $teams->tm_is_use = 0;
-        $teams->save();
+    // ลบข้อมูล user_team_history ที่เกี่ยวข้อง
+    DB::table('user_team_history')->where('uth_tm_id', $id)->delete();
 
-        
-        // Redirect ไปยังหน้า memberlist
-        return redirect()->route('team');
-    }
+   
+
+    // Redirect ไปยังหน้า team
+    return redirect()->route('team')->with('success', 'ทีมถูกลบเรียบร้อยแล้ว');
+}
+
     
 
 

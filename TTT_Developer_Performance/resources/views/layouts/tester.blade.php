@@ -196,8 +196,8 @@
 
     @yield('javascripts')
     <script src="resources/js/global.js"></script>
-
-     @stack('scripts')
+    
+    @stack('scripts')
 </body>
 
 </html>

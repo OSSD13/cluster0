@@ -12,6 +12,11 @@
 @endsection
 
 @section('contents')
+@php
+    $sortField = request('sort', 'created');
+    $sortOrder = request('order', 'desc');
+@endphp
+
 <div class="w-full px-6">
     <div class="bg-white rounded-lg shadow-md p-6 shadow-lg w-full">
         <div class="flex items-center justify-between gap-4 mb-4 w-full">
@@ -22,14 +27,14 @@
             </div>
             <a href="{{ route('team.add') }}"
                class="flex items-center bg-blue-900 text-white px-2 py-1 w-28 h-9 rounded text-[12px] font-bold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
-                <img src="http://localhost:1300/resources/Images/Icons/image-gallery.png" alt="Add"
+                <img src="{{ asset('resources/Images/Icons/image-gallery.png') }}" alt="Add"
                     class="w-6 h-6 mr-2 transition-transform duration-300 hover:rotate-12">
                 Add New
             </a>
         </div>
 
         <div class="w-full overflow-x-auto">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-300">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-300">
                 <thead class="border-t border-gray-400 text-gray-400 uppercase border-b">
                     <tr>
                         <th class="px-6 py-6 text-center">#</th>
@@ -37,41 +42,48 @@
                         <th class="px-6 py-6 text-center">
                             <div class="flex justify-center items-center gap-1">
                                 <span>Amount Members</span>
-                                <a href="#">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                @php
+                                    $nextOrder = ($sortField === 'current' && $sortOrder === 'asc') ? 'desc' : 'asc';
+                                @endphp
+                                <a href="{{ route('team', ['sort' => 'current', 'order' => $nextOrder]) }}">
+                                    <svg class="w-3 h-3 inline" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
                                     </svg>
+                                    {!! $sortField === 'current' ? ($sortOrder === 'asc' ? '&#9650;' : '&#9660;') : '' !!}
                                 </a>
                             </div>
                         </th>
                         <th class="px-6 py-6 text-center">
                             <div class="flex justify-center items-center gap-1">
                                 <span>Created Time</span>
-                                <a href="#">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                @php
+                                    $nextOrder = ($sortField === 'created' && $sortOrder === 'asc') ? 'desc' : 'asc';
+                                @endphp
+                                <a href="{{ route('team', ['sort' => 'created', 'order' => $nextOrder]) }}">
+                                    <svg class="w-3 h-3 inline" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
                                     </svg>
+                                    {!! $sortField === 'created' ? ($sortOrder === 'asc' ? '&#9650;' : '&#9660;') : '' !!}
                                 </a>
                             </div>
                         </th>
                         <th class="px-6 py-6 text-center">Action</th>
                     </tr>
                 </thead>
-                
                 <tbody>
                     @forelse ($teams as $index => $team)
-                    <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-center text-black">
-                        <th class="px-6 py-6 font-medium whitespace-nowrap">{{ $index + 1 }}</th>
-                        <td class="px-6 py-6">{{ $team->name }}</td>
-                        <td class="px-6 py-6">{{ $team->current }}</td>
-                        <td class="px-6 py-6">{{ \Carbon\Carbon::parse($team->created)->format('d/m/Y H:i') }}</td>
-                        <td class="px-6 py-6">
+                    <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black">
+                        <td class="px-6 py-4 text-center">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4 text-center">{{ $team->name }}</td>
+                        <td class="px-6 py-4 text-center">{{ $team->current }}</td>
+                        <td class="px-6 py-4 text-center">{{ \Carbon\Carbon::parse($team->created)->format('d/m/Y H:i') }}</td>
+                        <td class="px-6 py-4 text-center">
                             <div class="flex items-center justify-center gap-2">
                                 <a href="{{ url('/team-edit' . $team->id) }}">
                                     <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit" class="w-[35px] h-[35px]" />
                                 </a>
                                 <button type="button" onclick="openAlertDelete({{ $team->id }})"
-                                    class="text-red-600 hover:text-red-800 transform translate-y-[-2px] ml-2">
+                                    class="text-red-600 hover:text-red-800 ml-2">
                                     <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
                                         class="w-[35px] h-[35px]">
                                 </button>
@@ -123,8 +135,7 @@
 <script>
     function openAlertDelete(id) {
         const form = document.getElementById('deleteTeamManagmentfrom');
-        form.action = `/team-delete${id}`;  // เพิ่ม id ใน URL
-        form.querySelector('input[name="_method"]').value = 'DELETE'; // ใช้ _method เพื่อบอกว่าเป็น DELETE
+        form.action = `{{ url('/team-delete') }}` + id;
         document.getElementById('alertDeleteBox').classList.remove('hidden');
     }
 
@@ -133,7 +144,6 @@
     }
 </script>
 @endsection
-
 
 @section('styles')
 <style>
@@ -144,12 +154,12 @@
     font-family: "Jaro", sans-serif;
     line-height: 25px;
     letter-spacing: 0.5px;
-
 }
+
 #alertDeleteBox {
-            z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
 body {
     font-family: "Inter", sans-serif;

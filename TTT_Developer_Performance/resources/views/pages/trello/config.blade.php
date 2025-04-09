@@ -22,9 +22,9 @@
                     <h2 class="text-xl font-bold text-blue-900">Trello API</h2>
                     <!-- Add New API -->
                     <button type="button" onclick="window.location.href='{{ route('trello.api') }}'"
-                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center">
+                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg" >
                         <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
-                            class="w-[20px] h-[20px] mr-2">
+                            class="w-[20px] h-[20px] mr-2 transition-transform duration-300 hover:rotate-12">
                         Add New
                     </button>
                 </div>
@@ -47,7 +47,7 @@
                                         </th>
                                         <td class="px-6 py-4 text-center">{{ $api->trc_name }}</td>
                                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                            <a href="">
+                                            <a href="{{ route('trello.editApi.edit', $api->trc_id) }}">
                                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                                     alt="Edit Icon" class="w-[35px] h-[35px]">
                                             </a>
@@ -73,9 +73,9 @@
                     <h2 class="text-xl font-bold text-blue-900">Trello Lists</h2>
                     <!-- Add New List -->
                     <button type="button" onclick="window.location.href='{{ route('trello.list') }}'"
-                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center ">
+                        class="bg-[#00408E] text-white px-3 py-1 rounded-lg flex items-center hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">
                         <img src="{{ asset('resources\Images\Icons\image-gallery.png') }}" alt=""
-                            class="w-[20px] h-[20px] mr-2">
+                            class="w-[20px] h-[20px] mr-2 transition-transform duration-300 hover:rotate-12">
                         Add New
                     </button>
                 </div>
@@ -98,7 +98,7 @@
                                         </th>
                                         <td class="px-6 py-4 text-center">{{ $list->stl_name }}</td>
                                         <td class="px-6 py-4 flex items-center justify-center space-x-2">
-                                            <a href="">
+                                            <a href="{{ route('trello.editList.edit', $list->stl_id) }}">
                                                 <img src="{{ asset('resources/Images/Icons/editIcon.png') }}"
                                                     alt="Edit Icon" class="w-[35px] h-[35px]">
                                             </a>
