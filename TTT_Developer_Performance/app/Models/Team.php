@@ -15,8 +15,8 @@ class Team extends Model
         'tm_trello_boardname',
         'tm_is_use',
         'tm_stl_id',
-        'tm_trc_id',
-        'tec_created_time'
+        'tm_trc_id'
+        
     ];
 
     public function settingTrelloList()
