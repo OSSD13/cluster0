@@ -14,6 +14,7 @@
 @endsection
 
 @section('contents')
+    @yield('editContainer')
     <div class="bg-white rounded-lg shadow-md p-6 shadow-lg">
         <div class="flex justify-between items-center mb-4">
             <div class="text-2xl font-bold text-blue-900">
@@ -186,7 +187,7 @@
                             </th>
                             <!-- Sprint -->
                             <td class="px-6 py-4">
-                                {{ $extraPoint->spr_year . '-'. $extraPoint->spr_number}}
+                                {{ $extraPoint->spr_year . '-' . $extraPoint->spr_number }}
                             </td>
                             <!-- Team -->
                             <td class="px-6 py-4">
@@ -203,18 +204,54 @@
 
                             <!-- Actions button -->
                             <td class="px-6 py-4 flex items-center justify-center space-x-2 h-full">
-                                <a href="{{ route('editExtraPoint',['id' , $extraPoint->ext_id])}}">
-                                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                        class="w-[35px] h-[35px]">
-                                </a>
-                                <form action="{{ route('deleteExtraPoint', $extraPoint->ext_id) }}" method="POST" class="flex justify-center items-center">
+
+                                <form action="{{ route('editExtraPoint') }}" method="POST">
                                     @csrf
-                                    @method('put')
-                                    <button type="submit">
-                                        <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
-                                            class="w-[35px] h-[35px] items-center">
+                                    <button type="submit" name="editID" value="{{ $extraPoint->ext_id }}">
+                                        <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                            class="w-[35px] h-[35px]">
                                     </button>
                                 </form>
+
+
+                                <!-- ปุ่มลบ ที่เรียก Alert Modal -->
+                                <button type="button" onclick="openAlertDelete({{ $extraPoint->ext_id }})"
+                                    class="flex justify-center items-center">
+                                    <img src="{{ asset('resources/Images/Icons/deleteIcon.png') }}" alt="Delete"
+                                        class="w-[35px] h-[35px] items-center">
+                                </button>
+
+                                <!-- Modal กล่องยืนยันการลบ -->
+                                <div id="alertDeleteBox"
+                                    class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
+                                    <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                                        <button onclick="closeAlertDelete()"
+                                            class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <div class="flex justify-center mb-4">
+                                            <img alt="Cross icon" class="rounded-full" height="64"
+                                                src="{{ asset('resources/Images/Icons/cross.png') }}" width="64" />
+                                        </div>
+                                        <h2 class="text-2xl font-bold mb-2">Confirm Delection</h2>
+                                        <p class="text-gray-500 mb-6">Are you sure want to delete this item?</p>
+
+                                        <form id="deleteBacklogForm" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="flex justify-center space-x-4">
+                                                <button type="submit"
+                                                    class="bg-red-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-red-600">
+                                                    Delete
+                                                </button>
+                                                <button type="button" onclick="closeAlertDelete()"
+                                                    class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -228,137 +265,187 @@
 
 @section('javascripts')
     <script>
-        // Dropdown Year script
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownYear = document.getElementById('dropdownYear');
-            const dropdownYearMenu = document.getElementById('dropdownYearMenu');
-            const dropdownYearSelected = document.getElementById('dropdownYearSelected');
-            const yearCheckboxes = dropdownYearMenu.querySelectorAll('input[type="checkbox"]');
+        // ฟังก์ชันสำหรับการกรองข้อมูลและอัปเดต URL
+        function applyFilters() {
+            // Get selected values from all dropdowns
+            const selectedYears = Array.from(document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
+            const selectedSprints = Array.from(document.querySelectorAll(
+                '#dropdownSprintMenu input[type="checkbox"]:checked')).map(cb => cb.value.replace('Sprint ', ''));
+            const selectedTeams = Array.from(document.querySelectorAll(
+                '#dropdownTeamMenu input[type="checkbox"]:checked:not(#allTeams)')).map(cb => cb.value);
+            const selectedMembers = Array.from(document.querySelectorAll(
+                '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)')).map(cb => cb.value);
 
-            dropdownYear.addEventListener('click', function() {
-                dropdownYearMenu.classList.toggle('hidden');
-            });
+            // Create URL with query parameters
+            let url = new URL(window.location.href.split('?')[0], window.location.origin);
 
-            yearCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const selectedYears = Array.from(yearCheckboxes)
-                        .filter(cb => cb.checked)
-                        .map(cb => cb.value)
-                        .join(', ');
-                    dropdownYearSelected.textContent = `Year: ${selectedYears}`;
-                });
-            });
+            // Reset parameters
+            url.searchParams.delete('years');
+            url.searchParams.delete('sprints');
+            url.searchParams.delete('teams');
+            url.searchParams.delete('members');
 
-            document.addEventListener('click', function(event) {
-                if (!dropdownYear.contains(event.target) && !dropdownYearMenu.contains(event.target)) {
-                    dropdownYearMenu.classList.add('hidden');
-                }
-            });
-        });
-
-        // Dropdown Sprint script
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownSprint = document.getElementById('dropdownSprint');
-            const dropdownSprintMenu = document.getElementById('dropdownSprintMenu');
-            const dropdownSprintSelected = document.getElementById('dropdownSprintSelected');
-            const sprintCheckboxes = dropdownSprintMenu.querySelectorAll('input[type="checkbox"]');
-
-            dropdownSprint.addEventListener('click', function() {
-                dropdownSprintMenu.classList.toggle('hidden');
-            });
-
-            sprintCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const selectedSprints = Array.from(sprintCheckboxes)
-                        .filter(cb => cb.checked)
-                        .map(cb => cb.value)
-                        .join(', ');
-                    dropdownSprintSelected.textContent = `Sprint: ${selectedSprints}`;
-                });
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!dropdownSprint.contains(event.target) && !dropdownSprintMenu.contains(event.target)) {
-                    dropdownSprintMenu.classList.add('hidden');
-                }
-            });
-        });
-
-        // Dropdown Team script
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownTeam = document.getElementById('dropdownTeam');
-            const dropdownTeamMenu = document.getElementById('dropdownTeamMenu');
-            const dropdownTeamSelected = document.getElementById('dropdownTeamSelected');
-            const teamCheckboxes = dropdownTeamMenu.querySelectorAll('input[type="checkbox"]');
-            const allTeamsCheckbox = document.getElementById('allTeams');
-
-            dropdownTeam.addEventListener('click', function() {
-                dropdownTeamMenu.classList.toggle('hidden');
-            });
-
-            allTeamsCheckbox.addEventListener('change', function() {
-                const isChecked = allTeamsCheckbox.checked;
-                teamCheckboxes.forEach(checkbox => {
-                    if (checkbox !== allTeamsCheckbox) {
-                        checkbox.checked = isChecked;
-                    }
-                });
-                updateSelectedTeams();
-            });
-
-            teamCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (checkbox !== allTeamsCheckbox) {
-                        allTeamsCheckbox.checked = Array.from(teamCheckboxes)
-                            .filter(cb => cb !== allTeamsCheckbox)
-                            .every(cb => cb.checked);
-                    }
-                    updateSelectedTeams();
-                });
-            });
-
-            function updateSelectedTeams() {
-                const selectedTeams = Array.from(teamCheckboxes)
-                    .filter(cb => cb.checked && cb !== allTeamsCheckbox)
-                    .map(cb => cb.value)
-                    .join(', ');
-                dropdownTeamSelected.textContent = selectedTeams ? `Team: ${selectedTeams}` : 'Team:';
+            if (selectedYears.length > 0) {
+                url.searchParams.set('years', selectedYears.join(','));
+            }
+            if (selectedSprints.length > 0) {
+                url.searchParams.set('sprints', selectedSprints.join(','));
+            }
+            if (selectedTeams.length > 0) {
+                url.searchParams.set('teams', selectedTeams.join(','));
+            }
+            if (selectedMembers.length > 0) {
+                url.searchParams.set('members', selectedMembers.join(','));
             }
 
-            document.addEventListener('click', function(event) {
-                if (!dropdownTeam.contains(event.target) && !dropdownTeamMenu.contains(event.target)) {
-                    dropdownTeamMenu.classList.add('hidden');
+            // Reload the page with new filters
+            window.location.href = url.toString();
+        }
+
+        // Initialize dropdowns with current filter values from URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Initialize Year dropdown
+            const yearCheckboxes = document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]');
+            const selectedYears = urlParams.get('years') ? urlParams.get('years').split(',') : [];
+            yearCheckboxes.forEach(checkbox => {
+                if (selectedYears.includes(checkbox.value)) {
+                    checkbox.checked = true;
                 }
             });
-        });
+            updateYearDropdownText();
 
-        // Dropdown Member script
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownMember = document.getElementById('dropdownMember');
-            const dropdownMemberMenu = document.getElementById('dropdownMemberMenu');
-            const dropdownMemberSelected = document.getElementById('dropdownMemberSelected');
-            const memberCheckboxes = dropdownMemberMenu.querySelectorAll('input[type="checkbox"]');
-
-            dropdownMember.addEventListener('click', function() {
-                dropdownMemberMenu.classList.toggle('hidden');
+            // Initialize Sprint dropdown
+            const sprintCheckboxes = document.querySelectorAll('#dropdownSprintMenu input[type="checkbox"]');
+            const selectedSprints = urlParams.get('sprints') ? urlParams.get('sprints').split(',') : [];
+            sprintCheckboxes.forEach(checkbox => {
+                const sprintNumber = checkbox.value.replace('Sprint ', '');
+                if (selectedSprints.includes(sprintNumber)) {
+                    checkbox.checked = true;
+                }
             });
+            updateSprintDropdownText();
 
+            // Initialize Team dropdown
+            const teamCheckboxes = document.querySelectorAll(
+                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)');
+            const allTeamsCheckbox = document.getElementById('allTeams');
+            const selectedTeams = urlParams.get('teams') ? urlParams.get('teams').split(',') : [];
+            teamCheckboxes.forEach(checkbox => {
+                if (selectedTeams.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+            allTeamsCheckbox.checked = selectedTeams.length === 0 || (teamCheckboxes.length === selectedTeams
+                .length);
+            updateTeamDropdownText();
+
+            // Initialize Member dropdown
+            const memberCheckboxes = document.querySelectorAll(
+                '#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)');
+            const allMembersCheckbox = document.getElementById('allMembers');
+            const selectedMembers = urlParams.get('members') ? urlParams.get('members').split(',') : [];
             memberCheckboxes.forEach(checkbox => {
+                if (selectedMembers.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+            allMembersCheckbox.checked = selectedMembers.length === 0 || (memberCheckboxes.length ===
+                selectedMembers.length);
+            updateMemberDropdownText();
+
+            // Add event listeners to all checkboxes
+            document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
-                    const selectedMembers = Array.from(memberCheckboxes)
-                        .filter(cb => cb.checked)
-                        .map(cb => cb.value)
-                        .join(', ');
-                    dropdownMemberSelected.textContent = `Member: ${selectedMembers}`;
+                    updateYearDropdownText();
+                    applyFilters();
                 });
             });
 
-            document.addEventListener('click', function(event) {
-                if (!dropdownMember.contains(event.target) && !dropdownMemberMenu.contains(event.target)) {
-                    dropdownMemberMenu.classList.add('hidden');
-                }
+            document.querySelectorAll('#dropdownSprintMenu input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateSprintDropdownText();
+                    applyFilters();
+                });
+            });
+
+            document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (checkbox.id === 'allTeams') {
+                        document.querySelectorAll(
+                                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)')
+                            .forEach(cb => cb.checked = checkbox.checked);
+                    } else {
+                        const allChecked = Array.from(document.querySelectorAll(
+                                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)'))
+                            .every(cb => cb.checked);
+                        document.getElementById('allTeams').checked = allChecked;
+                    }
+                    updateTeamDropdownText();
+                    applyFilters();
+                });
+            });
+
+            document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (checkbox.id === 'allMembers') {
+                        document.querySelectorAll(
+                                '#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)')
+                            .forEach(cb => cb.checked = false);
+                        document.getElementById('dropdownMemberSelected').textContent =
+                            'Member: All Members';
+                    } else {
+                        document.getElementById('allMembers').checked = false;
+                        const selected = Array.from(document.querySelectorAll(
+                                '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)'
+                                ))
+                            .map(cb => cb.value);
+                        document.getElementById('dropdownMemberSelected').textContent =
+                            selected.length > 0 ? `Member: ${selected.join(', ')}` : 'Member:';
+                    }
+                    applyFilters();
+                });
+            });
+
+            // Toggle dropdown menus
+            document.getElementById('dropdownYear').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('dropdownYearMenu').classList.toggle('hidden');
+            });
+
+            document.getElementById('dropdownSprint').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('dropdownSprintMenu').classList.toggle('hidden');
+            });
+
+            document.getElementById('dropdownTeam').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('dropdownTeamMenu').classList.toggle('hidden');
+            });
+
+            document.getElementById('dropdownMember').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('dropdownMemberMenu').classList.toggle('hidden');
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                document.getElementById('dropdownYearMenu').classList.add('hidden');
+                document.getElementById('dropdownSprintMenu').classList.add('hidden');
+                document.getElementById('dropdownTeamMenu').classList.add('hidden');
+                document.getElementById('dropdownMemberMenu').classList.add('hidden');
             });
         });
+
+        // Prevent dropdown from closing when clicking inside
+        document.querySelectorAll('#dropdownYearMenu, #dropdownSprintMenu, #dropdownTeamMenu, #dropdownMemberMenu').forEach(
+            menu => {
+                menu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
 
 
         // Alert Box script
@@ -368,6 +455,19 @@
 
         function closeAlert() {
             document.getElementById('alertBox').classList.add('hidden');
+        }
+
+        function openAlertDelete(ext_id) {
+            // กำหนด action ให้กับฟอร์มลบ
+            const form = document.getElementById('deleteBacklogForm');
+            form.action = `/extrapoint-delete/${ext_id}`; // ให้ตรงกับ Route::delete('/backlog/{id}')
+
+            // แสดง modal
+            document.getElementById('alertDeleteBox').classList.remove('hidden');
+        }
+
+        function closeAlertDelete() {
+            document.getElementById('alertDeleteBox').classList.add('hidden');
         }
     </script>
 @endsection
@@ -387,7 +487,7 @@
             font-family: "Inter", sans-serif;
         }
 
-        #alertBox {
+        #alertDeleteBox {
             z-index: 9999;
             /* ให้สูงกว่าทุกอย่างในหน้า */
             background-color: rgba(0, 0, 0, 0.5);

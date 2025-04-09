@@ -6,22 +6,24 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    function developer(){
+    function developer()
+    {
         return view('pages.dashboard.dashboard');
     }
 
-    function tester(){
+    function tester()
+    {
         return view('pages.dashboard.testerDashboard');
     }
 
-    function index() {
+    function index()
+    {
         $points = Points::all()->paginate(5);
         return view('pages.dashboard.testerDashboard', compact('points'));
     }
 
-    function card() {
+    function card()
+    {
         return view('pages.chooseCard');
     }
-
-
 }

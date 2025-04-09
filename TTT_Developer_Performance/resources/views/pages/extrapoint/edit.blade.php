@@ -14,14 +14,18 @@
 @endsection
 
 @section('contents')
+
     <div class="bg-white rounded-lg shadow-md p-8 max-w-4xl mx-auto">
 
-        <!-- Header -->
+     <!-- Header -->
         <div class="text-left mb-8">
             <h1 class="text-2xl font-bold text-blue-900">Edit Extrapoint</h1>
         </div>
 
-        <!-- Form Container -->
+    <!-- Form Container -->
+    <form action="{{ route('updateExtraPoint', ['id' => $editID]) }}" method="POST">
+        @csrf
+        {{-- @method('PUT') --}}
         <div class="space-y-6">
 
             <!-- First Row - Dropdowns -->
@@ -30,10 +34,12 @@
                 <div>
                     <label for="member" class="block mb-2 text-sm font-bold text-gray-900">Member <span
                             class="text-red-500">*</span></label>
-                    <select id="member"
+                    <select id="member" name='userID'
                         class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
                         <option value="" disabled selected hidden class="text-center">Member</option>
-                        <option value="Member A">Sun</option>
+                        @foreach ($users as $user)
+                                <option value={{$user->id ,}}>{{ $user->name}}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -41,10 +47,12 @@
                 <div>
                     <label for="current_team" class="block mb-2 text-sm font-bold text-gray-900">Current Team <span
                             class="text-red-500">*</span></label>
-                    <select id="current_team"
+                    <select id="current_team" name='teamID'
                         class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
                         <option value="" disabled selected hidden class="text-center">Team</option>
-                        <option value="Team A">Team A</option>
+                        @foreach ($teams as $team)
+                                <option value={{$team->id ,}}>{{ $team->teamName }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -52,10 +60,12 @@
                 <div>
                     <label for="year" class="block mb-2 text-sm font-bold text-gray-900">Year <span
                             class="text-red-500">*</span></label>
-                    <select id="year"
+                    <select id="year" name='year'
                         class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
                         <option value="" disabled selected hidden class="text-center">Year</option>
-                        <option value="2023">2023</option>
+                        @foreach ($years as $year)
+                            <option value={{$year->year ,}}>{{ $year->year}}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -63,10 +73,12 @@
                 <div>
                     <label for="sprint" class="block mb-2 text-sm font-bold text-gray-900">Sprint <span
                             class="text-red-500">*</span></label>
-                    <select id="sprint"
+                    <select id="sprint" name='sprint'
                         class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
                         <option value="" disabled selected hidden class="text-center">Sprint</option>
-                        <option value="Sprint 1">Sprint 1</option>
+                        @foreach ($sprints as $sprint)
+                            <option value={{$sprint->number ,}}>{{ $sprint->number}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -75,7 +87,7 @@
                 <div>
                     <label for="test_pass" class="block mb-2 text-sm font-bold text-gray-900">Point All <span
                             class="text-red-500">*</span></label>
-                    <input type="text" id="test_pass"
+                    <input type="text" id="test_pass" name="point"
                         class="w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Point" required />
                 </div>
@@ -88,10 +100,11 @@
                 </button>
                 <button type="submit"
                     class="min-w-[400px] px-8 py-3 bg-blue-900 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
-                    Create
+                    Apply
                 </button>
             </div>
         </div>
+    </form>
     </div>
 @endsection
 
