@@ -102,7 +102,7 @@ Route::get('/team-add', [TeamManagementController::class,'add'])->name('team.add
 Route::get('/team-edit{id}', [TeamManagementController::class,'edit'])->name('team.edit');
 Route::get('/team-store', [TeamManagementController::class,'edit'])->name('team.store');
 Route::post('/team-create', [TeamManagementController::class, 'store'])->name('team.create');
-Route::get('/team-delete',[TeamManagementController::class, 'destroy'])->name('team.delete');
+Route::delete('/team-delete{id}', [TeamManagementController::class, 'destroy'])->name('team.delete');
 // ****************************************************************************************************** //
 // Members Managment
 //Route::get('/member', [UserController::class,'']);

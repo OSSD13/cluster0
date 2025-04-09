@@ -78,15 +78,47 @@ return view('pages.teams.teamManagment', compact('teams'));
 
     public function edit($id)
     {
-        return view('pages.teams.editTeam');
+        // ดึงข้อมูลทีม
+        $team = DB::table('teams')->where('tm_id', $id)->first();
+    
+        // ดึงผู้ใช้ทั้งหมด
+        $users = DB::table('users')
+            ->select('usr_id as id', 'usr_username as username')
+            ->get();
+    
+        // ดึง API Trello ทั้งหมด
+        $apis = DB::table('trello_credentials')
+            ->select('trc_id as id', 'trc_name as name')
+            ->get();
+    
+        // ดึง Trello Setting ทั้งหมด
+        $settings = DB::table('setting_trello')
+            ->select('stl_id as id', 'stl_name as name')
+            ->get();
+    
+        // ดึงสมาชิกปัจจุบันของทีมนี้
+        $currentMembers = DB::table('user_team_history')
+            ->where('uth_tm_id', $id)
+            ->where('uth_is_current', 1)
+            ->pluck('uth_usr_id') // ดึงเฉพาะ ID
+            ->toArray();
+    
+        return view('pages.teams.createNewTeam', compact('team', 'users', 'apis', 'settings', 'currentMembers'));
     }
-    public function destroy($id)
-    {
-        // ลบข้อมูลในฐานข้อมูล
-        DB::table('team')->where('tm_id', $id)->delete();
+    
+    public function update(){
 
-        // Redirect กลับไปที่หน้า backlog พร้อมข้อความ success
-        return redirect()->route('team')->with('success', 'ลบข้อมูลเรียบร้อยแล้ว');
-    }
+    } 
+    public function destroy($id)
+{
+    // ลบข้อมูลสมาชิกทีมก่อน
+    DB::table('user_team_history')->where('uth_tm_id', $id)->delete();
+
+    // แล้วค่อยลบทีม
+    DB::table('teams')->where('tm_id', $id)->delete();
+
+    return redirect()->route('team')->with('success', 'ลบทีมเรียบร้อยแล้ว');
+}
+
 
 }
