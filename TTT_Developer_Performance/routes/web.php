@@ -79,10 +79,11 @@ Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('over
 // Minor case
 Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
 Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
-Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
+Route::get('/minorcase-edit-{id}', [MinorcaseController::class, 'edit'])->name('editminorcase');
 Route::post('/minorcase/store', [MinorcaseController::class,'store'])->name('storeMinorcase');
-Route::put('/minorcase/{id}', [MinorcaseController::class, 'update'])->name('minorcase.update');
-//Route::get('/minorcase/edit/{id}', [MinorcaseController::class, 'edit'])->name('minorcase.edit');
+Route::post('/minorcase/{id}', [MinorcaseController::class, 'update'])->name('minorcase.update');
+Route::get('/api/members/{teamId}', [MinorcaseController::class, 'getMembersByTeam']);
+Route::put('/minorcase-{id}', [MinorcaseController::class, 'delete'])->name('minorcase.delete');
 // ****************************************************************************************************** //
 // Backlog
 Route::get('/backlog', [BacklogController::class, 'index'])->name('backlog'); // แสดงรายการ backlog

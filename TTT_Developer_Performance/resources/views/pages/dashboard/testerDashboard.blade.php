@@ -136,7 +136,7 @@
                 </div>
                 <div class="flex items-center gap-4 w-full mt-3">
                     <div class="flex-1 flex items-center justify-center">
-                        <p id="pointAllNumber" class="font-bold">37</p>
+                        <p id="pointAllNumber" class="font-bold">{{ $totalPointAll }}</p>
                     </div>
                     <div class="border-l-2 border-black h-[30px]"></div>
                     <div class="flex-1 flex items-center justify-center">
@@ -154,11 +154,12 @@
                 </div>
                 <div class="flex items-center gap-4 w-full mt-3">
                     <div class="flex-1 flex items-center justify-center">
-                        <p id="pointPassNumber" class="font-bold">36</p>
+                        <p id="pointPassNumber" class="font-bold">{{ $totalPass }}</p>
                     </div>
                     <div class="border-l-2 border-black h-[30px]"></div>
                     <div class="flex-1 flex items-center justify-center">
-                        <p id="pointPassPercent" class="font-bold text-[var(--green-color-text)]">97.30%</p>
+                        <p id="pointPassPercent" class="font-bold text-[var(--green-color-text)]">{{ number_format(($totalPass / $totalPointAll) * 100, 2) }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -171,11 +172,12 @@
                 </div>
                 <div class="flex items-center gap-4 w-full mt-3">
                     <div class="flex-1 flex items-center justify-center">
-                        <p id="pointPassNumber" class="font-bold">3</p>
+                        <p id="pointPassNumber" class="font-bold">{{ $totalBug }}</p>
                     </div>
                     <div class="border-l-2 border-black h-[30px]"></div>
                     <div class="flex-1 flex items-center justify-center">
-                        <p id="pointPassPercent" class="font-bold text-[var(--red-color-text)]">8.10%</p>
+                        <p id="pointPassPercent" class="font-bold text-[var(--red-color-text)]">{{ number_format(($totalBug / $totalPointAll) * 100, 2) }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -230,7 +232,7 @@
                     </div>
 
                     <div class="bg-white w-[90px] h-[30px] rounded-lg flex justify-center items-center m-1">
-                        <p class="text-[var(--primary-color-green)] font-bold">36</p>
+                        <p class="text-[var(--primary-color-green)] font-bold">{{ $totalPass }}</p>
                     </div>
                 </div>
 
@@ -241,7 +243,7 @@
                     </div>
 
                     <div class="bg-white w-[90px] h-[30px] rounded-lg flex justify-center items-center m-1">
-                        <p class="text-[var(--primary-color-red)] font-bold">3</p>
+                        <p class="text-[var(--primary-color-red)] font-bold">{{ $totalBug }}</p>
                     </div>
                 </div>
             </div>
@@ -376,121 +378,31 @@
                         </thead>
                         <!-- Table body -->
                         <tbody>
+                            @foreach($personal as $index => $person)
                             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
                                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    1
+                                    {{ $index + 1 }}
                                 </th>
                                 <!-- Member-->
                                 <td class="px-6 py-4 text-center">
-                                    Alex
+                                    {{ $person->usr_username }}
                                 </td>
                                 <!-- Amount -->
                                 <td class="px-6 py-4 text-center">
-                                    11
+                                    {{ $person->point_all }}
                                 </td>
                                 <!-- Test Pass -->
                                 <td class="px-6 py-4 text-center">
-                                    11
+                                    {{ $person->pcs_pass }}
                                 </td>
                                 <!-- Test Fail -->
                                 <td class="px-6 py-4 text-center">
-                                    0
+                                    {{ $person->pcs_bug }}
                                 </td>
                             </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    2
-                                </th>
-                                <!-- Member-->
-                                <td class="px-6 py-4 text-center">
-                                    Alex
-                                </td>
-                                <!-- Amount -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Pass -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Fail -->
-                                <td class="px-6 py-4 text-center">
-                                    0
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    3
-                                </th>
-                                <!-- Member-->
-                                <td class="px-6 py-4 text-center">
-                                    Alex
-                                </td>
-                                <!-- Amount -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Pass -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Fail -->
-                                <td class="px-6 py-4 text-center">
-                                    0
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    4
-                                </th>
-                                <!-- Member-->
-                                <td class="px-6 py-4 text-center">
-                                    Alex
-                                </td>
-                                <!-- Amount -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Pass -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Fail -->
-                                <td class="px-6 py-4 text-center">
-                                    0
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    5
-                                </th>
-                                <!-- Member-->
-                                <td class="px-6 py-4 text-center">
-                                    Alex
-                                </td>
-                                <!-- Amount -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Pass -->
-                                <td class="px-6 py-4 text-center">
-                                    11
-                                </td>
-                                <!-- Test Fail -->
-                                <td class="px-6 py-4 text-center">
-                                    0
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -535,101 +447,27 @@
                         </thead>
                         <!-- Table body -->
                         <tbody>
+                            @foreach($personal as $index => $person)
                             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
                                 <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
                                 <!-- ลำดับ # -->
                                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                                    1
+                                    {{ $index + 1 }}
                                 </th>
                                 <!-- Team-->
                                 <td class="px-6 py-4 text-center">
-                                    Team1
+                                    {{ $person->team }}
                                 </td>
                                 <!-- Member -->
                                 <td class="px-6 py-4 text-center">
-                                    Max
+                                    {{ $person->usr_username }}
                                 </td>
                                 <!-- Point All -->
                                 <td class="px-6 py-4 text-center">
-                                    8
+                                    {{ $person->point_all }}
                                 </td>
                             </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">
-                                    2
-                                </th>
-                                <!-- Team-->
-                                <td class="px-6 py-4 text-center">
-                                    Team1
-                                </td>
-                                <!-- Member -->
-                                <td class="px-6 py-4 text-center">
-                                    Max
-                                </td>
-                                <!-- Point All -->
-                                <td class="px-6 py-4 text-center">
-                                    8
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    3
-                                </th>
-                                <!-- Team-->
-                                <td class="px-6 py-4 text-center">
-                                    Team1
-                                </td>
-                                <!-- Member -->
-                                <td class="px-6 py-4 text-center">
-                                    Max
-                                </td>
-                                <!-- Point All -->
-                                <td class="px-6 py-4 text-center">
-                                    8
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    4
-                                </th>
-                                <!-- Team-->
-                                <td class="px-6 py-4 text-center">
-                                    Team1
-                                </td>
-                                <!-- Member -->
-                                <td class="px-6 py-4 text-center">
-                                    Max
-                                </td>
-                                <!-- Point All -->
-                                <td class="px-6 py-4 text-center">
-                                    8
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 text-black text-center">
-                                <!-- เขียนไว้แสดงตัวอย่างข้อมูลก่อนทำลูป -->
-                                <!-- ลำดับ # -->
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                    5
-                                </th>
-                                <!-- Team-->
-                                <td class="px-6 py-4 text-center">
-                                    Team1
-                                </td>
-                                <!-- Member -->
-                                <td class="px-6 py-4 text-center">
-                                    Max
-                                </td>
-                                <!-- Point All -->
-                                <td class="px-6 py-4 text-center">
-                                    8
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -828,17 +666,18 @@
             });
         });
 
-        // Year dashboard
+        let chartData = @json($chartData);
+        // column dashboard
         var options = {
             series: [{
-                name: 'Net Profit',
-                data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+                name: 'Point All',
+                data: chartData.Point_All
             }, {
-                name: 'Revenue',
-                data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+                name: 'Pass',
+                data: chartData.Pass
             }, {
-                name: 'Free Cash Flow',
-                data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+                name: 'Fail',
+                data: chartData.Bug
             }],
             chart: {
                 type: 'bar',
@@ -861,11 +700,11 @@
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                categories: chartData.categories,
             },
             yaxis: {
                 title: {
-                    text: '$ (thousands)'
+                    text: 'Points'
                 }
             },
             fill: {
@@ -874,7 +713,7 @@
             tooltip: {
                 y: {
                     formatter: function(val) {
-                        return "$ " + val + " thousands"
+                        return val + " point"
                     }
                 }
             }
@@ -884,9 +723,12 @@
         columnChart.render();
 
         // Pie chart
+        let totalPass = chartData.Pass.reduce((acc, val) => acc + val, 0);
+        let totalBug = chartData.Bug.reduce((acc, val) => acc + val, 0);
+
 
         var options = {
-            series: [44, 55],
+            series: [totalPass, totalBug],
             chart: {
                 type: 'donut',
             },
