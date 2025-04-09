@@ -22,22 +22,26 @@
             </div>
 
             <div>
-                <div id="sprint-list-container">
-                    <div class="flex items-center gap-4 mb-3 member-row">
-                        <div class="w-1/2">
-                            <label class="block font-bold text-gray-700">Year <span class="text-red-500">*</span></label>
-                            <input type="text" placeholder="Year"
-                                class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
-       placeholder-gray-300 placeholder:font-medium placeholder:text-base">
-                        </div>
-                        <div class="w-1/2">
-                            <label class="block font-bold text-gray-700">Sprint <span class="text-red-500">*</span></label>
-                            <input type="text" placeholder="Sprint"
-                                class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
-       placeholder-gray-300 placeholder:font-medium placeholder:text-base">
+                <form action="{{ route('sprint.store')}}" method="POST">
+                    @csrf
+                    <div id="sprint-list-container">
+                        <div class="flex items-center gap-4 mb-3 member-row">
+                            <div class="w-1/2">
+                                <label class="block font-bold text-gray-700">Year <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" placeholder="Year"
+                                    class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
+       placeholder-gray-300 placeholder:font-medium placeholder:text-base" name="year">
+                            </div>
+                            <div class="w-1/2">
+                                <label class="block font-bold text-gray-700">Sprint <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" placeholder="Sprint"
+                                    class="w-full h-full max-h-[60px] p-4 border border-gray-400 rounded-[7px]
+       placeholder-gray-300 placeholder:font-medium placeholder:text-base" name="sprint">
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 <script>
                     function validateAndSubmit() {
@@ -70,7 +74,7 @@
                         Create
                     </button>
                 </div>
-
+            </form>
                 <!-- Alert Box -->
                 {{-- <div id="alertWarningBox"
                     class="hidden fixed inset-0 flex items-center justify-center transition-opacity duration-300 rounded-lg">
@@ -133,10 +137,10 @@
                 }
 
                 /* #alertWarningBox {
-                                                                        z-index: 9999; */
+                                                                            z-index: 9999; */
                 /* ให้สูงกว่าทุกอย่างในหน้า */
                 /* background-color: rgba(0, 0, 0, 0.5);
-                                                                    } */
+                                                                        } */
 
                 #alertErrorBox {
                     z-index: 9999;
