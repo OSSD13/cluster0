@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RoleAccess;
 use Illuminate\Support\Facades\Route;
 // Auth
 use App\Http\Controllers\LoginController;
@@ -51,19 +52,39 @@ Route::prefix('register')->group(function () {
 });
 // ****************************************************************************************************** //
 
-// Test view
-Route::prefix('test')->group(function () {
-    Route::get('/login/success', [HomeController::class, 'index'])->name('home');
+Route::middleware(['web', 'auth', 'role:Tester'])->group(function () {
+    // View Summary Points
+    Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('overview');
+    Route::get('/dash-team-performance', [TeamPerformanceController::class,'card'])->name('team.performance');
+
+    // Minor case
+    Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
+    Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
+    Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
+
+    // Backlog
+    Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
+    Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
+    Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklog');
+
+    // Extra Points
+    Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extraPoint');
+    Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtraPoint');
+
+    // Members Managment
+    Route::get('memberlist', [MemberListController::class, 'index'])->name('memberlist');
+    Route::get('/memberlistAdd', function () {
+        return view('memberlistAdd');
+    })->name('memberlist.add');
+    Route::get('memberlist-edit{id}', [MemberListController::class, 'edit'])->name('memberlist.edit');
+    Route::get('memberlist-delete{id}', [MemberListController::class, 'delete'])->name('memberlist.delete');
+    Route::post('memberlist-update{id}', [MemberListController::class, 'delete'])->name('memberlist.update');
 });
 
-// Developer
-Route::prefix('dev')->group(function () {
-
-});
-
-// Tester
-Route::prefix('tester')->group(function () {
-
+Route::middleware(['web', 'auth', 'role:Developer'])->group(function () {
+    // View Summary Points
+    Route::get('/dash-overview-dev', [DashboardController::class, 'developer'])->name('overview.dev');
+    Route::get('/dash-team-performance-dev', [TeamPerformanceController::class,'cardDev'])->name('team.performance.dev');
 });
 
 // วิธีการตั้งชื่อ url Route menu/submenu/การทำงานอื่นๆ (add, edit)
@@ -72,23 +93,13 @@ Route::prefix('tester')->group(function () {
 Route::get('/myprofile', [ProfileController::class,'myProfile'])->name('myprofile');
 Route::get('/change-password', [ProfileController::class,'changePassword'])->name('change.password');
 // ****************************************************************************************************** //
-// View Summary Points
-Route::get('/dash-team-performance', [TeamPerformanceController::class,'card'])->name('team.performance');
-Route::get('/dash-overview', [DashboardController::class, 'tester'])->name('overview');
+
 // ****************************************************************************************************** //
-// Minor case
-Route::get('/minorcase', [MinorcaseController::class,'index'])->name('minorcase');
-Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminorcase');
-Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
+
 // ****************************************************************************************************** //
-// Backlog
-Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
-Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
-Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklog');
+
 // ****************************************************************************************************** //
-// Extra Points
-Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extraPoint');
-Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtraPoint');
+
 //Route::get('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtraPoint');
@@ -101,17 +112,7 @@ Route::get('/team', [TeamManagementController::class,'index'])->name('team');
 Route::get('/team-add', [TeamManagementController::class,'add'])->name('team.add');
 Route::get('/team-edit', [TeamManagementController::class,'edit'])->name('team.edit');
 // ****************************************************************************************************** //
-// Members Managment
-//Route::get('/member', [UserController::class,'']);
-//Route::get('/member-add', [UserController::class,'']);
-//Route::get('/member-edit', [UserController::class,'']);
-Route::get('memberlist', [MemberListController::class, 'index'])->name('memberlist');
-Route::get('/memberlistAdd', function () {
-    return view('memberlistAdd');
-})->name('memberlist.add');
-Route::get('memberlist-edit{id}', [MemberListController::class, 'edit'])->name('memberlist.edit');
-Route::get('memberlist-delete{id}', [MemberListController::class, 'delete'])->name('memberlist.delete');
-Route::post('memberlist-update{id}', [MemberListController::class, 'delete'])->name('memberlist.update');
+
 // ****************************************************************************************************** //
 // Settings
 Route::get('/setting-default-password', [UserController::class,'defaultConfiguration'])->name('default.password');
