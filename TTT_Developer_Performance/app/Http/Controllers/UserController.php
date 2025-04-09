@@ -55,7 +55,7 @@ class UserController extends Controller
         $userId = $request->input('user_id');
         $defaultPassword = json_decode(Storage::disk('local')->get('config/defaultPassword.json'), true)['defaultPassword'];
 
-        $user = \App\Models\User::find($userId);
+        $user = Users::find($userId);
         if ($user) {
             $user->usr_password = bcrypt($defaultPassword);
             $user->save();
@@ -89,13 +89,24 @@ class UserController extends Controller
             'team_id' => 'nullable|exists:teams,tm_id'
         ]);
 
-        UserTeamHistory::create([
-            'uth_usr_id' => $request->user_id,
-            'uth_tm_id' => $request->team_id,
-            'uth_start_date' => now(),
-            'uth_end_date' => null,
-            'uth_is_current' => 1
+         // เคลียร์ record เดิม
+        UserTeamHistory::where('uth_usr_id', $request->user_id)
+        ->where('uth_is_current', 1)
+        ->update([
+            'uth_is_current' => 0,
+            'uth_end_date' => now()
         ]);
+
+        // เพิ่ม record ใหม่
+        if ($request->team_id) {
+            UserTeamHistory::create([
+                'uth_usr_id' => $request->user_id,
+                'uth_tm_id' => $request->team_id,
+                'uth_start_date' => now(),
+                'uth_end_date' => null,
+                'uth_is_current' => 1
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Team updated successfully.');;
     }
