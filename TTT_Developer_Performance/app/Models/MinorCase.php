@@ -14,7 +14,7 @@ class MinorCase extends Model
     public $timestamps = false;
 
     protected $fillable = [ //ชื่อตรงกับฟิลด์ดาต้าเบต
-        'mnc_personal_point',
+        
         'mnc_card_detail',
         'mnc_defect_detail',
         'mnc_point',

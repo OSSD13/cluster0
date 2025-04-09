@@ -44,6 +44,10 @@
                 <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition" onclick="openAlertErrorToast()">Error test</button>
             </td>
 
+            <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition" onclick="openReloadAlert()">Reload</button>
+            </td>
+
         </form>
 
 
@@ -186,11 +190,42 @@
             </div>
         </div>
 
+        <!-- Alert Reload Box -->
+        <div id="alertReloadBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                <!-- ไอคอน -->
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('../resources/Images/Icons/refreshBlue.png') }}" alt="Reload" class="w-16 h-16 spin">
+                </div>
+
+                <!-- ข้อความ -->
+                <h2 class="text-2xl font-bold text-black mb-2">Reloading</h2>
+                <p class="text-gray-500 mb-6">Wait a minute.</p>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection
 
 @section('javascripts')
+<script>
+    function openReloadAlert() {
+        const alertBox = document.getElementById("alertReloadBox");
+        alertBox.classList.remove("hidden");
+
+        // ปิดเองหลังจาก 10 วินาที
+        setTimeout(() => {
+            alertBox.classList.add("hidden");
+        }, 10000);
+    }
+
+    function closeReloadAlert() {
+        document.getElementById("alertReloadBox").classList.add("hidden");
+    }
+
+</script>
+
 <script>
     function openSuccessAlert() {
         document.getElementById("alertSuccessBox").classList.remove("hidden");
@@ -371,6 +406,21 @@
             z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
             background-color: rgba(0, 0, 0, 0.5);
         }
+
+        .spin {
+        animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        #alertReloadBox {
+            z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
 
     </style>
 @endsection

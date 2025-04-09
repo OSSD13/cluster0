@@ -1,13 +1,13 @@
 @extends('layouts.tester')
 
 @section('title')
-    <title>Member Management</title>
+    <title>Sprint Management</title>
 @endsection
 
 @section('pagename')
     <div class="flex items-end gap-[10px] mb-4">
-        <h2 class="text-2xl font-bold">Member Management</h2>
-        <p class="font-bold text-neutral-400 ml-4">Member List / Edit</p>
+        <h2 class="text-2xl font-bold">Sprint Management</h2>
+        <p class="font-bold text-neutral-400 ml-4">Sprint List / Edit</p>
     </div>
 @endsection
 
@@ -18,21 +18,21 @@
         <div class="flex flex-col items-center justify-start min-h-screen ml-10 pt-10">
             <div class="w-[500px] h-[600px] bg-white p-6 rounded-2xl shadow-lg">
                 <!-- Header -->
-                <h3 class="text-xl font-bold text-blue-900 text-left mb-4 ml-5">Edit Member</h3>
+                <h3 class="text-xl font-bold text-blue-900 text-left mb-4 ml-5">Edit Sprint</h3>
 
-                <!-- Name Input -->
+                <!-- Year Input -->
                 <div class="w-[400px] ml-5">
-                    <label class="block font-bold text-gray-700">Name</label>
+                    <label class="block font-bold text-gray-700">Year</label>
 
-                    <input type="text" name="usr_name" value="{{ $user->usr_name }}" placeholder="Your Name"
+                    <input type="text" name="year" value="{{ $user->usr_name }}" placeholder="Year"
                         class="w-full p-3 border border-gray-400 rounded-lg placeholder-gray-400 text-base">
                 </div>
 
-                <!-- Trello Name Input -->
+                <!-- Sprint Input -->
                 <div class="w-[400px] mt-4 ml-5">
-                    <label class="block font-bold text-gray-700">Trello Full Name</label>
+                    <label class="block font-bold text-gray-700">Sprint</label>
 
-                    <input type="text" name="trello_fullname" value="{{ $user->usr_trello_fullname }}" placeholder="Your Trello Name"
+                    <input type="text" name="sprint" value="{{ $user->usr_trello_fullname }}" placeholder="Sprint"
                         class="w-full p-3 border border-gray-400 rounded-lg placeholder-gray-400 text-base">
                 </div>
 
@@ -66,7 +66,7 @@
                 <div class="flex justify-start mt-6 gap-1 ml-5">
 
                     <button class="w-[199px] h-[50px] bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-800"
-                        onclick="window.location.href='{{ route('memberlist') }}'">
+                        onclick="window.location.href='{{ route('sprintlist') }}'">
                         Cancel
                     </button>
                     <button class="w-[199px] h-[50px] bg-blue-900 text-white rounded-lg font-bold hover:bg-blue-700"
