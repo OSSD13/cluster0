@@ -82,9 +82,12 @@ Route::get('/minorcase-add', [MinorcaseController::class,'add'])->name('addminor
 Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editminorcase');
 // ****************************************************************************************************** //
 // Backlog
-Route::get('/backlog', [BacklogController::class,'index'])->name('backlog');
-Route::get('/backlog-add', [BacklogController::class,'add'])->name('addbacklog');
-Route::get('/backlog-edit', [BacklogController::class,'edit'])->name('editbacklog');
+Route::get('/backlog', [BacklogController::class, 'index'])->name('backlog'); // แสดงรายการ backlog
+Route::get('/backlog-add', [BacklogController::class, 'create'])->name('addbacklog'); // ฟอร์มการเพิ่ม backlog
+Route::get('/backlog-edit/{id}', [BacklogController::class, 'edit'])->name('editbacklog'); // ฟอร์มการแก้ไข backlog
+Route::delete('/backlog/{id}', [BacklogController::class, 'destroy'])->name('deletebacklog'); // ลบ backlog
+Route::put('/backlog/{id}', [BacklogController::class, 'update'])->name('backlog.update'); // อัพเดต backlog
+Route::post('/backlogs/store', [BacklogController::class, 'store'])->name('backlogs.store'); // บันทึก backlog ใหม่
 // ****************************************************************************************************** //
 // Extra Points
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');
