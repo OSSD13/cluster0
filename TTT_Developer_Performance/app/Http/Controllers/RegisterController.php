@@ -13,19 +13,19 @@ use DB;
 class RegisterController extends Controller
 {
     public function index(){
-        return view('register');
+        return view('auth.register');
     }
 
     public function pendingPage(){
-        return view('pending');
+        return view('auth.pending');
     }
 
     public function registerWithGooglePage(){
-        return view('registerWithGoogle_step2');
+        return view('auth.registerWithGoogle_step2');
     }
 
     public function step2(){
-        return view('register_step2');
+        return view('auth.register_step2');
     }
 
     public function registerStep1(Request $req)
@@ -36,7 +36,7 @@ class RegisterController extends Controller
             'usr_password' => bcrypt($req->password),
         ]);
 
-        return view('register_step2');
+        return view('auth.register_step2');
     }
 
     public function registerStep2(Request $req)
@@ -73,7 +73,7 @@ class RegisterController extends Controller
             session([
                 'usr_google_id' => $googleUser->id
             ]);
-            return view('registerWithGoogle_step2');
+            return view('auth.registerWithGoogle_step2');
         }
     }
 
@@ -84,7 +84,7 @@ class RegisterController extends Controller
         $user = Users::create([
             'usr_username' => $req->username,
             'usr_email' => null,
-            'usr_password' => bcrypt("TTT@1234"), 
+            'usr_password' => bcrypt("TTT@1234"),
             'usr_name' => $req->name,
             'usr_trello_fullname' => null,
             'usr_role' => null,

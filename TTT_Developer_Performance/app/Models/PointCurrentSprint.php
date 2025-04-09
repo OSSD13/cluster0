@@ -14,16 +14,13 @@ class PointCurrentSprint extends Model
 
     protected $fillable = [ //ชื่อตรงกับฟิลด์ดาต้าเบต
         'pcs_spr_id',
-        'pcs_mnc_id',
-        'pcs_blg_id',
-        'pcs_ext_id',
-        'pcs_uth_id',
-        'pcs_assign_usr_id',
+        'pcs_tester_id',
         'pcs_pass',
         'pcs_bug',
         'pcs_cancel',
         'pcs_day_off',
-        'pcs_is_use'
+        'pcs_is_use',
+        'pcs_uth_id'
 
     ];
 

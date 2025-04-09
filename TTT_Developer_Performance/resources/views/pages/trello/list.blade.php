@@ -20,19 +20,19 @@
             {{-- To-do --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">To-do</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="todo-list-name">Your List Name</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- In-progress --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">In-progress</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2">Doing</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="inprogress-list-name">Your List Name</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Done --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Done</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="done-list-name">Your List Name</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
         </div>
@@ -42,31 +42,32 @@
             {{-- Bug / Backlog --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Bug / Backlog</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="bug-list-name">Your List Name</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Minor case --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Minor case</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="minor-case-list-name">Your List Name</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Extra --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Extra</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="extra-list-name">Your List Name</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Cancel --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Cancel</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="cancel-list-name">Your List Name</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
         </div>
 
-        {{-- From Trello --}}
-        <form class="flex flex-col items-center">
+        {{-- Form --}}
+        <form class="flex flex-col items-center" method="POST" action="{{ route('trello.api.create') }}">
+            @csrf
             {{-- Setting Name --}}
             <div class="mb-4 w-[480px]">
                 <label for="setting-name" class="block text-sm font-bold text-black mb-2">
@@ -77,9 +78,9 @@
             </div>
             {{-- Choose List --}}
             <div class="mb-4 w-[480px]">
-                <label for="Choose List" class="block mb-2 text-sm font-bold text-gray-900 ">Choose List </label>
+                <label for="Choose List" class="block mb-2 text-sm font-bold text-gray-900">Choose List</label>
                 <select id="Choose List"
-                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-md focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5 ">
+                    class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-md focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5">
                     <option value="" disabled selected hidden>Choose List</option>
                     <option value="stl_todo">To-do</option>
                     <option value="stl_inprogress">In-progress</option>
@@ -98,10 +99,8 @@
 
                 <div class="relative">
                     <input type="text" id="list-name" placeholder="List Name" name="list_name"
-                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="">
-
-                    <button
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="button" id="check-green"
                         class="absolute top-1/2 left-122 transform -translate-y-1/2 w-[40px] h-[40px] bg-[#00BA00] p-2 rounded-md shadow-md flex items-center justify-center">
                         <img src="{{ asset('resources\Images\Icons\check-green.png') }}" alt=""
                             class="w-[25px] h-[25px]">
@@ -110,7 +109,7 @@
             </div>
             {{-- Cancel And Create --}}
             <div class="flex justify-center gap-4">
-                <button type="button" onclick="window.location.href='{{ route('trelloConfiguration') }}'"
+                <button type="button" onclick="window.location.href='{{ route('trello.config') }}'"
                     class="w-58 px-6 py-2 bg-zinc-500 text-white rounded-[10px] font-bold border-2 border-transparent hover:bg-white hover:text-blue-900 hover:border-blue-900">
                     Cancel
                 </button>
@@ -124,7 +123,45 @@
 @endsection
 
 @section('javascripts')
-    <script></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chooseListElement = document.getElementById('Choose List');
+            const listNameInput = document.getElementById('list-name');
+            const checkGreenButton = document.getElementById('check-green');
+
+            const listNameElements = {
+                stl_todo: document.getElementById('todo-list-name'),
+                stl_inprogress: document.getElementById('inprogress-list-name'),
+                stl_done: document.getElementById('done-list-name'),
+                stl_bug: document.getElementById('bug-list-name'),
+                stl_minor_case: document.getElementById('minor-case-list-name'),
+                stl_name: document.getElementById('extra-list-name'),
+                stl_cancel: document.getElementById('cancel-list-name')
+            };
+
+            // ฟังก์ชันเมื่อเลือกจาก Choose List
+            chooseListElement.addEventListener('change', function() {
+                // รีเซ็ต List Name เป็นค่าว่าง
+                listNameInput.value = "";
+            });
+
+            // ฟังก์ชันเมื่อกดปุ่ม check-green
+            checkGreenButton.addEventListener('click', function() {
+                const selectedValue = chooseListElement.value;
+                const newListName = listNameInput.value.trim();
+
+                // ถ้ามีการกรอกชื่อใน List Name
+                if (newListName) {
+                    listNameElements[selectedValue].textContent = newListName;
+                    // เก็บข้อมูลใน session
+                    sessionStorage.setItem(selectedValue, newListName);
+                } else {
+                    listNameElements[selectedValue].textContent = "Your List Name";
+                    sessionStorage.removeItem(selectedValue);
+                }
+            });
+        });
+    </script>
 @endsection
 
 @section('styles')

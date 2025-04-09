@@ -15,6 +15,7 @@ class Card extends Model
     public $timestamps = false;
 
     protected $fillable = [ //ชื่อตรงกับฟิลด์ดาต้าเบต
+        'crd_trc_id',
         'crd_trello_id',
         'crd_boardname',
         'crd_listname',

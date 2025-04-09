@@ -1,7 +1,7 @@
 @extends('layouts.tester')
 
 @section('title')
-    <title>Default Configuration</title>
+    <title>Example Alert</title>
 @endsection
 
 @section('pagename')
@@ -42,6 +42,14 @@
 
             <td class="px-6 py-4 flex items-center justify-center space-x-2">
                 <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition" onclick="openAlertErrorToast()">Error test</button>
+            </td>
+
+            <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition" onclick="openReloadAlert()">Reload</button>
+            </td>
+
+            <td class="px-6 py-4 flex items-center justify-center space-x-2">
+                <button type="button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition" onclick="openPermissionAlert()">Permission</button>
             </td>
 
         </form>
@@ -156,13 +164,33 @@
                 <p class="text-gray-500 mb-6">Anyone on the internet with this can view.</p>
 
                 <!-- ปุ่ม Done -->
-                <button onclick="closeInfoAlert()" class="bg-[#2196F3] text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600">
+                <button onclick="closeInfoAlert()" class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600">
                     OK
                 </button>
             </div>
         </div>
 
-        มัน<!-- Alert Success Box -->
+
+        <!-- Alert Permisson Box -->
+        <div id="alertPermissionBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div class="bg-white rounded-lg shadow-lg p-14 relative w-[650px] text-center transform scale-0 transition-transform duration-300 ease-out" id="alertBox" >
+
+                <!-- ไอคอน -->
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('resources/Images/Icons/warning.png') }}" alt="Check icon" class="w-16 h-16">
+                </div>
+
+                <!-- ข้อความ -->
+                <h2 class="text-2xl font-bold text-[#00408e] mb-2">Please wait for permission approval.</h2>
+
+                <!-- ปุ่ม Done -->
+                <button onclick="closePermissionAlert()" class="bg-[#00408e] text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600">
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Alert Success Box -->
         <div id="alertSuccessBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
                 <!-- ปุ่มปิด -->
@@ -186,11 +214,69 @@
             </div>
         </div>
 
+        <!-- Alert Reload Box -->
+        <div id="alertReloadBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+                <!-- ไอคอน -->
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('../resources/Images/Icons/refreshBlue.png') }}" alt="Reload" class="w-16 h-16 spin">
+                </div>
+
+                <!-- ข้อความ -->
+                <h2 class="text-2xl font-bold text-black mb-2">Reloading</h2>
+                <p class="text-gray-500 mb-6">Wait a minute.</p>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection
 
 @section('javascripts')
+<script>
+    function openReloadAlert() {
+        const alertBox = document.getElementById("alertReloadBox");
+        alertBox.classList.remove("hidden");
+
+        // ปิดเองหลังจาก 10 วินาที
+        setTimeout(() => {
+            alertBox.classList.add("hidden");
+        }, 10000);
+    }
+
+    function closeReloadAlert() {
+        document.getElementById("alertReloadBox").classList.add("hidden");
+    }
+
+</script>
+
+<script>
+    function openPermissionAlert() {
+        const box = document.getElementById("alertPermissionBox");
+        const content = document.getElementById("alertBox");
+        box.classList.remove("hidden");
+
+        // ช้า ๆ ให้ browser วาดก่อน แล้วค่อยเพิ่ม scale
+        setTimeout(() => {
+            content.classList.remove("scale-0");
+            content.classList.add("scale-100");
+        }, 10);
+    }
+
+    function closePermissionAlert() {
+        const box = document.getElementById("alertPermissionBox");
+        const content = document.getElementById("alertBox");
+
+        content.classList.remove("scale-100");
+        content.classList.add("scale-0");
+
+        setTimeout(() => {
+            box.classList.add("hidden");
+        }, 300);
+    }
+
+</script>
+
 <script>
     function openSuccessAlert() {
         document.getElementById("alertSuccessBox").classList.remove("hidden");
@@ -371,6 +457,27 @@
             z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
             background-color: rgba(0, 0, 0, 0.5);
         }
+
+        .spin {
+        animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        #alertReloadBox {
+            z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #alertPermissionBox {
+            z-index: 9999; /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+
 
     </style>
 @endsection

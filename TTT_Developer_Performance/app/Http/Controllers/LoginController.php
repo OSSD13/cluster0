@@ -11,7 +11,7 @@ use App\Models\Users;
 class LoginController extends Controller
 {
     public function index(){
-        return view('login');
+        return view('auth.login');
     }
 
     public function login(Request $req)
@@ -29,9 +29,9 @@ class LoginController extends Controller
 
         // ตรวจสอบรหัสผ่าน
         if ($user && Hash::check($validated['password'], $user->usr_password)) {
-            return view('home', compact('user'));
+            return view('auth.home', compact('user'));
         } else {
-            return view('login');
+            return view('auth.login');
         }
     }
 
@@ -55,12 +55,12 @@ class LoginController extends Controller
             $user = Users::where('usr_google_id', $googleUser->id)->first();
 
             if ($user) {
-                return view('home', compact('user'));
+                return view('auth.home', compact('user'));
             } else {
                 session([
                     'usr_google_id' => $googleUser->id
                 ]);
-                return view('registerWithGoogle_step2', compact('googleUser'));
+                return view('auth.registerWithGoogle_step2', compact('googleUser'));
             }
         } catch (\Exception $e) {
             dd($e);
