@@ -6,12 +6,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Users extends Authenticatable
 {
+    protected $guard = 'web';
+
     protected $table = 'users';
     protected $primaryKey = 'usr_id';
     public $timestamps = false;
 
 
     protected $fillable = [
+        'usr_image',
         'usr_username',
         'usr_email',
         'usr_password',
