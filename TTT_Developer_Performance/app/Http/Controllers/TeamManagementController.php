@@ -10,41 +10,25 @@ use App\Models\Team;
 
 class TeamManagementController extends Controller
 {
-    public function index(Request $request)
-    {
-        $sortField = $request->query('sort', 'created');
-        $sortOrder = $request->query('order', 'desc');
-    
-        $validSorts = ['created', 'current', 'name'];
-        if (!in_array($sortField, $validSorts)) {
-            $sortField = 'created';
-        }
-    
-        // mapping ชื่อคอลัมน์ sort ให้ตรงกับที่ใช้ใน DB
-        $sortColumn = match($sortField) {
-            'name' => 'teams.tm_name',
-            'current' => DB::raw('COUNT(user_team_history.uth_usr_id)'),
-            default => DB::raw('MIN(user_team_history.uth_start_date)'),
-        };
-    
-        $teams = DB::table('teams')
-            ->join('user_team_history', function ($join) {
-                $join->on('teams.tm_id', '=', 'user_team_history.uth_tm_id')
-                     ->where('user_team_history.uth_is_current', '=', 1);
-            })
-            ->where('teams.tm_is_use', '=', 1)
-            ->select(
-                'teams.tm_id as id',
-                'teams.tm_name as name',
-                DB::raw('MIN(user_team_history.uth_start_date) as created'),
-                DB::raw('COUNT(user_team_history.uth_usr_id) as current')
-            )
-            ->groupBy('teams.tm_id', 'teams.tm_name')
-            ->orderByRaw("{$sortColumn} {$sortOrder}")
-            ->get();
-    
-        return view('pages.teams.teamManagment', compact('teams', 'sortField', 'sortOrder'));
-    }
+    public function index()
+{
+    $teams = DB::table('teams')
+        ->join('user_team_history', function ($join) {
+            $join->on('teams.tm_id', '=', 'user_team_history.uth_tm_id')
+                 ->where('user_team_history.uth_is_current', '=', 1);
+        })
+        ->where('teams.tm_is_use', '=', 1)
+        ->select(
+            'teams.tm_id as id',
+            'teams.tm_name as name',
+            DB::raw('MIN(user_team_history.uth_start_date) as created'),
+            DB::raw('COUNT(user_team_history.uth_usr_id) as current')
+        )
+        ->groupBy('teams.tm_id', 'teams.tm_name')
+        ->get();
+
+    return view('pages.teams.teamManagment', compact('teams'));
+}
 
 public function add(){
     $users = DB::table('users')
@@ -61,7 +45,8 @@ public function add(){
     'stl_name as name')
     ->get();
 
-return view('pages.teams.createNewTeam', compact('users','apis','settings'));
+return view('pages.teams.createNewTeam'), compact('users','apis','settings')->with('success', 'Team updated successfully');
+
 }
 
 public function store(Request $request)
@@ -98,6 +83,7 @@ public function store(Request $request)
                 'uth_start_date' => Carbon::now(),  // วันที่เริ่มต้นการเข้าร่วมทีม
             ]);
         }
+        return redirect()->route('team')->with('success', 'Team updated successfully');
     }
 
     // ส่งข้อความสำเร็จหลังจากสร้างทีม

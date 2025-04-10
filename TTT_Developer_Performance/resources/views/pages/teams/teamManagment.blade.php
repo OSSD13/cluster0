@@ -11,12 +11,7 @@
 </div>
 @endsection
 
-@section('contents')
-@php
-    $sortField = request('sort', 'created');
-    $sortOrder = request('order', 'desc');
-@endphp
-
+@section('contents') {{-- ตรวจสอบให้แน่ใจว่า layouts.tester ใช้ @yield('contents') --}}
 <div class="w-full px-6">
     <div class="bg-white rounded-lg shadow-md p-6 shadow-lg w-full">
         <div class="flex items-center justify-between gap-4 mb-4 w-full">
@@ -42,28 +37,20 @@
                         <th class="px-6 py-6 text-center">
                             <div class="flex justify-center items-center gap-1">
                                 <span>Amount Members</span>
-                                @php
-                                    $nextOrder = ($sortField === 'current' && $sortOrder === 'asc') ? 'desc' : 'asc';
-                                @endphp
-                                <a href="{{ route('team', ['sort' => 'current', 'order' => $nextOrder]) }}">
-                                    <svg class="w-3 h-3 inline" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <a href="#">
+                                    <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
                                     </svg>
-                                    {!! $sortField === 'current' ? ($sortOrder === 'asc' ? '&#9650;' : '&#9660;') : '' !!}
                                 </a>
                             </div>
                         </th>
                         <th class="px-6 py-6 text-center">
                             <div class="flex justify-center items-center gap-1">
                                 <span>Created Time</span>
-                                @php
-                                    $nextOrder = ($sortField === 'created' && $sortOrder === 'asc') ? 'desc' : 'asc';
-                                @endphp
-                                <a href="{{ route('team', ['sort' => 'created', 'order' => $nextOrder]) }}">
-                                    <svg class="w-3 h-3 inline" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <a href="#">
+                                    <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"/>
                                     </svg>
-                                    {!! $sortField === 'created' ? ($sortOrder === 'asc' ? '&#9650;' : '&#9660;') : '' !!}
                                 </a>
                             </div>
                         </th>
@@ -129,19 +116,68 @@
         </form>
     </div>
 </div>
+
+<!-- Alert Success Box -->
+<div id="alertSuccessBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+        <!-- ปุ่มปิด -->
+        <button onclick="closeSuccessAlert()"
+            class="absolute top-2 right-4 text-gray-400 text-2xl hover:text-gray-600">
+            &times;
+        </button>
+
+        <!-- ไอคอน -->
+        <div class="flex justify-center mb-4">
+            <img src="{{ asset('resources/Images/Icons/check (1).png') }}" alt="Check icon" class="w-16 h-16">
+        </div>
+
+        <!-- ข้อความ -->
+        <h2 class="text-2xl font-bold text-black mb-2">Successful</h2>
+        <p class="text-gray-500 mb-6"> Trello credentials saved successfully! </p>
+
+        <!-- ปุ่ม Done -->
+        <button onclick="closeSuccessAlert()"
+            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+            Done
+        </button>
+    </div>
+</div>
+
 @endsection
 
 @section('javascripts')
 <script>
     function openAlertDelete(id) {
         const form = document.getElementById('deleteTeamManagmentfrom');
-        form.action = `{{ url('/team-delete') }}` + id;
+        form.action = `{{ url('/team-delete') }}${id}`;
+        form.querySelector('input[name="_method"]').value = 'DELETE';
         document.getElementById('alertDeleteBox').classList.remove('hidden');
     }
 
     function closeAlertDelete() {
         document.getElementById('alertDeleteBox').classList.add('hidden');
     }
+
+    @if (session('success'))
+            window.addEventListener('DOMContentLoaded', function() {
+                openSuccessAlert();
+            });
+
+            function openSuccessAlert() {
+                document.getElementById("alertSuccessBox").classList.remove("hidden");
+            }
+
+            function closeSuccessAlert() {
+                document.getElementById("alertSuccessBox").classList.add("hidden");
+            }
+
+            // ปิด alert ถ้าคลิกนอกกล่อง
+            document.getElementById("alertSuccessBox").addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeSuccessAlert();
+                }
+            });
+        @endif
 </script>
 @endsection
 
@@ -160,6 +196,12 @@
     z-index: 9999;
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+#alertSuccessBox {
+            z-index: 9999;
+            /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
+        } 
 
 body {
     font-family: "Inter", sans-serif;
