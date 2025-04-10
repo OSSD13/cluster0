@@ -41,12 +41,12 @@ return view('pages.teams.teamManagment', compact('teams'));
         ->select('stl_id as id',
         'stl_name as name')
         ->get();
-    
+
     return view('pages.teams.createNewTeam', compact('users','apis','settings'));
     }
 
     public function store(Request $request){
-        
+
         $request->validate([
             'team_name' => 'required|string',
             'trello_board' => 'required|string',
@@ -80,35 +80,35 @@ return view('pages.teams.teamManagment', compact('teams'));
     {
         // ดึงข้อมูลทีม
         $team = DB::table('teams')->where('tm_id', $id)->first();
-    
+
         // ดึงผู้ใช้ทั้งหมด
         $users = DB::table('users')
             ->select('usr_id as id', 'usr_username as username')
             ->get();
-    
+
         // ดึง API Trello ทั้งหมด
         $apis = DB::table('trello_credentials')
             ->select('trc_id as id', 'trc_name as name')
             ->get();
-    
+
         // ดึง Trello Setting ทั้งหมด
         $settings = DB::table('setting_trello')
             ->select('stl_id as id', 'stl_name as name')
             ->get();
-    
+
         // ดึงสมาชิกปัจจุบันของทีมนี้
         $currentMembers = DB::table('user_team_history')
             ->where('uth_tm_id', $id)
             ->where('uth_is_current', 1)
             ->pluck('uth_usr_id') // ดึงเฉพาะ ID
             ->toArray();
-    
+
         return view('pages.teams.createNewTeam', compact('team', 'users', 'apis', 'settings', 'currentMembers'));
     }
-    
+
     public function update(){
 
-    } 
+    }
     public function destroy($id)
 {
     // ลบข้อมูลสมาชิกทีมก่อน

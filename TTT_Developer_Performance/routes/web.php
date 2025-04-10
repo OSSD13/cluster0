@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RoleAccess;
 // Auth
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -31,7 +32,7 @@ use App\Http\Controllers\EmailController;
 
 // ****************************************************************************************************** //
 // Login
-Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::get('', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -55,16 +56,11 @@ Route::prefix('register')->group(function () {
 
 // Test view
 Route::prefix('test')->group(function () {
-    Route::get('/login/success', [HomeController::class, 'index'])->name('home');
-});
-
-// Developer
-Route::prefix('dev')->group(function () {
-
+    Route::get('/login/success', [HomeController::class, 'tester'])->name('home');
 });
 
 // Tester
-Route::prefix('tester')->group(function () {
+Route::middleware(['web', 'auth', 'role:Tester'])->group(function () {
 
 });
 
@@ -106,14 +102,14 @@ Route::delete('/extrapoint-delete/{id}', [ExtrapointController::class, 'delete']
 // ****************************************************************************************************** //
 // Teams Managment
 Route::get('/team', [TeamManagementController::class,'index'])->name('team');
-Route::get('/team-add', [TeamManagementController::class,'add'])->name('team.add');
+Route::get('/team-add', [TeamManagementController::class,'add'])->name('team.create');
 Route::get('/team-edit', [TeamManagementController::class,'edit'])->name('team.edit');
 // ****************************************************************************************************** //
 // Members Managment
 //Route::get('/member', [UserController::class,'']);
 //Route::get('/member-add', [UserController::class,'']);
 //Route::get('/member-edit', [UserController::class,'']);
-Route::get('memberlist', [MemberListController::class, 'index'])->name('memberlist');
+Route::get('member', [MemberListController::class, 'index'])->name('memberlist');
 Route::get('/memberlistAdd', function () {
     return view('memberlistAdd');
 })->name('memberlist.add');
@@ -141,12 +137,5 @@ Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 
 // Test
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
 
-Route::get('sendbasicemail','EmailController@basic_email');
-Route::get('sendhtmlemail','EmailController@html_email');
-Route::get('sendattachmentemail','EmailController@attachment_email');
-
-Route::post('senData', array('uses' => 'EmailController@attachment_email'));
-
-Route::get('send-email', [App\Http\Controllers\EmailController::class, 'showForm']);
-Route::post('send-email', [App\Http\Controllers\EmailController::class, 'sendEmail']);
+Route::get('/dash-team-performance-card', [TeamPerformanceController::class,'showCard'])->name('team.performance');
 

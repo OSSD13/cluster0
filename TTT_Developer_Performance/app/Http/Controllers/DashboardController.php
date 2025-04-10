@@ -11,7 +11,7 @@ use App\Models\Users;
 
 class DashboardController extends Controller
 {
-    function developer(){
+    public function developer(){
         return view('pages.dashboard.dashboard');
     }
 
