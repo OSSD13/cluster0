@@ -17,4 +17,5 @@ class ReportController extends Controller
         // return $pdf->download('report.pdf');
         return $pdf->stream('layouts.pdf');
     }
+
 }
