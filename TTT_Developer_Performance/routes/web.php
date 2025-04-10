@@ -85,10 +85,13 @@ Route::get('/minorcase-edit', [MinorcaseController::class,'edit'])->name('editmi
 Route::get('/backlog', [BacklogController::class, 'index'])->name('backlog');
 Route::get('/backlog-add', [BacklogController::class, 'add'])->name('addbacklog');
 Route::post('/backlog-store', [BacklogController::class, 'store'])->name('backlog.store');
-Route::get('/backlog-edit/{id}', [BacklogController::class, 'edit'])->name('editbacklog');
+Route::get('/backlog-edit', [BacklogController::class, 'edit'])->name('backlog-edit');
 Route::put('/backlog-update/{id}', [BacklogController::class, 'update'])->name('backlog.update');
 Route::delete('/backlog/{id}', [BacklogController::class, 'destroy'])->name('deletebacklog');
+Route::get('/members/{teamId}', [BacklogController::class, 'getMembersByTeam']);
 Route::get('/api/members/{teamId}', [BacklogController::class, 'getMembersByTeam']);
+Route::get('/backlog/create', [BacklogController::class, 'create'])->name('backlog.create');
+Route::post('/backlog', [BacklogController::class, 'store'])->name('backlog.store');
 // ****************************************************************************************************** //
 // Extra Points
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extrapoint');

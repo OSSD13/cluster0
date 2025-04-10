@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-use SoftDeletes;
-
-    // คุณสามารถกำหนดชื่อคอลัมน์สำหรับ `deleted_at` ได้หากต้องการ
 class Backlog extends Model
 {
-    protected $table = 'backlogs';
     protected $primaryKey = 'blg_id';
+
+    protected $table = 'backlogs';
     public $timestamps = false;
-    protected $dates = ['deleted_at'];
-
-
     protected $fillable = [
         'blg_pass_point',
         'blg_personal_point',
@@ -22,6 +18,41 @@ class Backlog extends Model
         'blg_cancel',
         'blg_is_use',
         'blg_uth_id',
-        'blg_spr_id',
+        'blg_spr_id'
     ];
+
+    // ความสัมพันธ์กับตารางอื่นๆ
+    public function userTeamHistory()
+    {
+        return $this->belongsTo(UserTeamHistory::class, 'blg_uth_id', 'uth_id');
+    }
+
+    public function sprint()
+    {
+        return $this->belongsTo(Sprint::class, 'blg_spr_id', 'spr_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOneThrough(
+            User::class,
+            UserTeamHistory::class,
+            'uth_id', // Foreign key on UserTeamHistory table
+            'usr_id', // Foreign key on User table
+            'blg_uth_id', // Local key on Backlog table
+            'uth_usr_id' // Local key on UserTeamHistory table
+        );
+    }
+
+    public function team()
+    {
+        return $this->hasOneThrough(
+            Team::class,
+            UserTeamHistory::class,
+            'uth_id', // Foreign key on UserTeamHistory table
+            'tm_id', // Foreign key on Team table
+            'blg_uth_id', // Local key on Backlog table
+            'uth_tm_id' // Local key on UserTeamHistory table
+        );
+    }
 }
