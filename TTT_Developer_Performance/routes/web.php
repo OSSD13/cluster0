@@ -86,12 +86,16 @@ Route::get('/api/members/{teamId}', [MinorcaseController::class, 'getMembersByTe
 Route::put('/minorcase-{id}', [MinorcaseController::class, 'delete'])->name('minorcase.delete');
 // ****************************************************************************************************** //
 // Backlog
-Route::get('/backlog', [BacklogController::class, 'index'])->name('backlog'); // แสดงรายการ backlog
-Route::get('/backlog-add', [BacklogController::class, 'create'])->name('addbacklog'); // ฟอร์มการเพิ่ม backlog
-Route::get('/backlog-edit/{id}', [BacklogController::class, 'edit'])->name('editbacklog'); // ฟอร์มการแก้ไข backlog
-Route::delete('/backlog/{id}', [BacklogController::class, 'destroy'])->name('deletebacklog'); // ลบ backlog
-Route::put('/backlog/{id}', [BacklogController::class, 'update'])->name('backlog.update'); // อัพเดต backlog
-Route::post('/backlogs/store', [BacklogController::class, 'store'])->name('backlogs.store'); // บันทึก backlog ใหม่
+Route::get('/backlog', [BacklogController::class, 'index'])->name('backlog');
+Route::get('/backlog-add', [BacklogController::class, 'add'])->name('addbacklog');
+Route::post('/backlog-store', [BacklogController::class, 'store'])->name('backlog.store');
+Route::get('/backlog-edit', [BacklogController::class, 'edit'])->name('backlog-edit');
+Route::put('/backlog-update/{id}', [BacklogController::class, 'update'])->name('backlog.update');
+Route::delete('/backlog/{id}', [BacklogController::class, 'destroy'])->name('deletebacklog');
+Route::get('/members/{teamId}', [BacklogController::class, 'getMembersByTeam']);
+Route::get('/api/members/{teamId}', [BacklogController::class, 'getMembersByTeam']);
+Route::get('/backlog/create', [BacklogController::class, 'create'])->name('backlog.create');
+Route::post('/backlog', [BacklogController::class, 'store'])->name('backlog.store');
 // ****************************************************************************************************** //
 // Extra Points
 Route::put('/extrapoint-update', [ExtrapointController::class, 'update'])->name('updateExtraPoint');
