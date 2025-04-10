@@ -7,32 +7,32 @@
 @section('pagename')
     <div class="flex items-end gap-[10px] mb-4">
         <h2 class="text-2xl font-bold">Setting</h2>
-        <p class="font-bold text-neutral-400">Trello Configuration / List</p>
+        <p class="font-bold text-neutral-400">Trello Configuration / Edit List</p>
     </div>
 @endsection
 
 @section('contents')
     <div class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-center text-2xl font-bold text-blue-900 mb-6">Create Trello List Setting</h2>
+        <h2 class="text-center text-2xl font-bold text-blue-900 mb-6">Edit Trello List Setting</h2>
 
         {{-- กล่องแสดง Trello list 3 คอลัมน์ --}}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {{-- To-do --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">To-do</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2" id="todo-list-name">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="todo-list-name">{{ $setting->stl_todo }}</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- In-progress --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">In-progress</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2" id="inprogress-list-name">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="inprogress-list-name">{{ $setting->stl_inprogress }}</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Done --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Done</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2" id="done-list-name">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="done-list-name">{{ $setting->stl_done }}</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
         </div>
@@ -42,42 +42,40 @@
             {{-- Bug / Backlog --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Bug / Backlog</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2" id="bug-list-name">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="bug-list-name">{{ $setting->stl_bug }}</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Minor case --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Minor case</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2" id="minor-case-list-name">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="minor-case-list-name">{{ $setting->stl_minor_case }}</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Extra --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Extra</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2" id="extra-list-name">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="extra-list-name">{{ $setting->stl_extra }}</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
             {{-- Cancel --}}
             <div class="bg-black text-white p-4 rounded-xl">
                 <h3 class="font-bold mb-2">Cancel</h3>
-                <div class="bg-gray-700 p-2 rounded mb-2" id="cancel-list-name">Your List Name</div>
+                <div class="bg-gray-700 p-2 rounded mb-2" id="cancel-list-name">{{ $setting->stl_cancel }}</div>
                 <div class="text-gray-400">+ Add a card</div>
             </div>
         </div>
 
         {{-- Form --}}
-        <form class="flex flex-col items-center" method="POST" action="{{ route('trello.list.create') }}">
+        <form class="flex flex-col items-center" action="{{ route('trello.editList.update', $setting->stl_id) }}" method="post">
             @csrf
+            @method('POST')
             {{-- Setting Name --}}
             <div class="mb-4 w-[480px]">
                 <label for="setting-name" class="block text-sm font-bold text-black mb-2">
                     Setting Name
                 </label>
                 <input type="text" id="setting-name" placeholder="Setting Name" name="setting_name"
-                    class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                @error('setting_name')
-                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                @enderror
+                    class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('setting_name', $setting->stl_name) }}" >
             </div>
             {{-- Choose List --}}
             <div class="mb-4 w-[480px]">
@@ -118,7 +116,7 @@
                 </button>
                 <button type="submit"
                     class="w-58 px-6 py-2 bg-blue-900 text-white rounded-[10px] font-bold border-2 border-transparent hover:bg-white hover:text-blue-900 hover:border-blue-900">
-                    Create
+                    Apply
                 </button>
             </div>
         </form>

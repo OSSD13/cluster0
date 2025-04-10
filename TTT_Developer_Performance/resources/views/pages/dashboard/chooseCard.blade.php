@@ -15,7 +15,7 @@
 
 @section('contents')
     <!-- ฺBox Team performance -->
-    <div class="relative" id="big-background">
+    <div class="relative opacity-20 content" id="big-background">
         <div
             class=" w-full h-20 bg-white border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-6 flex justify-between items-center mb-[20px] opacity">
             <div class="grid grid-cols-2 gap-2 w-full">
@@ -783,7 +783,7 @@
     </div>
 
     {{-- Pop-up choose card --}}
-    <div class="flex justify-center items-center" id="chooseCard">
+    <div class="flex justify-center items-center card" id="chooseCard">
         <div
             class="fixed top-[5%] left-1/2 transform -translate-x-1/2
             bg-white w-[1200px] h-[750px] rounded-lg shadow-lg
@@ -830,7 +830,7 @@
                             {{-- right --}}
                             <div class="flex basis-1/3 justify-end items-center gap-4 mx-5">
                                 <p class="text-black rounded-md font-semibold text-md"><span
-                                        id="count">0</span>selected</p>
+                                        id="count">0</span></p>
                                 <button>
                                     <img src="../resources/Images/Icons/deleteIcon.png" alt=""
                                         class="w-[30px] h-[30px]">
@@ -1005,7 +1005,7 @@
                             @foreach ($cards as $index => $card)
                                 <tr class="text-center bg-white hover:bg-gray-200">
                                     <td scope="col" class="px-6 py-3"><input type="checkbox"
-                                            class="w-[20px] h-[20px]" id="checked"></td>
+                                            class="w-[20px] h-[20px]" id="checked" value="allCards" name="checkedCard" onclick="getCount()"></td>
                                     <td scope="col" class="px-6 py-3">{{ $index + 1 }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $card->crd_boardname }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $card->crd_listname }}</td>
@@ -1176,19 +1176,19 @@
             }
         }
 
-        // window.addEventListener('DOMContentLoaded', function() {
-        //     openModal();
-        // });
-
-        (function (){
-            openModal();
-        })();
-
-        function openModal() {
-            var popUpCard = document.getElementById('chooseCard');
-            popUpCard.style.background = 'rgba(0,0,0,0.2)';
+        function getCount(){
+            var checkedCount = document.querySelectorAll('input[name="checkedCard"]:checked').length;
+            if(selectAllCheckbox){
+                
+            }
+            document.getElementById("count").innerHTML = checkedCount + " selected"
         }
 
+
+        // function openModal() {
+        //     var popUpCard = document.getElementById('chooseCard');
+        //     popUpCard.style.background = 'rgba(0,0,0,0.2)';
+        // }
 
 
         // checkbox select
@@ -1199,6 +1199,7 @@
                 checkbox.checked = selectAllCheckbox.checked;
             });
         });
+
 
 
         // function openModal() {

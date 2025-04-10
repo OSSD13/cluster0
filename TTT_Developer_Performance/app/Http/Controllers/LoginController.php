@@ -29,7 +29,20 @@ class LoginController extends Controller
 
         // ตรวจสอบรหัสผ่าน
         if ($user && Hash::check($validated['password'], $user->usr_password)) {
-            return view('auth.home', compact('user'));
+            //return view('pages.dashboard.testerDashboard', compact('user'));
+            Auth::login($user, $req->filled('remember'));
+            $req->session()->regenerate();
+            if ($user) {
+                // ตรวจสอบ role
+                if ($user->usr_role === 'Tester') {
+                    return view('pages.dashboard.testerDashboard', compact('user'));
+                } elseif ($user->usr_role === 'Developer') {
+                    return view('pages.dashboard.dashboard', compact('user'));
+                } else {
+                    // ถ้า role ไม่ตรงที่คาดไว้
+                    return view('auth.pending');
+                }
+            }
         } else {
             return view('auth.login');
         }
@@ -50,13 +63,21 @@ class LoginController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
-            //dd($googleUser);
 
             $user = Users::where('usr_google_id', $googleUser->id)->first();
 
             if ($user) {
-                return view('auth.home', compact('user'));
+                // ตรวจสอบ role
+                if ($user->usr_role === 'Tester') {
+                    return view('pages.dashboard.testerDashboard', compact('user'));
+                } elseif ($user->usr_role === 'Developer') {
+                    return view('pages.dashboard.dashboard', compact('user'));
+                } else {
+                    // ถ้า role ไม่ตรงที่คาดไว้
+                    return view('auth.pending');
+                }
             } else {
+                // ยังไม่เคยลงทะเบียน
                 session([
                     'usr_google_id' => $googleUser->id
                 ]);
@@ -66,4 +87,5 @@ class LoginController extends Controller
             dd($e);
         }
     }
+
 }
