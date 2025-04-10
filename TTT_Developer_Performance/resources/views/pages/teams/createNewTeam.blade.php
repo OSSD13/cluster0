@@ -47,10 +47,9 @@
                 <div id="tag-container" class="flex flex-wrap items-center gap-2 p-2 border border-gray-400 bg-gray-50 rounded-2xl min-h-[50px] relative">
                     <!-- Tags will render here -->
                     <input type="text" id="tag-input" 
-                        placeholder="Add team member..." 
-                        class="w-full px-4 py-2 bg-white text-gray-800 rounded-full border border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 shadow-sm transition duration-150"
-                        onfocus="showDropdown()" autocomplete="off">
-
+                           placeholder="Add team member..." 
+                           class="w-full px-4 py-2 bg-gray-50 text-gray-700 rounded-lg focus:outline-none focus:ring-0 border-none shadow-none"
+                           onfocus="showDropdown()" autocomplete="off">
                     
                     <!-- Dropdown suggestion box -->
                     <ul id="member-dropdown" class="absolute z-10 top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-60 overflow-y-auto hidden">
