@@ -167,5 +167,13 @@ Route::get('/setting-trello-configList-delete/{id}', [TrelloConfigurationControl
 // Test
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
 
+
 Route::get('/dash-team-performance-card', [TeamPerformanceController::class,'showCard'])->name('team.performance');
+//Sprint
+Route::get('/listsprint', [SprintController::class, 'index'])->name('sprint');
+Route::get('/listsprint-add', [SprintController::class, 'add'])->name('sprint.add');
+Route::post('/listsprint-store',[SprintController::class, 'store'])->name('sprint.store');
+Route::get('/listsprint-edit-{id}', [SprintController::class, 'edit'])->name('sprint.edit');
+Route::put('/listsprint-update/{id}', [SprintController::class, 'update'])->name('sprint.update');
+Route::delete('/listsprint-delete/{id}', [SprintController::class, 'delete'])->name('sprint.delete');
 

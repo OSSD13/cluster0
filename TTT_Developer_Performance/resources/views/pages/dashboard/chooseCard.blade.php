@@ -785,7 +785,6 @@
             </div>
         </div>
     </div>
-    <form id="myForm" action="{{ route('cards.store.selected') }}" method="POST">
         {{-- Pop-up choose card --}}
         <div class="flex justify-center items-center card" id="chooseCard">
             <div
@@ -1032,7 +1031,6 @@
                 </div>
             </div>
         </div>
-    </form>
     </div>
 @endsection
 
