@@ -197,6 +197,7 @@
 
     @yield('javascripts')
     <script src="{{ asset('resources/js/global.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>
