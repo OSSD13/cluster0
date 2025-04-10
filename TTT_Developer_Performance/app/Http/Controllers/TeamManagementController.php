@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use App\Models\Team;  
+use App\Models\Team;
 
 
 class TeamManagementController extends Controller
@@ -45,7 +45,7 @@ public function add(){
     'stl_name as name')
     ->get();
 
-return view('pages.teams.createNewTeam'), compact('users','apis','settings')->with('success', 'Team updated successfully');
+return view('pages.teams.createNewTeam', compact('users','apis','settings'));
 
 }
 
@@ -73,7 +73,7 @@ public function store(Request $request)
     // เพิ่มสมาชิกให้กับทีมในตาราง user_team_history
     foreach ($request->team_members as $username) {
         $userId = DB::table('users')->where('usr_username', $username)->value('usr_id');
-        
+
         // ตรวจสอบว่าผู้ใช้ที่ถูกเลือกมีอยู่จริง
         if ($userId) {
             DB::table('user_team_history')->insert([
@@ -90,40 +90,40 @@ public function store(Request $request)
     return redirect()->route('team')->with('success', 'Team created successfully!');
 }
 
-    
+
     public function edit($id)
     {
         $team = DB::table('teams')->where('tm_id', $id)->first();
-    
+
         $users = DB::table('users')
             ->select('usr_id as id', 'usr_username as username')
             ->get();
-    
+
         $apis = DB::table('trello_credentials')
             ->select('trc_id as id', 'trc_name as name')
             ->get();
-    
+
         $settings = DB::table('setting_trello')
             ->select('stl_id as id', 'stl_name as name')
             ->get();
-    
+
         $currentMembers = DB::table('user_team_history')
             ->where('uth_tm_id', $id)
             ->where('uth_is_current', 1)
             ->pluck('uth_usr_id')
             ->toArray();
-    
+
         $currentMembersUsernames = DB::table('users')
             ->whereIn('usr_id', $currentMembers)
             ->pluck('usr_username')
             ->toArray();
-    
+
         return view('pages.teams.editTeam', compact(
             'team', 'users', 'apis', 'settings', 'currentMembers', 'currentMembersUsernames'
         ));
     }
-    
-    
+
+
     public function update(Request $request, $id)
 {
     // Update ข้อมูล team
@@ -161,7 +161,7 @@ public function store(Request $request)
 
     return redirect()->route('team')->with('success', 'Team updated successfully');
 }
- 
+
     public function delete($id)
 {
     // ดึงข้อมูล team ตาม id
@@ -174,13 +174,13 @@ public function store(Request $request)
     // ลบข้อมูล user_team_history ที่เกี่ยวข้อง
     DB::table('user_team_history')->where('uth_tm_id', $id)->delete();
 
-   
+
 
     // Redirect ไปยังหน้า team
     return redirect()->route('team')->with('success', 'ทีมถูกลบเรียบร้อยแล้ว');
 }
 
-    
+
 
 
 }
