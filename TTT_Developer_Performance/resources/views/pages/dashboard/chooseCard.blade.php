@@ -1,5 +1,9 @@
 @extends('layouts.tester')
 
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('title')
     <title>Team Performance</title>
 @endsection
@@ -781,246 +785,254 @@
             </div>
         </div>
     </div>
-
-    {{-- Pop-up choose card --}}
-    <div class="flex justify-center items-center card" id="chooseCard">
-        <div
-            class="fixed top-[5%] left-1/2 transform -translate-x-1/2
+    <form id="myForm" action="{{ route('cards.store.selected') }}" method="POST">
+        {{-- Pop-up choose card --}}
+        <div class="flex justify-center items-center card" id="chooseCard">
+            <div
+                class="fixed top-[5%] left-1/2 transform -translate-x-1/2
             bg-white w-[1200px] h-[750px] rounded-lg shadow-lg
             z-[9999] opacity-100">
 
-            {{-- cross x --}}
-            <div class="flex justify-end mx-5 my-5">
-                <a href="{{ url('/dash-team-performance') }}">
-                    <button onclick="closeModal()">
-                        <img src="../resources/Images/Icons/x-button.png" alt="" class="w-[20px] h-[20px]">
-                    </button>
-                </a>
-            </div>
+                {{-- cross x --}}
+                <div class="flex justify-end mx-5 my-5">
+                    <a href="{{ url('/dash-team-performance') }}">
+                        <button onclick="closeModal()">
+                            <img src="../resources/Images/Icons/x-button.png" alt="" class="w-[20px] h-[20px]">
+                        </button>
+                    </a>
+                </div>
 
-            {{-- All cards from Trello + timestamp --}}
-            <div class="flex justify-between gap-5 mx-10 my-5">
-                <p class="font-bold text-3xl text-[var(--primary-color)]">All cards from Trello</p>
-                <p class="font-bold text-lg text-black items-center">Last update: 03/01/2025, 15:42
-                </p>
-            </div>
+                {{-- All cards from Trello + timestamp --}}
+                <div class="flex justify-between gap-5 mx-10 my-5">
+                    <p class="font-bold text-3xl text-[var(--primary-color)]">All cards from Trello</p>
+                    <p class="font-bold text-lg text-black items-center" id="timestamp">Last update: 03/01/2025, 15:42
+                    </p>
+                </div>
 
-            {{-- Add to & Filter --}}
-            <div class="flex flex-col gap-3">
-                {{-- Bigbox Add to --}}
-                <div class="flex justify-center">
-                    <div class="bg-white w-[1100px] h-[50px] rounded-lg shadow-md shadow-lg flex items-center">
-                        {{-- left --}}
-                        <div class="flex justify-between w-full">
-                            <div class="flex flex-row gap-4 mx-5 basis-2/3">
-                                <p class="text-[var(--primary-color)] font-bold text-xl">Add to</p>
-                                <button
-                                    class="bg-[var(--primary-color)] text-white rounded-md font-semibold text-md w-[100px] h-[30px]">
-                                    Year
-                                </button>
-                                <button
-                                    class="bg-[var(--primary-color)] text-white rounded-md font-semibold text-md w-[100px] h-[30px]">
-                                    Sprint
-                                </button>
-                                <button
-                                    class="bg-[var(--primary-color)] text-white rounded-md font-semibold text-md w-[100px] h-[30px]">
-                                    Team
-                                </button>
+                {{-- Add to & Filter --}}
+                <div class="flex flex-col gap-3">
+                    {{-- Bigbox Add to --}}
+                    <div class="flex justify-center">
+                        <div class="bg-white w-[1100px] h-[50px] rounded-lg shadow-md shadow-lg flex items-center">
+                            {{-- left --}}
+                            <div class="flex justify-between w-full">
+                                <div class="flex flex-row gap-4 mx-5 basis-2/3">
+                                    <p class="text-[var(--primary-color)] font-bold text-xl">Add to</p>
+                                    <button
+                                        class="bg-[var(--primary-color)] text-white rounded-md font-semibold text-md w-[100px] h-[30px]">
+                                        Year
+                                    </button>
+                                    <button
+                                        class="bg-[var(--primary-color)] text-white rounded-md font-semibold text-md w-[100px] h-[30px]">
+                                        Sprint
+                                    </button>
+                                    <button
+                                        class="bg-[var(--primary-color)] text-white rounded-md font-semibold text-md w-[100px] h-[30px]">
+                                        Team
+                                    </button>
+                                </div>
+                                {{-- right --}}
+                                <div class="flex basis-1/3 justify-end items-center gap-4 mx-5">
+                                    <p class="text-black rounded-md font-semibold text-md" id="count">0 selected</p>
+                                    <button id="sendSelected" onclick="sendSelectedCardsToController()">
+                                        <img src="../resources/Images/Icons/deleteIcon.png" alt="deleteCard"
+                                            class="w-[30px] h-[30px]">
+                                    </button>
+                                    <button
+                                        class="bg-[var(--green-color-text)] w-[150px] h-[30px] rounded-md px-5 flex items-center justify-center gap-2">
+                                        <img src="../resources/Images/Icons/checked.png" alt=""
+                                            class="w-[20px] h-[20px]">
+                                        <p class="text-bold text-md text-white font-semibold">Confirm</p>
+                                    </button>
+                                </div>
                             </div>
-                            {{-- right --}}
-                            <div class="flex basis-1/3 justify-end items-center gap-4 mx-5">
-                                <p class="text-black rounded-md font-semibold text-md"><span
-                                        id="count">0</span></p>
-                                <button>
-                                    <img src="../resources/Images/Icons/deleteIcon.png" alt=""
-                                        class="w-[30px] h-[30px]">
-                                </button>
-                                <button
-                                    class="bg-[var(--green-color-text)] w-[150px] h-[30px] rounded-md px-5 flex items-center justify-center gap-2">
-                                    <img src="../resources/Images/Icons/checked.png" alt=""
-                                        class="w-[20px] h-[20px]">
-                                    <p class="text-bold text-md text-white font-semibold">Confirm</p>
-                                </button>
+                        </div>
+                    </div>
+
+                    {{-- Bigbox Filter --}}
+                    <div class="flex justify-center">
+                        <div class="bg-white w-[1100px] h-[50px] rounded-lg shadow-md shadow-lg flex items-center">
+                            {{-- left --}}
+                            <div class="flex justify-between w-full">
+                                <div class="flex flex-row gap-4 mx-5 basis-1/2">
+                                    {{-- image + filter --}}
+                                    <div class="flex items-center gap-3">
+                                        <img src="../resources/Images/Icons/filter (1).png" alt=""
+                                            class="w-[30px] h-[30px]">
+                                        <p class="text-[var(--primary-color)] font-bold text-xl">Filter</p>
+                                    </div>
+
+
+                                    {{-- Board dropdown  --}}
+                                    <div class="relative ml-[8px]">
+                                        <button id="dropdownBoard"
+                                            class="border border-blue-900 text-blue-900 font-bold rounded px-2 py-1 w-30 bg-white text-center flex justify-between items-center">
+                                            <span id="dropdownYearSelected"
+                                                class="truncate text-center w-full">Board</span>
+                                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        {{-- BoardMenu --}}
+                                        <div id="dropdownBoardMenu"
+                                            class="absolute hidden mt-2 w-30 bg-white border border-gray-300 rounded shadow-lg z-10">
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Board1" value="Board1" class="mr-2">
+                                                <label for="Board1" class="text-black">Board1</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Board2" value="Board2" class="mr-2">
+                                                <label for="Board2" class="text-black">Board2</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Board3" value="Board3" class="mr-2">
+                                                <label for="Board3" class="text-black">Board3</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Board4" value="Board4" class="mr-2">
+                                                <label for="Board4" class="text-black">Board4</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Board5" value="Board5" class="mr-2">
+                                                <label for="Board5" class="text-black">Board5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- List dropdown  --}}
+                                    <div class="relative">
+                                        <button id="dropdownList"
+                                            class="border border-blue-900 text-blue-900 font-bold rounded px-2 py-1 w-30 bg-white text-center flex justify-between items-center">
+                                            <span id="dropdownListSelected"
+                                                class="truncate text-center w-full">List</span>
+                                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        {{-- ListMenu --}}
+                                        <div id="dropdownListMenu"
+                                            class="absolute hidden mt-2 w-30 bg-white border border-gray-300 rounded shadow-lg z-10">
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="List1" value="List1" class="mr-2">
+                                                <label for="List1" class="text-black">List1</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="List2" value="List2" class="mr-2">
+                                                <label for="List2" class="text-black">List2</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="List3" value="List3" class="mr-2">
+                                                <label for="List3" class="text-black">List3</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="List4" value="List4" class="mr-2">
+                                                <label for="List4" class="text-black">List4</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="List5" value="List5" class="mr-2">
+                                                <label for="List5" class="text-black">List5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- Fullname dropdown  --}}
+                                    <div class="relative">
+                                        <button id="dropdownFullname"
+                                            class="border border-blue-900 text-blue-900 font-bold rounded px-2 py-1 w-30 bg-white text-center flex justify-between items-center">
+                                            <span id="dropdownFullnameSelected" class="truncate text-center w-full">Full
+                                                name</span>
+                                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        {{-- Fullname Menu --}}
+                                        <div id="dropdownFullnameMenu"
+                                            class="absolute hidden mt-2 w-30 bg-white border border-gray-300 rounded shadow-lg z-10">
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Fullname1" value="Fullname1" class="mr-2">
+                                                <label for="Fullname1" class="text-black">Fullname1</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Fullname2" value="Fullname2" class="mr-2">
+                                                <label for="Fullname2" class="text-black">Fullname2</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Fullname3" value="Fullname3" class="mr-2">
+                                                <label for="Fullname3" class="text-black">Fullname3</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Fullname4" value="Fullname4" class="mr-2">
+                                                <label for="Fullname4" class="text-black">Fullname4</label>
+                                            </div>
+                                            <div class="flex items-center px-2 py-1">
+                                                <input type="checkbox" id="Fullname5" value="Fullname5" class="mr-2">
+                                                <label for="Fullname5" class="text-black">Fullname5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- right --}}
+                                <div class="flex basis-1/2 justify-end items-center gap-4 mx-5">
+                                    <button
+                                        class="bg-gray-200 w-[100px] h-[30px] text-white rounded-md font-semibold text-md">Clear</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {{-- Bigbox Filter --}}
-                <div class="flex justify-center">
-                    <div class="bg-white w-[1100px] h-[50px] rounded-lg shadow-md shadow-lg flex items-center">
-                        {{-- left --}}
-                        <div class="flex justify-between w-full">
-                            <div class="flex flex-row gap-4 mx-5 basis-1/2">
-                                {{-- image + filter --}}
-                                <div class="flex items-center gap-3">
-                                    <img src="../resources/Images/Icons/filter (1).png" alt=""
-                                        class="w-[30px] h-[30px]">
-                                    <p class="text-[var(--primary-color)] font-bold text-xl">Filter</p>
-                                </div>
-
-
-                                {{-- Board dropdown  --}}
-                                <div class="relative ml-[8px]">
-                                    <button id="dropdownBoard"
-                                        class="border border-blue-900 text-blue-900 font-bold rounded px-2 py-1 w-30 bg-white text-center flex justify-between items-center">
-                                        <span id="dropdownYearSelected" class="truncate text-center w-full">Board</span>
-                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </button>
-                                    {{-- BoardMenu --}}
-                                    <div id="dropdownBoardMenu"
-                                        class="absolute hidden mt-2 w-30 bg-white border border-gray-300 rounded shadow-lg z-10">
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Board1" value="Board1" class="mr-2">
-                                            <label for="Board1" class="text-black">Board1</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Board2" value="Board2" class="mr-2">
-                                            <label for="Board2" class="text-black">Board2</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Board3" value="Board3" class="mr-2">
-                                            <label for="Board3" class="text-black">Board3</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Board4" value="Board4" class="mr-2">
-                                            <label for="Board4" class="text-black">Board4</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Board5" value="Board5" class="mr-2">
-                                            <label for="Board5" class="text-black">Board5</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- List dropdown  --}}
-                                <div class="relative">
-                                    <button id="dropdownList"
-                                        class="border border-blue-900 text-blue-900 font-bold rounded px-2 py-1 w-30 bg-white text-center flex justify-between items-center">
-                                        <span id="dropdownListSelected" class="truncate text-center w-full">List</span>
-                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </button>
-                                    {{-- ListMenu --}}
-                                    <div id="dropdownListMenu"
-                                        class="absolute hidden mt-2 w-30 bg-white border border-gray-300 rounded shadow-lg z-10">
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="List1" value="List1" class="mr-2">
-                                            <label for="List1" class="text-black">List1</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="List2" value="List2" class="mr-2">
-                                            <label for="List2" class="text-black">List2</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="List3" value="List3" class="mr-2">
-                                            <label for="List3" class="text-black">List3</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="List4" value="List4" class="mr-2">
-                                            <label for="List4" class="text-black">List4</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="List5" value="List5" class="mr-2">
-                                            <label for="List5" class="text-black">List5</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- Fullname dropdown  --}}
-                                <div class="relative">
-                                    <button id="dropdownFullname"
-                                        class="border border-blue-900 text-blue-900 font-bold rounded px-2 py-1 w-30 bg-white text-center flex justify-between items-center">
-                                        <span id="dropdownFullnameSelected" class="truncate text-center w-full">Full
-                                            name</span>
-                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </button>
-                                    {{-- Fullname Menu --}}
-                                    <div id="dropdownFullnameMenu"
-                                        class="absolute hidden mt-2 w-30 bg-white border border-gray-300 rounded shadow-lg z-10">
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Fullname1" value="Fullname1" class="mr-2">
-                                            <label for="Fullname1" class="text-black">Fullname1</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Fullname2" value="Fullname2" class="mr-2">
-                                            <label for="Fullname2" class="text-black">Fullname2</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Fullname3" value="Fullname3" class="mr-2">
-                                            <label for="Fullname3" class="text-black">Fullname3</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Fullname4" value="Fullname4" class="mr-2">
-                                            <label for="Fullname4" class="text-black">Fullname4</label>
-                                        </div>
-                                        <div class="flex items-center px-2 py-1">
-                                            <input type="checkbox" id="Fullname5" value="Fullname5" class="mr-2">
-                                            <label for="Fullname5" class="text-black">Fullname5</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- right --}}
-                            <div class="flex basis-1/2 justify-end items-center gap-4 mx-5">
-                                <button
-                                    class="bg-gray-200 w-[100px] h-[30px] text-white rounded-md font-semibold text-md">Clear</button>
-                            </div>
+                {{-- Show cards --}}
+                <div class="flex justify-center items-center">
+                    <div class="bg-white w-[1100px] h-[500px] mt-4">
+                        <div class="relative overflow-x-auto sm:rounded-lg max-h-[500px] overflow-y-auto">
+                            <!-- Table -->
+                            <table class="w-full text-[12px] text-left rtl:text-right text-gray-500">
+                                <!-- Table header -->
+                                <thead
+                                    class="border-t border-gray-400 text-l text-gray-400 uppercase border-b text-center">
+                                    <tr>
+                                        <!-- Table header -->
+                                        <th scope="col" class="px-6 py-3"><input type="checkbox" id="selectAll"
+                                                class="w-[20px] h-[20px]"></th>
+                                        <th scope="col" class="px-6 py-3">#</th>
+                                        <th scope="col" class="px-6 py-3">Board</th>
+                                        <th scope="col" class="px-6 py-3">List</th>
+                                        <th scope="col" class="px-6 py-3">title</th>
+                                        <th scope="col" class="px-6 py-3">Detail</th>
+                                        <th scope="col" class="px-6 py-3">Full name</th>
+                                        <th scope="col" class="px-6 py-3">Point</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($cards as $index => $card)
+                                        <tr class="text-center bg-white hover:bg-gray-200" id="card_{{ $card->crd_id }}">
+                                            <td scope="col" class="px-6 py-3">
+                                                <input type="checkbox" class="w-[20px] h-[20px]"
+                                                    id="checked_{{ $card->crd_id }}" value="{{ $card->crd_id }}"
+                                                    name="checkedCard" data-id="{{ $card->crd_id }}">
+                                            </td>
+                                            <td scope="col" class="px-6 py-3">{{ $index + 1 }}</td>
+                                            <td scope="col" class="px-6 py-3">{{ $card->crd_boardname }}</td>
+                                            <td scope="col" class="px-6 py-3">{{ $card->crd_listname }}</td>
+                                            <td scope="col" class="px-6 py-3">{{ $card->crd_title }}</td>
+                                            <td scope="col" class="px-6 py-3">{{ $card->crd_detail }}</td>
+                                            <td scope="col" class="px-6 py-3">{{ $card->crd_member_fullname }}</td>
+                                            <td scope="col" class="px-6 py-3">{{ $card->crd_point }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Show cards --}}
-            <div class="flex justify-center items-center">
-                <div class="bg-white w-[1100px] h-[500px] mt-4">
-                    <div class="relative overflow-x-auto sm:rounded-lg max-h-[500px] overflow-y-auto">
-                        <!-- Table -->
-                        <table class="w-full text-[12px] text-left rtl:text-right text-gray-500">
-                            <!-- Table header -->
-                            <thead class="border-t border-gray-400 text-l text-gray-400 uppercase border-b text-center">
-                                <tr>
-                                    <!-- Table header -->
-                                    <th scope="col" class="px-6 py-3"><input type="checkbox" id="selectAll"
-                                            class="w-[20px] h-[20px]"></th>
-                                    <th scope="col" class="px-6 py-3">#</th>
-                                    <th scope="col" class="px-6 py-3">Board</th>
-                                    <th scope="col" class="px-6 py-3">List</th>
-                                    <th scope="col" class="px-6 py-3">title</th>
-                                    <th scope="col" class="px-6 py-3">Detail</th>
-                                    <th scope="col" class="px-6 py-3">Full name</th>
-                                    <th scope="col" class="px-6 py-3">Point</th>
-                                </tr>
-                            </thead>
-                            @foreach ($cards as $index => $card)
-                                <tr class="text-center bg-white hover:bg-gray-200">
-                                    <td scope="col" class="px-6 py-3"><input type="checkbox"
-                                            class="w-[20px] h-[20px]" id="checked" value="allCards" name="checkedCard" onclick="getCount()"></td>
-                                    <td scope="col" class="px-6 py-3">{{ $index + 1 }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_boardname }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_listname }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_title }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_detail }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_member_fullname }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $card->crd_point }}</td>
-                                </tr>
-                            @endforeach
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     </div>
 @endsection
 
@@ -1176,31 +1188,184 @@
             }
         }
 
-        function getCount(){
-            var checkedCount = document.querySelectorAll('input[name="checkedCard"]:checked').length;
-            if(selectAllCheckbox){
-                
-            }
-            document.getElementById("count").innerHTML = checkedCount + " selected"
-        }
-
-
         // function openModal() {
         //     var popUpCard = document.getElementById('chooseCard');
         //     popUpCard.style.background = 'rgba(0,0,0,0.2)';
         // }
 
-
-        // checkbox select
         const selectAllCheckbox = document.getElementById('selectAll');
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#selectAll)');
+        const checkboxes = document.querySelectorAll('tbody input[name="checkedCard"]');
+        const countDisplay = document.getElementById("count"); // อย่าลืมใส่ <p id="count"></p> ไว้ตรงไหนก็ได้
+
+
+        window.addEventListener('DOMContentLoaded', function() {
+            getCount(); // เรียกฟังก์ชันเพื่อกำหนดค่าเริ่มต้น
+        });
+
+        // เมื่อคลิก Select All
         selectAllCheckbox.addEventListener('change', function() {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = selectAllCheckbox.checked;
+            checkboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+            getCount();
+        });
+
+        // ผูก event กับ checkbox ทุกอันใน tbody
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const allChecked = Array.from(checkboxes).every(c => c.checked);
+                selectAllCheckbox.checked = allChecked;
+                getCount();
             });
         });
 
+        function getCount() {
+            let checkedCount = document.querySelectorAll('tbody input[name="checkedCard"]:checked').length;
 
+            // ถ้ายังไม่มีการเลือกอะไรเลย ให้แสดงค่าเริ่มต้นเป็น "0 selected"
+            if (selectAllCheckbox.checked) {
+
+                checkedCount = Math.max(checkedCount - 1, 0);
+
+            }
+            const countDisplay = document.getElementById("count");
+            let arrayCard =
+                countDisplay.textContent = `${checkedCount} selected`;
+        }
+
+        function formatTimestamp() {
+            const now = new Date();
+
+            // กำหนดรูปแบบของวันที่
+            const date = now.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+
+            // กำหนดรูปแบบของเวลา
+            const time = now.toLocaleTimeString('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false // ไม่ใช้เวลาแบบ AM/PM
+            });
+
+            // รวมวันที่และเวลาเป็นสตริงตามต้องการ
+            const formatted = `Last update: ${date}, ${time}`;
+
+            document.getElementById('timestamp').textContent = formatted;
+        }
+
+
+        window.addEventListener('DOMContentLoaded', formatTimestamp);
+
+        // ตัวแปรสำหรับเก็บข้อมูลที่เลือก
+        let selectedCards = [];
+
+        // ฟังก์ชั่นสำหรับเช็ค checkbox ที่ถูกเลือก
+        function updateSelectedCards() {
+            // รีเซ็ต array ก่อนทุกครั้ง
+            selectedCards = [];
+
+            // ค้นหา checkbox ที่ถูกเลือก
+            document.querySelectorAll('input[name="checkedCard"]:checked').forEach(function(checkbox) {
+                // หาข้อมูลจากแถวที่มี checkbox ที่ถูกเลือก
+                const row = checkbox.closest('tr');
+                const cardId = checkbox.dataset.id; // ดึงค่า data-id ที่เก็บ id ของการ์ด
+                const rowData = {
+                    id: cardId,
+                    index: row.cells[1].textContent,
+                    boardname: row.cells[2].textContent,
+                    listname: row.cells[3].textContent,
+                    title: row.cells[4].textContent,
+                    detail: row.cells[5].textContent,
+                    fullname: row.cells[6].textContent,
+                    point: row.cells[7].textContent
+                };
+
+                // เพิ่มข้อมูลที่แสดงผลในตารางลงใน array
+                selectedCards.push(rowData);
+            });
+
+            // แสดงผลข้อมูลที่เลือก
+            console.log(selectedCards);
+        }
+
+        // ฟังก์ชั่นนี้จะถูกเรียกใช้เมื่อมีการเปลี่ยนแปลง checkbox
+        document.querySelectorAll('input[name="checkedCard"]').forEach(function(checkbox) {
+            checkbox.addEventListener('change', updateSelectedCards);
+        });
+
+        // ฟังก์ชั่นนี้จะถูกเรียกใช้เมื่อคลิก Select All
+        document.getElementById('selectAll').addEventListener('change', function(event) {
+            // ค้นหา checkbox ทั้งหมดและเลือกหรือยกเลิกการเลือกตาม Select All
+            const isChecked = event.target.checked;
+            document.querySelectorAll('input[name="checkedCard"]').forEach(function(checkbox) {
+                checkbox.checked = isChecked;
+            });
+
+            // อัพเดทข้อมูลที่ถูกเลือกใหม่
+            updateSelectedCards();
+        });
+
+        function sendSelectedCardsToController(selectedCards) {
+            fetch('cards.store.selected', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        ids: selectedCards
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Items deleted successfully!');
+                        // อัปเดต UI หรือรีเฟรชหน้าเว็บ
+                    } else {
+                        alert('Failed to delete items.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+
+
+
+        // function getCount() {
+        //     // ดึง checkbox ทั้งหมดใน tbody ที่ถูกเลือก
+        //     let checkedCount = document.querySelectorAll('tbody input[name="checkedCard"]:checked').length;
+
+        //     // ถ้า selectAll ถูกติ๊กอยู่ แปลว่าผู้ใช้เลือกทั้งหมดจาก header → ลบออก 1
+        //     if (selectAllCheckbox.checked) {
+        //         checkedCount = Math.max(checkedCount - 1, 0); // กันติดลบ
+        //     }
+
+        //     // แสดงผล
+        //     countDisplay.textContent = checkedCount > 0 ? `${checkedCount} selected` : '';
+        // }
+
+
+
+        // checkbox select
+        // const selectAllCheckbox = document.getElementById('selectAll');
+
+        // const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#selectAll)');
+        // selectAllCheckbox.addEventListener('change', function() {
+        //     checkboxes.forEach(function(checkbox) {
+        //         checkbox.checked = selectAllCheckbox.checked;
+        //     });
+        // });
+
+        // function getCount(){
+        //     var checkedCount = document.querySelectorAll('input[name="checkedCard"]:checked').length;
+        //     if(selectAllCheckbox){
+
+        //     }
+        //     document.getElementById("count").innerHTML = checkedCount + " selected"
+        // }
 
         // function openModal() {
         //     var popUpCard = document.getElementById('chooseCard')
