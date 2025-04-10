@@ -320,19 +320,27 @@
         </thead>
         <!-- Table body -->
         <tbody>
-            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50 ">
-                <th class="px-8 py-5 text-center text-black font-light whitespace-nowrap">1</th>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">67-52</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">Team 2</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">Steve</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">10</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">10</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">0</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">100.00%</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">0</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">10</td>
-                <td class="px-8 py-5 text-center text-black whitespace-nowrap">23/07/2004</td>
+            @foreach ($pointsCurrentSprint as $key => $point)
+            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $key + 1 }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->spr_year . '-'. $point->spr_number }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->tm_name }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->usr_username }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->pcs_pass + $point->pcs_bug + $point->pcs_cancel }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->pcs_pass }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->pcs_bug }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">
+                    @php
+                        $denominator = $point->pcs_pass + $point->pcs_bug + $point->pcs_cancel;
+                        $result = $denominator != 0 ? round(($point->pcs_pass / $denominator) * 100, 2) : 0;
+                    @endphp
+                    {{ $result . '%'}}
+                </td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->pcs_cancel }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->pcs_pass - $point->pcs_bug }}</td>
+                <td class="px-8 py-5 text-center text-black font-light whitespace-nowrap">{{ $point->pcs_finished_date }}</td>
             </tr>
+        @endforeach
         </tbody>
     </table>
 </div>
