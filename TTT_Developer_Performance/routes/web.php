@@ -96,12 +96,16 @@ Route::get('/backlog/create', [BacklogController::class, 'create'])->name('backl
 Route::post('/backlog', [BacklogController::class, 'store'])->name('backlog.store');
 // ****************************************************************************************************** //
 // Extra Points
-Route::post('/extrapoint-update/{id}', [ExtrapointController::class, 'update'])->name('updateExtraPoint');
+Route::put('/extrapoint-update', [ExtrapointController::class, 'update'])->name('updateExtraPoint');
 Route::get('/extrapoint', [ExtrapointController::class, 'index'])->name('extraPoint');
 Route::get('/extrapoint-add', [ExtrapointController::class, 'add'])->name('createExtraPoint');
 Route::post('/extrapoint-edit', [ExtrapointController::class, 'edit'])->name('editExtraPoint');
 Route::post('/extrapoint/store', [ExtrapointController::class, 'store'])->name('storeExtraPoint');
 Route::delete('/extrapoint-delete/{id}', [ExtrapointController::class, 'delete'])->name('deleteExtraPoint');
+
+Route::get('/members/{teamId}', [ExtraPointController::class, 'getMembersByTeam']);
+Route::get('/api/members/{teamId}', [ExtraPointController::class, 'getMembersByTeam']);
+Route::get('/api/sprints/{year}', [ExtraPointController::class, 'getSprintsByYear']);
 
 // ****************************************************************************************************** //
 // Teams Managment

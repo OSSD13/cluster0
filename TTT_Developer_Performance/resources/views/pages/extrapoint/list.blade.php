@@ -23,8 +23,8 @@
             <!-- Compact Dropdown Filters -->
             <div class="flex gap-2 ml-4 items-center">
 
-                <!-- Year Dropdown -->
-                <div class="relative">
+                 <!-- Year Dropdown -->
+                 <div class="relative">
                     <button id="dropdownYear"
                         class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
                         <span id="dropdownYearSelected" class="truncate text-center w-full">Year:</span>
@@ -35,26 +35,14 @@
                     </button>
                     <div id="dropdownYearMenu"
                         class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="year2568" value="2568" class="mr-2 h-3 w-3">
-                            <label for="year2568" class="text-black">2568</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="year2567" value="2567" class="mr-2 h-3 w-3">
-                            <label for="year2567" class="text-black">2567</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="year2566" value="2566" class="mr-2 h-3 w-3">
-                            <label for="year2566" class="text-black">2566</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="year2565" value="2565" class="mr-2 h-3 w-3">
-                            <label for="year2565" class="text-black">2565</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="year2564" value="2564" class="mr-2 h-3 w-3">
-                            <label for="year2564" class="text-black">2564</label>
-                        </div>
+
+                        @foreach ($years as $year)
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="year{{ $year }}" value="{{ $year }}"
+                                    class="mr-2 h-3 w-3">
+                                <label for="year{{ $year }}" class="text-black">{{ $year }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -70,22 +58,13 @@
                     </button>
                     <div id="dropdownSprintMenu"
                         class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="sprint1" value="Sprint 1" class="mr-2 h-3 w-3">
-                            <label for="sprint1" class="text-black">Sprint 1</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="sprint2" value="Sprint 2" class="mr-2 h-3 w-3">
-                            <label for="sprint2" class="text-black">Sprint 2</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="sprint3" value="Sprint 3" class="mr-2 h-3 w-3">
-                            <label for="sprint3" class="text-black">Sprint 3</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="sprint4" value="Sprint 4" class="mr-2 h-3 w-3">
-                            <label for="sprint4" class="text-black">Sprint 4</label>
-                        </div>
+                        @foreach ($sprints as $sprint)
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="sprint{{ $sprint }}" value="Sprint {{ $sprint }}"
+                                    class="mr-2 h-3 w-3">
+                                <label for="sprint{{ $sprint }}" class="text-black">Sprint {{ $sprint }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -96,8 +75,7 @@
                         <span id="dropdownTeamSelected" class="truncate text-center w-full">Team:</span>
                         <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div id="dropdownTeamMenu"
@@ -106,14 +84,13 @@
                             <input type="checkbox" id="allTeams" value="All Teams" class="mr-2 h-3 w-3">
                             <label for="allTeams" class="text-black">All Teams</label>
                         </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="team1" value="Team 1" class="mr-2 h-3 w-3">
-                            <label for="team1" class="text-black">Team 1</label>
-                        </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="team2" value="Team 2" class="mr-2 h-3 w-3">
-                            <label for="team2" class="text-black">Team 2</label>
-                        </div>
+                        @foreach ($teams as $team)
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="team{{ $team }}" value="{{ $team }}"
+                                    class="mr-2 h-3 w-3">
+                                <label for="team{{ $team }}" class="text-black">{{ $team }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -124,20 +101,22 @@
                         <span id="dropdownMemberSelected" class="truncate text-center w-full">Member:</span>
                         <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div id="dropdownMemberMenu"
                         class="absolute hidden mt-1 w-40 bg-white border border-gray-300 rounded shadow-lg z-10 text-sm">
                         <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="member01" value="Member 01" class="mr-2 h-3 w-3">
-                            <label for="member01" class="text-black">Member 01</label>
+                            <input type="checkbox" id="allMembers" value="All Members" class="mr-2 h-3 w-3">
+                            <label for="allMembers" class="text-black">All Members</label>
                         </div>
-                        <div class="flex items-center px-3 py-1">
-                            <input type="checkbox" id="member02" value="Member 02" class="mr-2 h-3 w-3">
-                            <label for="member02" class="text-black">Member 02</label>
-                        </div>
+                        @foreach ($members as $member)
+                            <div class="flex items-center px-3 py-1">
+                                <input type="checkbox" id="member{{ $member }}" value="{{ $member }}"
+                                    class="mr-2 h-3 w-3">
+                                <label for="member{{ $member }}" class="text-black">{{ $member }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -205,13 +184,11 @@
                             <!-- Actions button -->
                             <td class="px-6 py-4 flex items-center justify-center space-x-2 h-full">
 
-                                <form action="{{ route('editExtraPoint') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" name="editID" value="{{ $extraPoint->ext_id }}">
-                                        <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                            class="w-[35px] h-[35px]">
-                                    </button>
-                                </form>
+                                <!-- ปุ่มแก้ไข -->
+                                <div>
+                                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                        class="w-[35px] h-[35px] opacity-50 cursor-not-allowed">
+                                </div>
 
 
                                 <!-- ปุ่มลบ ที่เรียก Alert Modal -->
@@ -265,17 +242,12 @@
 
 @section('javascripts')
     <script>
-        // ฟังก์ชันสำหรับการกรองข้อมูลและอัปเดต URL
         function applyFilters() {
             // Get selected values from all dropdowns
-            const selectedYears = Array.from(document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]:checked'))
-                .map(cb => cb.value);
-            const selectedSprints = Array.from(document.querySelectorAll(
-                '#dropdownSprintMenu input[type="checkbox"]:checked')).map(cb => cb.value.replace('Sprint ', ''));
-            const selectedTeams = Array.from(document.querySelectorAll(
-                '#dropdownTeamMenu input[type="checkbox"]:checked:not(#allTeams)')).map(cb => cb.value);
-            const selectedMembers = Array.from(document.querySelectorAll(
-                '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)')).map(cb => cb.value);
+            const selectedYears = Array.from(document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]:checked')).map(cb => cb.value);
+            const selectedSprints = Array.from(document.querySelectorAll('#dropdownSprintMenu input[type="checkbox"]:checked')).map(cb => cb.value.replace('Sprint ', ''));
+            const selectedTeams = Array.from(document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]:checked:not(#allTeams)')).map(cb => cb.value);
+            const selectedMembers = Array.from(document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)')).map(cb => cb.value);
 
             // Create URL with query parameters
             let url = new URL(window.location.href.split('?')[0], window.location.origin);
@@ -329,8 +301,7 @@
             updateSprintDropdownText();
 
             // Initialize Team dropdown
-            const teamCheckboxes = document.querySelectorAll(
-                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)');
+            const teamCheckboxes = document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)');
             const allTeamsCheckbox = document.getElementById('allTeams');
             const selectedTeams = urlParams.get('teams') ? urlParams.get('teams').split(',') : [];
             teamCheckboxes.forEach(checkbox => {
@@ -338,13 +309,11 @@
                     checkbox.checked = true;
                 }
             });
-            allTeamsCheckbox.checked = selectedTeams.length === 0 || (teamCheckboxes.length === selectedTeams
-                .length);
+            allTeamsCheckbox.checked = selectedTeams.length === 0 || (teamCheckboxes.length === selectedTeams.length);
             updateTeamDropdownText();
 
             // Initialize Member dropdown
-            const memberCheckboxes = document.querySelectorAll(
-                '#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)');
+            const memberCheckboxes = document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)');
             const allMembersCheckbox = document.getElementById('allMembers');
             const selectedMembers = urlParams.get('members') ? urlParams.get('members').split(',') : [];
             memberCheckboxes.forEach(checkbox => {
@@ -352,9 +321,39 @@
                     checkbox.checked = true;
                 }
             });
-            allMembersCheckbox.checked = selectedMembers.length === 0 || (memberCheckboxes.length ===
-                selectedMembers.length);
+            allMembersCheckbox.checked = selectedMembers.length === 0 || (memberCheckboxes.length === selectedMembers.length);
             updateMemberDropdownText();
+
+            // Helper functions to update dropdown text
+            function updateYearDropdownText() {
+                const selected = Array.from(document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]:checked'))
+                    .map(cb => cb.value);
+                document.getElementById('dropdownYearSelected').textContent =
+                    selected.length > 0 ? `Year: ${selected.join(', ')}` : 'Year:';
+            }
+
+            function updateSprintDropdownText() {
+                const selected = Array.from(document.querySelectorAll('#dropdownSprintMenu input[type="checkbox"]:checked'))
+                    .map(cb => cb.value);
+                document.getElementById('dropdownSprintSelected').textContent =
+                    selected.length > 0 ? `Sprint: ${selected.join(', ')}` : 'Sprint:';
+            }
+
+            function updateTeamDropdownText() {
+                const selected = Array.from(document.querySelectorAll(
+                    '#dropdownTeamMenu input[type="checkbox"]:checked:not(#allTeams)'))
+                    .map(cb => cb.value);
+                document.getElementById('dropdownTeamSelected').textContent =
+                    selected.length > 0 ? `Team: ${selected.join(', ')}` : 'Team:';
+            }
+
+            function updateMemberDropdownText() {
+                const selected = Array.from(document.querySelectorAll(
+                    '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)'))
+                    .map(cb => cb.value);
+                document.getElementById('dropdownMemberSelected').textContent =
+                    selected.length > 0 ? `Member: ${selected.join(', ')}` : 'Member:';
+            }
 
             // Add event listeners to all checkboxes
             document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]').forEach(checkbox => {
@@ -374,12 +373,11 @@
             document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     if (checkbox.id === 'allTeams') {
-                        document.querySelectorAll(
-                                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)')
+                        document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)')
                             .forEach(cb => cb.checked = checkbox.checked);
                     } else {
                         const allChecked = Array.from(document.querySelectorAll(
-                                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)'))
+                            '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)'))
                             .every(cb => cb.checked);
                         document.getElementById('allTeams').checked = allChecked;
                     }
@@ -391,16 +389,13 @@
             document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     if (checkbox.id === 'allMembers') {
-                        document.querySelectorAll(
-                                '#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)')
+                        document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)')
                             .forEach(cb => cb.checked = false);
-                        document.getElementById('dropdownMemberSelected').textContent =
-                            'Member: All Members';
+                        document.getElementById('dropdownMemberSelected').textContent = 'Member: All Members';
                     } else {
                         document.getElementById('allMembers').checked = false;
                         const selected = Array.from(document.querySelectorAll(
-                                '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)'
-                                ))
+                            '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)'))
                             .map(cb => cb.value);
                         document.getElementById('dropdownMemberSelected').textContent =
                             selected.length > 0 ? `Member: ${selected.join(', ')}` : 'Member:';
@@ -446,6 +441,7 @@
                     e.stopPropagation();
                 });
             });
+
 
 
         // Alert Box script

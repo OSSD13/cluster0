@@ -35,34 +35,46 @@
         <!-- Form Container -->
         <div class="space-y-6">
 
-            <form action=" {{ route('storeExtraPoint') }}" method="POST" >
+            <form action=" {{ route('storeExtraPoint') }}" method="POST">
                 @csrf
 
                 <!-- First Row - Dropdowns -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <!-- Member -->
-                    <div class="w-full max-w-2xl">
-                        <label for="member" class="block mb-2 text-sm font-bold text-gray-900">Member <span
+                    <!-- Team -->
+                    <div>
+                        <label for="team" class="block mb-2 text-sm font-bold text-gray-900">Team <span
                                 class="text-red-500">*</span></label>
-                        <select id="member" name="member"
-                            class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
-                            <option value="" disabled selected hidden class="text-center">Member</option>
-                            @foreach ($userTeamHistories as $userTeamHistory)
-                                <option value={{$userTeamHistory->id ,}}>{{ $userTeamHistory->name . ',' . $userTeamHistory->teamName}}</option>
+                        <select id="team" name="tm_id"
+                            class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                            required>
+                            <option value="" disabled selected hidden>Team</option>
+                            @foreach ($teams as $team)
+                                <option value="{{ $team->tm_id }}">{{ $team->tm_name }}</option>
                             @endforeach
                         </select>
                     </div>
 
+                    <!-- Member -->
+                    <div>
+                        <label for="member" class="block mb-2 text-sm font-bold text-gray-900">Member <span
+                                class="text-red-500">*</span></label>
+                        <select id="member" name="usr_id"
+                            class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                            required>
+                            <option value="" disabled selected hidden>Member</option>
+                        </select>
+                    </div>
 
                     <!-- Year -->
                     <div>
                         <label for="year" class="block mb-2 text-sm font-bold text-gray-900">Year <span
                                 class="text-red-500">*</span></label>
                         <select id="year" name="spr_year"
-                            class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
-                            <option value="" disabled selected hidden class="text-center">Year</option>
-                            @foreach ($years as $year)
-                                <option value={{$year->year}}>{{ $year->year }}</option>
+                            class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                            required>
+                            <option value="" disabled selected hidden>Year</option>
+                            @foreach ($sprints->unique('spr_year') as $sprint)
+                                <option value="{{ $sprint->spr_year }}">{{ $sprint->spr_year }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -72,43 +84,75 @@
                         <label for="sprint" class="block mb-2 text-sm font-bold text-gray-900">Sprint <span
                                 class="text-red-500">*</span></label>
                         <select id="sprint" name="spr_number"
-                            class="w-full p-2.5 text-sm font-bold text-blue-900 border border-blue-900 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900">
-                            <option value="" disabled selected hidden class="text-center">Sprint</option>
+                            class="bg-gray-50 border border-blue-900 text-blue-900 text-sm font-bold rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                            required>
+                            <option value="" disabled selected hidden>Sprint</option>
                             @foreach ($sprints as $sprint)
-                                <option value={{$sprint->number}}>{{ $sprint->number }}</option>
+                                <option value="{{ $sprint->spr_number }}">{{ $sprint->spr_number }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Point -->
-                    <div>
-                        <label for="test_pass" class="block mb-2 text-sm font-bold text-gray-900">Point All <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" id="test_pass" name="point_all"
-                            class="w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Point" required />
-                    </div>
-                </div>
-                <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                    <button type="button" onclick="window.location.href='{{ route('extraPoint')}}'"
-                        class="min-w-[400px] px-8 py-3 bg-zinc-500 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
-                        Cancel
-                    </button>
-                    <button type="submit"
-                        class="min-w-[400px] px-8 py-3 bg-blue-900 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
-                        Create
-                    </button>
-                </div>
-            </form>
 
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <!-- Point -->
+            <div>
+                <label for="your_point" class="block mb-2 text-sm font-bold text-gray-900">Point <span
+                        class="text-red-500">*</span></label>
+                <input type="number" id="your_point" name="ext_value"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Point" required />
+            </div>
+        </div>
+        <!-- Buttons -->
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+            <button type="button" onclick="window.location.href='{{ route('extraPoint') }}'"
+                class="min-w-[400px] px-8 py-3 bg-zinc-500 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
+                Cancel
+            </button>
+            <button type="submit"
+                class="min-w-[400px] px-8 py-3 bg-blue-900 text-white rounded-lg font-bold hover:bg-white hover:text-blue-900 hover:border-2 hover:border-blue-900 transition-all duration-200">
+                Create
+            </button>
+        </div>
+        </form>
+
+    </div>
     </div>
 @endsection
 
 @section('javascripts')
-    <script></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const teamSelect = document.getElementById('team');
+            const memberSelect = document.getElementById('member');
+
+            teamSelect.addEventListener('change', function() {
+                const teamId = this.value;
+                fetch(`/api/members/${teamId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        memberSelect.innerHTML =
+                            '<option value="" disabled selected hidden>Member</option>';
+                        data.forEach(member => {
+                            memberSelect.innerHTML +=
+                                `<option value="${member.usr_id}">${member.usr_username}</option>`;
+                        });
+                    });
+            });
+        });
+        fetch(`/api/members/${teamId}`)
+            .then(response => response.json())
+            .then(data => {
+                memberSelect.innerHTML = '<option value="" disabled selected hidden>Member</option>';
+                data.forEach(member => {
+                    memberSelect.innerHTML +=
+                        `<option value="${member.usr_id}">${member.usr_username}</option>`;
+                });
+            })
+            .catch(error => console.error('Error fetching members:', error));
+    </script>
 @endsection
 
 @section('styles')
