@@ -23,8 +23,8 @@
             <!-- Compact Dropdown Filters -->
             <div class="flex gap-2 ml-4 items-center">
 
-                <!-- Year Dropdown -->
-                <div class="relative">
+                 <!-- Year Dropdown -->
+                 <div class="relative">
                     <button id="dropdownYear"
                         class="border border-blue-900 text-blue-900 text-sm font-bold rounded px-4 py-1 w-30 bg-white h-9 text-center flex justify-between items-center">
                         <span id="dropdownYearSelected" class="truncate text-center w-full">Year:</span>
@@ -184,13 +184,11 @@
                             <!-- Actions button -->
                             <td class="px-6 py-4 flex items-center justify-center space-x-2 h-full">
 
-                                <form action="{{ route('editExtraPoint') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" name="editID" value="{{ $extraPoint->ext_id }}">
-                                        <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
-                                            class="w-[35px] h-[35px]">
-                                    </button>
-                                </form>
+                                <!-- ปุ่มแก้ไข -->
+                                <div>
+                                    <img src="{{ asset('resources/Images/Icons/editIcon.png') }}" alt="Edit"
+                                        class="w-[35px] h-[35px] opacity-50 cursor-not-allowed">
+                                </div>
 
 
                                 <!-- ปุ่มลบ ที่เรียก Alert Modal -->
@@ -244,74 +242,106 @@
 
 @section('javascripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize dropdowns with URL parameters
-            function initializeFilters() {
-                const urlParams = new URLSearchParams(window.location.search);
+        function applyFilters() {
+            // Get selected values from all dropdowns
+            const selectedYears = Array.from(document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]:checked')).map(cb => cb.value);
+            const selectedSprints = Array.from(document.querySelectorAll('#dropdownSprintMenu input[type="checkbox"]:checked')).map(cb => cb.value.replace('Sprint ', ''));
+            const selectedTeams = Array.from(document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]:checked:not(#allTeams)')).map(cb => cb.value);
+            const selectedMembers = Array.from(document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)')).map(cb => cb.value);
 
-                // Year filter
-                if (urlParams.has('years')) {
-                    const years = urlParams.get('years').split(',');
-                    years.forEach(year => {
-                        const checkbox = document.querySelector(`#dropdownYearMenu input[value="${year}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    });
-                    updateYearDropdownText();
-                }
+            // Create URL with query parameters
+            let url = new URL(window.location.href.split('?')[0], window.location.origin);
 
-                // Sprint filter
-                if (urlParams.has('sprints')) {
-                    const sprints = urlParams.get('sprints').split(',');
-                    sprints.forEach(sprint => {
-                        const checkbox = document.querySelector(
-                            `#dropdownSprintMenu input[value="Sprint ${sprint}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    });
-                    updateSprintDropdownText();
-                }
+            // Reset parameters
+            url.searchParams.delete('years');
+            url.searchParams.delete('sprints');
+            url.searchParams.delete('teams');
+            url.searchParams.delete('members');
 
-                // Team filter
-                if (urlParams.has('teams')) {
-                    const teams = urlParams.get('teams').split(',');
-                    teams.forEach(team => {
-                        const checkbox = document.querySelector(`#dropdownTeamMenu input[value="${team}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    });
-                    updateTeamDropdownText();
-                }
-
-                // Member filter
-                if (urlParams.has('members')) {
-                    const members = urlParams.get('members').split(',');
-                    members.forEach(member => {
-                        const checkbox = document.querySelector(
-                            `#dropdownMemberMenu input[value="${member}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    });
-                    updateMemberDropdownText();
-                }
+            if (selectedYears.length > 0) {
+                url.searchParams.set('years', selectedYears.join(','));
+            }
+            if (selectedSprints.length > 0) {
+                url.searchParams.set('sprints', selectedSprints.join(','));
+            }
+            if (selectedTeams.length > 0) {
+                url.searchParams.set('teams', selectedTeams.join(','));
+            }
+            if (selectedMembers.length > 0) {
+                url.searchParams.set('members', selectedMembers.join(','));
             }
 
-            // Update dropdown button text
+            // Reload the page with new filters
+            window.location.href = url.toString();
+        }
+
+        // Initialize dropdowns with current filter values from URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Initialize Year dropdown
+            const yearCheckboxes = document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]');
+            const selectedYears = urlParams.get('years') ? urlParams.get('years').split(',') : [];
+            yearCheckboxes.forEach(checkbox => {
+                if (selectedYears.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+            updateYearDropdownText();
+
+            // Initialize Sprint dropdown
+            const sprintCheckboxes = document.querySelectorAll('#dropdownSprintMenu input[type="checkbox"]');
+            const selectedSprints = urlParams.get('sprints') ? urlParams.get('sprints').split(',') : [];
+            sprintCheckboxes.forEach(checkbox => {
+                const sprintNumber = checkbox.value.replace('Sprint ', '');
+                if (selectedSprints.includes(sprintNumber)) {
+                    checkbox.checked = true;
+                }
+            });
+            updateSprintDropdownText();
+
+            // Initialize Team dropdown
+            const teamCheckboxes = document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)');
+            const allTeamsCheckbox = document.getElementById('allTeams');
+            const selectedTeams = urlParams.get('teams') ? urlParams.get('teams').split(',') : [];
+            teamCheckboxes.forEach(checkbox => {
+                if (selectedTeams.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+            allTeamsCheckbox.checked = selectedTeams.length === 0 || (teamCheckboxes.length === selectedTeams.length);
+            updateTeamDropdownText();
+
+            // Initialize Member dropdown
+            const memberCheckboxes = document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)');
+            const allMembersCheckbox = document.getElementById('allMembers');
+            const selectedMembers = urlParams.get('members') ? urlParams.get('members').split(',') : [];
+            memberCheckboxes.forEach(checkbox => {
+                if (selectedMembers.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+            allMembersCheckbox.checked = selectedMembers.length === 0 || (memberCheckboxes.length === selectedMembers.length);
+            updateMemberDropdownText();
+
+            // Helper functions to update dropdown text
             function updateYearDropdownText() {
-                const selected = Array.from(document.querySelectorAll(
-                        '#dropdownYearMenu input[type="checkbox"]:checked'))
+                const selected = Array.from(document.querySelectorAll('#dropdownYearMenu input[type="checkbox"]:checked'))
                     .map(cb => cb.value);
                 document.getElementById('dropdownYearSelected').textContent =
                     selected.length > 0 ? `Year: ${selected.join(', ')}` : 'Year:';
             }
 
             function updateSprintDropdownText() {
-                const selected = Array.from(document.querySelectorAll(
-                        '#dropdownSprintMenu input[type="checkbox"]:checked'))
-                    .map(cb => cb.value.replace('Sprint ', ''));
+                const selected = Array.from(document.querySelectorAll('#dropdownSprintMenu input[type="checkbox"]:checked'))
+                    .map(cb => cb.value);
                 document.getElementById('dropdownSprintSelected').textContent =
                     selected.length > 0 ? `Sprint: ${selected.join(', ')}` : 'Sprint:';
             }
 
             function updateTeamDropdownText() {
                 const selected = Array.from(document.querySelectorAll(
-                        '#dropdownTeamMenu input[type="checkbox"]:checked:not(#allTeams)'))
+                    '#dropdownTeamMenu input[type="checkbox"]:checked:not(#allTeams)'))
                     .map(cb => cb.value);
                 document.getElementById('dropdownTeamSelected').textContent =
                     selected.length > 0 ? `Team: ${selected.join(', ')}` : 'Team:';
@@ -319,55 +349,10 @@
 
             function updateMemberDropdownText() {
                 const selected = Array.from(document.querySelectorAll(
-                        '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)'))
+                    '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)'))
                     .map(cb => cb.value);
                 document.getElementById('dropdownMemberSelected').textContent =
                     selected.length > 0 ? `Member: ${selected.join(', ')}` : 'Member:';
-            }
-
-            function applyFilters() {
-                const getCheckedValues = (selector) =>
-                    Array.from(document.querySelectorAll(selector))
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.value);
-
-                const selectedYears = getCheckedValues('#dropdownYearMenu input[type="checkbox"]');
-                const selectedSprints = getCheckedValues('#dropdownSprintMenu input[type="checkbox"]')
-                    .map(v => v.replace('Sprint ', ''));
-
-                const selectedTeams = getCheckedValues('#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)');
-                const selectedMembers = getCheckedValues(
-                    '#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)');
-
-                // Construct base URL without query params
-                const url = new URL(window.location.origin + window.location.pathname);
-
-                if (selectedYears.length > 0) {
-                    url.searchParams.set('years', selectedYears.join(','));
-                } else {
-                    url.searchParams.delete('years');
-                }
-
-                if (selectedSprints.length > 0) {
-                    url.searchParams.set('sprints', selectedSprints.join(','));
-                } else {
-                    url.searchParams.delete('sprints');
-                }
-
-                if (selectedTeams.length > 0) {
-                    url.searchParams.set('teams', selectedTeams.join(','));
-                } else {
-                    url.searchParams.delete('teams');
-                }
-
-                if (selectedMembers.length > 0) {
-                    url.searchParams.set('members', selectedMembers.join(','));
-                } else {
-                    url.searchParams.delete('members');
-                }
-
-                // Navigate to the new URL with filters applied
-                window.location.href = url.toString();
             }
 
             // Add event listeners to all checkboxes
@@ -388,12 +373,11 @@
             document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     if (checkbox.id === 'allTeams') {
-                        document.querySelectorAll(
-                                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)')
+                        document.querySelectorAll('#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)')
                             .forEach(cb => cb.checked = checkbox.checked);
                     } else {
                         const allChecked = Array.from(document.querySelectorAll(
-                                '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)'))
+                            '#dropdownTeamMenu input[type="checkbox"]:not(#allTeams)'))
                             .every(cb => cb.checked);
                         document.getElementById('allTeams').checked = allChecked;
                     }
@@ -405,139 +389,104 @@
             document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     if (checkbox.id === 'allMembers') {
-                        document.querySelectorAll(
-                                '#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)')
+                        document.querySelectorAll('#dropdownMemberMenu input[type="checkbox"]:not(#allMembers)')
                             .forEach(cb => cb.checked = false);
-                        document.getElementById('dropdownMemberSelected').textContent =
-                            'Member: All Members';
+                        document.getElementById('dropdownMemberSelected').textContent = 'Member: All Members';
                     } else {
                         document.getElementById('allMembers').checked = false;
-                        updateMemberDropdownText();
+                        const selected = Array.from(document.querySelectorAll(
+                            '#dropdownMemberMenu input[type="checkbox"]:checked:not(#allMembers)'))
+                            .map(cb => cb.value);
+                        document.getElementById('dropdownMemberSelected').textContent =
+                            selected.length > 0 ? `Member: ${selected.join(', ')}` : 'Member:';
                     }
                     applyFilters();
                 });
             });
 
-            // Toggle dropdown menus with proper positioning
-            function toggleDropdown(buttonId, menuId) {
-                const button = document.getElementById(buttonId);
-                const menu = document.getElementById(menuId);
-
-                // Close all other dropdowns first
-                document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
-                    if (dropdown.id !== menuId) {
-                        dropdown.classList.add('hidden');
-                    }
-                });
-
-                // Position the dropdown (up or down)
-                const buttonRect = button.getBoundingClientRect();
-                const spaceBelow = window.innerHeight - buttonRect.bottom;
-                const menuHeight = 200; // Approximate menu height
-
-                if (spaceBelow < menuHeight && buttonRect.top > menuHeight) {
-                    // Open above the button
-                    menu.style.bottom = `${window.innerHeight - buttonRect.top + 5}px`;
-                    menu.style.top = 'auto';
-                } else {
-                    // Open below the button
-                    menu.style.top = `${buttonRect.bottom + 5}px`;
-                    menu.style.bottom = 'auto';
-                }
-
-                menu.classList.toggle('hidden');
-            }
-
-            // Set up dropdown toggle events
+            // Toggle dropdown menus
             document.getElementById('dropdownYear').addEventListener('click', function(e) {
                 e.stopPropagation();
-                toggleDropdown('dropdownYear', 'dropdownYearMenu');
+                document.getElementById('dropdownYearMenu').classList.toggle('hidden');
             });
 
             document.getElementById('dropdownSprint').addEventListener('click', function(e) {
                 e.stopPropagation();
-                toggleDropdown('dropdownSprint', 'dropdownSprintMenu');
+                document.getElementById('dropdownSprintMenu').classList.toggle('hidden');
             });
 
             document.getElementById('dropdownTeam').addEventListener('click', function(e) {
                 e.stopPropagation();
-                toggleDropdown('dropdownTeam', 'dropdownTeamMenu');
+                document.getElementById('dropdownTeamMenu').classList.toggle('hidden');
             });
 
             document.getElementById('dropdownMember').addEventListener('click', function(e) {
                 e.stopPropagation();
-                toggleDropdown('dropdownMember', 'dropdownMemberMenu');
+                document.getElementById('dropdownMemberMenu').classList.toggle('hidden');
             });
 
             // Close dropdowns when clicking outside
             document.addEventListener('click', function() {
-                document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                    menu.classList.add('hidden');
-                });
+                document.getElementById('dropdownYearMenu').classList.add('hidden');
+                document.getElementById('dropdownSprintMenu').classList.add('hidden');
+                document.getElementById('dropdownTeamMenu').classList.add('hidden');
+                document.getElementById('dropdownMemberMenu').classList.add('hidden');
             });
+        });
 
-            // Prevent dropdown from closing when clicking inside
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        // Prevent dropdown from closing when clicking inside
+        document.querySelectorAll('#dropdownYearMenu, #dropdownSprintMenu, #dropdownTeamMenu, #dropdownMemberMenu').forEach(
+            menu => {
                 menu.addEventListener('click', function(e) {
                     e.stopPropagation();
                 });
             });
 
-            // Initialize filters on page load
-            initializeFilters();
 
-            // Alert Box script
-            function showAlert() {
-                document.getElementById('alertBox').classList.remove('hidden');
-            }
 
-            function closeAlert() {
-                document.getElementById('alertBox').classList.add('hidden');
-            }
+        // Alert Box script
+        function showAlert() {
+            document.getElementById('alertBox').classList.remove('hidden');
+        }
 
-            function openAlertDelete(ext_id) {
-                // Set the form action
-                const form = document.getElementById('deleteBacklogForm');
-                form.action = `/extrapoint-delete/${ext_id}`;
+        function closeAlert() {
+            document.getElementById('alertBox').classList.add('hidden');
+        }
 
-                // Show modal
-                document.getElementById('alertDeleteBox').classList.remove('hidden');
-            }
+        function openAlertDelete(ext_id) {
+            // กำหนด action ให้กับฟอร์มลบ
+            const form = document.getElementById('deleteBacklogForm');
+            form.action = `/extrapoint-delete/${ext_id}`; // ให้ตรงกับ Route::delete('/backlog/{id}')
 
-            function closeAlertDelete() {
-                document.getElementById('alertDeleteBox').classList.add('hidden');
-            }
-        });
+            // แสดง modal
+            document.getElementById('alertDeleteBox').classList.remove('hidden');
+        }
+
+        function closeAlertDelete() {
+            document.getElementById('alertDeleteBox').classList.add('hidden');
+        }
     </script>
 @endsection
 
 @section('styles')
     <style>
-        .dropdown-menu {
-            position: absolute;
-            right: 0;
-            min-width: 160px;
-            z-index: 1000;
-            display: none;
+        @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        #navbar-title {
+            font-family: "Jaro", sans-serif;
+            line-height: 25px;
+            letter-spacing: 0.5px;
         }
 
-        .dropdown-menu.show {
-            display: block;
+        body {
+            font-family: "Inter", sans-serif;
         }
 
-        /* Make sure dropdowns appear above other content */
-        .relative {
-            position: relative;
-        }
-
-        /* Add some spacing between dropdown items */
-        .dropdown-menu div {
-            padding: 8px 16px;
-        }
-
-        /* Style for dropdown checkboxes */
-        .dropdown-menu input[type="checkbox"] {
-            margin-right: 8px;
+        #alertDeleteBox {
+            z-index: 9999;
+            /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
         }
     </style>
 @endsection

@@ -190,6 +190,9 @@ class ExtrapointController extends Controller
                 ['spr_number', '=', $number]
             ])
             ->first();
+        if (!$sprint) {
+            return redirect()->back()->withErrors('ไม่พบข้อมูล Sprint');
+        }
         //dd($sprint->spr_id);
         return $sprint->spr_id;
     }
