@@ -114,20 +114,26 @@ Route::delete('/team-delete{id}', [TeamManagementController::class, 'delete'])->
 
 // ****************************************************************************************************** //
 // Members Managment
-//Route::get('/member', [UserController::class,'']);
-//Route::get('/member-add', [UserController::class,'']);
-//Route::get('/member-edit', [UserController::class,'']);
-Route::get('member', [MemberListController::class, 'index'])->name('memberlist');
-Route::get('/memberlistAdd', function () {
-    return view('memberlistAdd');
-})->name('memberlist.add');
+Route::get('memberlist', [MemberListController::class, 'index'])->name('memberlist');
+
 Route::get('memberlist-edit{id}', [MemberListController::class, 'edit'])->name('memberlist.edit');
+
 Route::get('memberlist-delete{id}', [MemberListController::class, 'delete'])->name('memberlist.delete');
-Route::post('memberlist-update{id}', [MemberListController::class, 'delete'])->name('memberlist.update');
+
+Route::post('memberlist-update{id}', [MemberListController::class, 'update'])->name('memberlist.update');
+
+Route::get('memberlist-insert', [MemberListController::class, 'dropdowngetData'])->name('memberlist.insert');
+
+Route::post('memberlist-add', [MemberListController::class, 'add'])->name('memberlist.add');
 // ****************************************************************************************************** //
 // Settings
-Route::get('/setting-default-password', [UserController::class,'defaultConfiguration'])->name('default.password');
-Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']);
+Route::get('/setting-default-password', [UserController::class,'defaultConfiguration'])->name('setting.default.password');
+Route::post('/setting-save-config', [UserController::class, 'saveConfiguration']);
+Route::get('/setting-access-control', [UserController::class, 'manageUser'])->name('setting.manage.user');
+Route::post('/setting-delete-user', [UserController::class, 'deleteUser'])->name('setting.delete.user');
+Route::post('/setting-update-role', [UserController::class, 'updateRole'])->name('setting.update.role');
+Route::post('/setting-update-team', [UserController::class, 'updateTeam'])->name('setting.update.team');
+Route::post('/setting-reset-password', [UserController::class, 'resetPassword'])->name('setting.reset.password');
 // ****************************************************************************************************** //
 // Report
 Route::get('/report', [ReportController::class, 'index'])->name('report');
@@ -143,6 +149,16 @@ Route::get('/review-performance-history', [PerformanceHistoryController::class, 
 Route::get('/setting-trello-config', [TrelloConfigurationController::class, 'index'])->name('trello.config');
 Route::get('/setting-trello-configAPI', [TrelloConfigurationController::class, 'api'])->name('trello.api');
 Route::get('/setting-trello-configList', [TrelloConfigurationController::class, 'list'])->name('trello.list');
+
+Route::get('/setting-trello-configAPI-edit-{id}', [TrelloConfigurationController::class, 'editAPI'])->name('trello.editApi.edit');
+Route::post('/setting-trello-configAPI-update/{id}', [TrelloConfigurationController::class, 'updateAPI'])->name('trello.editApi.update');
+Route::get('/setting-trello-list-edit-{id}', [TrelloConfigurationController::class, 'editList'])->name('trello.editList.edit');
+Route::post('/setting-trello-list-edit/{id}', [TrelloConfigurationController::class, 'updateList'])->name('trello.editList.update');
+
+Route::post('/setting-trello-configAPI', [TrelloConfigurationController::class, 'createAPI'])->name('trello.api.create');
+Route::post('/setting-trello-configList', [TrelloConfigurationController::class, 'createList'])->name('trello.list.create');
+Route::get('/setting-trello-configAPI-delete/{id}', [TrelloConfigurationController::class, 'deleteAPI'])->name('trello.api.delete');
+Route::get('/setting-trello-configList-delete/{id}', [TrelloConfigurationController::class, 'deleteList'])->name('trello.list.delete');
 // ****************************************************************************************************** //
 // Test
 Route::get('/test-fetch-cards', [TeamPerformanceController::class, 'testTrelloApi']);
