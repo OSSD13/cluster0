@@ -75,13 +75,24 @@ class TrelloConfigurationController extends Controller
 
     //Delete Trello API
     public function deleteAPI($id) {
+        // ค้นหา TrelloCredential ที่ต้องการลบ
         $trello = TrelloCredential::findOrFail($id);
 
-        // ลบลูก (cards) โดยการ query โดยตรง
-        Card::where('crd_trc_id', $trello->id)->delete();
+        // ลบข้อมูลในตาราง Card ที่อ้างอิงถึง trc_id (foreign key)
+        $cards = Card::where('crd_trc_id', $trello->trc_id)->get();
 
-        // ค่อยลบพ่อ
+        foreach ($cards as $card) {
+            $card->delete();  // ลบการ์ดที่อ้างอิงถึง trc_id
+        }
+
+        // อัพเดต tm_trc_id ในตาราง Team ให้เป็น null (ไม่ลบ เพราะต้องเก็บประวัติ)
+        Team::where('tm_trc_id', $trello->trc_id)
+            ->update(['tm_trc_id' => null]);  // เปลี่ยนเป็น null เพื่อเก็บประวัติ
+
+        // ลบ TrelloCredential (trc_id) หลังจากลบข้อมูลที่เกี่ยวข้องแล้ว
         $trello->delete();
+
+        // ส่งกลับไปยังหน้าที่ต้องการพร้อมข้อความยืนยัน
         return redirect()->route('trello.config')->with('success', 'Trello API deleted successfully!');
     }
 
@@ -149,11 +160,22 @@ class TrelloConfigurationController extends Controller
 
     //Delete Trello List
     public function deleteList($id) {
-        $trello = SettingTrello::findOrFail($id);
+    try {
+        // Check if the list can be deleted (add your conditions here)
+        $canDelete = true; // Replace with your actual condition
 
-        Team::where('tm_stl_id', $trello->id)->delete();
-        $trello->delete();
+        if (!$canDelete) {
+            return redirect()->route('trello.config')->with('warning', 'Cannot delete this list because it is in use.');
+            }
 
-        return redirect()->route('trello.config')->with('success', 'Trello API deleted successfully!');
+            // ค้นหา SettingTrello ที่ต้องการลบ
+            $trello = SettingTrello::findOrFail($id);
+            $trello->delete();
+
+            // ส่งกลับไปยังหน้าที่ต้องการพร้อมข้อความยืนยัน
+            return redirect()->route('trello.config')->with('success', 'Trello List deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('trello.config')->with('warning', 'Cannot delete this list: ');
+        }
     }
 }
