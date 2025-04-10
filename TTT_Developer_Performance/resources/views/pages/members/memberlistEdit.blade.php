@@ -32,7 +32,8 @@
                 <div class="w-[400px] mt-4 ml-5">
                     <label class="block font-bold text-gray-700">Trello Full Name</label>
 
-                    <input type="text" name="trello_fullname" value="{{ $user->usr_trello_fullname }}" placeholder="Your Trello Name"
+                    <input type="text" name="trello_fullname" value="{{ $user->usr_trello_fullname }}"
+                        placeholder="Your Trello Name"
                         class="w-full p-3 border border-gray-400 rounded-lg placeholder-gray-400 text-base">
                 </div>
 
@@ -77,7 +78,33 @@
             </div>
         </div>
     </form>
+    <!-- Alert Success Box -->
+    <div id="alertSuccessBox" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center">
+            <!-- ปุ่มปิด -->
+            <button onclick="closeSuccessAlert()" class="absolute top-2 right-4 text-gray-400 text-2xl hover:text-gray-600">
+                &times;
+            </button>
+
+            <!-- ไอคอน -->
+            <div class="flex justify-center mb-4">
+                <img src="{{ asset('resources/Images/Icons/check (1).png') }}" alt="Check icon" class="w-16 h-16">
+            </div>
+
+            <!-- ข้อความ -->
+            <h2 class="text-2xl font-bold text-black mb-2">Successful</h2>
+            <p class="text-gray-500 mb-6"> Trello credentials saved successfully! </p>
+
+            <!-- ปุ่ม Done -->
+            <button onclick="closeSuccessAlert()"
+                class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-green-600">
+                Done
+            </button>
+        </div>
+    </div>
 @endsection
+
+
 
 
 
@@ -85,6 +112,12 @@
     <style>
         body {
             font-family: "Inter", sans-serif;
+        }
+
+        #alertSuccessBox {
+            z-index: 9999;
+            /* ให้สูงกว่าทุกอย่างในหน้า */
+            background-color: rgba(0, 0, 0, 0.5);
         }
     </style>
 @endsection
