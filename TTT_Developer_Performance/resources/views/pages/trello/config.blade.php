@@ -196,6 +196,33 @@
             </button>
         </div>
     </div>
+
+    <!-- Alert Box -->
+    <div id="alertWarningBox"
+        class="hidden fixed inset-0 flex items-center justify-center transition-opacity duration-300 rounded-lg">
+        <div class="bg-white rounded-lg shadow-lg p-8 relative max-w-sm w-full text-center rounded-xl">
+            <!-- ปุ่มปิด -->
+            <button onclick="closeWarningAlert()"
+                class="absolute top-2 right-4 text-gray-400 hover:text-gray-600 text-3xl">
+                &times;
+            </button>
+
+            <!-- ไอคอน -->
+            <div class="flex justify-center mb-4">
+                <img src="{{ asset('resources/Images/Icons/warning.png') }}" alt="Check icon" class="w-16 h-16">
+            </div>
+
+            <!-- ข้อความ -->
+            <h2 class="text-2xl font-bold text-black-600 mb-2">Something went wrong</h2>
+            <p class="text-lg text-gray-500 mb-6">Unable to delete Trello List because it is currently in use by a Team.</p>
+
+            <!-- ปุ่ม Done -->
+            <button onclick="closeWarningAlert()"
+                class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600">
+                OK
+            </button>
+        </div>
+    </div>
 @endsection
 
 @section('javascripts')
@@ -265,6 +292,29 @@
             document.getElementById("alertSuccessBox").addEventListener('click', function(e) {
                 if (e.target === this) {
                     closeSuccessAlert();
+                }
+            });
+        @endif
+    </script>
+
+    <script>
+        @if (session('warning'))
+        window.addEventListener('DOMContentLoaded', function() {
+                openSuccessAlert();
+            });
+
+            function openSuccessAlert() {
+                document.getElementById("alertWarningBox").classList.remove("hidden");
+            }
+
+            function closeWarningAlert() {
+                document.getElementById("alertWarningBox").classList.add("hidden");
+            }
+
+            // ปิด alert ถ้าคลิกนอกกล่อง
+            document.getElementById("alertWarningBox").addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeWarningAlert();
                 }
             });
         @endif
