@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Card;
+use App\Models\PointCurrentSprint;
+use App\Models\Team;
+use App\Models\UserTeamHistory;
+use App\Models\Users;
 use Illuminate\Support\Facades\DB;
 
 
@@ -165,5 +169,19 @@ class TeamPerformanceController extends Controller
     //         'crd_point' => 10
     //     ]);
     //     return redirect('pages.dashboard.teamPerformance');
+    // }
+
+    // public function showPoints()
+    // {
+    //     $points = DB::table('points_current_sprint')
+    //         ->join('user_team_history', 'pcs_uth_id', '=', 'uth_id')
+    //         ->join('users', 'uth_usr_id', '=', 'usr_id')
+    //         ->join('teams', 'uth_tm_id', '=', 'tm_id')
+    //         ->select('usr_username', 'pcs_pass', 'pcs_bug', 'pcs_cancel', 'pcs_day_off', 'pcs_tester_id')
+    //         ->get();
+
+    //     $team = DB::
+
+    //     return view('pages.dashboard.teamPerformance', compact('points'));
     // }
 }

@@ -304,7 +304,6 @@
             </div>
         </div>
 
-
         <!-- Team -->
         <div
             class="w-full h-15 bg-[var(--primary-color)] border-gray-300 rounded-lg shadow-xl shadow-md shadow-lg p-4 mb-[10px]">

@@ -94,7 +94,7 @@
                     </button>
                     <ul id="memberManagementMenu" class="submenu hidden space-y-2 ml-4 mt-2">
                         <li><a href="{{ url('member') }}" class="block">Member List</a></li>
-                        <li><a href="{{ url('member-add') }}" class="block">Add Member</a></li>
+                        <li><a href="{{ url('memberlistAdd') }}" class="block">Add Member</a></li>
                     </ul>
                 </li>
 
