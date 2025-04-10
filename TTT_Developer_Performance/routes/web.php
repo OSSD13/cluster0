@@ -134,6 +134,8 @@ Route::post('/setting/save-config', [UserController::class, 'saveConfiguration']
 // Report
 Route::get('/report', [ReportController::class, 'index'])->name('report');
 Route::get('/report-generate', [ReportController::class, 'reportGenerate'])->name('report.generate');
+Route::post('/report-generate', [ReportController::class, 'reportGenerate'])->name('step2');
+
 // ****************************************************************************************************** //
 // History
 Route::get('/setting-revision-history', [RevisionHistoryController::class, 'index'])->name('revision.history');
